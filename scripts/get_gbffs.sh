@@ -8,6 +8,7 @@ filesuffix="_genomic.gbff.gz" #file suffix for every organism
 outfile="all_refseq_bacteria_ftp_paths_110918.txt" #outputfile with all ftp links
 
 wget -qO- $ftpurl | tee "$rawsummary" | sed 's/\t\{1,\}/,/g' | awk -F "," '{print $0 ~ "latest" && $0 ~ "Complete Genome"?$(NF-1):""}' | sed '/^$/d' | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$filesuffix/g" >| "$outfile"
+
 echo "Got all paths in $outfile"
 
 for url in $(cat "$outfile");

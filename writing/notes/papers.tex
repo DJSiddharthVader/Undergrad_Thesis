@@ -1,0 +1,498 @@
+%Preamble
+%Layout/Spacing
+\documentclass[10pt,letter]{article}
+\usepackage[margin=1cm]{geometry} %sets margins
+\usepackage[compact]{titlesec}%sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{fullpage} %use entire page
+\usepackage{amsmath} %for math command
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%References
+\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
+\addbibresource{../refs.bib}
+\begin{document}
+\title{\vspace{-1in}Notes On Papers For Thesis}
+\author{Siddharth Reed, 400034828}
+\date{\today}
+\maketitle
+\section*{Estimation Of Gene InDel Rates With Missing Data\cite{indelmiss}}
+\subsection*{Intro}
+\begin{itemize}
+    \item Can infer indel rates from P/A of genes in closely related species
+    \item Parsimony underestimates indel rates
+    \item Can compare different gene trees as well
+    \item Need whole sequence to be sure rearrangements don't mask homologs
+    \item ML methods can now account for missing data
+    \begin{itemize}
+        \item Missing can mean non-whole genomes
+        \item Can also be genome reduction beyond normal flux (pathogen deletion)
+    \end{itemize}
+    \item Evo. rates can vary across lineages, allows for this to some extent
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item Use P/A markov chain
+    \item Assumes indels are independant, at constant rate
+    \item Consider families to avoid paralog issues (cluster above $>$ BLAST \% Ident)
+    \item Rate matrix $Q = \begin{bmatrix} -\mu & \mu \\ v & -v \end{bmatrix}$ with insertion,deletion $= v, \mu$ respectively
+    \item $P(P^i_d|P^i_a,t) = (\mu + v)^{-1} \cdot (v + \mu e^{-(\mu +v)t})$
+    \item using liklihood to accomodate missing data
+    \begin{itemize}
+        \item $L^i(g_i) = $1 if $g_i$ observed at node $i$, $0$ otherwise
+        \item $L^i(A) = (\delta,1)' \implies$ prob of gene missing even if truly present is $(\delta,1)$
+        \item $L^i(P) = (1-\delta,o)' \implies$ prob of gene present even if truly absent is $(1-\delta,0)$
+        \item $\delta = (\delta_1 \dots \delta_s)$ is the proportion of missing data for all tree members $1 \to s$ where $\delta \in [0,1]$
+    \end{itemize}
+\end{itemize}
+\begin{center}
+\scalebox{2.0}{
+    \begin{forest}
+    for tree={
+        if n children=0{
+            font=\itshape,
+            tier=terminal,
+        }{},
+    }
+    [i
+     [j,edge label={node[midway,above,font=\scriptsize]{$t_j$}}]
+     [k,edge label={node[midway,above,font=\scriptsize]{$t_k$}}]
+    ]
+    \end{forest}}
+\end{center}
+For a given gene and the above tree
+$$L_i(g_i) = [\sum_{g_j} p_{g_ig_[j}(t_j)L_j(g_j)] \times [\sum_{g_k} p_{g_ig_k}(t_k)L_k(g_k)]$$
+\begin{center}
+    \begin{tabular}{c c c c}
+                           &                        &\multicolumn{2}{c}{Observed}\\
+                           & \multicolumn{1}{c|}{}  & 0          & 1\\\cline{2-4}
+     \multirow{2}{*}{True} & \multicolumn{1}{c|}{0} & 1          & 0\\
+                           & \multicolumn{1}{c|}{1} & $\delta_i$ & $1 - \delta_i$\\
+    \end{tabular}
+\end{center}
+\begin{itemize}
+    \item Pr(observed P/A of $g_i$) = $f($\textbf{$x_h$}$) = \sum_{x_0} \pi_{x_0}L_0(x_0)$
+    \item Log-lkl of P/A pattern for a set of genes ($\Theta$) is $l(\Theta) = \sum_{h=1}^{N} \pi_{x_0}L_0(x_0)$
+    \item correction for genes never observed (lost over time) $L^h_+ = \frac{l^h}{1-L^h_-}$ ($L^h_-$ is Pr(gene h absent in all taxa, computed bu calculating liklihood of all 0 vector on the tree)
+    \item Assumed all genes are equally likely to be missing
+    \item Four models used
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item BIC is able to recover $\mu$ and $v$ params effectively within 100 runs on a set of 5000 genes in 5 taxa in homogenous indel rates
+    \item Deletion rates are artificially inflated if missing data not accounted for
+    \item simulation procedure:
+    \begin{itemize}
+        \item generate tree with taxa
+        \item branch lengths estimated fro beta dist.(1:4,8), with scaling factor
+        \item 500 rnd samples of 5000 phyletic patterns
+        \item patterns simulated with $\mu \in [0.625,1.167]$ and $v \in [0.875,2]$,
+    \end{itemize}
+    \item assumed at least 3 taxa have (no $\delta$)
+    \item for \textit{Troy} OTUs, estimated up to $\sim 3$ indel event per base sub. by Model 1
+    \item estimating missing data has large effect on param estimates
+    \item can cluster branches by length
+    \item more stuff
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item Dont overparameterize (no $\delta$ for each tip)
+    \item these methods are best for trees of closely related taxa with short branch lengths
+    \item extend with GMMs, $\Gamma$ rate var for gene fams
+\end{itemize}
+\section*{Inferring Horizontal Gene Transfer \cite{ihgt}}
+\subsection*{Intro}
+\begin{itemize}
+    \item Transformation, conjugation, transduction as HGT methods
+    \item Methods of detection
+    \begin{itemize}
+        \item Nuc. composition analysis
+        \begin{itemize}
+            \item GC content
+            \item Codon Usage
+        \end{itemize}
+        \item only need 1 genome
+        \item vanishes over time via mutation
+        \item need to account for intragenmic variation
+        \item Phylogenetic methods
+        \begin{itemize}
+            \item Gene vs Species distance (low,high $\implies$ HGT)
+            \item Look for ILS between gene/species tree (close genes,farther species)
+        \end{itemize}
+        \item need a few genomes
+        \item genearlly better than parametric methods
+        \item can infer donor and time of transfer
+        \item generally only applied to coding sequences
+        \item issues with duplication $\to$ gene loss vs. HGT
+    \end{itemize}
+    \item Combining methods can improve results, but also increase FP rate
+\end{itemize}
+\subsection*{Parametric}
+\begin{itemize}
+    \item Need HGT candidates to be sig. diff from host signature and insig. diff from donor signature
+    \item cant detect ancient transfers as well, mutation
+    \item signatures include
+    \begin{itemize}
+        \item nuc. composition
+        \item kmer frequency
+        \item codon usage bias
+        \item structural features
+        \item genomic islands
+    \end{itemize}
+\end{itemize}
+\subsection*{Phylogenetic}
+\begin{itemize}
+    \item Nodes that look like ILS can indicate HGT
+    \item explicit methods
+    \begin{itemize}
+        \item need strong BS support on these nodes
+        \item paralogy can lead to false HGT detection
+        \item test if gene/species trees are sig. diff. (KH test), if no resonable explanation infer HGT
+        \item spectral approach, compare discordance of gene/species subtrees
+        \item create these bipartitions only at strong BS branches, can also use quartet decomposition
+        \item If pruning/regrafting can resolve gene/species tree diff., that edit path can imply donor and recipient of HGT
+        \item can also use reconciliation methods to map possible HGT events
+    \end{itemize}
+    \item Genes that are similar in highly diff. species
+    \item Implicit methods
+    \begin{itemize}
+        \item bunch of distance metrics for stuff
+        \item also assumptions and issues
+    \end{itemize}
+\end{itemize}
+\section*{Fate of Laterally Transferred Genes \cite{fate}}
+\subsection*{Intro}
+\begin{itemize}
+    \item indels vary between species
+    \item inferring gene indels hard
+    \item Parsimony underestimates evo. events
+    \item assumed insertion = deletion rate for each branch, but branches can vary
+    \item suggests many LGT genes are quickly deleted after transfer
+    \item LGT rates increase at tree tips
+    \item LGT rates generaly $\geq$ than nuc. sub rates
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item $\alpha,\beta$ were selected using ML, assuming $\alpha = \beta$ and not
+    \item $\alpha$ much lower than $\beta$
+    \item Based on Bacillus dat, could seee up to 5 gene indels ber nuc. sub
+    \item more gene movements in closer vs more distant organisms (i.e. at tips)
+    \item Assuming genes cannot be regained has no sig. effect on param estimates
+    \item External branches have higher InDel rates than internal $\to$ higher indels at tips
+    \item Strain specific genes evolve faster than ancestral genes in other taxa
+    \item $K_s$ and $K_ns$ both elevated in strain specific genes (i.e. more recently transfered genes)
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item Want complete genomes to eliminate hidden paralogs or homolog masking
+    \item Removed all predicted ORFs with no BLAST homologs
+    \item High indel rates not explained by highly mobile genetic elements (patho islands), most such ORFs were excluded
+    \item more recent genes have longer branch lengths (evolve faster)
+    \item Unlikely just amelieoration as the cause since there is an increase in non-syn mutations
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item Phylogeny constructed from 4 catted genes with mrbayes
+    \item Model assumes
+    \begin{itemize}
+        \item insertion, deletion are constant rates
+        \item constant number of genes
+        \item all indels independatn
+        \item insertion = deletion for each branch, can vary across branches
+    \end{itemize}
+    \item Pr(gene i at node x) =\\
+            (Pr(gene stays present)*Pr(gene is present at y) +\\
+            Pr(gene stays present)*Pr(gene is present at z)) x\\
+            (Pr(gene becomes absent)*Pr(gene is absent at y) +\\
+            Pr(gene becomes absent)*Pr(gene is absent at z))\\
+            for child nodes y,z
+    \item For a given P/A vector, last common ancestor probs are considered equal (Q_i) for each gene
+    \item Correction for missing data Q_cor = Q/1-Pr(gene exists but not observed in any taxa)
+    \item Root prob Q = gammm(multiply) of Q_cor for each gene
+\end{itemize}
+\section*{High LGT rates not due to false gene absence\cite{unrate}}
+\subsection*{Intro}
+\begin{itemize}
+    \item Truncated homologs can lead to false inference of gene gain, than multiple gene losses
+    \item Since genome sizes are stable over time, gene insertion $\sim=$ deletion rate
+    \item failure to recognize truncated genes leads to insertion rate overestimation
+    \item considered gene fragment presence (discrete) vs truncation and just full gene presence/absence
+    \item full gene model had highest likelihood, meaning truncation not as important as thought
+    \item fragments decrease insertion, but increase deletion
+    \item ORFans (only in one genome, no NR hits) excluded
+    \item Bc genes are much more truncated than non-Bc
+    \item more recently trasnfered genes are more likely truncated, consistent with idea that they are transient
+    \item truncated genes have higher ka/ks ratios
+    \item gene fragments are complicated
+\end{itemize}
+\section*{Phylogenetic Networks\cite{phynet}}
+\subsection*{Phylogenomics}
+\begin{itemize}
+    \item phylogenies help identify evolutionary events
+    \item Less critical genes more likely to be transferred
+    \item Networks are commonly used in other fields
+\end{itemize}
+\subsection*{Networks}
+\begin{itemize}
+    \item Have nice mathematical properties, useful abstraction for types of analysis
+    \item network properties
+    \begin{itemize}
+        \item weighted
+        \item directed
+        \item connectivity
+    \end{itemize}
+    \item Transcription/Metabolic/Gene networks exist
+    \item Good for visualizations
+\end{itemize}
+\subsection*{Phylogenomic Networks}
+\begin{itemize}
+    \item Start with tree, but allow for horizontal events like LG,recombination, hybridization or genome fusion
+    \item Can also apply network theory to regular trees
+    \item Split networks
+    \begin{itemize}
+        \item Built from a bi portion of taxa
+        \item Can have compat or incompat splits compared to a tree
+    \end{itemize}
+    \item Shared microbial transposase network
+    \begin{itemize}
+        \item indicates LGT contributes more than vertical
+        \item Reconstructed with P/A data
+        \item integrated habitat data
+    \end{itemize}
+    \item Can create networks from whole genome data
+\end{itemize}
+\subsection*{Shared Phylogenomic Network}
+\begin{itemize}
+    \item Constructed from P/A patters for all pfam orthologs
+    \item edges = # of shared genes, vertex = taxa
+    \item Construction steps
+    \begin{itemize}
+        \item pick genomes
+        \item group into families
+        \item Build PA matrix
+        \item sum cols(pfam) for each pair of rows(species) = edge
+        \item normalize edge by genome sizes
+    \end{itemize}
+    \item Frequent chromosome-plasmid links imply LGT
+\end{itemize}
+\subsection*{LGT Phylogenomic Networks}
+\begin{itemize}
+    \item Like a shared gene network
+    \item vertices = nodes from a tree
+    \item edges = putatative LGT events
+    \item gene gains are rare, assumed to occur very infrequently
+    \begin{itemize}
+        \item
+        \item
+    \end{itemize}
+    \item
+\end{itemize}
+\subsection*{Network Properties and Biological Interpretations}
+\begin{itemize}
+    \item Connectivity: LGT frequency
+    \item Centrality: Nodes that are main LGT drivers
+    \item Edge Weight Distribution: Are LGTs bulked or individual?
+    \item Diameter: How far genes travel between organisms
+    \item Community Structure: Why dense clusters form?
+\end{itemize}
+\section*{Uncovering Rate Variation of LGT During Bacterial Evolution\cite{unrate}}
+\subsection*{Intro}
+\begin{itemize}
+    \item Overcome parallel indels with max lkl methods
+    \item Complexity hypothesis not enough to explain indel rate variation
+    \item $\Gamma$ distribution incorporated into indel estimation
+    \item Considering rate variation increases likelihood estimations
+    \item information content contributes little to rate var param $\alpha$
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item Same 13 bacillus species used
+    \item 3 rate conditions (all =, 2 =, all !=) with/without rate variation
+    \item single rates likelihood improved with rate variation param
+    \item rate variation also improves 2=,all != model likelihood values
+    \item both models support that recently transferred genes have higher indel rates
+    \item positive correlation between $\alpha$ and branch length
+    \item higher $\alpha$ means lower rate variation
+    \item closely related taxa have more rate variation for indels
+    \item rate variation is blurry over time
+    \item infromational genes have lower indel rates, but they still contribute little to rate cariation
+    \item conserved genes contribute more to this rate variation than inormational genes
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item slow evolving genes better for tree construction
+    \item more accurate trees from better taxon sampling (more WGs)
+    \item tested alternative topologies for trees, got similar $\alpha$ values
+    \item gfam thresholds have little effect on gfam size or $\alpha$ values
+    \item more rate variation in closer species (lower branch len, lower $\alpha$)
+    \item endosymbionts can cause bias, experience faster evolution
+    \item rate variation might be a strong local effect because rate variation is higher in recently transferred genes
+    \item genes from all categories are subject to transfer
+    \item up to $\sim 66%$ of genes may have undergone LGT at one point
+    \item incongruencies between close and diverged LGT events may be explained by selective foreign gene retention by bacteria
+    \item this selection can be based on condon usage, GC content etc.
+    \item Ultimately results are consistent with complexity hypothesis, but much more going on
+    \item conserved genes also help explain rate variation
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item Used concatenated common gene sequences for tree
+    \item select gene trees were generated from literature
+    \item duplicated genes removed
+    \item super trees construed from incongruent common-select trees
+    \item missing data correction
+    \item discrete $\Gamma$ model used
+    \item estimated indel rates and $\alpha$ that maximized likelihood function given observed gfam pattern data
+    \item paralogs excluded
+    \item recovered non-annotated genome genes with TBLASTN
+    \item ORFans excludede
+    \item $< 100$ aa genes excluded
+    \item COG with BLASTP was used to identiy informational genes
+\end{itemize}
+\section*{Does Gene Translocation accelerate LT Gene Evolution\cite{trans}}
+\subsection*{Intro}
+\begin{itemize}
+    \item Recently transferred genes have high evolutionary and turnover rates
+    \item little known about association between rearrangements and LGT
+    \item translocated genes are more often recently transfered, evolve faster and are more often truncated
+    \item or is transfer more likely to result in translocation?
+    \item bias or leading strand
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item compaare genomes with low rearrangement and similar gene content
+    \item identify paralogs via TBLASTN and remove
+    \item genes grouped by strain specificity
+    \item genes sorted by chromosome location
+    \item orthologs with mismatched chr location were deemed translocated
+    \item truncated genes considered via BLAST hits with <100\% length match
+    \item IS and prophage sequences were identified
+    \item Ka/Ks was estimated
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item Conserved specific genes have higher evo distance and hiher Ka/Ks ratio than conserved nonspecific genes
+    \item translocated genes evolve faster than positionally conserved genes
+    \item recently transferred genes show most translocation
+    \item if translocation is constant, above implies lots of ancestral deletion of transfered genes
+    \item excluded genes that are more related to genes in further strains  thatn closer ones
+    \item broader spectrum genes (deeper in trees)  are more often translocated
+    \item gene truncation is high in translocated genes
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item does accessory genome size grow down tree?
+    \item All results are dependant on ortholog identification, but results are robust to different blast cutoffs
+    \item high similarity cutoffs $\to$ still see more translocation in recently transferred genes $\implies$ translocation not due to ancestral duplication (would see more divergence from ancestors)
+    \item LGT also not likely a confounding factor in positional analysis or ortholog grouping
+    \item translocated genes evolve faster (what if they are translocated closer to conserved regions (oriC, termini)?)
+    \item often following gene translocation is depletion (truncation, deletion)
+    \item translocation can affect function/expression
+    \item translocation can be deleterious, may be a mecahnism to increase turnover of recently transferred genes
+    \item translocated genes are spatially distributed
+    \item IS and prophages may play important part in translocation dynamics
+\end{itemize}
+\section*{LGT Rates in Prokaryotes: High But Why?\cite{high}}
+\subsection*{Quantifying Rate of Change in Gene Content}
+\begin{itemize}
+    \item Lots of species have high gene indel rates relative to nucleotide indel rates
+    \item Changes are short-lived (high tip rates vs low ancestor rates)
+    \item Why are most changes transient?
+    \begin{itemize}
+        \item Most are neutral, lost via drift
+        \item Most are deleterious lost via selection
+        \item LTG are only beneficial circumstantially, can be lost after serving their short purpose
+    \end{itemize}
+    \item Most gene indel rate estimated will be underestimated since many deleterious changes in ancestors would have never been observed, especially between distant species
+\end{itemize}
+\subsection*{Applying mutation rate theory to gene turonver rate}
+\begin{itemize}
+    \item If LGT is deleterious, why does it happen so much?
+    \item LGT depends on (external and internal)
+    \begin{itemize}
+        \item Natural competency
+        \item immune systems (phages,plasmids)
+        \item Amount of free-floating DNA around cell
+    \end{itemize}
+    \item Mutation rate depends on
+    \begin{itemize}
+        \item Distribution of fitness effects
+        \item cost of constraining mutation rate
+        \item presence of recombination
+    \end{itemize}
+    \item MTR is optimized to get most out of mutations without incurring too much fitness/metabolic cost
+    \item sexual selection minimizes mutation rate
+    \item LGT DFE has higher proportion of strongly beneficial changes than mutation (immediate unction gain)
+    \item LGT rates may be high to ensure the uptake of beneficial genes, this would explain high turnover rates as most gene indels would be deleterious and deleted
+    \item maybe cost of barrier to LGT is too high to be worth it
+\end{itemize}
+\section*{Inferring Bacterial Genome Flux Considering Truncated Genes\cite{fluxt}}
+\subsection*{Intro}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+        \item
+    \end{itemize}
+    \item
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+    \end{itemize}
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+    \end{itemize}
+    \item
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item
+\end{itemize}
+\section*{Network of Gene Sharing among 329 Proteobacterial Genomes Reveal Differences in LGT Freq at Different Phylogenetic Depth\cite{}}
+\subsection*{Intro}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+        \item
+    \end{itemize}
+    \item
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+    \end{itemize}
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item
+    \begin{itemize}
+        \item
+    \end{itemize}
+    \item
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item
+\end{itemize}
+\printbibliography
+\end{document}
+

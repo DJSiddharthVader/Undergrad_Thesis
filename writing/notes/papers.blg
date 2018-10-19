@@ -1,0 +1,17 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'papers.blg'
+[56] biber:287> INFO - === Wed Oct 17, 2018, 16:16:14
+[176] Biber.pm:348> INFO - Reading 'papers.bcf'
+[358] Biber.pm:742> INFO - Found 3 citekeys in bib section 0
+[369] Biber.pm:3151> INFO - Processing section 0
+[417] Biber.pm:3308> INFO - Looking for bibtex format file '../refs.bib' for section 0
+[441] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[457] bibtex.pm:974> INFO - Found BibTeX data source '../refs.bib'
+[563] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[563] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[563] Biber.pm:3028> INFO - Sorting list 'nyt/global' of type 'entry' with scheme 'nyt' and locale 'en-US'
+[563] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-US'
+[572] bbl.pm:519> INFO - Writing 'papers.bbl' with encoding 'ascii'
+[622] Utils.pm:147> WARN - The entry 'ihgt' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[642] bbl.pm:615> INFO - Output to papers.bbl
+[643] Biber.pm:109> INFO - WARNINGS: 1

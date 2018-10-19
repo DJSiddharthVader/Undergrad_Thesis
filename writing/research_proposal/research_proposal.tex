@@ -1,0 +1,93 @@
+%Preamble
+%Layout/Spacing
+\documentclass[12pt,letter]{article}
+\usepackage[margin=1in]{geometry} %sets margins
+\usepackage[compact]{titlesec}%sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{fullpage} %use entire page
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%References
+\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
+\addbibresource{../refs.bib}
+%Misc
+\usepackage{amsmath} %for math command
+\begin{document}
+\linespread{1.25} %1,5 spacing,latex default is 1.2, 1.2*1.25 = 1.5
+\title{Investigating Trends In \\Lateral Gene Transfer Rates\\ \vspace{0.25in}
+       \large MolBiol 4C12 Research Proposal}
+\author{Siddharth Reed\\ 400034828}
+\date{\today}
+\maketitle
+\newpage
+%Abstract
+\begin{abstract}
+    The abstract
+\end{abstract}
+\section*{Introduction} %7 pages, lit review
+%Phylogeny construction
+    %techniques
+    %interpreting trees
+%Techniques
+    %likelihood
+    %network statistics
+%Bacterial gene dynamics
+    %fast evolution
+%one page on lateral gene transfer
+    %mechanism
+    %occurrence naturally
+    %triggers
+    %frequency
+%Inferring LGT events
+    %false positives/negative
+    %detection methods
+    %pros/cons
+%Noted trends in LGT rates
+    %higher at tips
+    %not false absence diagnosis
+    %potential biological explanations
+    %Evo rate variation in transferred genes vs already present
+    %comparison vs mutation rate (branch length
+\section*{Hypothesis} %one sentence
+\section*{Objectives} %1 page, 3-4 objectives, 1-2 sentences each
+%%%%are accessory genes responsible or the increased LGT at tips? Start with core genome, progressively include more accessory genomes ans see if LGT rate increases?
+\begin{itemize}
+    %\item Compare ancestral gene indel rates to quasi related outgroups, weight by branch lengths, see if significantly different?
+    \item Is LGT rate disparity consistent across branch lengths (greater in tips vs ancestors)?
+    \item Is ancestral branch length correlated with LGT ancestral rate?
+    \item Why are transfered genes mutated more if they are lost so quickly?
+    \item Is accessory size (absolute, relative to core) correlated with LGT rates?
+    \item Is accessory diversity correlated with LGT rates?
+    \item Are pan-genomes with higher LGT rates more fluid?
+    \item Species trends in LGT?, use GOLD metadata for species
+    \item Genome size trends (total length, accessory vs core, accessory size) in LGT?
+    \item Do LGT genes increase evolutionary rate before transfer (annotate donor/recipient, build gene tree, compare donor/recep branch length)
+    \item Are bacteria under selective pressure doing more LGT?
+    \item Are LGT rates $\sim$ constant over time?
+    \item build phylonetworks,look for trends in gene transfer rate vs
+    \begin{itemize}
+        \item Length
+        \item function
+        \item chromosomal position (near oriC/termini)
+        \item LGT markers? (GC content, codon bias, ILS?)
+    \end{itemize}
+    \item Do network groups have higher LGT rates between them? than inside them
+    \item Expect small worlds graph of LGT phylonetworks among species?
+    \item Ancestral reconstruction with PAML, LGT annotation, phylonetwork, compare flow to tip network? Compare each level of tree ancestors?
+    \item Want lots of genomes (e coli)
+\end{itemze}
+\section*{Methods} %1-2 pages
+%maximum likelihood trees
+%indelmiss estimation
+%gene family grouping via blast, matrix construction
+%LGT Network analysis (trends in flow of tip vs ancestral network)
+\end{document}

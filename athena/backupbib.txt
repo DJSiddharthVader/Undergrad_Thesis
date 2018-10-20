@@ -1,0 +1,1170 @@
+﻿@article{Goph:15,
+    AUTHOR   = {Gophna, U. and Kristensen, D.M. and Wolf, Y.I. and Popa, O. and Drevet, C. and Koonin, E.V.},
+    TITLE    = {{No evidence of inhibition of horizontal gene transfer by CRISPR-Cas on
+evolutionary timescales}},
+    JOURNAL  = {ISME J},
+    YEAR     = {2015},
+    VOLUME   = {},
+    PAGES    = {},
+    ABSTRACT = {The CRISPR (clustered, regularly, interspaced, short, palindromic repeats)-Cas
+(CRISPR-associated genes) systems of archaea and bacteria provide adaptive
+immunity against viruses and other selfish elements and are believed to curtail
+horizontal gene transfer (HGT). Limiting acquisition of new genetic material
+could be one of the sources of the fitness cost of CRISPR-Cas maintenance and one
+of the causes of the patchy distribution of CRISPR-Cas among bacteria, and across
+environments. We sought to test the hypothesis that the activity of CRISPR-Cas in
+microbes is negatively correlated with the extent of recent HGT. Using three
+independent measures of HGT, we found no significant dependence between the
+length of CRISPR arrays, which reflects the activity of the immune system, and
+the estimated number of recent HGT events. In contrast, we observed a significant
+negative dependence between the estimated extent of HGT and growth temperature of
+microbes, which could be explained by the lower genetic diversity in hotter
+environments. We hypothesize that the relevant events in the evolution of
+resistance to mobile elements and proclivity for HGT, to which CRISPR-Cas systems
+seem to substantially contribute, occur on the population scale rather than on
+the timescale of species evolution.The ISME Journal advance online publication,
+24 February 2015; doi:10.1038/ismej.2015.20.},
+    AUADDR   = {1] National Evolutionary Synthesis Center, Durham, NC, USA [2] Department of
+Molecular Microbiology and Biotechnology, George S. Wise Faculty of Life
+Sciences, Tel Aviv University, Tel Aviv, Israel.
+National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, Bethesda, MD, USA.
+National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, Bethesda, MD, USA.
+Institute of Microbiology, Genomic Microbiology Group,
+Christian-Albrechts-University Kiel, Germany.
+Institute for Integrative Biology of the Cell, CEA, CNRS, Universite Paris Sud,
+Paris, France.
+National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, Bethesda, MD, USA.},
+    PMID     = {25710183},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25710183},
+    DOI      = {10.1038/ismej.2015.20}
+}
+
+
+@article{West:14,
+    AUTHOR   = {Westra, E.R. and Buckling, A. and Fineran, P.C.},
+    TITLE    = {{CRISPR-Cas systems: beyond adaptive immunity}},
+    JOURNAL  = {Nat Rev Microbiol},
+    YEAR     = {2014},
+    VOLUME   = {12},
+    PAGES    = {317-326},
+    ABSTRACT = {The discovery of CRISPR-Cas (clustered, regularly interspaced short palindromic
+repeats-CRISPR-associated proteins) adaptive immune systems in prokaryotes has
+been one of the most exciting advances in microbiology in the past decade. Their 
+role in host protection against mobile genetic elements is now well established, 
+but there is mounting evidence that these systems modulate other processes, such 
+as the genetic regulation of group behaviour and virulence, DNA repair and genome
+evolution. In this Progress article, we discuss recent studies that have provided
+insights into these unconventional CRISPR-Cas functions and consider their
+potential evolutionary implications. Understanding the role of CRISPR-Cas in
+these processes will improve our understanding of the evolution and maintenance
+of CRISPR-Cas systems in prokaryotic genomes.},
+    AUADDR   = {University of Exeter, Penryn, Cornwall TR10 9EZ, UK.
+University of Exeter, Penryn, Cornwall TR10 9EZ, UK.
+Department of Microbiology and Immunology, University of Otago, Dunedin 9054, New
+Zealand.},
+    PMID     = {24704746},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=24704746},
+    DOI      = {10.1038/nrmicro3241}
+}
+
+@article{Barr:13,
+    AUTHOR   = {Barrangou, R.},
+    TITLE    = {{CRISPR-Cas systems and RNA-guided interference}},
+    JOURNAL  = {Wiley Interdiscip Rev RNA},
+    YEAR     = {2013},
+    VOLUME   = {4},
+    PAGES    = {267-278},
+    ABSTRACT = {Clustered regularly interspaced short palindromic repeats (CRISPR) together with 
+associated sequences (cas) form the CRISPR-Cas system, which provides adaptive
+immunity against viruses and plasmids in bacteria and archaea. Immunity is built 
+through acquisition of short stretches of invasive nucleic acids into CRISPR loci
+as 'spacers'. These immune markers are transcribed and processed into small
+noncoding interfering CRISPR RNAs (crRNAs) that guide Cas proteins toward target 
+nucleic acids for specific cleavage of homologous sequences. Mechanistically,
+CRISPR-Cas systems function in three distinct stages, namely: (1) adaptation,
+where new spacers are acquired from invasive elements for immunization; (2) crRNA
+biogenesis, where CRISPR loci are transcribed and processed into small
+interfering crRNAs; and (3) interference, where crRNAs guide the Cas machinery to
+specifically cleave homologous invasive nucleic acids. A number of studies have
+shown that CRISPR-mediated immunity can readily increase the breadth and depth of
+virus resistance in bacteria and archaea. CRISPR interference can also target
+plasmid sequences and provide a barrier against the uptake of undesirable mobile 
+genetic elements. These inheritable hypervariable loci provide phylogenetic
+information that can be insightful for typing purposes, epidemiological studies, 
+and ecological surveys of natural habitats and environmental samples. More
+recently, the ability to reprogram CRISPR-directed endonuclease activity using
+customizable small noncoding interfering RNAs has set the stage for novel genome 
+editing and engineering avenues. This review highlights recent studies that
+revealed the molecular basis of CRISPR-mediated immunity, and discusses
+applications of crRNA-guided interference.},
+    AUADDR   = {Department of Food, Bioprocessing and Nutrition Sciences, North Carolina State
+University, Raleigh, NC, USA. rodolphe_barrangou@ncsu.edu},
+    PMID     = {23520078},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=23520078},
+    DOI      = {10.1002/wrna.1159}
+}
+
+@article{Bond:14,
+    AUTHOR   = {Bondy-Denomy, J. and Davidson, A.R.},
+    TITLE    = {{To acquire or resist: the complex biological effects of CRISPR-Cas systems}},
+    JOURNAL  = {Trends Microbiol},
+    YEAR     = {2014},
+    VOLUME   = {22},
+    PAGES    = {218-225},
+    ABSTRACT = {Prokaryotic CRISPR-Cas (clustered regularly interspaced short palindromic
+repeat-CRISPR associated) systems provide a sophisticated adaptive immune system 
+that offers protection against foreign DNA. These systems are widely distributed 
+in prokaryotes and exert an important influence on bacterial behavior and
+evolution. However, interpreting the biological effects of a CRISPR-Cas system
+within a given species can be complicated because the outcome of rejecting
+foreign DNA does not always provide a fitness advantage, as foreign DNA uptake is
+sometimes beneficial. To address these issues, here we review data pertaining to 
+the potential in vivo costs and benefits of CRISPR-Cas systems, novel functions
+for these systems, and how they may be inactivated.},
+    AUADDR   = {Departments of Molecular Genetics and Biochemistry, University of Toronto,
+Toronto, ON, Canada.
+Departments of Molecular Genetics and Biochemistry, University of Toronto,
+Toronto, ON, Canada. Electronic address: alan.davidson@utoronto.ca.},
+    PMID     = {24582529},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=24582529},
+    DOI      = {10.1016/j.tim.2014.01.007}
+}
+
+@article{Jian:13,
+    AUTHOR   = {Jiang, W. and Maniv, I. and Arain, F. and Wang, Y. and Levin, B.R. and Marraffini, L.A.},
+    TITLE    = {{Dealing with the evolutionary downside of CRISPR immunity: bacteria and
+beneficial plasmids}},
+    JOURNAL  = {PLoS Genet},
+    YEAR     = {2013},
+    VOLUME   = {9},
+    PAGES    = {e1003844},
+    ABSTRACT = {The immune systems that protect organisms from infectious agents invariably have 
+a cost for the host. In bacteria and archaea CRISPR-Cas loci can serve as
+adaptive immune systems that protect these microbes from infectiously transmitted
+DNAs. When those DNAs are borne by lytic viruses (phages), this protection can
+provide a considerable advantage. CRISPR-Cas immunity can also prevent cells from
+acquiring plasmids and free DNA bearing genes that increase their fitness. Here, 
+we use a combination of experiments and mathematical-computer simulation models
+to explore this downside of CRISPR-Cas immunity and its implications for the
+maintenance of CRISPR-Cas loci in microbial populations. We analyzed the
+conjugational transfer of the staphylococcal plasmid pG0400 into Staphylococcus
+epidermidis RP62a recipients that bear a CRISPR-Cas locus targeting this plasmid.
+Contrary to what is anticipated for lytic phages, which evade CRISPR by mutations
+in the target region, the evasion of CRISPR immunity by plasmids occurs at the
+level of the host through loss of functional CRISPR-Cas immunity. The results of 
+our experiments and models indicate that more than 10(-4) of the cells in
+CRISPR-Cas positive populations are defective or deleted for the CRISPR-Cas
+region and thereby able to receive and carry the plasmid. Most intriguingly, the 
+loss of CRISPR function even by large deletions can have little or no fitness
+cost in vitro. These theoretical and experimental results can account for the
+considerable variation in the existence, number and function of CRISPR-Cas loci
+within and between bacterial species. We postulate that as a consequence of the
+opposing positive and negative selection for immunity, CRISPR-Cas systems are in 
+a continuous state of flux. They are lost when they bear immunity to laterally
+transferred beneficial genes, re-acquired by horizontal gene transfer, and ascend
+in environments where phage are a major source of mortality.},
+    AUADDR   = {Laboratory of Bacteriology, The Rockefeller University, New York, New York,
+United States of America.},
+    PMID     = {24086164},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=24086164},
+    DOI      = {10.1371/journal.pgen.1003844}
+}
+
+
+@article{Koon:13,
+    AUTHOR   = {Koonin, E.V. and Makarova, K.S.},
+    TITLE    = {{CRISPR-Cas: evolution of an RNA-based adaptive immunity system in prokaryotes}},
+    JOURNAL  = {RNA Biol},
+    YEAR     = {2013},
+    VOLUME   = {10},
+    PAGES    = {679-686},
+    ABSTRACT = {The CRISPR-Cas (clustered regularly interspaced short palindromic repeats,
+CRISPR-associated genes) is an adaptive immunity system in bacteria and archaea
+that functions via a distinct self-non-self recognition mechanism that is
+partially analogous to the mechanism of eukaryotic RNA interference (RNAi). The
+CRISPR-Cas system incorporates fragments of virus or plasmid DNA into the CRISPR 
+repeat cassettes and employs the processed transcripts of these spacers as guide 
+RNAs to cleave the cognate foreign DNA or RNA. The Cas proteins, however, are not
+homologous to the proteins involved in RNAi and comprise numerous, highly
+diverged families. The majority of the Cas proteins contain diverse variants of
+the RNA recognition motif (RRM), a widespread RNA-binding domain. Despite the
+fast evolution that is typical of the cas genes, the presence of diverse versions
+of the RRM in most Cas proteins provides for a simple scenario for the evolution 
+of the three distinct types of CRISPR-cas systems. In addition to several
+proteins that are directly implicated in the immune response, the cas genes
+encode a variety of proteins that are homologous to prokaryotic toxins that
+typically possess nuclease activity. The predicted toxins associated with
+CRISPR-Cas systems include the essential Cas2 protein, proteins of COG1517 that, 
+in addition to a ligand-binding domain and a helix-turn-helix domain, typically
+contain different nuclease domains and several other predicted nucleases. The
+tight association of the CRISPR-Cas immunity systems with predicted toxins that, 
+upon activation, would induce dormancy or cell death suggests that adaptive
+immunity and dormancy/suicide response are functionally coupled. Such coupling
+could manifest in the persistence state being induced and potentially providing
+conditions for more effective action of the immune system or in cell death being 
+triggered when immunity fails.},
+    AUADDR   = {National Center for Biotechnology Information, NLM, National Institutes of
+Health, Bethesda, MD, USA. koonin@ncbi.nlm.nih.gov},
+    PMID     = {23439366},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=23439366},
+    DOI      = {10.4161/rna.24022}
+}
+
+@article{Szcz:12,
+    AUTHOR   = {Szczepankowska, A.},
+    TITLE    = {{Role of CRISPR/cas system in the development of bacteriophage resistance}},
+    JOURNAL  = {Adv Virus Res},
+    YEAR     = {2012},
+    VOLUME   = {82},
+    PAGES    = {289-338},
+    ABSTRACT = {Acquisition of foreign DNA can be of advantage or disadvantage to the host cell. 
+New DNAs can increase the fitness of an organism to certain environmental
+conditions; however, replication and maintenance of incorporated nucleotide
+sequences can be a burden for the host cell. These circumstances have resulted in
+the development of certain cellular mechanisms limiting horizontal gene transfer,
+including the immune system of vertebrates or RNA interference mechanisms in
+eukaryotes. Also, in prokaryotes, specific systems have been characterized, which
+are aimed especially at limiting the invasion of bacteriophage DNA, for example, 
+adsorption inhibition, injection blocking, restriction/modification, or abortive 
+infection. Quite recently, another distinct mechanism limiting horizontal
+transfer of genetic elements has been identified in procaryotes and shown to
+protect microbial cells against exogenous nucleic acids of phage or plasmid
+origin. This system has been termed CRISPR/cas and consists of two main
+components: (i) the CRISPR (clustered, regularly interspaced short palindromic
+regions) locus and (ii) cas genes, encoding CRISPR-associated (Cas) proteins. In 
+simplest words, the mechanism of CRISPR/cas activity is based on the active
+integration of small fragments (proto-spacers) of the invading DNAs (phage or
+plasmids) into microbial genomes, which are subsequently transcribed into short
+RNAs that direct the degradation of foreign invading DNA elements. In this way,
+the host organism acquires immunity toward mobile elements carrying matching
+sequences. The CRISPR/cas system is regarded as one of the earliest defense
+system that has evolved in prokaryotic organisms. It is inheritable, but at the
+same time is unstable when regarding the evolutionary scale. Comparative sequence
+analyses indicate that CRISPR/cas systems play an important role in the evolution
+of microbial genomes and their predators, bacteriophages.},
+    AUADDR   = {Department of Microbial Biochemistry, Institute of Biochemistry and Biophysics,
+Polish Academy of Sciences, Warsaw, Poland.},
+    PMID     = {22420856},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=22420856},
+    DOI      = {10.1016/B978-0-12-394621-8.00011-X}
+}
+
+@article{Maka:11,
+    AUTHOR   = {Makarova, K.S. and Haft, D.H. and Barrangou, R. and Brouns, S.J. and Charpentier, E. and Horvath, P. and Moineau, S. and Mojica, F.J. and Wolf, Y.I. and Yakunin, A.F. and vanderOost, J. and Koonin, E.V.},
+    TITLE    = {{Evolution and classification of the CRISPR-Cas systems}},
+    JOURNAL  = {Nat Rev Microbiol},
+    YEAR     = {2011},
+    VOLUME   = {9},
+    PAGES    = {467-477},
+    ABSTRACT = {The CRISPR-Cas (clustered regularly interspaced short palindromic
+repeats-CRISPR-associated proteins) modules are adaptive immunity systems that
+are present in many archaea and bacteria. These defence systems are encoded by
+operons that have an extraordinarily diverse architecture and a high rate of
+evolution for both the cas genes and the unique spacer content. Here, we provide 
+an updated analysis of the evolutionary relationships between CRISPR-Cas systems 
+and Cas proteins. Three major types of CRISPR-Cas system are delineated, with a
+further division into several subtypes and a few chimeric variants. Given the
+complexity of the genomic architectures and the extremely dynamic evolution of
+the CRISPR-Cas systems, a unified classification of these systems should be based
+on multiple criteria. Accordingly, we propose a 'polythetic' classification that 
+integrates the phylogenies of the most common cas genes, the sequence and
+organization of the CRISPR repeats and the architecture of the CRISPR-cas loci.},
+    AUADDR   = {National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, 8600 Rockville Pike, Bethesda, Maryland 20894,
+USA.},
+    PMID     = {21552286},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=21552286},
+    DOI      = {10.1038/nrmicro2577}
+}
+
+
+@article{Pawl:14,
+    AUTHOR   = {Pawluk, A. and Bondy-Denomy, J. and Cheung, V.H. and Maxwell, K.L. and Davidson, A.R.},
+    TITLE    = {{A new group of phage anti-CRISPR genes inhibits the
+type I-E CRISPR-Cas system of \textit{Pseudomonas aeruginosa}}i},
+    JOURNAL  = {MBio},
+    YEAR     = {2014},
+    VOLUME   = {5},
+    PAGES    = {e00896},
+    ABSTRACT = {CRISPR-Cas systems are one of the most widespread phage resistance mechanisms in 
+prokaryotes. Our lab recently identified the first examples of phage-borne
+anti-CRISPR genes that encode protein inhibitors of the type I-F CRISPR-Cas
+system of Pseudomonas aeruginosa. A key question arising from this work was
+whether there are other types of anti-CRISPR genes. In the current work, we
+address this question by demonstrating that some of the same phages carrying type
+I-F anti-CRISPR genes also possess genes that mediate inhibition of the type I-E 
+CRISPR-Cas system of P. aeruginosa. We have discovered four distinct families of 
+these type I-E anti-CRISPR genes. These genes do not inhibit the type I-F
+CRISPR-Cas system of P. aeruginosa or the type I-E system of Escherichia coli.
+Type I-E and I-F anti-CRISPR genes are located at the same position in the
+genomes of a large group of related P. aeruginosa phages, yet they are found in a
+variety of combinations and arrangements. We have also identified functional
+anti-CRISPR genes within nonprophage Pseudomonas genomic regions that are likely 
+mobile genetic elements. This work emphasizes the potential importance of
+anti-CRISPR genes in phage evolution and lateral gene transfer and supports the
+hypothesis that more undiscovered families of anti-CRISPR genes exist. Finally,
+we provide the first demonstration that the type I-E CRISPR-Cas system of P.
+aeruginosa is naturally active without genetic manipulation, which contrasts with
+E. coli and other previously characterized I-E systems. IMPORTANCE The CRISPR-Cas
+system is an adaptive immune system possessed by the majority of prokaryotic
+organisms to combat potentially harmful foreign genetic elements. This study
+reports the discovery of bacteriophage-encoded anti-CRISPR genes that mediate
+inhibition of a well-studied subtype of CRISPR-Cas system. The four families of
+anti-CRISPR genes described here, which comprise only the second group of
+anti-CRISPR genes to be identified, encode small proteins that bear no sequence
+similarity to previously studied phage or bacterial proteins. Anti-CRISPR genes
+represent a newly discovered and intriguing facet of the ongoing evolutionary
+competition between phages and their bacterial hosts.},
+    AUADDR   = {},
+    PMID     = {24736222},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=24736222},
+    DOI      = {10.1128/mBio.00896-14}
+}
+
+@article{Tyso:08,
+    AUTHOR   = {Tyson, G.W. and Banfield, J.F.},
+    TITLE    = {{Rapidly evolving CRISPRs implicated in acquired resistance of microorganisms to
+viruses}},
+    JOURNAL  = {Environ Microbiol},
+    YEAR     = {2008},
+    VOLUME   = {10},
+    PAGES    = {200-207},
+    ABSTRACT = {Recent experimental evidence has demonstrated that bacteria acquire resistance to
+viruses by incorporation of short transcribed nucleotide sequences into regions
+of clustered regularly interspaced short palindromic repeats (CRISPR). We have
+analysed community genomic data from acidophilic microbial biofilms and
+discovered that evolution of the CRISPR regions in two distinct Leptospirillum
+group II bacteria occurs fast enough to promote individuality in otherwise nearly
+clonal populations. Comparative genomics strongly indicates very recent lateral
+transfer of the CRISPR locus between these populations, followed by significant
+loss of spacer sequences and locus expansion by unidirectional heterogeneous
+addition of new spacer sequences. Diversification of the CRISPR region is
+inferred to be a population-level response to the rapidly changing selective
+pressure of phage predation. Results reinforce the importance of phage-host
+interactions in shaping microbial ecology and evolution over very short time
+scales.},
+    AUADDR   = {Department of Environmental Science, Policy and Management, University of
+California, Berkeley, Berkeley, CA 94720, USA.},
+    PMID     = {17894817},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=17894817},
+    DOI      = {10.1111/j.1462-2920.2007.01444.x}
+}
+
+@article{Bere:14,
+    AUTHOR   = {Berezovskaya, F.S. and Wolf, Y.I. and Koonin, E.V. and Karev, G.P.},
+    TITLE    = {{Pseudo-chaotic oscillations in CRISPR-virus coevolution predicted by bifurcation 
+analysis}},
+    JOURNAL  = {Biol Direct},
+    YEAR     = {2014},
+    VOLUME   = {9},
+    PAGES    = {13},
+    ABSTRACT = {BACKGROUND: The CRISPR-Cas systems of adaptive antivirus immunity are present in 
+most archaea and many bacteria, and provide resistance to specific viruses or
+plasmids by inserting fragments of foreign DNA into the host genome and then
+utilizing transcripts of these spacers to inactivate the cognate foreign genome. 
+The recent development of powerful genome engineering tools on the basis of
+CRISPR-Cas has sharply increased the interest in the diversity and evolution of
+these systems. Comparative genomic data indicate that during evolution of
+prokaryotes CRISPR-Cas loci are lost and acquired via horizontal gene transfer at
+high rates. Mathematical modeling and initial experimental studies of
+CRISPR-carrying microbes and viruses reveal complex coevolutionary dynamics.
+RESULTS: We performed a bifurcation analysis of models of coevolution of viruses 
+and microbial host that possess CRISPR-Cas hereditary adaptive immunity systems. 
+The analyzed Malthusian and logistic models display complex, and in particular,
+quasi-chaotic oscillation regimes that have not been previously observed
+experimentally or in agent-based models of the CRISPR-mediated immunity. The key 
+factors for the appearance of the quasi-chaotic oscillations are the non-linear
+dependence of the host immunity on the virus load and the partitioning of the
+hosts into the immune and susceptible populations, so that the system consists of
+three components. CONCLUSIONS: Bifurcation analysis of CRISPR-host coevolution
+model predicts complex regimes including quasi-chaotic oscillations. The
+quasi-chaotic regimes of virus-host coevolution are likely to be biologically
+relevant given the evolutionary instability of the CRISPR-Cas loci revealed by
+comparative genomics. The results of this analysis might have implications beyond
+the CRISPR-Cas systems, i.e. could describe the behavior of any adaptive immunity
+system with a heritable component, be it genetic or epigenetic. These predictions
+are experimentally testable. REVIEWERS' REPORTS: This manuscript was reviewed by 
+Sandor Pongor, Sergei Maslov and Marek Kimmel. For the complete reports, go to
+the Reviewers' Reports section.},
+    AUADDR   = {National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, Bethesda, MD 20894, USA. koonin@ncbi.nlm.nih.gov.},
+    PMID     = {24986220},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=24986220},
+    DOI      = {10.1186/1745-6150-9-13}
+}
+
+@article{Koon:15,
+    AUTHOR   = {Koonin, E.V. and Wolf, Y.I.},
+    TITLE    = {{Evolution of the CRISPR-Cas adaptive immunity systems in prokaryotes: models and 
+observations on virus-host coevolution}},
+    JOURNAL  = {Mol Biosyst},
+    YEAR     = {2015},
+    VOLUME   = {11},
+    PAGES    = {20-27},
+    ABSTRACT = {CRISPR-Cas is an adaptive immunity system in prokaryotes that functions via a
+unique mechanism which involves incorporation of foreign DNA fragments into
+CRISPR arrays and subsequent utilization of transcripts of these inserts (known
+as spacers) as guide RNAs to cleave the cognate selfish element genome. Multiple 
+attempts have been undertaken to explore the coevolution of viruses and microbial
+hosts carrying CRISPR-Cas using mathematical models that employ either systems of
+differential equations or an agent-based approach, or combinations thereof.
+Analysis of these models reveals highly complex co-evolutionary dynamics that
+ensues from the combination of the heritability of the CRISPR-mediated adaptive
+immunity with the existence of different degrees of immunity depending on the
+number of cognate spacers and the cost of carrying a CRISPR-Cas locus. Depending 
+on the details of the models, a variety of testable, sometimes conflicting
+predictions have been made on the dependence of the degree of immunity and the
+benefit of maintaining CRISPR-Cas on the abundance and diversity of hosts and
+viruses. Some of these predictions have already been directly validated
+experimentally. In particular, both the reality of the virus-host arms race, with
+viruses escaping resistance and hosts reacquiring it through the capture of new
+spacers, and the fitness cost of CRISPR-Cas due to the curtailment of beneficial 
+HGT have been reproduced in the laboratory. However, to test the predictions of
+the models more specifically, detailed studies of coevolving populations of
+microbes and viruses both in nature and in the laboratory are essential. Such
+analyses are expected to yield disagreements with the predictions of the current,
+oversimplified models and to trigger a new round of theoretical developments.},
+    AUADDR   = {National Center for Biotechnology Information, National Library of Medicine,
+National Institutes of Health, Bethesda, MD 20894, USA. koonin@ncbi.nlm.nih.gov.},
+    PMID     = {25238531},
+    URL      = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25238531},
+    DOI      = {10.1039/c4mb00438h}
+}
+
+@article{Marr:08,
+  title={CRISPR interference limits horizontal gene transfer in
+\textit{Staphylococci} by targeting DNA},
+  author={Marraffini, L.A. and Sontheimer, E.J.},
+  journal={Science},
+  volume={322},
+  pages={1843--1845},
+  year={2008},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{Phil:03,
+  title={Horizontal gene transfer and phylogenetics},
+  author={Philippe, H. and Douady, C.J.},
+  journal={Current Opinion in Microbiology},
+  volume={6},
+  pages={498--505},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{Ochm:00,
+  title={Lateral gene transfer and the nature of bacterial innovation},
+  author={Ochman, H. and Lawrence, J.G. and Groisman, E.A.},
+  journal={Nature},
+  volume={405},
+  pages={299--304},
+  year={2000},
+  publisher={Nature Publishing Group}
+}
+
+@article{Bika:12,
+  title={CRISPR interference can prevent natural transformation and virulence acquisition during in vivo bacterial infection},
+  author={Bikard, D. and Hatoum-Aslan, A. and Mucida, D. and
+Marraffini, L.A.},
+  journal={Cell Host and Microbe},
+  volume={12},
+  pages={177--186},
+  year={2012},
+  publisher={Elsevier}
+}
+
+@article{Davi:99,
+  title={Genetic exchange between bacteria in the environment},
+  author={Davison, J.},
+  journal={Plasmid},
+  volume={42},
+  pages={73--91},
+  year={1999},
+  publisher={Elsevier}
+}
+
+@article{Raga:09,
+  title={Lateral genetic transfer: open issues},
+  author={Ragan, M.A. and Beiko, R.G.},
+  journal={Philosophical Transactions of the Royal Society B: Biological Sciences},
+  volume={364},
+  pages={2241--2251},
+  year={2009},
+  publisher={The Royal Society}
+}
+
+@article{Barr:07,
+  title={CRISPR provides acquired resistance against viruses in prokaryotes},
+  author={Barrangou, R. and Fremaux, C. and Deveau, H. and Richards,
+M. and Boyaval, P. and Moineau, S. and Romero, D.A. and Horvath, P.},
+  journal={Science},
+  volume={315},
+  pages={1709--1712},
+  year={2007},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{Marr:10,
+  title={CRISPR interference: RNA-directed adaptive immunity in bacteria and archaea},
+  author={Marraffini, L.A. and Sontheimer, E.J.},
+  journal={Nature Reviews Genetics},
+  volume={11},
+  pages={181--190},
+  year={2010},
+  publisher={Nature Publishing Group}
+}
+
+@article{Bika:12,
+  title={CRISPR interference can prevent natural transformation and virulence acquisition during in vivo bacterial infection},
+  author={Bikard, D. and Hatoum-Aslan, A. and Mucida, D. and
+Marraffini, L.A.},
+  journal={Cell Host \& Microbe},
+  volume={12},
+  pages={177--186},
+  year={2012},
+  publisher={Elsevier}
+}
+
+@article{Yang:15,
+    AUTHOR   = {Yang, C. and Lin, F. and Li, Q. and Li, T. and Zhao,
+J.},
+    TITLE    = {{Comparative genomics reveals diversified CRISPR-Cas
+systems of globally
+distributed \textit{Microcystis aeruginosa}, a freshwater bloom-forming
+cyanobacterium}},
+    JOURNAL  = {Front Microbiol},
+    YEAR     = {2015},
+    VOLUME   = {6},
+    PAGES    = {394},
+    ABSTRACT = {Microcystis aeruginosa is one of the most common and
+dominant bloom-forming
+cyanobacteria in freshwater lakes around the world. Microcystis cells
+can produce
+toxic secondary metabolites, such as microcystins, which are harmful
+to human
+health. Two M. aeruginosa strains were isolated from two highly
+eutrophic lakes
+in China and their genomes were sequenced. Comparative genomic
+analysis was
+performed with the 12 other available M. aeruginosa genomes and
+closely related
+unicellular cyanobacterium. Each genome of M. aeruginosa containing at
+least one 
+clustered regularly interspaced short palindromic repeat (CRISPR)
+locus and total
+71 loci were identified, suggesting it is ubiquitous in M. aeruginosa
+genomes. In
+addition to the previously reported subtype I-D cas gene sets, three
+CAS subtypes
+I-A, III-A and III-B were identified and characterized in this study.
+Seven types
+of CRISPR direct repeat have close association with CAS subtype,
+confirming that 
+different and specific secondary structures of CRISPR repeats are
+important for
+the recognition, binding and process of corresponding cas gene sets.
+Homology
+search of the CRISPR spacer sequences provides a history of not only
+resistance
+to bacteriophages and plasmids known to be associated with M.
+aeruginosa, but
+also the ability to target much more exogenous genetic material in the
+natural
+environment. These adaptive and heritable defense mechanisms play a
+vital role in
+keeping genomic stability and self-maintenance by restriction of
+horizontal gene 
+transfer. Maintaining genomic stability and modulating genomic
+plasticity are
+both important evolutionary strategies for M. aeruginosa in adaptation
+and
+survival in various habitats.},
+    AUADDR   = {Key Laboratory of Algal Biology, Institute of
+Hydrobiology, Chinese Academy of
+Science Wuhan, China ; University of Chinese Academy of Sciences
+Beijing, China.
+Key Laboratory of Algal Biology, Institute of Hydrobiology, Chinese
+Academy of
+Science Wuhan, China ; University of Chinese Academy of Sciences
+Beijing, China.
+Key Laboratory of Algal Biology, Institute of Hydrobiology, Chinese
+Academy of
+Science Wuhan, China ; University of Chinese Academy of Sciences
+Beijing, China.
+Key Laboratory of Algal Biology, Institute of Hydrobiology, Chinese
+Academy of
+Science Wuhan, China.
+Key Laboratory of Algal Biology, Institute of Hydrobiology, Chinese
+Academy of
+Science Wuhan, China ; College of Life Science, Peking University
+Beijing, China.},
+    PMID     = {26029174},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=26029174},
+    DOI      = {10.3389/fmicb.2015.00394}
+}
+
+
+@article{Kupc:15,
+author = {Kupczok, A. and Landan, G. and Dagan, T.}, 
+title = {The contribution of genetic recombination to CRISPR array
+evolution},
+year = {2015}, 
+doi = {10.1093/gbe/evv113}, 
+abstract ={CRISPR (clustered regularly interspaced short palindromic
+repeats) is a microbial immune system against foreign DNA. Recognition
+sequences (spacers) encoded within the CRISPR array mediate the immune
+reaction in a sequence-specific manner. The known mechanisms for the
+evolution of CRISPR arrays include spacer acquisition from foreign DNA
+elements at the time of invasion and array erosion through spacer
+deletion. Here we consider the contribution of genetic recombination
+between homologous CRISPR arrays to the evolution of spacer
+repertoire. Acquisition of spacers from exogenic arrays via
+recombination may confer the recipient with immunity against
+unencountered antagonists. For this purpose we develop a novel method
+for the detection of recombination in CRISPR arrays by modeling the
+spacer order in arrays from multiple strains from the same species.
+Because the evolutionary signal of spacer recombination may be similar
+to that of pervasive spacer deletions or independent spacer
+acquisition, our method entails a robustness analysis of the
+recombination inference by a statistical comparison to resampled and
+perturbed datasets. We analyze CRISPR datasets from four bacterial
+species: two Gammaproteobacteria species harboring CRISPR type I and
+two Streptococcus species harboring CRISPR type II loci. We find that
+CRISPR array evolution in E. coli and S. agalactiae can be explained
+solely by vertical inheritance and differential spacer deletion. In P.
+aeruginosa, we find an excess of single spacers potentially
+incorporated into the CRISPR locus during independent acquisition
+events. In S. thermophilus, evidence for spacer acquisition by
+recombination is present in five out of 70 strains. Genetic
+recombination has been proposed to accelerate adaptation by combining
+beneficial mutations that arose in independent lineages. However, for
+most species under study, we find that CRISPR evolution is shaped
+mainly by spacer acquisition and loss rather than recombination. Since
+the evolution of spacer content is characterized by a rapid turnover,
+it is likely that recombination is not beneficial for improving phage
+resistance in the strains under study, or that it cannot be detected
+in the resolution of intra-species comparisons.}, 
+URL =
+{http://gbe.oxfordjournals.org/content/early/2015/06/16/gbe.evv113.abstract}, 
+eprint =
+{http://gbe.oxfordjournals.org/content/early/2015/06/16/gbe.evv113.full.pdf+html}, 
+journal = {Genome Biology and Evolution} 
+}
+
+
+@article{Sell:15,
+    AUTHOR   = {Selle, K. and Klaenhammer, T.R. and Barrangou, R.},
+    TITLE    = {{CRISPR-based screening of genomic island excision
+events in bacteria}},
+    JOURNAL  = {Proc Natl Acad Sci U S A},
+    YEAR     = {2015},
+    VOLUME   = {},
+    PAGES    = {},
+    ABSTRACT = {Genomic analysis of Streptococcus thermophilus
+revealed that mobile genetic
+elements (MGEs) likely contributed to gene acquisition and loss during
+evolutionary adaptation to milk. Clustered regularly interspaced short
+palindromic repeats-CRISPR-associated genes (CRISPR-Cas), the adaptive
+immune
+system in bacteria, limits genetic diversity by targeting MGEs
+including
+bacteriophages, transposons, and plasmids. CRISPR-Cas systems are
+widespread in
+streptococci, suggesting that the interplay between CRISPR-Cas systems
+and MGEs
+is one of the driving forces governing genome homeostasis in this
+genus. To
+investigate the genetic outcomes resulting from CRISPR-Cas targeting
+of
+integrated MGEs, in silico prediction revealed four genomic islands
+without
+essential genes in lengths from 8 to 102 kbp, totaling 7\% of the
+genome. In this 
+study, the endogenous CRISPR3 type II system was programmed to target
+the four
+islands independently through plasmid-based expression of engineered
+CRISPR
+arrays. Targeting lacZ within the largest 102-kbp genomic island was
+lethal to
+wild-type cells and resulted in a reduction of up to 2.5-log in the
+surviving
+population. Genotyping of Lac- survivors revealed variable deletion
+events
+between the flanking insertion-sequence elements, all resulting in
+elimination of
+the Lac-encoding island. Chimeric insertion sequence footprints were
+observed at 
+the deletion junctions after targeting all of the four genomic
+islands,
+suggesting a common mechanism of deletion via recombination between
+flanking
+insertion sequences. These results established that self-targeting
+CRISPR-Cas
+systems may direct significant evolution of bacterial genomes on a
+population
+level, influencing genome homeostasis and remodeling.},
+    AUADDR   = {Department of Food, Bioprocessing and Nutrition
+Sciences, North Carolina State
+University, Raleigh, NC 27695; Functional Genomics Graduate Program,
+North
+Carolina State University, Raleigh, NC 27695.
+Department of Food, Bioprocessing and Nutrition Sciences, North
+Carolina State
+University, Raleigh, NC 27695; Functional Genomics Graduate Program,
+North
+Carolina State University, Raleigh, NC 27695 klaenhammer@ncsu.edu
+rbarran@ncsu.edu.
+Department of Food, Bioprocessing and Nutrition Sciences, North
+Carolina State
+University, Raleigh, NC 27695; klaenhammer@ncsu.edu
+rbarran@ncsu.edu.},
+    PMID     = {26080436},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=26080436},
+    DOI      = {10.1073/pnas.1508525112}
+}
+
+@article{Maka:15,
+    AUTHOR   = {Makarova, K.S. and Koonin, E.V.},
+    TITLE    = {{Annotation and Classification of CRISPR-Cas
+Systems}},
+    JOURNAL  = {Methods Mol Biol},
+    YEAR     = {2015},
+    VOLUME   = {1311},
+    PAGES    = {47-75},
+    ABSTRACT = {The clustered regularly interspaced short palindromic
+repeats (CRISPR)-Cas
+(CRISPR-associated proteins) is a prokaryotic adaptive immune system
+that is
+represented in most archaea and many bacteria. Among the currently
+known
+prokaryotic defense systems, the CRISPR-Cas genomic loci show
+unprecedented
+complexity and diversity. Classification of CRISPR-Cas variants that
+would
+capture their evolutionary relationships to the maximum possible
+extent is
+essential for comparative genomic and functional characterization of
+this
+theoretically and practically important system of adaptive immunity.
+To this end,
+a multipronged approach has been developed that combines phylogenetic
+analysis of
+the conserved Cas proteins with comparison of gene repertoires and
+arrangements
+in CRISPR-Cas loci. This approach led to the current classification of
+CRISPR-Cas
+systems into three distinct types and ten subtypes for each of which
+signature
+genes have been identified. Comparative genomic analysis of the
+CRISPR-Cas
+systems in new archaeal and bacterial genomes performed over the 3
+years elapsed 
+since the development of this classification makes it clear that new
+types and
+subtypes of CRISPR-Cas need to be introduced. Moreover, this
+classification
+system captures only part of the complexity of CRISPR-Cas organization
+and
+evolution, due to the intrinsic modularity and evolutionary mobility
+of these
+immunity systems, resulting in numerous recombinant variants.
+Moreover, most of
+the cas genes evolve rapidly, complicating the family assignment for
+many Cas
+proteins and the use of family profiles for the recognition of
+CRISPR-Cas subtype
+signatures. Further progress in the comparative analysis of CRISPR-Cas
+systems
+requires integration of the most sensitive sequence comparison tools,
+protein
+structure comparison, and refined approaches for comparison of gene
+neighborhoods.},
+    AUADDR   = {National Center for Biotechnology Information,
+National Library of Medicine,
+National Institutes of Health, 8600 Rockville Pike, Bethesda, MD,
+20894, USA,
+makarova@ncbi.nlm.nih.gov.},
+    PMID     = {25981466},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25981466},
+    DOI      = {10.1007/978-1-4939-2687-9_4}
+}
+
+@article{Paez:15,
+    AUTHOR   = {Paez-Espino, D. and Sharon, I. and Morovic, W. and
+Stahl, B. and Thomas, B.C. and Barrangou, R. and Banfield, J.F.},
+    TITLE    = {{CRISPR immunity drives rapid phage genome evolution
+in \textit{Streptococcus
+thermophilus}}},
+    JOURNAL  = {MBio},
+    YEAR     = {2015},
+    VOLUME   = {6},
+    PAGES    = {},
+    ABSTRACT = {Many bacteria rely on CRISPR-Cas systems to provide
+adaptive immunity against
+phages, predation by which can shape the ecology and functioning of
+microbial
+communities. To characterize the impact of CRISPR immunization on
+phage genome
+evolution, we performed long-term bacterium-phage (Streptococcus
+thermophilus-phage 2972) coevolution experiments. We found that in
+this species, 
+CRISPR immunity drives fixation of single nucleotide polymorphisms
+that
+accumulate exclusively in phage genome regions targeted by CRISPR.
+Mutation rates
+in phage genomes highly exceed those of the host. The presence of
+multiple phages
+increased phage persistence by enabling recombination-based formation
+of chimeric
+phage genomes in which sequences heavily targeted by CRISPR were
+replaced.
+Collectively, our results establish CRISPR-Cas adaptive immunity as a
+key driver 
+of phage genome evolution under the conditions studied and highlight
+the
+importance of multiple coexisting phages for persistence in natural
+systems.
+IMPORTANCE: Phages remain an enigmatic part of the biosphere. As
+predators, they 
+challenge the survival of host bacteria and archaea and set off an
+"arms race"
+involving host immunization countered by phage mutation. The
+CRISPR-Cas system is
+adaptive: by capturing fragments of a phage genome upon exposure, the
+host is
+positioned to counteract future infections. To investigate this
+process, we
+initiated massive deep-sequencing experiments with a host and
+infective phage and
+tracked the coevolution of both populations over hundreds of days. In
+the present
+study, we found that CRISPR immunity drives the accumulation of phage
+genome
+rearrangements (which enable longer phage survival) and escape
+mutations,
+establishing CRISPR as one of the fundamental drivers of phage
+evolution.},
+    AUADDR   = {University of California, Berkeley, California, USA.
+University of California, Berkeley, California, USA.
+DuPont Nutrition and Health, Madison, Wisconsin, USA.
+DuPont Nutrition and Health, Madison, Wisconsin, USA.
+University of California, Berkeley, California, USA.
+Department of Food, Bioprocessing and Nutrition Sciences, North
+Carolina State
+University, Raleigh, North Carolina, USA rbarran@ncsu.edu
+jbanfield@berkeley.edu.
+University of California, Berkeley, California, USA rbarran@ncsu.edu
+jbanfield@berkeley.edu.},
+    PMID     = {25900652},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25900652},
+    DOI      = {10.1128/mBio.00262-15}
+}
+
+@article{Mika:15,
+    AUTHOR   = {Mikalsen, T. and Pedersen, T. and Willems, R. and
+Coque, T.M. and Werner, G. and Sadowy, E. and vanSchaik, W. and
+Jensen, L.B. and Sundsfjord, A. and Hegstad, K.},
+    TITLE    = {{Investigating the mobilome in clinically important
+lineages of \textit{Enterococcus
+faecium} and \textit{Enterococcus faecalis}}},
+    JOURNAL  = {BMC Genomics},
+    YEAR     = {2015},
+    VOLUME   = {16},
+    PAGES    = {282},
+    ABSTRACT = {BACKGROUND: The success of Enterococcus faecium and E.
+faecalis evolving as
+multi-resistant nosocomial pathogens is associated with their ability
+to acquire 
+and share adaptive traits, including antimicrobial resistance genes
+encoded by
+mobile genetic elements (MGEs). Here, we investigate this mobilome in
+successful 
+hospital associated genetic lineages, E. faecium sequence type (ST)17
+(n=10) and 
+ST78 (n=10), E. faecalis ST6 (n=10) and ST40 (n=10) by DNA microarray
+analyses.
+RESULTS: The hybridization patterns of 272 representative targets
+including
+plasmid backbones (n=85), transposable elements (n=85), resistance
+determinants
+(n=67), prophages (n=29) and clustered regularly interspaced short
+palindromic
+repeats (CRISPR)-cas sequences (n=6) separated the strains according
+to species, 
+and for E. faecalis also according to STs. RCR-, Rep_3-, RepA_N- and
+Inc18-family
+plasmids were highly prevalent and with the exception of Rep_3, evenly
+distributed between the species. There was a considerable difference
+in the
+replicon profile, with rep 17/pRUM , rep 2/pRE25 , rep 14/EFNP1 and
+rep 20/pLG1
+dominating in E. faecium and rep 9/pCF10 , rep 2/pRE25 and rep 7 in E.
+faecalis
+strains. We observed an overall high correlation between the presence
+and absence
+of genes coding for resistance towards antibiotics, metals, biocides
+and their
+corresponding MGEs as well as their phenotypic antimicrobial
+susceptibility
+pattern. Although most IS families were represented in both E.
+faecalis and E.
+faecium, specific IS elements within these families were distributed
+in only one 
+species. The prevalence of IS256-, IS3-, ISL3-, IS200/IS605-, IS110-,
+IS982- and 
+IS4-transposases was significantly higher in E. faecium than E.
+faecalis, and
+that of IS110-, IS982- and IS1182-transposases in E. faecalis ST6
+compared to
+ST40. Notably, the transposases of IS981, ISEfm1 and IS1678 that have
+only been
+reported in few enterococcal isolates were well represented in the E.
+faecium
+strains. E. faecalis ST40 strains harboured possible functional
+CRISPR-Cas
+systems, and still resistance and prophage sequences were generally
+well
+represented. CONCLUSIONS: The targeted MGEs were highly prevalent
+among the
+selected STs, underlining their potential importance in the evolution
+of
+hospital-adapted lineages of enterococci. Although the propensity of
+inter-species horizontal gene transfer (HGT) must be emphasized, the
+considerable
+species-specificity of these MGEs indicates a separate vertical
+evolution of MGEs
+within each species, and for E. faecalis within each ST.},
+    AUADDR   = {Research group for Host-microbe Interactions,
+Department of Medical Biology,
+Faculty of Health Science, UiT - The Arctic University of Norway,
+Tromso, Norway.
+Theresa.Mikalsen@uit.no.
+Norwegian National Advisory Unit on Detection of Antimicrobial
+Resistance,
+Department of Microbiology and Infection Control, University Hospital
+of North
+Norway, Tromso, Norway. Torunn.Annie.Pedersen@unn.no.
+Department of Medical Microbiology, University Medical Center Utrecht,
+Utrecht,
+The Netherlands. rwillems@umcutrecht.nl.
+Servicio de Microbiologia, Hospital Ramon y Cajal, Instituto Ramon y
+Cajal de
+Investigacion Sanitaria (IRYCIS), Madrid, Spain.
+teresacoque@gmail.com.
+Centro de Investigacion Biomedica en Red de Epidemiologia y Salud
+Publica
+(CIBER-ESP), Madrid, Spain. teresacoque@gmail.com.
+Division of Nosocomial Pathogens and Antibiotic Resistance, Robert
+Koch
+Institute, Wernigerode Branch, Wernigerode, Germany. WernerG@rki.de.
+Department of Molecular Microbiology, National Medicines Institute,
+ul, Chelmska 
+30/34, 00-725, Warsaw, Poland. ewasadowy@cls.edu.pl.
+Department of Medical Microbiology, University Medical Center Utrecht,
+Utrecht,
+The Netherlands. W.vanSchaik@umcutrecht.nl.
+Division of Food Microbiologyt, National Food Institute, Danish
+Technical
+University, Copenhagen V, Denmark. lboj@food.dtu.dk.
+Research group for Host-microbe Interactions, Department of Medical
+Biology,
+Faculty of Health Science, UiT - The Arctic University of Norway,
+Tromso, Norway.
+arnfinn.sundsfjord@uit.no.
+Norwegian National Advisory Unit on Detection of Antimicrobial
+Resistance,
+Department of Microbiology and Infection Control, University Hospital
+of North
+Norway, Tromso, Norway. arnfinn.sundsfjord@uit.no.
+Research group for Host-microbe Interactions, Department of Medical
+Biology,
+Faculty of Health Science, UiT - The Arctic University of Norway,
+Tromso, Norway.
+Kristin.Hegstad@uit.no.
+Norwegian National Advisory Unit on Detection of Antimicrobial
+Resistance,
+Department of Microbiology and Infection Control, University Hospital
+of North
+Norway, Tromso, Norway. Kristin.Hegstad@uit.no.},
+    PMID     = {25885771},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25885771},
+    DOI      = {10.1186/s12864-015-1407-6}
+}
+
+@article{West:15,
+    AUTHOR   = {Westra, E.R. and vanHoute, S. and Oyesiku-Blakemore,
+S. and Makin, B. and Broniewski, J.M. and Best, A. and Bondy-Denomy,
+J. and Davidson, A. and Boots, M. and Buckling, A.},
+    TITLE    = {{Parasite Exposure Drives Selective Evolution of
+Constitutive versus Inducible
+Defense}},
+    JOURNAL  = {Curr Biol},
+    YEAR     = {2015},
+    VOLUME   = {25},
+    PAGES    = {1043-1049},
+    ABSTRACT = {In the face of infectious disease, organisms evolved a
+range of defense
+mechanisms, with a clear distinction between those that are
+constitutive (always 
+active) and those that are inducible (elicited by parasites). Both
+defense
+strategies have evolved from each other, but we lack an understanding
+of the
+conditions that favor one strategy over the other. While it is hard to
+generalize
+about their degree of protection, it is possible to make
+generalizations about
+their associated fitness costs, which are commonly detected. By
+definition,
+constitutive defenses are always "on," and are therefore associated
+with a fixed 
+cost, independent of parasite exposure. Inducible defenses, on the
+other hand,
+may lack costs in the absence of parasites but become costly when
+defense is
+elicited through processes such as immunopathology. Bacteria can
+evolve
+constitutive defense against phage by modification/masking of surface
+receptors, 
+which is often associated with reduced fitness in the absence of
+phage. Bacteria 
+can also evolve inducible defense using the CRISPR-Cas (clustered
+regularly
+interspaced short palindromic repeat, CRISPR associated) immune
+system, which is 
+typically elicited upon infection. CRISPR-Cas functions by integrating
+phage
+sequences into CRISPR loci on the host genome. Upon re-infection,
+CRISPR
+transcripts guide cleavage of phage genomes. In nature, both
+mechanisms are
+important. Using a general theoretical model and experimental
+evolution, we tease
+apart the mechanism that drives their evolution and show that
+infection risk
+determines the relative investment in the two arms of defense.},
+    AUADDR   = {Environment and Sustainability Institute, Biosciences,
+University of Exeter,
+Penryn Campus, Penryn TR10 9FE, UK. Electronic address:
+westra.edze@gmail.com.
+Environment and Sustainability Institute, Biosciences, University of
+Exeter,
+Penryn Campus, Penryn TR10 9FE, UK.
+Environment and Sustainability Institute, Biosciences, University of
+Exeter,
+Penryn Campus, Penryn TR10 9FE, UK.
+Environment and Sustainability Institute, Biosciences, University of
+Exeter,
+Penryn Campus, Penryn TR10 9FE, UK.
+Environment and Sustainability Institute, Biosciences, University of
+Exeter,
+Penryn Campus, Penryn TR10 9FE, UK.
+School of Mathematics and Physics, University of Sheffield, Hicks
+Building,
+Sheffield S10 2TN, UK.
+Departments of Molecular Genetics and Biochemistry, University of
+Toronto, 1
+King's College Circle, Toronto, ON M5S 1A8, Canada.
+Departments of Molecular Genetics and Biochemistry, University of
+Toronto, 1
+King's College Circle, Toronto, ON M5S 1A8, Canada.
+Biosciences, University of Exeter, Penryn Campus, Penryn TR10 9FE, UK.
+Environment and Sustainability Institute, Biosciences, University of
+Exeter,
+Penryn Campus, Penryn TR10 9FE, UK.},
+    PMID     = {25772450},
+    URL      =
+{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&dopt=Citation&list_uids=25772450},
+    DOI      = {10.1016/j.cub.2015.01.065}
+}
+
+@article{Dang:15,
+  title={Gene insertion deletion analysis while accounting for
+possible missing data},
+  author={Dang, U.J. and Devault, A.M. and Poinar, H.N.
+and Pepperell, C. and Mortimer, T. and Golding, G.B.}, 
+  pages={1--28},
+  year={2015},
+  journal={in manuscript}
+  publisher={Unpublished}
+}
+
+@article{Neil:85,
+  title={Recombination deficient mutant of \textit{Caulobacter
+crescentus}},
+  author={O'Neill, E.A. and Hynes, R.H. and Bender, R.A.},
+  journal={Molecular and General Genetics MGG},
+  volume={198},
+  pages={275--278},
+  year={1985},
+  publisher={Springer}
+}
+
+@article{Yang:12,
+  title={\textit{Edwardsiella} comparative phylogenomics reveal the new
+intra/inter-species taxonomic relationships, virulence evolution and
+niche adaptation mechanisms},
+  author={Yang, M. and Lv, Y. and Xiao, J. and Wu,
+H. and Zheng, H. and Liu, Q. and Zhang, Y. and Wang,
+Q.},
+  journal={PloS One},
+  volume={7},
+  pages={e36987},
+  year={2012},
+  publisher={Public Library of Science}
+}
+
+@article{Suer:07,
+  title={\textit{Helicobacter pylori} evolution and phenotypic diversification
+in a changing host},
+  author={Suerbaum, S. and Josenhans, C.},
+  journal={Nature Reviews Microbiology},
+  volume={5},
+  pages={441--452},
+  year={2007},
+  publisher={Nature Publishing Group}
+}
+
+@article{Shen:14,
+  title={Efficient genome modification by CRISPR-Cas9 nickase with
+minimal off-target effects},
+  author={Shen, B. and Zhang, W. and Zhang, J. and Zhou,
+J. and Wang, J. and Chen, L. and Wang, L. and Hodgkins,
+A. and Iyer, V. and Huang, X. and others},
+  journal={Nature Methods},
+  volume={11},
+  pages={399--402},
+  year={2014},
+  publisher={Nature Publishing Group}
+}
+
+@article{Kato:02,
+  title={MAFFT: a novel method for rapid multiple sequence alignment
+based on fast Fourier transform},
+  author={Katoh, K. and Misawa, K. and Kuma, K. and
+Miyata, T.},
+  journal={Nucleic Acids Research},
+  volume={30},
+  pages={3059--3066},
+  year={2002},
+  publisher={Oxford Univ Press}
+}
+
+@article{Ronq:03,
+  title={MrBayes 3: Bayesian phylogenetic inference under mixed
+models},
+  author={Ronquist, F. and Huelsenbeck, J.P.},
+  journal={Bioinformatics},
+  volume={19},
+  pages={1572--1574},
+  year={2003},
+  publisher={Oxford Univ Press}
+}

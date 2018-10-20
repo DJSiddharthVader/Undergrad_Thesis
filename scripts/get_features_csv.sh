@@ -15,7 +15,7 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
         local tmp=$(grep -m 1 "$pattern" "$1" | tr -d ',' | perl -pe 's/^.*:: (\d+)[^\d]*$/\1/')
         info+=("$tmp")
     done
-    #join with , and print
+    #join with ~ and print
     outvar="$1" #absolute file path
     for i in "${info[@]}" #for each piece of info
     do
@@ -24,11 +24,11 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     echo "$outvar"
 }
 
-headers="Accession Number, Organism, Genus, Taxonomy,Genes (total), CDS (total), Genes (coding), CDS (coding), Genes (RNA), tRNAs, ncRNAs, Pseudo Genes (total),localfilepath"
+headers="Filepath~Accession Number~Organism~Genus~Taxonomy~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
 base="/home/sid/thesis_SidReed/"
 
 echo "$headers"
 for file in $1* #dir of gbff files
 do
-    singlefileinfo "$base$file" #print , delimited file info to STDOUT
+    singlefileinfo "$base$file" #print ~ delimited file info to STDOUT
 done

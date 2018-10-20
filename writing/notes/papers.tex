@@ -467,18 +467,40 @@ $$L_i(g_i) = [\sum_{g_j} p_{g_ig_[j}(t_j)L_j(g_j)] \times [\sum_{g_k} p_{g_ig_k}
 \section*{Network of Gene Sharing among 329 Proteobacterial Genomes Reveal Differences in LGT Freq at Different Phylogenetic Depth\cite{}}
 \subsection*{Intro}
 \begin{itemize}
-    \item
-    \begin{itemize}
-        \item
-        \item
-    \end{itemize}
-    \item
+    \item LGT is fairly common
+    \item Estimated that $\sim81\%$ of genes underwent LGT at one point
+    \item $\sim18\%$ of e coli gene families affected by LGT
+    \item High in cyanobacteria
+    \item proteobacteria large, quite varied phylum
+    \item Lots of sequences genomes
+    \item LGT is a quick way to adapt vs. selection, often occurs for bacteria sharing niches ,symbionts
+    \item Use network approach for large, whole genomes
 \end{itemize}
 \subsection*{Methods}
 \begin{itemize}
-    \item
+    \item Data gathering/familiy grouping
     \begin{itemize}
-        \item
+        \item 329 Proteobacterial genomes from NCBI
+        \item Gene families clustered by identity with BLAST
+        \item E value cluster $< -10$, aligned with clustalw
+        \item Protiens above threhsold AA identity clustered using MCL, I=2.0
+    \end{itemize}
+    \item Trees
+    \begin{itemize}
+        \item RPL31 and apara-tRNA syth tress created
+        \item proteins families alinged using clustalw
+        \item ML tree with PHYML with JTT matrix
+        \item Reference tree from concatenated rRNA (5,16,23 S)
+        \item Clustalw alingment, trimmed, PHYML with HKY matrix
+        \item Also built Pfam P/A matrix, built tree with wafner parsimony
+    \end{itemize}
+    \item Networks
+    \begin{itemize}
+        \item Shared protins = number of shared families between genomes
+        \item Module division done
+        \item different models allow different max number of LGT per pfam
+        \item LGT model picked on how ancestral genome size distribution from LGT model agrees with modern size distribution
+        \item K gene origins in a protein gami
     \end{itemize}
 \end{itemize}
 \subsection*{Results}

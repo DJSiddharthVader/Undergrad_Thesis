@@ -1,0 +1,3 @@
+/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_001689125.2_ASM168912v2_genomic.gbff
+/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_002222595.2_ASM222259v2_genomic.gbff
+/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_003287895.1_ASM328789v1_genomic.gbff

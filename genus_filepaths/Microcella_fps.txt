@@ -1,0 +1,1 @@
+/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_002355395.1_Microcella_alkaliphila_JAM_AC0309_assembly_01_genomic.gbff

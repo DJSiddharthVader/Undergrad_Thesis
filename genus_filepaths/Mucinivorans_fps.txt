@@ -1,0 +1,1 @@
+/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000723505.1_Mucivorans_M3_Nelson-Bomar-Fixed_genomic.gbff

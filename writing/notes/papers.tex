@@ -25,6 +25,7 @@
 \author{Siddharth Reed, 400034828}
 \date{\today}
 \maketitle
+%OLD PAPERS
 \section*{Estimation Of Gene InDel Rates With Missing Data\cite{indelmiss}}
 \subsection*{Intro}
 \begin{itemize}
@@ -467,18 +468,40 @@ $$L_i(g_i) = [\sum_{g_j} p_{g_ig_[j}(t_j)L_j(g_j)] \times [\sum_{g_k} p_{g_ig_k}
 \section*{Network of Gene Sharing among 329 Proteobacterial Genomes Reveal Differences in LGT Freq at Different Phylogenetic Depth\cite{}}
 \subsection*{Intro}
 \begin{itemize}
-    \item
-    \begin{itemize}
-        \item
-        \item
-    \end{itemize}
-    \item
+    \item LGT is fairly common
+    \item Estimated that $\sim81\%$ of genes underwent LGT at one point
+    \item $\sim18\%$ of e coli gene families affected by LGT
+    \item High in cyanobacteria
+    \item proteobacteria large, quite varied phylum
+    \item Lots of sequences genomes
+    \item LGT is a quick way to adapt vs. selection, often occurs for bacteria sharing niches ,symbionts
+    \item Use network approach for large, whole genomes
 \end{itemize}
 \subsection*{Methods}
 \begin{itemize}
-    \item
+    \item Data gathering/familiy grouping
     \begin{itemize}
-        \item
+        \item 329 Proteobacterial genomes from NCBI
+        \item Gene families clustered by identity with BLAST
+        \item E value cluster $< -10$, aligned with clustalw
+        \item Protiens above threhsold AA identity clustered using MCL, I=2.0
+    \end{itemize}
+    \item Trees
+    \begin{itemize}
+        \item RPL31 and apara-tRNA syth tress created
+        \item proteins families alinged using clustalw
+        \item ML tree with PHYML with JTT matrix
+        \item Reference tree from concatenated rRNA (5,16,23 S)
+        \item Clustalw alingment, trimmed, PHYML with HKY matrix
+        \item Also built Pfam P/A matrix, built tree with wafner parsimony
+    \end{itemize}
+    \item Networks
+    \begin{itemize}
+        \item Shared protins = number of shared families between genomes
+        \item Module division done
+        \item different models allow different max number of LGT per pfam
+        \item LGT model picked on how ancestral genome size distribution from LGT model agrees with modern size distribution
+        \item K gene origins in a protein gami
     \end{itemize}
 \end{itemize}
 \subsection*{Results}
@@ -494,5 +517,68 @@ $$L_i(g_i) = [\sum_{g_j} p_{g_ig_[j}(t_j)L_j(g_j)] \times [\sum_{g_k} p_{g_ig_k}
     \item
 \end{itemize}
 \printbibliography
+\section*{Athena Thesis}
+\subsection*{Methods}
+\begin{itemize}
+    \item Get complete genomes
+    \item Pick Cas1,2 from closely related orgaanism with CRISPR database
+    \item Also used to pick outgroups
+    \item CRISPR means Cas1 AND Cas2 AND CRISPR array
+    \item BLASTN Cas1,Cas2 for genus against all genomes for genus ($e<0.5, q >85\%$)
+    \item Gene Grouping
+    \begin{itemize}
+        \item delete all MGEs
+        \item Group genes into families with AvA BLASTP ($e<-20, q>85\%$)
+        \item Run ungrouped genes against NR database
+        \item If multihit against NR included
+        \item Excluded gene if no hits/only self hits
+        \item Create PA matrix of families and valid singletons
+    \end{itemize}
+    \item Tree
+    \begin{itemize}
+        \item get nuc sequences of genes in all genomes
+        \item Aligned with MAFFT and concatenated
+        \item Convert alingment to NEXUS
+        \item MR Bayes: 500,000 generatisno, 25\% burnin
+        \item outgroup rooting with FigTree
+    \end{itemize}
+    \item Indelmiss model 4 used, missing data only for CRISPR-Cas systems
+    \item 1000 reps of rnd subsets were run through model 4
+    \item average of subsets was null hypothesis for missing data proprotion
+    \item null comapred to cripsr missing data test for signifigance
+    \item sig difference if CRISPR missing data was $> 95\%$ of the random subsets missing data
+    \item IndelMiss Test Simulation
+    \begin{itemize}
+        \item Simulate PA matrix, permute based on given indel rate
+        \item insertion,deletion were tested separately
+        \item Branch length dehydrogenate simulated to tree
+        \item 100 indelmiss iterations were run
+        \item insertion and deletion estimated seperately for Crispr and non-Cripsr taxa seperately
+        \item Welch 2-sample test to detect mean insertion,deletion raet diferences
+        \item Markophylo also used to estimate gene indel rates
+    \end{itemize}
+\end{itemize}
+\subsection*{Results}
+\begin{itemize}
+    \item Proteobacteria, difference in missing data proportion not significantly lower than random sampling
+    \item Markophylo used to estimate indel rates, CRISPR clade had lower insertion and deletion rates
+    \item signifigance is lack of SE overlaps
+    \item redid without outgroups got opposite results  (higher indel in CRISPR than without)
+    \item Also saw reverse in Firmucutes
+    \item Found insertion,deletion scaling factors that indicate the actual percentage different in CRISPR/Non-CRISPR insertion,deletion rates found when indelmiss show sa significant difference
+\end{itemize}
+\subsection*{Discussion}
+\begin{itemize}
+    \item $C LGT < NC LGT$ only supported in preobacteria, only in closely related genera
+    \item Otherwise opposite trend observed
+    \item  Possible biological explanation
+    \item High missing data proportions not necessairily due to indelmiss innacuracy
+    \item Missing data proportions not correalted with indel rates, CRISPR not causing significant missing data
+\end{itemize}
+\section*{Microbial Co-habitation Networks}
+\subsection*{Methods}
+    \begin{itemize}
+        \item
+    \end{itemize}
 \end{document}
 

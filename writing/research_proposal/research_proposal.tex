@@ -17,13 +17,14 @@
 \usepackage{multirow}
 \usepackage{array}
 %References
-\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
-\addbibresource{../refs.bib}
+%\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
+%\addbibresource{../refs.bib}
 %Misc
 \usepackage{amsmath} %for math command
 \begin{document}
 \linespread{1.25} %1,5 spacing,latex default is 1.2, 1.2*1.25 = 1.5
-\title{Investigating Trends In \\Lateral Gene Transfer Rates\\ \vspace{0.25in}
+\title{Elucidating The Effects Of CRISPR-Cas Systems\\
+        On Lateral Gene Transfer Using Network Analysis
        \large MolBiol 4C12 Research Proposal}
 \author{Siddharth Reed\\ 400034828}
 \date{\today}
@@ -34,60 +35,75 @@
     The abstract
 \end{abstract}
 \section*{Introduction} %7 pages, lit review
-%Phylogeny construction
-    %techniques
-    %interpreting trees
-%Techniques
-    %likelihood
-    %network statistics
-%Bacterial gene dynamics
-    %fast evolution
-%one page on lateral gene transfer
+%CRISPR 1 page
+\subsection*{CRISPR-Cas Systems}
+\subsubsection*{What Are They?}
+CRISPR-Cas systems are sets of nucleotide motifs interspaced with nucleotide repeats (CRISPRs) and Cas proteins that serve an adaptive immune function in many bacteria and archaea\cite{evocas}.
+Each nucleotide motif is indicative of some DNA sequence that was taken up before by the host and serve as a marker for the Cas proteins to degrade any foreign  DNA entering the cell matching this motif.
+If a bacterium is infected with a phage, a motif representative of that phage can be integrated into the CRISPR repeats so that when the phage attempts infection again, it will by Cas before genomic integration can occur.
+    %What it is
+    %Higly diverse
+    %Ubiquity
+    %Biotech applications
+%LGT 2 page
     %mechanism
     %occurrence naturally
     %triggers
     %frequency
-%Inferring LGT events
-    %false positives/negative
-    %detection methods
-    %pros/cons
-%Noted trends in LGT rates
-    %higher at tips
-    %not false absence diagnosis
-    %potential biological explanations
-    %Evo rate variation in transferred genes vs already present
-    %comparison vs mutation rate (branch length
+    %Optimal rate, can vary
+        %in pathogens
+        %low exogenous DNA
+        %can be dangerous
+        %metabolic cost
+%Network Theory 1/2 page
+    %Brief introduction
+    %Other use cases
+%Phylogenomic Networks and Highways 1 1/2 page
+    %Vertical bridges
+    %New strategy for prokaryote 'net' of life
+%Noted trends in LGT rates For CRISPR 2 1/2 page
+    %Thought to interfere
+    %Gohpna says no effect
+    %Faster in Firmicutes, not proteobacteria
+    %Also been known to enhance it
+%Applications of this work
 \section*{Hypothesis} %one sentence
 \section*{Objectives} %1 page, 3-4 objectives, 1-2 sentences each
-%%%%are accessory genes responsible or the increased LGT at tips? Start with core genome, progressively include more accessory genomes ans see if LGT rate increases?
-\begin{itemize}
-    %\item Compare ancestral gene indel rates to quasi related outgroups, weight by branch lengths, see if significantly different?
-    \item Is LGT rate disparity consistent across branch lengths (greater in tips vs ancestors)?
-    \item Is ancestral branch length correlated with LGT ancestral rate?
-    \item Why are transfered genes mutated more if they are lost so quickly?
-    \item Is accessory size (absolute, relative to core) correlated with LGT rates?
-    \item Is accessory diversity correlated with LGT rates?
-    \item Are pan-genomes with higher LGT rates more fluid?
-    \item Species trends in LGT?, use GOLD metadata for species
-    \item Genome size trends (total length, accessory vs core, accessory size) in LGT?
-    \item Do LGT genes increase evolutionary rate before transfer (annotate donor/recipient, build gene tree, compare donor/recep branch length)
-    \item Are bacteria under selective pressure doing more LGT?
-    \item Are LGT rates $\sim$ constant over time?
-    \item build phylonetworks,look for trends in gene transfer rate vs
-    \begin{itemize}
-        \item Length
-        \item function
-        \item chromosomal position (near oriC/termini)
-        \item LGT markers? (GC content, codon bias, ILS?)
-    \end{itemize}
-    \item Do network groups have higher LGT rates between them? than inside them
-    \item Expect small worlds graph of LGT phylonetworks among species?
-    \item Ancestral reconstruction with PAML, LGT annotation, phylonetwork, compare flow to tip network? Compare each level of tree ancestors?
-    \item Want lots of genomes (e coli)
-\end{itemze}
 \section*{Methods} %1-2 pages
-%maximum likelihood trees
-%indelmiss estimation
-%gene family grouping via blast, matrix construction
-%LGT Network analysis (trends in flow of tip vs ancestral network)
+%Maximum likelihood estimation
+%Markophylo Estimation
+%Gene family grouping via blast, matrix construction
+%Quartet Decomposition
+%Network theory
 \end{document}
+
+
+
+
+
+%%%%%are accessory genes responsible or the increased LGT at tips? Start with core genome, progressively include more accessory genomes ans see if LGT rate increases?
+%\begin{itemize}
+%    %\item Compare ancestral gene indel rates to quasi related outgroups, weight by branch lengths, see if significantly different?
+%    \item Is LGT rate disparity consistent across branch lengths (greater in tips vs ancestors)?
+%    \item Is ancestral branch length correlated with LGT ancestral rate?
+%    \item Why are transfered genes mutated more if they are lost so quickly?
+%    \item Is accessory size (absolute, relative to core) correlated with LGT rates?
+%    \item Is accessory diversity correlated with LGT rates?
+%    \item Are pan-genomes with higher LGT rates more fluid?
+%    \item Species trends in LGT?, use GOLD metadata for species
+%    \item Genome size trends (total length, accessory vs core, accessory size) in LGT?
+%    \item Do LGT genes increase evolutionary rate before transfer (annotate donor/recipient, build gene tree, compare donor/recep branch length)
+%    \item Are bacteria under selective pressure doing more LGT?
+%    \item Are LGT rates $\sim$ constant over time?
+%    \item build phylonetworks,look for trends in gene transfer rate vs
+%    \begin{itemize}
+%        \item Length
+%        \item function
+%        \item chromosomal position (near oriC/termini)
+%        \item LGT markers? (GC content, codon bias, ILS?)
+%    \end{itemize}
+%    \item Do network groups have higher LGT rates between them? than inside them
+%    \item Expect small worlds graph of LGT phylonetworks among species?
+%    \item Ancestral reconstruction with PAML, LGT annotation, phylonetwork, compare flow to tip network? Compare each level of tree ancestors?
+%    \item Want lots of genomes (e coli)
+%\end{itemze}

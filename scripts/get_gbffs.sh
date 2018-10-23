@@ -2,15 +2,16 @@
 
 #file to download gbffs from ncbi summary txt file
 
-ftpurl="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt" #tsv-ish of bacteria, accs, names and ftp urls for everything in refseq
-rawsummary="assembly_summary_110918SR.txt"
+#ftpurl="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt" #tsv-ish of bacteria, accs, names and ftp urls for everything in refseq
+#rawsummary="assembly_summary_110918SR.txt"
+#filesuffix="_genomic.gbff.gz" #file suffix for every organism
+#outfile="all_refseq_bacteria_ftp_paths_110918.txt" #outputfile with all ftp links
+#wget -qO- $ftpurl | tee "$rawsummary" | sed 's/\t\{1,\}/,/g' | awk -F "," '{print $0 ~ "latest" && $0 ~ "Complete Genome"?$(NF-1):""}' | sed '/^$/d' | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$filesuffix/g" >| "$outfile"
+
 filesuffix="_genomic.gbff.gz" #file suffix for every organism
-outfile="all_refseq_bacteria_ftp_paths_110918.txt" #outputfile with all ftp links
-
-wget -qO- $ftpurl | tee "$rawsummary" | sed 's/\t\{1,\}/,/g' | awk -F "," '{print $0 ~ "latest" && $0 ~ "Complete Genome"?$(NF-1):""}' | sed '/^$/d' | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$filesuffix/g" >| "$outfile"
-
+outfile="$2"
+cat "$1" | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$filesuffix/g" >| "$outfile"
 echo "Got all paths in $outfile"
-
 for url in $(cat "$outfile");
 do
     wget $url

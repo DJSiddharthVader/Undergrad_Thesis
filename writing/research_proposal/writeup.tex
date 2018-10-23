@@ -1,0 +1,115 @@
+%Preamble
+%Layout/Spacing
+\documentclass[12pt,letter]{article}
+\usepackage[margin=1in]{geometry} %sets margins
+\usepackage[compact]{titlesec}%sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{fullpage} %use entire page
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%References
+\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
+\addbibresource{../refs.bib}
+%Misc
+\usepackage{hyperref} %for url formatting
+\usepackage{amsmath} %for math command
+\begin{document}
+\linespread{1.25} %1,5 spacing,latex default is 1.2, 1.2*1.25 = 1.5
+\title{Elucidating The Effects Of CRISPR-Cas Systems On Lateral Gene Transfer Using Network Analysis}
+\author{Siddharth Reed\\ 400034828}
+\date{\today}
+\maketitle
+\newpage
+\section*{Introduction}
+The focus of the project is to see whether strains with CRISPR are affecting LGT rates in congeneric species, using techniques from network theory. I found 48  genera, 39 with both CRISPR and Non-CRISPR strains, and 8 with only Non-CRISPR strains, all with $>15$ genomes (with CRISPR presence defined by the same database Athena used \url{http://crispr.i2bc.paris-saclay.fr/}, all with GCF numbers).\\
+For each set of genomes with both CRISPR,Non-CRISPR strains I will estimate insertion, deletion rates for the CRISPR and Non-CRISPR strains separately with Markophylo. Next I will construct an LGT network using the species tree and a set of gene trees (likely 50). Multiple replicate networks for a single set of genomes can be computed using different random subsets of gene trees. For each set of networks multiple statistics can be computed to compare the CRISPR node to the Non-CRISPR nodes, to see if the presence of CRISPR systems impact a node's effect on the network.\\
+Networks statistics and Markophylo estimates will also be calculated for the genome sets with only Non-CRISPR strains. Different network statistics can be used to compare the mixed networks to the exclusively Non-CRISPR networks, as outlined below.
+Ultimately the questions are:
+\begin{itemize}
+    \item Are LGT network dynamics different in networks with CRISPR-containing nodes than without?
+    \item Are CRISPR-containing nodes different from Non-CRISPR nodes in the same network?
+    \item Are maximum likelihood insertion,deletion rate estimates related to LGT network dynamics?
+\end{itemize}
+\section*{Steps}
+Outline of the project
+\begin{itemize}
+    \item Pick sets of congeneric genomes
+    \begin{itemize}
+        \item 40 Sets of congeneric genomes (each $>15$ genomes) with CRISPR and Non-CRISPR strains
+        \item 8 Sets of congeneric genomes (each $>15$ genomes) with only Non-CRISPR strains
+        \item All genomes have links to refseq
+        \item CRISPR presence as defined by \url{http://crispr.i2bc.paris-saclay.fr/crispr/BLAST/CRISPRsdatabase}, \url{http://crispr.i2bc.paris-saclay.fr/crispr/BLAST/noCRISPRsdatabase}, the same database that Athena used for her thesis
+    \end{itemize}
+    \item For each set of congeneric genomes
+    \begin{enumerate}
+        \item Filter mobile genetic elements
+        \item Group genes into families by reciprocal blast hits
+        \item Build Presence/Absence matrix of gene families
+        \item Pick genes for species tree if they are present in all genomes (genefamily11.R)
+        \item Build species tree
+    \end{enumerate}
+    \item Use Markophylo to estimate gene insertion/deletion rates for CRISPR/Non-CRISPR taxa in genome sets with both, as well as for insertion,deletion rate for the whole tree
+    \item Compare those whole tree estimates to whole tree estimated for those genome sets with only Non-CRISPR taxa
+    \item Markophylo estimates also provide expectations for what the network statistics will say, lower insertion,deletion rates will presumably lead to sparser, lower total weight networks
+    \item Network Analysis (for each set of congeneric genomes)
+    \begin{itemize}
+        \item Building the network (using HiDe \url{http://acgt.cs.tau.ac.il/hide/}
+        \begin{itemize}
+            \item Pick random subsets of genes to build gene trees
+            \item Build sets of gene trees, (50 genes per set) (bootstrap support for gene trees can also be incorporated into building the networks by specifying support a cutoff)
+            \item Each tree to build network must be rooted
+            \item HiDe authors also  state that thier method is very robust to using gene trees lacking many taxa in the species tree as well as noise.
+            \item Using species tree from the Markphylo estimates and the sets of gene trees, use HiDe to produce LGT networks, (1 per set of gene trees). Each gene tree set acts as a replicate for building a network for a set of congeneric genomes. This will allow for statistical test when comparing network statistics between individual nodes or between entire congeneric genomes sets
+        \end{itemize}
+        \item Each HiDe network is an edge list, with a weight corresponding to an estimation of the proportion of genes that were transfered along that edge.
+        \item Each gene is scored between [0,1] of being transferred (1 is most likely a transfer) and each edge is the sum of all gene scores for that edge. The maximum possible edge score (i.e. more gene  transfer) is the total number of input gene trees.
+        \item Compute network statistics (using all network replicates
+        \begin{itemize}
+            \item For each node set (in networks with CRISPR and Non-CRISPR nodes)
+            \begin{itemize}
+                \item Edge weight distribution (bias larger $\implies$ more transfer, more skewed $\implies$ certain nodes drive transfers)
+                \item Average total edge weght (larger $\implies$ more transfer)
+                \item Centrality (higher $\implies$ stronger driver of transfer)
+                \item Associativity (do CRISPR nodes transfer more with eachother or with Non-CRISPR nodes?)
+            \end{itemize}
+            \item For entire network (to compare Non-CRISPR only networks to mixed networks)
+            \begin{itemize}
+                \item Total edge weight (Do CRISPR containing networks have higher edge weights?)
+                \item Average edge weight (Do CRISPR containing networks have higher edge weights?)
+                \item Density (do networks with more CRISPR nodes have transfer between more species?)
+                \item Clustering Coefficient (tight separate clusters vs sparser,network wide connections?)
+                \item Network Diameter (how many transfers on average are required for a gene to transfer between any two nodes)
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Do the expectations from Markophylo estimates meet the calculated network statistics (lower weight, sparser networks for genera with CRISPR nodes, if CRISPR is assumed to inhibit LGT)
+    \item Are any of these network statistics correlated with insertion,deletion rates estimated by Markophylo?
+\end{itemize}
+Three sets of comparisons are going to be made:
+\begin{itemize}
+    \item Difference between CRISPR and Non-CRISPR nodes in the same network
+    \item Difference between networks with CRISPR nodes and ones with no CRISPR nodes
+    \item Insertion,deletion rate estimates and whether they associate with trends in network properties
+\end{itemize}
+\section*{Time Considerations}
+From the steps outlined above, it seems that the most time consuming steps will be grouping the genes into gene families (all vs all BLAST) and constructing trees. Most of the scripts to build the Presence/Absence matrix were written already (either by you or me last summer). The authors of HiDe state that the running time for their network construction is $< 6$hours on a dataset of 22,430 genes tress, with a single core and 16GB RAM, which is much much larger than my networks. Further computing the networks statistics will also be fairly quick, as all the networks will be relatively small ($> 100$ nodes in most cases). igraph nad networkx are popular graph utility libraries that implement the calculations of the statistics I mentioned.
+\section*{Further Considerations}
+Things I still need to consider:
+    \begin{itemize}
+        \item Double checking the CRISPR strain labels? (BLASTing against Cas1,Cas2 genes, genus specific?)
+        \item Which statistical test to compare network statistics?
+        \item What tree building program to use?
+        \item How many replicates for networks, gene trees (bootstraps)?
+        \item How to pick outgroups for trees?
+        \item Which rooting program/method to use (for HiDe)?
+    \end{itemize}
+\end{document}

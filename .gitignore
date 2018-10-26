@@ -1,0 +1,11 @@
+.ipynb_checkpoints/*
+#tex files
+*.run.xml
+*.bcf
+*.blg
+*.bbl
+*.aux
+#data files
+*.gbff
+*.faa
+*.fna

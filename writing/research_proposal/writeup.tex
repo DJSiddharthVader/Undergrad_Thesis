@@ -23,7 +23,6 @@
 \usepackage{hyperref} %for url formatting
 \usepackage{amsmath} %for math command
 \begin{document}
-\linespread{1.25} %1,5 spacing,latex default is 1.2, 1.2*1.25 = 1.5
 \title{Elucidating The Effects Of CRISPR-Cas Systems On Lateral Gene Transfer Using Network Analysis}
 \author{Siddharth Reed\\ 400034828}
 \date{\today}
@@ -105,11 +104,17 @@ From the steps outlined above, it seems that the most time consuming steps will 
 \section*{Further Considerations}
 Things I still need to consider:
     \begin{itemize}
-        \item Double checking the CRISPR strain labels? (BLASTing against Cas1,Cas2 genes, genus specific?)
-        \item Which statistical test to compare network statistics?
+        \item Double checking the CRISPR strain labels? (BLASTing against Cas1,Cas2 genes, genus specific?, CRISPRone Tool?, NCBI annotations?, MySacFinder HMMs?)
+        \item Which statistical tests to compare network statistics?
+        \item Bootstrap/weight cutoffs for edges in network?
+        \item Does large edge variance $\implies$ variance in which genes transferred across that edge (function specific)?
+        \item Create function specific gene tree sets for testing?
         \item What tree building program to use?
         \item How many replicates for networks, gene trees (bootstraps)?
         \item How to pick outgroups for trees?
         \item Which rooting program/method to use (for HiDe)?
+        \item Annotate specific CRISPR system types (I,II,III)?
+        \item build gene trees of Cas,Cpf genes, compare Cas trees network to transposases trees, ribosome trees (high and low expected transfer respectively)
+        \item CRISPR array trees for networks?
     \end{itemize}
 \end{document}

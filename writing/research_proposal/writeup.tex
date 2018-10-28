@@ -103,18 +103,19 @@ Three sets of comparisons are going to be made:
 From the steps outlined above, it seems that the most time consuming steps will be grouping the genes into gene families (all vs all BLAST) and constructing trees. Most of the scripts to build the Presence/Absence matrix were written already (either by you or me last summer). The authors of HiDe state that the running time for their network construction is $< 6$hours on a dataset of 22,430 genes tress, with a single core and 16GB RAM, which is much much larger than my networks. Further computing the networks statistics will also be fairly quick, as all the networks will be relatively small ($> 100$ nodes in most cases). igraph nad networkx are popular graph utility libraries that implement the calculations of the statistics I mentioned.
 \section*{Further Considerations}
 Things I still need to consider:
-    \begin{itemize}
-        \item Double checking the CRISPR strain labels? (BLASTing against Cas1,Cas2 genes, genus specific?, CRISPRone Tool?, NCBI annotations?, MySacFinder HMMs?)
-        \item Which statistical tests to compare network statistics?
-        \item Bootstrap/weight cutoffs for edges in network?
-        \item Does large edge variance $\implies$ variance in which genes transferred across that edge (function specific)?
-        \item Create function specific gene tree sets for testing?
-        \item What tree building program to use?
-        \item How many replicates for networks, gene trees (bootstraps)?
-        \item How to pick outgroups for trees?
-        \item Which rooting program/method to use (for HiDe)?
-        \item Annotate specific CRISPR system types (I,II,III)?
-        \item build gene trees of Cas,Cpf genes, compare Cas trees network to transposases trees, ribosome trees (high and low expected transfer respectively)
-        \item CRISPR array trees for networks?
-    \end{itemize}
+\begin{itemize}
+    \item Double checking the CRISPR strain labels? (BLASTing against Cas1,Cas2 genes, genus specific?, CRISPRone Tool?, NCBI annotations?, MySacFinder HMMs?)
+    \item Which statistical tests to compare network statistics?
+    \item Bootstrap/weight cutoffs for edges in network?
+    \item Does large edge variance $\implies$ variance in which genes transferred across that edge (function specific)?
+    \item Create function specific gene tree sets for testing?
+    \item What tree building program to use?
+    \item How many replicates for networks, gene trees (bootstraps)?
+    \item How to pick outgroups for trees?
+    \item Which rooting program/method to use (for HiDe)?
+    \item Annotate specific CRISPR system types (I,II,III)?
+    \item build gene trees of Cas,Cpf genes, compare Cas trees network to transposases trees, ribosome trees (high and low expected transfer respectively)
+    \item CRISPR array trees for networks?
+    \item subsample PA matrix to get indel rates for specific gene tree networks, more data points for netstats against indel rate comparisons?
+\end{itemize}
 \end{document}

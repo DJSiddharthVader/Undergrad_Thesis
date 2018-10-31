@@ -1,4 +1,8 @@
 .ipynb_checkpoints/*
+Cas-Finder_macsyfinder/
+apps/
+bacterialGBFFs/
+testing/
 #tex files
 *.run.xml
 *.bcf

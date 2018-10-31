@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#use ./get_eatures_csv.sh dir_of_gbffs/ >| outfile.csv
+#takes ~50minutes on the 10,614 gbffs I have, probably speed it up by grepping single column for every file at once, paste cols?
+
 declare -a gcounts=("Genes (total)" "CDS (total)" "Genes (coding)" "CDS (coding)" "Genes (RNA)" "tRNAs" "ncRNAs" "Pseudo Genes (total)")
 singlefileinfo() {  #get info for a single gbfffile, , delimited
     #identifying info
@@ -7,7 +10,12 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     local orgname=$(grep -m 1 ORGANISM "$1" | sed 's/^\s\+ORGANISM\s\+//') #name
     local genus=$(echo $orgname | perl -pe 's/^(\w.*?)\s.*$/\1/') #genus only
     local taxonomy=$(sed -n '/ORGANISM/,/REFERENCE/{/(ORGANISM|REFERENCE|\n)/d;p}' "$1" | head -n -1 | sed 's/ORGANISM//' | tail -n+2 | tr -d '\n' | tr -d ' ') #gets taxonomy until genus
-    info=("$accnum" "$orgname" "$genus" "$taxonomy")
+    local complet=$(grep -m1 COMPLETENESS "$1" | cut -d':' -f2)
+    local crisprs=$(grep -m1 CRISPR.*:: "$1" | cut -d':' -f3 | tr -d ' ')
+    if [[ $crisprs == '' ]];then
+        crisprs=0
+    fi
+    info=("$accnum" "$orgname" "$genus" "$taxonomy" "$complet" "$crisprs" )
     #gene counts
     for gcount in "${gcounts[@]}" #get gene type counts for bacteria
     do
@@ -24,11 +32,11 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     echo "$outvar"
 }
 
-headers="Filepath~Accession Number~Organism~Genus~Taxonomy~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
-base="/home/sid/thesis_SidReed/"
+headers="Filepath~Accession Number~Organism~Genus~Taxonomy~IsComplete~NCBI_CRISPR_Arrays~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
 
 echo "$headers"
 for file in $1* #dir of gbff files
 do
-    singlefileinfo "$base$file" #print ~ delimited file info to STDOUT
+    ffile=`readlink -e "$file"`
+    singlefileinfo "$ffile" #print ~ delimited file info to STDOUT
 done

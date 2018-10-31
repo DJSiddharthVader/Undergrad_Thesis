@@ -3,3 +3,6 @@
 1) Download gbff cells from NCBI, to download all refseq bacterial genomes from NCBI, run the script `scripts/get_gbffs.sh`.
 It will take a few hours (~10000 genomes), but optimizations can be made to make it run in parallel
 
+
+#install diamond with conda, acticate conda thesis env, then call diamond normally
+

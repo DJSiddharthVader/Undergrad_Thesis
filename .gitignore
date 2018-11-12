@@ -1,5 +1,6 @@
 .ipynb_checkpoints/*
 Cas-Finder_macsyfinder/
+athena/genomedata/
 apps/
 bacterialGBFFs/
 testing/

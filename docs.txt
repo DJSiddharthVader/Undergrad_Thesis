@@ -3,6 +3,53 @@
 1) Download gbff cells from NCBI, to download all refseq bacterial genomes from NCBI, run the script `scripts/get_gbffs.sh`.
 It will take a few hours (~10000 genomes), but optimizations can be made to make it run in parallel
 
+Following steps are only considering all genomes in 1 genera, steps will be repeated for each genera (set of close genomes) for the analysis
+Also, all python command were run in an anaconda environment, env file thesis_conda.yml)
 
-#install diamond with conda, acticate conda thesis env, then call diamond normally
+2) Extract Protein Sequences - modified_get_features.pl
+This extracts the protein sequences from the genbank files, and excludes any mobile/transposable elements as they move around independent of LGT
+
+	mkdir targetdirectory
+    cd path/to/targetdirectory
+	for x in *.gbff;
+        do
+            modified_get_features.pl -t $x > `basename $x`".faa: 2>> errorfile.txt;
+        done
+
+The result is a set of .faa (protein fasta) files, 1 per geonome with all MGEs filtered
+
+3) AllvsAll blast
+Cat all individual genome .faas into on faa with all proteins
+    cat *.faa > allgenomes.faa
+Dedup the fast with a script
+    scripts/dedupfasta.sh allgenomes.faa dd_allgenomes.faa
+
+#installed diamond with conda, acticate conda thesis env, then call diamond normally
+Next to all vs all blast to cluster genes into families, diamond command/params for allvsall blasting
+first make databse from all proteins
+    diamond makedb --in dd_allgenomes.faa -d dd_allgenomes
+then all vs all blast with diamond
+    diamond blastp --more-sensitive --matrix BLOSUM62 -e 5e-2 --query-cover 85 --no-self-hits -f 6 qseqid qlen length sseqid slen qcovhsp pident score bitscore evalue -q query.faa -d query --out query_allvsall.dmnd.out
+    diamond blastp
+            --more-sensitive                                                         #more sensitive, negligible time increase
+            --matrix BLOSUM62                                                        #standard protein matrix, could be changed per geneus
+            -e 5e-2                                                                  #taken from athena's thesis
+            --query-cover 85                                                         #taken from athena's thesis
+            --no-self-hits                                                           #repress self hits, reduce output table size
+            -f 6 qseqid qlen length sseqid slen qcovhsp pident score bitscore evalue #output table formatting
+            -q dd_allgenomes.faa                                                     #input
+            -d dd_allgenomes                                                         #database to blast against
+            --out query_allvsall.dmnd.out                                            #output table name
+
+For some reason diamond doesnt output column names in output so just do the following
+    echo qseqid qlen length sseqid slen qcovhsp pident score bitscore evalue > tmp
+    vi tmp; :%s/ /\t/g #make the cols tab delimited like dmnd out
+    cat query_allvsall.dmnd.out >> tmp
+    mv tmp query_allvsall.dmnd.out #now tsv, readable from pandas
+
+4) Single Link clustering into gene families
+Using the blast table from the last step use python scipy module to cluster genes into families
+    python single_link_clustering_blast_hits.py query_allvsall.dmnd.out dd_allgenomes.faa gene_families
+This will output 2 files, gene_families.json which is a dictionary, key are arbitrary, values are lists of genes that form a family.
+The other file is singltone_gene_families.faa which is a fasta file where each entry was grouped into a family by itself, and will be dealt with later.
 

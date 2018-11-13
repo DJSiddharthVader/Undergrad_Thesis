@@ -22,7 +22,7 @@ def filterblasttable(data,coverage,pident,evalue):
 #this should already be filtered by diamond, but just in case
     #allgenes=tuple(set(data['qseqid'].values.tolist() + data['sseqid'].values.tolist()))
     newdata = data[data['pident'] > pident]
-    newdata = newdata[(newdata['qlen']/newdata['slen'] > coverage) & (newdata['slen']/newdata['qlen'] > coverage)]
+    newdata = newdata[(newdata['qlen']/newdata['slen'] > coverage)]
     newdata = newdata[newdata['qseqid'] != newdata['sseqid']]
     newdata = newdata[newdata['evalue'] < evalue]
     return newdata#,allgenes

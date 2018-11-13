@@ -6,7 +6,7 @@
 declare -a gcounts=("Genes (total)" "CDS (total)" "Genes (coding)" "CDS (coding)" "Genes (RNA)" "tRNAs" "ncRNAs" "Pseudo Genes (total)")
 singlefileinfo() {  #get info for a single gbfffile, , delimited
     #identifying info
-    local GCA=$(grep -m 1 'Assembly' "$1" | cut -d':' -f2 | tr -d ' ') #gca for linking back to crispr annoattions
+    local GCF=$(grep -m 1 'Assembly' "$1" | cut -d':' -f2 | tr -d ' ') #gca for linking back to crispr annoattions
     local accnum=$(head -1 "$1" | sed 's/^\w\+\s\+\(\w\+\)\s.*$/\1/g') #accession
     local orgname=$(grep -m 1 ORGANISM "$1" | sed 's/^\s\+ORGANISM\s\+//') #name
     local genus=$(echo $orgname | perl -pe 's/^(\w.*?)\s.*$/\1/') #genus only
@@ -16,7 +16,7 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     if [[ $crisprs == '' ]];then
         crisprs=0
     fi
-    info=("$GCA" "$accnum" "$orgname" "$genus" "$taxonomy" "$complet" "$crisprs" )
+    info=("$GCF" "$accnum" "$orgname" "$genus" "$taxonomy" "$complet" "$crisprs" )
     #gene counts
     for gcount in "${gcounts[@]}" #get gene type counts for bacteria
     do
@@ -33,7 +33,7 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     echo "$outvar"
 }
 
-headers="Filepath~GCA~Accession Number~Organism~Genus~Taxonomy~IsComplete~NCBI_CRISPR_Arrays~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
+headers="Filepath~GCF~Accession Number~Organism~Genus~Taxonomy~IsComplete~NCBI_CRISPR_Arrays~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
 
 echo "$headers"
 for file in $1* #dir of gbff files

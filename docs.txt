@@ -53,3 +53,33 @@ Using the blast table from the last step use python scipy module to cluster gene
 This will output 2 files, gene_families.json which is a dictionary, key are arbitrary, values are lists of genes that form a family.
 The other file is singltone_gene_families.faa which is a fasta file where each entry was grouped into a family by itself, and will be dealt with later.
 
+5) Build matrix
+Using the gene families, and a directory of all protein fasta files for the
+genus, outputs 4 files:
+    - PA matrix (row are taxa, cols are gene families, A_ij is the number of
+      genes in that gene family present in that organism
+    - row index (row number and organism it corresponds to)
+    - colum index (col number and gene family it corresponds to (ex 1:fam126
+      ,where fam126 is a key in the gene_families.json dictionary)
+    - binary PA matrix (same as PA matrix, but every value > 1 is set to 1)
+Invoke as follows:
+    python scripts/createPAmatrix.py gene_families.json targetdirectory pamatrix
+
+6) Extract species tree genes and align
+Next, using the matrix, the matrix index files, the gene families and a fasta
+with all the nucleotide sequences.
+All gene and species tree alingments are done with nucleotide files as the
+taxa being compared are highly similar
+There are 5 inputs:
+    - the PA matrix (non-binary)
+    - the column index file
+    - the gene families file
+    - nucleotide fasta with all genes in all taxa
+    - outputname
+3 output directories and 1 file are created:
+    - species tree fastas (1 gene, homologs in all taxa per file)
+    - fasta alingments (alignment of each gene fasta in fasta format)
+    - nexus alingments (same fasta alingments, converted to nexus)
+    - concatenated nexus alingment (1 nexus alignment with all seperate species tree genes, ready for mrbayes to make a species tree)
+Invoke the command as follows:
+    python pamatrix.npy columindices.json genefamilies.json all_nuc_genes.fna species_tree_genes

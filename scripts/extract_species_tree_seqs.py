@@ -21,13 +21,13 @@ from multiprocessing.dummy import Pool as ThreadPool
 #will extract all genes present in only 1 copy in every taxa and spit to a fasta file for alignment and tree creation
 
 def getGeneFamilies(pamat,columnindex):
-    familyidxlist = []
-    print(pamat.T.shape)
     orgs = pamat.T.shape[1]
-    for i,family in enumerate(pamat.T):
-        if np.array_equal(family,np.ones(orgs)):
-            familyidxlist.append(columnindex[str(i)])
-    return familyidxlist #gene family colidxs with only 1 gene in every taxa
+#    familyidxlist = []
+#    for i,family in enumerate(pamat.T):
+#        if np.array_equal(family,np.ones(orgs)):
+#            familyidxlist.append(columnindex[str(i)])
+#    return familyidxlist #gene family colidxs with only 1 gene in every taxa
+    return [i for i,fam in enumerate(pamat.T) if np.array_equal(family,np.ones(orgs))]
 
 def familyToList(familylist,familyindex,fams):
     #list  of lists, each is a genefamily with 1 member in every organism
@@ -38,8 +38,11 @@ def listToFasta(genelist,fastaname,outdir):
     singlerecords = []
     with open(fastaname) as fasta:
         for record in SeqIO.parse(fasta,'fasta'):
-            if record.id in genelist:
-                singlerecords.append(record)
+            if (record.id in genelist) and (str(record.seq) != ''):
+                newrecord = record
+                newrecord.id = record.name.split(':')[0].strip('>')
+                newrecord.name = record.name.split(':')[0].strip('>')
+                singlerecords.append(newrecord)
     foutname = 'gene_{}.fna'.format(name)
     absoutname = os.path.join(outdir,foutname)
     with open(absoutname,'w') as singleout:
@@ -51,7 +54,8 @@ def writeAllSpeciesTreeFastas(pamat,columnindex,familyindex,nucFasta,outdir,proc
     familyidxlist = getGeneFamilies(pamat,columnindex)
     familylist = familyToList(familyidxlist,familyindex,fams)
     if len(os.listdir(outdir)) == fams: #previously cached results
-        return outdir
+        #return outdir
+        pass
     pool = ThreadPool(processes)
     parlistToFasta = partial(listToFasta,fastaname=nucFasta,outdir=outdir)
     for _ in tqdm(pool.imap_unordered(parlistToFasta,familylist),total=len(familylist),desc='extracting families'):
@@ -77,11 +81,11 @@ def nexusAlnSTreeFastas(sTreeDir,fams):
 
 def checkTaxa(nexi):
     alltaxa = set([y for x in nexi for y in x[1].taxlabels])
-    print(alltaxa)
-    print(len(alltaxa))
-    print([len(x[1].taxlabels) for x in nexi])
+    #print(alltaxa)
+    #print(len(alltaxa))
+    #print([len(x[1].taxlabels) for x in nexi])
     missingTaxa = [False if set(x[1].taxlabels) == alltaxa else True for x in nexi]
-    print(set(missingTaxa))
+    #print(set(missingTaxa))
     return False
 
 def concatNexAlns(nexDir,outname,same_taxa=True):#from https://biopython.org/wiki/Concatenate_nexus

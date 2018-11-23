@@ -6,17 +6,12 @@ It will take a few hours (~10000 genomes), but optimizations can be made to make
 Following steps are only considering all genomes in 1 genera, steps will be repeated for each genera (set of close genomes) for the analysis
 Also, all python command were run in an anaconda environment, env file thesis_conda.yml)
 
-2) Extract Protein Sequences - modified_get_features.pl
-This extracts the protein sequences from the genbank files, and excludes any mobile/transposable elements as they move around independent of LGT
-
-	mkdir targetdirectory
-    cd path/to/targetdirectory
-	for x in *.gbff;
-        do
-            modified_get_features.pl -t $x > `basename $x`".faa: 2>> errorfile.txt;
-        done
-
-The result is a set of .faa (protein fasta) files, 1 per geonome with all MGEs filtered
+2) Extract Sequences (gbfff to fasta)
+Extract the protein and nucleotide seuqences from a set of gbffs to fasta files, 1 prot and 1 nuc per gbff.
+All MGE elements are filtered out by regex (IS, transposon, viral, etc.)
+    bash scripts/gbffToFasta.sh filepaths.txt outdir
+filepaths.txt is a file where every line is an absolute file path to a gbff file.
+2 dir are produced prot_outdir and nuc_outdir with the corresponding fasta files in them.
 
 3) AllvsAll blast
 Cat all individual genome .faas into on faa with all proteins
@@ -54,8 +49,7 @@ This will output 2 files, gene_families.json which is a dictionary, key are arbi
 The other file is singltone_gene_families.faa which is a fasta file where each entry was grouped into a family by itself, and will be dealt with later.
 
 5) Build matrix
-Using the gene families, and a directory of all protein fasta files for the
-genus, outputs 4 files:
+Using the gene families, and a directory of all protein fasta files for the genus, outputs 4 files:
     - PA matrix (row are taxa, cols are gene families, A_ij is the number of
       genes in that gene family present in that organism
     - row index (row number and organism it corresponds to)
@@ -82,4 +76,4 @@ There are 5 inputs:
     - nexus alingments (same fasta alingments, converted to nexus)
     - concatenated nexus alingment (1 nexus alignment with all seperate species tree genes, ready for mrbayes to make a species tree)
 Invoke the command as follows:
-    python pamatrix.npy columindices.json genefamilies.json all_nuc_genes.fna species_tree_genes
+    python extract_species_tree_seqs.py pamatrix.npy columindices.json genefamilies.json all_nuc_genes.fna species_tree_genes

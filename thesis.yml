@@ -1,10 +1,11 @@
-name: thesis_conda
+name: thesis
 channels:
   - bioconda
   - defaults
 dependencies:
   - diamond=0.9.21=1
   - asn1crypto=0.24.0=py37_0
+  - biopython=1.72=py37h04863e7_0
   - blas=1.0=mkl
   - ca-certificates=2018.03.07=0
   - certifi=2018.10.15=py37_0
@@ -23,13 +24,9 @@ dependencies:
   - libxml2=2.9.8=h26e45fe_1
   - libxslt=1.1.32=h1312cb7_0
   - lxml=4.2.5=py37hefd8a0e_0
-  - mkl=2019.0=118
-  - mkl_fft=1.0.6=py37h7dd41cf_0
-  - mkl_random=1.0.1=py37h4414c95_1
   - ncurses=6.1=hf484d3e_0
   - numpy=1.15.3=py37h1d66e8a_0
   - numpy-base=1.15.3=py37h81de0dd_0
-  - openssl=1.1.1=h7b6447c_0
   - pandas=0.23.4=py37h04863e7_0
   - pip=10.0.1=py37_0
   - pycparser=2.19=py37_0
@@ -55,3 +52,4 @@ dependencies:
     - beautifulsoup4==4.6.3
     - bs4==0.0.1
 prefix: /home/sid/anaconda3/envs/thesis_conda
+

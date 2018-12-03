@@ -22,16 +22,17 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 def getGeneFamilies(pamat,columnindex):
     orgs = pamat.T.shape[1]
+    return [columnindex[str(i)] for i,family in enumerate(pamat.T) if np.array_equal(family,np.ones(orgs))]
 #    familyidxlist = []
 #    for i,family in enumerate(pamat.T):
 #        if np.array_equal(family,np.ones(orgs)):
 #            familyidxlist.append(columnindex[str(i)])
 #    return familyidxlist #gene family colidxs with only 1 gene in every taxa
-    return [i for i,fam in enumerate(pamat.T) if np.array_equal(family,np.ones(orgs))]
 
 def familyToList(familylist,familyindex,fams):
     #list  of lists, each is a genefamily with 1 member in every organism
-    return [(colidx,familyindex[colidx]) for colidx in familylist][:fams] #elements are tuples, fam index and gene list
+    #elements are tuples, fam index and gene list
+    return [(colidx,familyindex[colidx]) for colidx in familylist][:fams]
 
 def listToFasta(genelist,fastaname,outdir):
     (name,genelist) = genelist
@@ -81,11 +82,7 @@ def nexusAlnSTreeFastas(sTreeDir,fams):
 
 def checkTaxa(nexi):
     alltaxa = set([y for x in nexi for y in x[1].taxlabels])
-    #print(alltaxa)
-    #print(len(alltaxa))
-    #print([len(x[1].taxlabels) for x in nexi])
     missingTaxa = [False if set(x[1].taxlabels) == alltaxa else True for x in nexi]
-    #print(set(missingTaxa))
     return False
 
 def concatNexAlns(nexDir,outname,same_taxa=True):#from https://biopython.org/wiki/Concatenate_nexus
@@ -125,22 +122,3 @@ if __name__ == '__main__':
     fams = 50
     main(pamat,columnindex,familyindex,nucFasta,outname,processes,fams)
 
-
-def checkTaxa(nexi):#from https://biopython.org/wiki/Concatenate_nexus
-    """Verify Nexus instances have the same taxa information.
-    Checks that nexus instances in a list [(name, instance)...] have
-    the same taxa, provides useful error if not and returns None if
-    everything matches"""
-    first_taxa = nexi[0][1].taxlabels
-    for name, matrix in nexi[1:]:
-        first_only = [t for t in first_taxa if t not in matrix.taxlabels]
-        new_only = [t for t in matrix.taxlabels if t not in first_taxa]
-        if first_only:
-            missing = ', '.join(first_only)
-            msg='{} taxa {} not in martix {}'.format(nexi[0][0],missing,name)
-            raise Nexus.NexusError(msg)
-        elif new_only:
-            missing = ', '.join(new_only)
-            msg = '{} taxa {} not in all matrices'.format(name, missing)
-            raise Nexus.NexusError(msg)
-    return None # will only get here if it hasn't thrown an exception

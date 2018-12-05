@@ -1,15 +1,14 @@
 import os
 import sys
 import json
+import glob
+import subprocess
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from Bio import SeqIO
-from Bio import AlignIO
-from Bio import Alphabet
 from Bio.Nexus import Nexus
 from functools import partial
-from multiprocessing import Pool
+from Bio import SeqIO,AlignIO,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
 #arg 1 is PA matrix (not binary)
@@ -61,7 +60,7 @@ def writeAllSpeciesTreeFastas(pamat,columnindex,familyindex,nucFasta,outdir,proc
     parlistToFasta = partial(listToFasta,fastaname=nucFasta,outdir=outdir)
     for _ in tqdm(pool.imap_unordered(parlistToFasta,familylist),total=len(familylist),desc='extracting families'):
         pass
-    return outdir
+    return outdir,len(familylist)
 
 def nexusAlnSTreeFastas(sTreeDir,fams):
     faadir = 'aligned_faa_{}'.format(sTreeDir)
@@ -102,15 +101,41 @@ def concatNexAlns(nexDir,outname,same_taxa=True):#from https://biopython.org/wik
         combined.write_nexus_data(filename=open(coutname,'w'))
         return coutname
 
+def buildMbSpecTree(nexaln,outname):
+    mbf =\
+"""set autoclose=yes nowarn=yes
+execute {}
+lset nst=6 rates=gamma
+mcmc ngen=10000 savebrlens=yes file={}_{}
+quit""".format(nexaln,'spectree',outname)
+    mbscriptname = 'mbScript_{}.txt'.format(outname)
+    open(mbscriptname,'w').write(mbf)
+    logfilename = 'mb_spectree_log_{}.txt'.format(outname)
+    with open(mbscriptname,'rb',0) as mbscript, open(logfilename,'wb',0) as logfile:
+        logtxt = subprocess.run(['mb'],
+                                stdin=mbscript,
+                                stdout=logfile,
+                                check=True)
+    outdir = 'mb_species_tree_{}'.format(outname)
+    os.system('mkdir -p {}'.format(outdir))
+    for fp in glob.glob('./*spectree*'):
+        os.rename(fp,os.path.join(os.getcwd(),outdir,fp))
+    os.rename(mbscriptname,os.path.join(os.getcwd(),outdir,mbscriptname))
+    return outdir
+
 def main(pamat,columnindex,familyindex,nucFasta,outname,processes,fams):
     fastadir = 'species_tree_fastas_{}'.format(outname)
-    fastadir = writeAllSpeciesTreeFastas(pamat,columnindex,familyindex,nucFasta,fastadir,processes,fams)
-    print('fasta files for species tree genes written to {}'.format(fastadir))
+    fastadir,treegenes = writeAllSpeciesTreeFastas(pamat,columnindex,familyindex,nucFasta,fastadir,processes,fams)
+    print('{} genes used for species tree'.format(treegenes))
+    print('fasta files for species tree written to {}'.format(fastadir))
     nexDir = nexusAlnSTreeFastas(fastadir,fams)
     print('fasta alingments for species tree written to {}'.format(fastadir))
     print('nexus alingments for species tree written to {}'.format(nexDir))
     coutname = concatNexAlns(nexDir,outname,same_taxa=True)
     print('concat nexus aln file for mrbayes written to {}'.format(coutname))
+    print('running MrBayes ...')
+    toutname = buildMbSpecTree(coutname,outname)
+    print('mrbayes species tree files in {}'.format(toutname))
 
 if __name__ == '__main__':
     pamat = np.load(sys.argv[1])

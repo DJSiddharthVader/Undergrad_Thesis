@@ -1,4 +1,4 @@
---------------- Gene Family - Presence/Absence Matrix-----------------------------------
+---------------Creating HGT Inference Networks ------------------------------
 
 1) Download gbff cells from NCBI, to download all refseq bacterial genomes from NCBI, run the script `scripts/get_gbffs.sh`.
 It will take a few hours (~10000 genomes), but optimizations can be made to make it run in parallel
@@ -6,12 +6,18 @@ It will take a few hours (~10000 genomes), but optimizations can be made to make
 Following steps are only considering all genomes in 1 genera, steps will be repeated for each genera (set of close genomes) for the analysis
 Also, all python command were run in an anaconda environment, env file thesis_conda.yml)
 
+
+
+
 2) Extract Sequences (gbfff to fasta)
 Extract the protein and nucleotide seuqences from a set of gbffs to fasta files, 1 prot and 1 nuc per gbff.
 All MGE elements are filtered out by regex (IS, transposon, viral, etc.)
     bash scripts/gbffToFasta.sh filepaths.txt outdir
 filepaths.txt is a file where every line is an absolute file path to a gbff file.
 2 dir are produced prot_outdir and nuc_outdir with the corresponding fasta files in them.
+
+
+
 
 3) AllvsAll blast
 Cat all individual genome .faas into on faa with all proteins
@@ -37,16 +43,19 @@ then all vs all blast with diamond
             --out query_allvsall.dmnd.out                                            #output table name
 
 For some reason diamond doesnt output column names in output so just do the following
-    echo qseqid qlen length sseqid slen qcovhsp pident score bitscore evalue > tmp
-    vi tmp; :%s/ /\t/g #make the cols tab delimited like dmnd out
-    cat query_allvsall.dmnd.out >> tmp
-    mv tmp query_allvsall.dmnd.out #now tsv, readable from pandas
+    ../scripts/addcoltodmnd.sh query_allvsall.dmnd.out
+
+
+
 
 4) Single Link clustering into gene families
 Using the blast table from the last step use python scipy module to cluster genes into families
     python single_link_clustering_blast_hits.py query_allvsall.dmnd.out dd_allgenomes.faa gene_families
 This will output 2 files, gene_families.json which is a dictionary, key are arbitrary, values are lists of genes that form a family.
 The other file is singltone_gene_families.faa which is a fasta file where each entry was grouped into a family by itself, and will be dealt with later.
+
+
+
 
 5) Build matrix
 Using the gene families, and a directory of all protein fasta files for the genus, outputs 4 files:
@@ -58,6 +67,9 @@ Using the gene families, and a directory of all protein fasta files for the genu
     - binary PA matrix (same as PA matrix, but every value > 1 is set to 1)
 Invoke as follows:
     python scripts/createPAmatrix.py gene_families.json targetdirectory pamatrix
+
+
+
 
 6) Extract species tree genes and align
 Next, using the matrix, the matrix index files, the gene families and a fasta

@@ -1,13 +1,14 @@
 import os
 import sys
 import json
+import tempfile
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from Bio import SeqIO
-from Bio import AlignIO
-from Bio import Alphabet
+from Bio.Nexus import Nexus
 from functools import partial
+from Bio import SeqIO,AlignIO,Alphabet
+from multiprocessing.dummy import Pool as ThreadPool
 
 #pick genes families with col len([x >0 for x in a]) > len(col)*-.40, what coverage cutoff?
 #get one or all members, from each family?
@@ -35,11 +36,6 @@ def buildTree(fastapath,treedir,outname):
     mafftbase = 'mafft --quiet --localpair --maxiterate 1000'
     align ='{} {} > tmp_{}.aln'.format(mafftbase,fastapath,outname)
     os.system(align)
-    fasttree = 'FastTree -nt -gtr'
-    tree = '{} {} > {}/{}.nwk'.format(tree,outname,treedir,outname)
-    os.system(tree)
-    os.system('\rm -rf tmp_{}.aln'.format(outname))
-    return '{}/{}.nwk'.format(treedir,outname)
 
 def main(pamat,colidx,famdict,allnucfasta,outname)
     genetreefams = pickFamiliesForTree(pamat,colidx)
@@ -55,7 +51,6 @@ def main(pamat,colidx,famdict,allnucfasta,outname)
             SeqIO.write(seqs,fasta,'fasta')
         treepath = buildTree(fasta,trdir,outname)
     return treedir
-
 
 if __name__ == '__main__':
     pamat = np.load(sys.argv[1])

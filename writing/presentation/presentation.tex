@@ -326,31 +326,31 @@
 \begin{center}
     \begin{tikzpicture}
         % boxes
-        \node [slock]                       (node1)  {Get Genomes};\onslide<1->
-        \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};\onslide<3->
-        \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};\onslide<4->
-        \node [block,right=0.5cm of node2]  (node4)  {P/A Matrix};\onslide<5->
-        \node [block,right=0.5cm of node4]  (node5)  {Species Tree};\onslide<6->
-        \node [block,above=0.5cm of node5]  (node6)  {Gene Trees};\onslide<7->
-        \node [block,below=0.5cm of node5]  (node7)  {Gene InDel Rates};\onslide<8->
-        \node [block,right=0.5cm of node6]  (node8)  {Infer Network};\onslide<9->
-        \node [block,right=0.5cm of node8]  (node9)  {Annotate CRISPR};\onslide<10->
-        \node [block,below=0.5cm of node9]  (node10) {Compute Stats};\onslide<11->
-        \node [flock,below=0.5cm of node10] (node11) {Look For Trends};\onslide<12->
+        \onslide<1->  \node [slock]                       (node1)  {Get Genomes};
+        \onslide<2->  \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};
+        \onslide<3->  \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};
+        \onslide<4->  \node [block,right=0.5cm of node2]  (node4)  {P/A Matrix};
+        \onslide<5->  \node [block,right=0.5cm of node4]  (node5)  {Species Tree};
+        \onslide<6->  \node [block,below=0.5cm of node5]  (node6)  {Gene InDel Rates};
+        \onslide<7->  \node [block,above=0.5cm of node5]  (node7)  {Gene Trees};
+        \onslide<8->  \node [block,right=0.5cm of node7]  (node8)  {Infer Network};
+        \onslide<9->  \node [block,right=0.5cm of node8]  (node9)  {Annotate CRISPR};
+        \onslide<10-> \node [block,below=0.5cm of node9]  (node10) {Compute Stats};
+        \onslide<11-> \node [flock,below=0.5cm of node10] (node11) {Look For Trends};
         %lines
-        \path [line] (node1) -- (node2);\onslide<2->
-        \path [line] (node2) -- (node3);\onslide<3->
-        \path [line] (node3) -- (node4);\onslide<4->
-        \path [line] (node4) -- (node5);\onslide<5->
-        \path [line] (node4) -- (node7);\onslide<6->
-        \path [line] (node5) -- (node7);\onslide<6->
-        \path [line] (node4) -- (node6);\onslide<7->
-        \path [line] (node5) -- (node8);\onslide<8->
-        \path [line] (node6) -- (node8);\onslide<8->
-        \path [line] (node8) -- (node9);\onslide<9->
-        \path [line] (node9) -- (node10);\onslide<10->
-        \path [line] (node7) -- (node11);\onslide<11->
-        \path [line] (node10) -- (node11);\onslide<11->
+        \onslide<2->  \path [line] (node1) -- (node2);
+        \onslide<3->  \path [line] (node2) -- (node3);
+        \onslide<4->  \path [line] (node3) -- (node4);
+        \onslide<5->  \path [line] (node4) -- (node5);
+        \onslide<6->  \path [line] (node4) -- (node6);
+        \onslide<6->  \path [line] (node5) -- (node6);
+        \onslide<7->  \path [line] (node4) -- (node7);
+        \onslide<8->  \path [line] (node5) -- (node8);
+        \onslide<8->  \path [line] (node7) -- (node8);
+        \onslide<9->  \path [line] (node8) -- (node9);
+        \onslide<10-> \path [line] (node9) -- (node10);
+        \onslide<11-> \path [line] (node6) -- (node11);
+        \onslide<11-> \path [line] (node10) -- (node11);
     \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -358,10 +358,10 @@
     \begin{itemize}
         \item<2-> \textbf{Total/Average edge weight}: $\sum_i w_i$,$\frac{\sum_i w_i}{N}$
         \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
-        \item<4-> \textbf{Network Diameter}: The shortest path between the 2 furthest nodes.
-        \item<5-> \textbf{Node Closeness Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the shortest path $v \to u$.
+        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+        \item<5-> \textbf{Node Closeness Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.
         \item<6-> \textbf{Node Clustering Coefficient}: $\frac{2e}{k(k-1)}$ where $k$ is the neighbors and $e$ is the edges between all neighbors.
-        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)}dx$
+        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
         \item<8-> \textbf{Node Associativity}: $\frac{j(j+1)(\overline{k}-\mu_q)}{2E\sigma^2_q}$ where $j$ is the excess degree of the node and $\overline{k}$ is the average excess degree of the node's neighbors and $\mu_q$ and $\sigma_q$ are the mean and standard variation of the excess degree distribution.
     \end{itemize}
 \end{frame}

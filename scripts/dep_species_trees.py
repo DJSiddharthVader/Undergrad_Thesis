@@ -91,15 +91,9 @@ def concatNexAlns(nexDir,outname,same_taxa=True):#from https://biopython.org/wik
     filelist = [x for x in os.listdir(nexDir) if x.endswith('.nex')]
     nexi = [(os.path.join(nexDir,fname), Nexus.Nexus(os.path.join(nexDir,fname))) for fname in filelist]
     coutname = 'concat_stree_aln_{}.nex'.format(outname)
-    if same_taxa:
-        if not checkTaxa(nexi):
-            combined = Nexus.combine(nexi)
-            combined.write_nexus_data(filename=open(coutname,'w'))
-            return coutname
-    else:
-        combined = Nexus.combine(nexi)
-        combined.write_nexus_data(filename=open(coutname,'w'))
-        return coutname
+    combined = Nexus.combine(nexi)
+    combined.write_nexus_data(filename=open(coutname,'w'))
+    return coutname
 
 def buildMbSpecTree(nexaln,outname):
     mbf =\

@@ -72,7 +72,7 @@ def singlegenelisttofasta(genelist,fastaname,outname):
         SeqIO.write(singlerecords,foutname,'fasta')
     return foutname
 
-def main2(ogdata,allgenesfasta,outname):
+def main(ogdata,allgenesfasta,outname):
     genes = getgenelist(allgenesfasta)
     data= filterblasttable(ogdata,0.85,85,0.05)
     print('building distance matrix...')
@@ -89,8 +89,8 @@ def main2(ogdata,allgenesfasta,outname):
 
 if __name__ == '__main__':
     data = pd.read_csv(sys.argv[1],delimiter='\t') #blast/diamond table
-    families,foutname = main2(data,sys.argv[2],sys.argv[3])
-    json.dump(families,open(sys.argv[3] + '.json','w'))
+    families,foutname = main(data,sys.argv[2],sys.argv[3])
+    json.dump(families,open('gene_families_{}.json'.format(sys.argv[3]),'w'))
     #json.dump(singletons,open('singletons_' + sys.argv[3],'w'))
     print('data output to file {}.json'.format(sys.argv[3]))
     print('singlton families in {}'.format(foutname))

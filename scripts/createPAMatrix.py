@@ -44,8 +44,8 @@ def matrix_to_binary(pamat):
     return vecbin(pamat)
 
 def namegenerator(basename):
-    matname = '{}.npy'.format(basename)
-    biname = 'binary_{}.npy'.format(basename)
+    matname = 'pa_matrix_{}.npy'.format(basename)
+    biname = 'binary_pa_matrix_{}.npy'.format(basename)
     orgidxname = 'row_organism_idxs_{}.json'.format(basename)
     famidxname = 'col_families_idxs_{}.json'.format(basename)
     return matname,biname,orgidxname,famidxname

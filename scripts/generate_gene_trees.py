@@ -7,8 +7,9 @@ import subprocess
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from Bio import SeqIO,AlignIO,Alphabet
+from functools import partial
 from Bio.SeqRecord import SeqRecord
+from Bio import SeqIO,AlignIO,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
 def matrix_to_binary(pamat):
@@ -37,7 +38,10 @@ def extractSeqsForTree(headerlist,nucFasta,outdir,genefam):
 def fixNames(seqlist):
     fixedseqs = []
     for sequence in seqlist:
-        fixedseqs.append(SeqRecord(sequence.seq, name=sequence.name.replace(':','__'), id=sequence.id.replace(':','__')))
+        fixedseqs.append(SeqRecord(sequence.seq,
+                                   name=sequence.name.replace(':','__'),
+                                   id=sequence.id.replace(':','__'),
+                                   description=''))
     return fixedseqs
 
 def writeFastas(nameseqiter):
@@ -46,40 +50,60 @@ def writeFastas(nameseqiter):
             SeqIO.write(seqs,outfile,'fasta') #write all seqs to a fasta file
     return None
 
-def alignGeneFamilies(outdir):
+def alignGeneFamilies(fastafile,outdir):
     mafftbase = 'mafft --quiet --localpair --maxiterate 1000'
-    for fastafile in tqdm(os.listdir('{}/fastas'.format(outdir)),desc='aligning'):
-        fastabase = fastafile.split('.')[0]
-        fastaname = '{}/fastas/{}'.format(outdir,fastafile)
-        alnfile = '{}/tmp.aln'.format(outdir,fastabase)
-        align = '{} {} > {}'.format(mafftbase,fastaname,alnfile)
-        os.system(align)
-        AlignIO.convert(alnfile,'fasta','{}/nexus/{}.nex'.format(outdir,fastabase),'nexus',alphabet=Alphabet.generic_dna)
+    fastabase = fastafile.split('.')[0]
+    fastaname = '{}/fastas/{}'.format(outdir,fastafile)
+    alnfile = '{}/tmp_{}.aln'.format(outdir,fastabase)
+    align = '{} {} > {}'.format(mafftbase,fastaname,alnfile)
+    os.system(align)
+    AlignIO.convert(alnfile,'fasta','{}/nexus/{}.nex'.format(outdir,fastabase),'nexus',alphabet=Alphabet.generic_dna)
+    os.remove(alnfile)
     return None
 
-def buildTrees(outdir):
-    for nexfile in tqdm(os.listdir('{}/nexus'.format(outdir)),desc='trees'):
-        nexbase = nexfile.split('.')[0]
-        mbf = """set autoclose=yes nowarn=yes
+def parallelAlignFastas(outdir,processes):
+    pool = ThreadPool(processes)
+    fastas = os.listdir('{}/fastas'.format(outdir))
+    alnfnc = partial(alignGeneFamilies,outdir=outdir)
+    alnfiles = list(tqdm(pool.imap(alnfnc,fastas),total=len(fastas),desc='aligning'))
+    return None
+
+def buildTree(nexfile,outdir):
+    nexbase = nexfile.split('.')[0]
+    mbf = """set autoclose=yes nowarn=yes
 execute {}/nexus/{}
 lset nst=6 rates=gamma
 mcmc ngen=10000 savebrlens=yes file={}
 quit""".format(outdir,nexfile,nexbase)
-        treedir = '{}/trees/{}'.format(outdir,nexbase)
-        os.system('mkdir -p {}'.format(treedir))
-        mbscriptname = '{}/mb_script.txt'.format(treedir)
-        open(mbscriptname,'w').write(mbf)
-        logfilename = '{}/mb_log.txt'.format(treedir)
-        with open(mbscriptname,'rb',0) as mbscript, open(logfilename,'wb',0) as logfile:
-            logtxt = subprocess.run(['mb'],
-                                    stdin=mbscript,
-                                    stdout=logfile,
-                                    check=True)
-        for fp in glob.glob('./{}*'.format(nexbase)):
-            os.rename(fp,os.path.join(os.getcwd(),treedir,fp))
+    mbscriptname = '{}_mrbayes_script.txt'.format(nexbase)
+    open(mbscriptname,'w').write(mbf)
+    logfilename = '{}_mrbayes_species_tree_log.txt'.format(nexbase)
+    with open(mbscriptname,'rb',0) as mbscript, open(logfilename,'wb',0) as logfile:
+        logtxt = subprocess.run(['mb'],
+                                stdin=mbscript,
+                                stdout=logfile,
+                                check=True)
+    treedir = '{}/trees/{}'.format(outdir,nexbase)
+    os.system('mkdir -p {}'.format(treedir))
+    for fp in glob.glob('./{}*'.format(nexbase)):
+        os.rename(fp,os.path.join(os.getcwd(),treedir,fp))
     return None
 
-def main(pamat,columns,familys,nucFasta,genusname,minsize):
+def parallelBuildTrees(outdir,processes):
+    pool = ThreadPool(processes)
+    alnfiles = os.listdir('{}/nexus'.format(outdir))
+    treefnc = partial(buildTree,outdir=outdir)
+    treefiles = list(tqdm(pool.imap(treefnc,alnfiles),total=len(alnfiles),desc='trees'))
+    #test = tqdm(pool.map(treefnc,alnfiles))
+    return None
+
+def convertToNewick(outdir,treedir):
+    glob.glob('{}/*run2.t'.format(treedir))[0]
+    for tree in Phylo.parse(treefile,'nexus'):
+        Phylo.write(tree,'{}/trees_newick/{}_species_tree_{}.nwk'.format(outdir,genusname,tree.name),'newick')
+    return None
+
+def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     #set up out directories
     outdir = 'gene_tree_files'
     os.system('mkdir -p {}'.format(outdir))
@@ -95,9 +119,9 @@ def main(pamat,columns,familys,nucFasta,genusname,minsize):
     seqs_to_write = {name:fixNames(seqs) for (name,seqs) in seqs_to_write}
     writeFastas(seqs_to_write)
     #align gene family fastas and convert to nexus
-    alignGeneFamilies(outdir)
-    #buiil gene trees with mrbayes from alingments
-    buildTrees(outdir)
+    parallelAlignFastas(outdir,processes)
+    #build gene trees with mrbayes from alingments
+    parallelBuildTrees(outdir,processes)
     return None
 
 if __name__ == '__main__':
@@ -107,4 +131,5 @@ if __name__ == '__main__':
     nucFasta = sys.argv[4]
     genusname = sys.argv[5]
     minsize = 0.3
-    main(pamat,colidx,famidx,nucFasta,genusname,minsize)
+    processes = 8
+    main(pamat,colidx,famidx,nucFasta,genusname,minsize,processes)

@@ -89,3 +89,15 @@ There are 5 inputs:
     - concatenated nexus alingment (1 nexus alignment with all seperate species tree genes, ready for mrbayes to make a species tree)
 Invoke the command as follows:
     python extract_species_tree_seqs.py pamatrix.npy columindices.json genefamilies.json all_nuc_genes.fna species_tree_genes
+
+
+
+
+
+Docker Stuff
+
+#create ubuntu 18.04 container and mount data files
+sudo docker run -it --mount type=bind,source="$(pwd)"/thesis_SidReed,target=/thesis_SidReed ubuntu bash
+apt update
+apt install libreadline5
+apt-get install liblua5.1

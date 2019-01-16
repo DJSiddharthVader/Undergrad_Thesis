@@ -95,36 +95,3 @@ if __name__ == '__main__':
     print('data output to file {}.json'.format(sys.argv[3]))
     print('singlton families in {}'.format(foutname))
 
-#old stuff
-#def format_to_dict(fclust,genes):
-#    families = defaultdict(list)
-#    for n,i in enumerate(fclust):
-#        families['fam' + str(i)].append(genes[n])
-#    return families
-#def builddmat(data):
-#    genes = tuple(set(data['qseqid'].values.tolist() + data['sseqid'].values.tolist()))
-#    dmat = np.ones((len(genes),len(genes)))
-#    for i,gi in enumerate(tqdm(genes)):
-#        for j,gj in enumerate(tqdm(genes)):
-#            dmat[i][j] = bindist(gi,gj,data) #every match has dist 0
-#    return dmat,genes
-#singlefams = defaultdict(list)
-#for i,r in tqdm(data.iterrows(),total=len(data)):
-#    singlefams[r['qseqid']].append(r['sseqid'])
-#print(len(list(singlefams.keys())) == len(list(set(data['qseqid']))))
-#print(set([len(x) for x in singlefams.values()]))
-#singlefams = [[x] + f for x,f in zip(singlefams.keys(),singlefams.values())] #add index member to each family now list of lists, each list is all genes that have a blast hit (blast already filtered when run
-#merged = True
-#while merged:
-#    merged = False
-#    for idx,fam in enumerate(tqdm(singlefams)):
-#        for i2,fam2 in enumerate(singlefams):
-#            if set(fam).intersection(fam2) != None:
-#                singlefams[idx] = list(set(fam).union(fam2))
-#                merged = True
-#json.dump(singlefams,open(sys.argv[2],'w'))
-#def main(data):
-#    dmat,genes = builddmat(data)
-#    fclust = linkage(dmat)
-#    families = format_to_dict(fclust,genes)
-#    return families

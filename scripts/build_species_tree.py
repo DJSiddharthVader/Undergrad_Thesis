@@ -16,7 +16,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 #arg 2 is col families index dict
 #arg 3 is actualy genefamilies dict
 #arg 4 is concatenated fasta fle with all genes (nuc seqs)
-#arg 5 is outname, no extension
+#arg 5 is genusname
 
 #will extract all genes present in only 1 copy in every taxa and spit to a fasta file for alignment and tree creation
 
@@ -104,12 +104,6 @@ quit""".format(concat_nexus_aln,genusname)
     for fp in glob.glob('./*tmp_*'):
         os.rename(fp,os.path.join(os.getcwd(),treedir,fp.replace('tmp_','')))
     return treedir
-
-def convertToNewick(outdir,treedir):
-    treefile = glob.glob('{}/*run2.t'.format(treedir))[0]
-    for tree in Phylo.parse(treefile,'nexus'):
-        Phylo.write(tree,'{}/trees_newick/{}_species_tree_{}.nwk'.format(outdir,genusname,tree.name),'newick')
-    return None
 
 def main(pamat,columns,familys,nucFasta,genusname,genes,processes):
     #set up out directories

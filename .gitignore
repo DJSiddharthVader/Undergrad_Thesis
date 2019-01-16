@@ -1,9 +1,10 @@
-.ipynb_checkpoints/*
 Cas-Finder_macsyfinder/
 athena/genomedata/
 apps/
 bacterialGBFFs/
 testing/
+.ipynb_checkpoints/*
+*.pyc
 #tex files
 *.run.xml
 *.bcf

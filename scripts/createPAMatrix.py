@@ -9,7 +9,7 @@ from Bio import SeqIO
 #arg 1 is the json with the list of gene families (including singletons verified by blasting against NR database)
 #arg 2 should be path to a directory that contains all .faa files for every taxa in the matrix
 ## the gene names in the files in arg 2 should match the gene names from the families in arg 1
-#arg 3 is output file name, no extension
+#arg 3 is the genus name
 
 def getOrganismGeneList(fastapath):
     genelist = []
@@ -47,7 +47,7 @@ def namegenerator(basename):
     matname = 'pa_matrix_{}.npy'.format(basename)
     biname = 'binary_pa_matrix_{}.npy'.format(basename)
     orgidxname = 'row_organism_idxs_{}.json'.format(basename)
-    famidxname = 'col_families_idxs_{}.json'.format(basename)
+    famidxname = 'column_indexes_families_{}.json'.format(basename)
     return matname,biname,orgidxname,famidxname
 
 def main(families,fastadir):

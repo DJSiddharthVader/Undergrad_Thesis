@@ -1,13 +1,11 @@
 #!/bin/bash
 
 extractFastas() {
-    pdir="prot_$2"
-    mkdir -p "$pdir"
-    ndir="nuc_$2"
-    mkdir -p "$ndir"
+    mkdir -p "$2"
+    mkdir -p "$3"
     while read file; do
-        ~/thesis_SidReed/scripts/modified_get_features.pl -a -t "$file" >| "$pdir""/"`basename $file`".faa" 2>> "$pdir""/errors.txt"
-        ~/thesis_SidReed/scripts/modified_get_features.pl -c -t "$file" >| "$ndir""/"`basename $file`".fna" 2>> "$ndir""/errors.txt"
+        ~/thesis_SidReed/scripts/modified_get_features.pl -a -t "$file" >| "$2""/"`basename $file`".faa" 2>> "$2""/errors.txt"
+        ~/thesis_SidReed/scripts/modified_get_features.pl -c -t "$file" >| "$3""/"`basename $file`".fna" 2>> "$3""/errors.txt"
     done < "$1"
 }
 
@@ -49,13 +47,18 @@ rmEmptyHeads (){
 }
 
 main() {
-    extractFastas "$1" "$2"
-    cat "prot_$2"/*.faa >| all_proteins.faa
+    mkdir -p "$2"
+    pdir="protein_fastas"
+    ndir="nucleotide_fastas"
+    extractFastas "$1" "$2/$pdir" "$2/$ndir"
+    cd "$2"
+    cat "$pdir"/*.faa >| all_proteins.faa
     dedupFasta all_proteins.faa
     rmEmptyHeads all_proteins.faa
-    cat "nuc_$2"/*.fna >| all_nucleotides.fna
+    cat "$ndir"/*.fna >| all_nucleotides.fna
     dedupFasta all_nucleotides.fna
-    #rmEmptyHeads all_nucleotides.fna
+    rmEmptyHeads all_nucleotides.fna
+    cd -
 }
 
 main2() {
@@ -73,6 +76,7 @@ main2() {
 shopt -s extglob #allows for globbing in scripts
 #main "$1" "$2"
 #need conda environment activated, cant do it in script for some reason so just make sure its activated first
-main2 "$1" "$2"
+#$1 is paths to gbff files, $2 is genus name
+main "$1" "$2"
 
 

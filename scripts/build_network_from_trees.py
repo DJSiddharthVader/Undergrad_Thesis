@@ -70,8 +70,23 @@ def parseEdge(edge):
             isInternal = False
     return source,sink,isInternal
 
-def parseRawNetwork(raw_network_filename,newicktreedir):
-    totalgenetrees = len(os.listdir(newicktreedir))
+def removeLCA(network):
+    nolca = nx.Graph()
+    nolcaedges = [(u,v,d) for u,v,d in network.edges(data=True) if (re.search('^LCA\(',u) == None) and (re.search('^LCA\(',v) == None)]
+    nolca.add_edges_from(nolcaedges)
+    return nolca
+
+def annotateCRISPR(network,crisprdata):
+    networkcrisprdata = crisprdata[crisprdata['Accession Number'].isin(network.nodes())]
+    crisprlabels = {row[1]['Accession Number']:\
+                    {header:value for header,value in row[1].items()}\
+                   for row in networkcrisprdata.iterrows()}
+    copy = network.copy()
+    nx.set_node_attributes(copy,crisprlabels)
+    return copy
+
+def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=False):
+    #totalgenetrees = len(os.listdir(newicktreedir))
     df = pd.read_csv(raw_network_filename,
                      delimiter='\t',
                      header=None,
@@ -79,10 +94,15 @@ def parseRawNetwork(raw_network_filename,newicktreedir):
     df = df.loc[df['raw_score'] != 0] #filter edges with 0 score
     df['percent_score'] = df['raw_score']/totalgenetrees
     df['source'],df['target'],df['has_internal_node'] = zip(*df['edge'].apply(parseEdge))
-    df = df.drop(['edge','direction'],axis=1)
-    return nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
-
-def annotateCRISPR(network,crisprdata):
+    df = df.drop(['edge'],axis=1)
+    print(df.columns)
+    network = nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
+    for e in network.edges(data=True):
+        print(e)
+        break
+    if not internal:
+        network = removeLCA(network)
+    return annotateCRISPR(network,crisprdata)
 
 #drawing
 def makecolors(cmap):
@@ -111,7 +131,7 @@ def makeEdge(edge,pos,colormap):
 
 def makeNode(node,pos):
     x,y = pos[node]
-    colorfnc = lambda x:'red' if re.search('^LCA\(',x) != None else 'blue'
+    color=lambda x:'red' if re.search('^LCA\(',x) != None else 'blue'
     newnode = dict(type='scatter',
                     x=tuple([x]),
                     y=tuple([y]),
@@ -119,13 +139,15 @@ def makeNode(node,pos):
                     mode='markers',
                     hoverinfo='text',
                     marker=dict(
-                        color=colorfnc(node),
+                        color=color(node),
                         size=30,
                    )
               )
     return newnode
 
-def drawNetwork(network,colormap=cmx.viridis):
+def drawNetwork(network,internal=False,ipy=True,colormap=cmx.viridis):
+    if not internal:
+        network = removeLCA(network)
     pos = nx.spring_layout(network,iterations=200)
     #draw edges
     edge_trace = []
@@ -133,19 +155,26 @@ def drawNetwork(network,colormap=cmx.viridis):
         edge_trace.append(makeEdge(edge,pos,makecolors(colormap)))
     #draw nodes
     node_trace=[]
-    for node in network.nodes():
+    for node in network.nodes(data=True):
         node_trace.append(makeNode(node,pos))
     #figure
     fig = go.Figure(data=edge_trace + node_trace,
-         layout=go.Layout(
-            title='<br>Test HGT Network',
-            titlefont=dict(size=16),
-            showlegend=False,
-            hovermode='closest',
-            margin=dict(b=20,l=5,r=5,t=40),
-            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
-    py.plot(fig, filename='test')
+                    layout=go.Layout(
+                        title='Test HGT Network',
+                        titlefont=dict(size=16),
+                        showlegend=False,
+                        hovermode='closest',
+                        margin=dict(b=20,l=5,r=5,t=40),
+                        xaxis=dict(showgrid=False,
+                                   showticklabels=False),
+                        yaxis=dict(showgrid=False,
+                                   showticklabels=False)
+                    )
+          )
+    if ipy:
+        py.iplot(fig, filename='test')
+    else:
+        py.plot(fig, filename='test')
     return None
 
 def main(speciesdir,genedir,luapath,hidepath):
@@ -174,6 +203,7 @@ if __name__ == '__main__':
 #    speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_ehrlichia/')
 #    main(speciestreefilesdir,genetreefilesdir,pathToLua,pathToHide)
     testnet = os.path.join(basedir,'hide/realnetwork.txt')
-    network = parseRawNetwork(testnet,'network_files/all_newick_trees')
+    totalgenetrees = len(os.listdir('network_files/all_newick_trees'))
+    network = parseRawNetwork(testnet,totalgenetrees)
     drawNetwork(network)
 

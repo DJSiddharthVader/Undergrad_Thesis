@@ -28,7 +28,8 @@ def pickGeneFamiliesForTrees(pamat,columnindex,minsize):
     print('using {} of {} gene families for trees'.format(len(family_idxs),pamat.shape[1]))
     return family_idxs
 
-def extractSeqsForTree(headerlist,nucFasta,outdir,genefam):
+def extractSeqsForTree(headersNameTuple,nucFasta,outdir):
+    genefam,headerlist = headersNameTuple
     seqRecordlist = []
     seqiter = SeqIO.parse(open(nucFasta),'fasta') #open fasta file
     seqRecordlist = [seq for seq in seqiter if seq.id in headerlist] #put sequences in list
@@ -39,15 +40,23 @@ def fixNames(seqlist):
     fixedseqs = []
     for sequence in seqlist:
         fixedseqs.append(SeqRecord(sequence.seq,
-                                   name=sequence.name.replace(':','__'),
-                                   id=sequence.id.replace(':','__'),
+                                   name=sequence.name.split(':')[0],
+                                   id=sequence.id.split(':')[0],
+#                                   name=sequence.name.replace(':','__'),
+#                                   id=sequence.id.replace(':','__'),
                                    description=''))
     return fixedseqs
+
+def extractSeqsParallel(headerTuples,outdir,nucFasta):
+    pool = ThreadPool(processes)
+    extractfnc = partial(extractSeqsForTree,outdir=outdir,nucFasta=nucFasta)
+    fastas = list(tqdm(pool.imap(extractfnc,headerTuples),total=len(headerTuples),desc='getseqs'))
+    return fastas
 
 def writeFastas(nameseqiter):
     for name,seqs in nameseqiter.items():
         with open(name,'w') as outfile:
-            SeqIO.write(seqs,outfile,'fasta') #write all seqs to a fasta file
+            SeqIO.write(seqs,outfile,'fasta')#write all seqs to a fasta file
     return None
 
 def alignGeneFamilies(fastafile,outdir):
@@ -97,12 +106,6 @@ def parallelBuildTrees(outdir,processes):
     #test = tqdm(pool.map(treefnc,alnfiles))
     return None
 
-def convertToNewick(outdir,treedir):
-    glob.glob('{}/*run2.t'.format(treedir))[0]
-    for tree in Phylo.parse(treefile,'nexus'):
-        Phylo.write(tree,'{}/trees_newick/{}_species_tree_{}.nwk'.format(outdir,genusname,tree.name),'newick')
-    return None
-
 def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     #set up out directories
     outdir = 'gene_tree_files'
@@ -113,9 +116,11 @@ def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     #pick families
     family_col_idxs = pickGeneFamiliesForTrees(pamat,columns,minsize)
     family_idxs = [columns[col_idx] for col_idx in family_col_idxs]
-    headerlists = {famidx:familys[famidx] for famidx in family_idxs}
+    #headerlists = {famidx:familys[famidx] for famidx in family_idxs}
+    headerTuples = [(famidx,familys[famidx]) for famidx in family_idxs]
     #write families to fasta files
-    seqs_to_write = [extractSeqsForTree(heads,nucFasta,outdir,fam) for fam,heads in tqdm(headerlists.items(),total=len(list(headerlists.keys())),desc='getseqs')]
+    #seqs_to_write = [extractSeqsForTree(heads,nucFasta,outdir,fam) for fam,heads in tqdm(headerlists.items(),total=len(list(headerlists.keys())),desc='getseqs')]
+    seqs_to_write = extractSeqsParallel(headerTuples,outdir,nucFasta)
     seqs_to_write = {name:fixNames(seqs) for (name,seqs) in seqs_to_write}
     writeFastas(seqs_to_write)
     #align gene family fastas and convert to nexus
@@ -131,5 +136,5 @@ if __name__ == '__main__':
     nucFasta = sys.argv[4]
     genusname = sys.argv[5]
     minsize = 0.3
-    processes = 8
+    processes = 16
     main(pamat,colidx,famidx,nucFasta,genusname,minsize,processes)

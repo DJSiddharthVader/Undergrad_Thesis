@@ -7,6 +7,9 @@ import pandas as pd
 import networkx as nx
 from Bio import Phylo
 from tqdm import tqdm
+import dendropy as dp
+from functools import partial
+from multiprocessing.dummy import Pool as ThreadPool
 
 #Docs
 #STEPS
@@ -42,38 +45,43 @@ from tqdm import tqdm
 
 #make network
 def getTree(treefilename):
-    return list(Phylo.parse(treefilename,'nexus'))[-1]
+    return dp.Tree.get(path=treefilename,
+                       schema='nexus',
+                       rooting='force-unrooted')
 
 def writeNewickWithOutBrLen(treeobj,outpath):
-    treestr = re.sub(':\d\.\d+','',treeobj.format('newick'))
-    hascopy = 0
+    treestr = re.sub(':\d\.\d+','',str(treeobj))
     if re.search('copy',treestr) != None:
         hascopy = 1
     else:
+        hascopy = 0
         treestr = re.sub(',',', ',treestr)
         treestr = re.sub('\.1', '',treestr)
         open(outpath,'w').write(treestr)
     return hascopy
 
-def fixNewickTrees(speciesdir,genedir):
+def writeNewickParallel(treefile):
+    gene_tree = getTree(treefile)
+    gene_tree.reroot_at_midpoint()
+    basename = os.path.basename(treefile).split('.')[0]
+    nwkfile = 'network_files/all_newick_trees/{}.newick'.format(basename)
+    return writeNewickWithOutBrLen(gene_tree,nwkfile)
+
+def fixNewickTrees(speciesdir,genedir,processes):
     #set up dirs
     maindir = 'network_files'
     os.system('mkdir -p {}/all_newick_trees'.format(maindir))
     #convert species tree to newick
-    speciestreefile = glob.glob('{}/*run2.t'.format(speciesdir))[0]
+    speciestreefile = glob.glob('{}/*.con.tre'.format(speciesdir))[0]
     species_tree = getTree(speciestreefile)
-    species_tree.root_at_midpoint()
+    species_tree.reroot_at_midpoint()
     writeNewickWithOutBrLen(species_tree,'{}/all_newick_trees/species.newick'.format(maindir))
     #convert gene trees to newick
-    hascopy = 0
-    for treefile in tqdm(glob.iglob('{}/**/*run2.t'.format(genedir)),total=len(os.listdir(genedir))):
-        gene_tree = getTree(treefile)
-        gene_tree.root_at_midpoint()
-        basename = os.path.basename(treefile).split('.')[0]
-        nwkfile = '{}/all_newick_trees/{}.newick'.format(maindir,basename)
-        hascopy += writeNewickWithOutBrLen(gene_tree,nwkfile)
+    pool = ThreadPool(processes)
+    treefiles = list(glob.iglob('{}/**/*.con.tre'.format(genedir)))
+    hascopy = sum(list(tqdm(pool.imap(writeNewickParallel,treefiles),total=len(treefiles),desc='fixtrees')))
     print('{} of {} gene trees had duplicate taxa, not considered'.format(hascopy,len(os.listdir(genedir))))
-    numgenetrees= len(os.listdir('network_files/all_newick_trees')) -1 #-1 for the species tree
+    numgenetrees = len(os.listdir('network_files/all_newick_trees')) -1 #-1 for the species tree
     return '{}/all_newick_trees'.format(maindir), numgenetrees
 
 def runHideOnTreeDir(treedir,hiderDir):
@@ -120,14 +128,14 @@ def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=Fals
     return annotateCRISPR(network,crisprdata)
 
 if __name__ == '__main__':
-#    basedir = '/home/sidreed/thesis_SidReed/hide_test/'
     basedir = sys.argv[1]
+    processes = 16
 #    pathToLua = os.path.join(basedir,'hide_for_linux/score.lua')
 #    pathToHide = os.path.join(basedir,'hide_for_linux/lua')
     genetreefilesdir = os.path.join(basedir,'gene_tree_files/trees/')
     genusname = os.path.basename(os.path.normpath(basedir))
     speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_{}/'.format(genusname))
-    treedir, totalgenetrees = fixNewickTrees(speciestreefilesdir,genetreefilesdir)
+    treedir, totalgenetrees = fixNewickTrees(speciestreefilesdir,genetreefilesdir,processes)
     print(totalgenetrees)
 #    testnet = runHideOnTreeDir(treedir)
 #    network = parseRawNetwork(testnet,totalgenetrees)

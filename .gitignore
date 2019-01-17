@@ -2,6 +2,7 @@ Cas-Finder_macsyfinder/
 athena/genomedata/
 apps/
 bacterialGBFFs/
+genus_filepaths/
 testing/
 .ipynb_checkpoints/*
 *.pyc

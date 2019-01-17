@@ -1,9 +1,0 @@
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000016265.1_ASM1626v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000016285.1_ASM1628v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000092025.1_ASM9202v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000192635.1_ASM19263v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_000971565.1_ASM97156v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_001551895.1_ASM155189v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_001713475.1_ASM171347v1_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_002005205.3_ASM200520v3_genomic.gbff
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_002943835.1_ASM294383v1_genomic.gbff

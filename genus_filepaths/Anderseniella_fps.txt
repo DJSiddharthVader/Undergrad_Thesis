@@ -1,1 +1,0 @@
-/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1/GCF_900149695.1_Anderseniella_sp._Alg231_50_genomic.gbff

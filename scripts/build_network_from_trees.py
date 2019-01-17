@@ -5,13 +5,8 @@ import glob
 import numpy as np
 import pandas as pd
 import networkx as nx
-from tqdm import tqdm
 from Bio import Phylo
-import matplotlib.cm as cmx
-import plotly.plotly as py
-import plotly.graph_objs as go
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
+from tqdm import tqdm
 
 #Docs
 #STEPS
@@ -51,12 +46,42 @@ def getTree(treefilename):
 
 def writeNewickWithOutBrLen(treeobj,outpath):
     treestr = re.sub(':\d\.\d+','',treeobj.format('newick'))
+    hascopy = 0
     if re.search('copy',treestr) != None:
-        print('has copy')
+        hascopy = 1
     else:
         treestr = re.sub(',',', ',treestr)
         treestr = re.sub('\.1', '',treestr)
         open(outpath,'w').write(treestr)
+    return hascopy
+
+def fixNewickTrees(speciesdir,genedir):
+    #set up dirs
+    maindir = 'network_files'
+    os.system('mkdir -p {}/all_newick_trees'.format(maindir))
+    #convert species tree to newick
+    speciestreefile = glob.glob('{}/*run2.t'.format(speciesdir))[0]
+    species_tree = getTree(speciestreefile)
+    species_tree.root_at_midpoint()
+    writeNewickWithOutBrLen(species_tree,'{}/all_newick_trees/species.newick'.format(maindir))
+    #convert gene trees to newick
+    hascopy = 0
+    for treefile in tqdm(glob.iglob('{}/**/*run2.t'.format(genedir)),total=len(os.listdir(genedir))):
+        gene_tree = getTree(treefile)
+        gene_tree.root_at_midpoint()
+        basename = os.path.basename(treefile).split('.')[0]
+        nwkfile = '{}/all_newick_trees/{}.newick'.format(maindir,basename)
+        hascopy += writeNewickWithOutBrLen(gene_tree,nwkfile)
+    print('{} of {} gene trees had duplicate taxa, not considered'.format(hascopy,len(os.listdir(genedir))))
+    numgenetrees= len(os.listdir('network_files/all_newick_trees')) -1 #-1 for the species tree
+    return '{}/all_newick_trees'.format(maindir), numgenetrees
+
+def runHideOnTreeDir(treedir,hiderDir):
+    luaexe = os.path.join(hideDir,'lua')
+    networktxt = subprocess.run(['mb'],
+                            stdin=mbscript,
+                            stdout=logfile,
+                            check=True)
     return None
 
 #parse network
@@ -69,12 +94,6 @@ def parseEdge(edge):
         if re.search('^LCA\(',sink) == None:
             isInternal = False
     return source,sink,isInternal
-
-def removeLCA(network):
-    nolca = nx.Graph()
-    nolcaedges = [(u,v,d) for u,v,d in network.edges(data=True) if (re.search('^LCA\(',u) == None) and (re.search('^LCA\(',v) == None)]
-    nolca.add_edges_from(nolcaedges)
-    return nolca
 
 def annotateCRISPR(network,crisprdata):
     networkcrisprdata = crisprdata[crisprdata['Accession Number'].isin(network.nodes())]
@@ -95,115 +114,20 @@ def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=Fals
     df['percent_score'] = df['raw_score']/totalgenetrees
     df['source'],df['target'],df['has_internal_node'] = zip(*df['edge'].apply(parseEdge))
     df = df.drop(['edge'],axis=1)
-    print(df.columns)
-    network = nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
-    for e in network.edges(data=True):
-        print(e)
-        break
     if not internal:
-        network = removeLCA(network)
+        df = df[df['has_internal_node'] == False]
+    network = nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
     return annotateCRISPR(network,crisprdata)
 
-#drawing
-def makecolors(cmap):
-    scheme = cm = plt.get_cmap(cmap)
-    cNorm = colors.Normalize(vmin=0,vmax=1)
-    scalarMap = cmx.ScalarMappable(norm=cNorm,cmap=scheme)
-    return scalarMap.to_rgba
-
-def makeEdge(edge,pos,colormap):
-    x0,y0 = pos[edge[0]]
-    x1,y1 = pos[edge[1]]
-    color = colormap(edge[2]['percent_score'])
-    newedge = dict(
-        type='scatter',
-        x = tuple([x0,x1,None]),
-        y = tuple([y0,y1,None]),
-        hoverinfo='text',
-        text = tuple([edge[2]['percent_score']]),
-        mode='lines',
-        line=dict(
-            width=20*edge[2]['percent_score'],
-            color='rgb{}'.format(color)
-            )
-        )
-    return newedge
-
-def makeNode(node,pos):
-    x,y = pos[node]
-    color=lambda x:'red' if re.search('^LCA\(',x) != None else 'blue'
-    newnode = dict(type='scatter',
-                    x=tuple([x]),
-                    y=tuple([y]),
-                    text=node,
-                    mode='markers',
-                    hoverinfo='text',
-                    marker=dict(
-                        color=color(node),
-                        size=30,
-                   )
-              )
-    return newnode
-
-def drawNetwork(network,internal=False,ipy=True,colormap=cmx.viridis):
-    if not internal:
-        network = removeLCA(network)
-    pos = nx.spring_layout(network,iterations=200)
-    #draw edges
-    edge_trace = []
-    for edge in network.edges(data=True):
-        edge_trace.append(makeEdge(edge,pos,makecolors(colormap)))
-    #draw nodes
-    node_trace=[]
-    for node in network.nodes(data=True):
-        node_trace.append(makeNode(node,pos))
-    #figure
-    fig = go.Figure(data=edge_trace + node_trace,
-                    layout=go.Layout(
-                        title='Test HGT Network',
-                        titlefont=dict(size=16),
-                        showlegend=False,
-                        hovermode='closest',
-                        margin=dict(b=20,l=5,r=5,t=40),
-                        xaxis=dict(showgrid=False,
-                                   showticklabels=False),
-                        yaxis=dict(showgrid=False,
-                                   showticklabels=False)
-                    )
-          )
-    if ipy:
-        py.iplot(fig, filename='test')
-    else:
-        py.plot(fig, filename='test')
-    return None
-
-def main(speciesdir,genedir,luapath,hidepath):
-    #set up dirs
-    maindir = 'network_files'
-    os.system('mkdir -p {}/all_newick_trees'.format(maindir))
-    #convert species tree to newick
-    speciestreefile = glob.glob('{}/*run2.t'.format(speciesdir))[0]
-    species_tree = getTree(speciestreefile)
-    species_tree.root_at_midpoint()
-    writeNewickWithOutBrLen(species_tree,'{}/all_newick_trees/species.newick'.format(maindir))
-    #convert gene trees to newick
-    for treefile in tqdm(glob.iglob('{}/**/*run2.t'.format(genedir)),total=len(os.listdir(genedir))):
-        gene_tree = getTree(treefile)
-        gene_tree.root_at_midpoint()
-        basename = os.path.basename(treefile).split('.')[0]
-        nwkfile = '{}/all_newick_trees/{}.newick'.format(maindir,basename)
-        writeNewickWithOutBrLen(gene_tree,nwkfile)
-    return None
-
 if __name__ == '__main__':
-    basedir = '/home/sidreed/thesis_SidReed/hide_test/'
+#    basedir = '/home/sidreed/thesis_SidReed/hide_test/'
+    basedir = sys.argv[1]
 #    pathToLua = os.path.join(basedir,'hide_for_linux/score.lua')
 #    pathToHide = os.path.join(basedir,'hide_for_linux/lua')
-#    genetreefilesdir = os.path.join(basedir,'gene_tree_files/trees/')
-#    speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_ehrlichia/')
-#    main(speciestreefilesdir,genetreefilesdir,pathToLua,pathToHide)
-    testnet = os.path.join(basedir,'hide/realnetwork.txt')
-    totalgenetrees = len(os.listdir('network_files/all_newick_trees'))
-    network = parseRawNetwork(testnet,totalgenetrees)
-    drawNetwork(network)
-
+    genetreefilesdir = os.path.join(basedir,'gene_tree_files/trees/')
+    genusname = os.path.basename(os.path.normpath(basedir))
+    speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_{}/'.format(genusname))
+    treedir, totalgenetrees = fixNewickTrees(speciestreefilesdir,genetreefilesdir)
+    print(totalgenetrees)
+#    testnet = runHideOnTreeDir(treedir)
+#    network = parseRawNetwork(testnet,totalgenetrees)

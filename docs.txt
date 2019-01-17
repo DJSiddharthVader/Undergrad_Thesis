@@ -3,7 +3,8 @@
 bash prepSeqs.sh filepaths.txt genusname
 bash diamondAlign.sh genusname
 python single_link_clustering_blast_hits.py allvsallproteins.dmnd.out all_proteins.faa genusname
-python createPAmatrix.py gene_families_genusname.json nucleotide_fastas/ pa_matrix_genusname.npy
+python createPAmatrix.py gene_families_genusname.json protein_fastas/
+genusname
 python build_species_tree.py pa_matrix_genusname.npy column_indexes_families_genusname.json gene_families_genusname.json all_nucleotides.fna genusname
 python generate_gene_trees.py pa_matrix_genusname.npy column_indexes_families_genusname.json gene_families_genusname.json all_nucleotides.fna genusname
 ---------------Creating HGT Inference Networks ------------------------------

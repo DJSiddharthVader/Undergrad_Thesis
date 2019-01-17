@@ -83,6 +83,8 @@ def buildTree(nexfile,outdir):
 execute {}/nexus/{}
 lset nst=6 rates=gamma
 mcmc ngen=10000 savebrlens=yes file={}
+sump burnin=250
+sumt burnin=250
 quit""".format(outdir,nexfile,nexbase)
     mbscriptname = '{}_mrbayes_script.txt'.format(nexbase)
     open(mbscriptname,'w').write(mbf)

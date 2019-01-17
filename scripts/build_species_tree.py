@@ -89,6 +89,8 @@ def buildSpeciesTree(concat_nexus_aln,outdir,genusname):
 execute {}
 lset nst=6 rates=gamma
 mcmc ngen=10000 savebrlens=yes file=tmp_species_tree_{}
+sump burnin=250
+sumt burnin=250
 quit""".format(concat_nexus_aln,genusname)
     mbscriptname = 'tmp_mrbayes_script.txt'
     open(mbscriptname,'w').write(mbf)

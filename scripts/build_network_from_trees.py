@@ -82,11 +82,14 @@ def fixNewickTrees(speciesdir,genedir,processes):
     numgenetrees = len(os.listdir('network_files/all_newick_trees')) -1 #-1 for the species tree
     return '{}/all_newick_trees'.format(maindir), numgenetrees
 
-def runHideOnTreeDir(treedir,hiderDir):
-    luaexe = os.path.join(hideDir,'lua')
-    networktxt = subprocess.run(['mb'],
-                            stdin=mbscript,
-                            stdout=logfile,
+#cd to hide dir
+def runHideOnTreeDir(treedir,networkfile):
+#run hide and capture output
+#write network to file
+#parse network
+#write as graphml
+    networktxt = subprocess.run(['./lua','score.lua',treedir],
+                            stdout=networkfile,
                             check=True)
     return None
 
@@ -110,18 +113,20 @@ def annotateCRISPR(network,crisprdata):
     nx.set_node_attributes(copy,crisprlabels)
     return copy
 
-def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=False):
+def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=False,dfonly=False):
     #totalgenetrees = len(os.listdir(newicktreedir))
     df = pd.read_csv(raw_network_filename,
                      delimiter='\t',
                      header=None,
                      names=['raw_score','edge','direction'])
     df = df.loc[df['raw_score'] != 0] #filter edges with 0 score
-    df['percent_score'] = df['raw_score']/totalgenetrees
+    df['weight'] = df['raw_score']/totalgenetrees
     df['source'],df['target'],df['has_internal_node'] = zip(*df['edge'].apply(parseEdge))
     df = df.drop(['edge'],axis=1)
     if not internal:
         df = df[df['has_internal_node'] == False]
+    if dfonly:
+        return df
     network = nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
     return annotateCRISPR(network,crisprdata)
 
@@ -135,5 +140,3 @@ if __name__ == '__main__':
     speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_{}/'.format(genusname))
     treedir, totalgenetrees = fixNewickTrees(speciestreefilesdir,genetreefilesdir,processes)
     print(totalgenetrees)
-#    testnet = runHideOnTreeDir(treedir)
-#    network = parseRawNetwork(testnet,totalgenetrees)

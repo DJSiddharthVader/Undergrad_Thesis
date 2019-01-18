@@ -81,8 +81,8 @@ def main(ogdata,allgenesfasta,outname):
     print('clustering...')
     fclust = linkage(dmat)
     families = format_to_dict2(fclust,idxgenes)
-    families,singletons = filtersingletons(families)
     print('fetching singleton families...')
+    families,singletons = filtersingletons(families)
     foutname = singlegenelisttofasta(singletons,allgenesfasta,outname)
     print('{} singletons genes'.format(len(singletons)))
     return families,foutname

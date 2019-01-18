@@ -23,16 +23,16 @@ def makecolors(cmap):
 def makeEdge(edge,pos,colormap,maxthick=20):
     x0,y0 = pos[edge[0]]
     x1,y1 = pos[edge[1]]
-    color = colormap(edge[2]['percent_score'])
+    color = colormap(edge[2]['weight'])
     newedge = dict(
         type='scatter',
         x = tuple([x0,x1,None]),
         y = tuple([y0,y1,None]),
         hoverinfo='text',
-        text = tuple([edge[2]['percent_score']]),
+        text = tuple([edge[2]['weight']]),
         mode='lines',
         line=dict(
-            width=maxthick*edge[2]['percent_score'],
+            width=maxthick*edge[2]['weight'],
             color='rgb{}'.format(color)
             )
         )

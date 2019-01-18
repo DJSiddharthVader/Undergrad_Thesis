@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#$1 is dir with all trees
+#$2 is source dir
+#$3 number of trees
 counter=1
 
 for file in "$1"*.newick;

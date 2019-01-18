@@ -118,10 +118,8 @@ def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     #pick families
     family_col_idxs = pickGeneFamiliesForTrees(pamat,columns,minsize)
     family_idxs = [columns[col_idx] for col_idx in family_col_idxs]
-    #headerlists = {famidx:familys[famidx] for famidx in family_idxs}
     headerTuples = [(famidx,familys[famidx]) for famidx in family_idxs]
     #write families to fasta files
-    #seqs_to_write = [extractSeqsForTree(heads,nucFasta,outdir,fam) for fam,heads in tqdm(headerlists.items(),total=len(list(headerlists.keys())),desc='getseqs')]
     seqs_to_write = extractSeqsParallel(headerTuples,outdir,nucFasta)
     seqs_to_write = {name:fixNames(seqs) for (name,seqs) in seqs_to_write}
     writeFastas(seqs_to_write)

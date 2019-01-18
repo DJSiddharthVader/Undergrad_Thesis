@@ -12,6 +12,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO,AlignIO,Phylo,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
+#args
 #arg 1 is PA matrix (not binary)
 #arg 2 is col families index dict
 #arg 3 is actualy genefamilies dict
@@ -19,10 +20,16 @@ from multiprocessing.dummy import Pool as ThreadPool
 #arg 5 is genusname
 
 #will extract all genes present in only 1 copy in every taxa and spit to a fasta file for alignment and tree creation
+def matrix_to_binary(pamat):
+    binarize = lambda x:np.where(x > 0, 1, 0)
+    vecbin = np.vectorize(binarize)
+    return vecbin(pamat)
 
 def pickGeneFamilies(pamat,columnindex,genes):
-    sizes = np.apply_along_axis(sum,0,pamat)
-    family_idxs = [str(i) for i,pavec in enumerate(pamat.T) if np.array_equal(pavec,np.ones(pamat.shape[0]))]
+    bmat = matrix_to_binary(pamat)
+    sizes = np.apply_along_axis(sum,0,bmat)
+    #family_idxs = [str(i) for i,pavec in enumerate(pamat.T) if np.array_equal(pavec,np.ones(pamat.shape[0]))]
+    family_idxs = [str(i) for i,sumvec in enumerate(sizes) if sumvec == bmat.shape[0]]
     print('using {} of {} usable of {} total genes for species tree'.format(genes,len(family_idxs),pamat.shape[1]))
     #usable means that the gene family has exactly 1 gene in each organism
     return family_idxs[:genes]

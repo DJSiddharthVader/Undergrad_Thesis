@@ -6,9 +6,11 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 from Bio import Phylo
+from ete3 import Tree
 from tqdm import tqdm
 import dendropy as dp
 from functools import partial
+from io import StringIO
 from multiprocessing.dummy import Pool as ThreadPool
 
 #Docs
@@ -44,28 +46,26 @@ from multiprocessing.dummy import Pool as ThreadPool
 #                  ...
 
 #make network
-def getTree(treefilename):
-    return dp.Tree.get(path=treefilename,
-                       schema='nexus',
-                       rooting='force-unrooted')
-
-def writeNewickWithOutBrLen(treeobj,outpath):
-    treestr = re.sub(':\d\.\d+','',str(treeobj))
+def writeNewickWithOutBrLen(treefile,outpath):
+    nextree = dp.Tree.get(path=treefile,schema='nexus')
+    treestr = nextree.as_string(schema='newick')
+    treestr = re.sub(':\d\.[0-9\-e]+','',treestr)
+    treestr = re.sub('\[\&[UR]\]','',treestr)
     if re.search('copy',treestr) != None:
         hascopy = 1
     else:
         hascopy = 0
-        treestr = re.sub(',',', ',treestr)
-        treestr = re.sub('\.1', '',treestr)
-        open(outpath,'w').write(treestr)
+        nwktree = Tree(treestr,format=0)
+        nwktree.resolve_polytomy(recursive=True)
+        #r = nwktree.get_midpoint_outgroup()
+        #nwktree.set_outgroup(r)
+        nwktree.write(format=9,outfile=outpath)
     return hascopy
 
 def writeNewickParallel(treefile):
-    gene_tree = getTree(treefile)
-    gene_tree.reroot_at_midpoint()
     basename = os.path.basename(treefile).split('.')[0]
     nwkfile = 'network_files/all_newick_trees/{}.newick'.format(basename)
-    return writeNewickWithOutBrLen(gene_tree,nwkfile)
+    return writeNewickWithOutBrLen(treefile,nwkfile)
 
 def fixNewickTrees(speciesdir,genedir,processes):
     #set up dirs
@@ -73,9 +73,7 @@ def fixNewickTrees(speciesdir,genedir,processes):
     os.system('mkdir -p {}/all_newick_trees'.format(maindir))
     #convert species tree to newick
     speciestreefile = glob.glob('{}/*.con.tre'.format(speciesdir))[0]
-    species_tree = getTree(speciestreefile)
-    species_tree.reroot_at_midpoint()
-    writeNewickWithOutBrLen(species_tree,'{}/all_newick_trees/species.newick'.format(maindir))
+    writeNewickWithOutBrLen(speciestreefile,'{}/all_newick_trees/species.newick'.format(maindir))
     #convert gene trees to newick
     pool = ThreadPool(processes)
     treefiles = list(glob.iglob('{}/**/*.con.tre'.format(genedir)))

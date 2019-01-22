@@ -13,10 +13,7 @@ from scipy.cluster.hierarchy import single,fcluster
 #arg 3 is output name (no extension)
 
 def getgenelist(allgenesfasta):
-    genelist = []
-    for seq in SeqIO.parse(allgenesfasta,'fasta'):
-        genelist.append(seq.id)
-    return list(set(genelist))
+    return list(set([seq.id for seq in SeqIO.parse(allgenesfasta,'fasta')]))
 
 def filterblasttable(data,coverage,pident,evalue):
 #this should already be filtered by diamond, but just in case
@@ -25,11 +22,12 @@ def filterblasttable(data,coverage,pident,evalue):
     newdata = newdata[(newdata['qlen']/newdata['slen'] > coverage)]
     newdata = newdata[newdata['qseqid'] != newdata['sseqid']]
     newdata = newdata[newdata['evalue'] < evalue]
-    return newdata#,allgenes
+    return newdata
 
 def fasterbuilddmat(data,genes):
-    geneidxs = {gene:i for i,gene in enumerate(genes)}
-    dmat = np.ones((len(genes),len(genes)))
+    geneidxs = {gene:i for i,gene in enumerate(genes)} #create row indices for each gene
+    idxgenes = {v:k for k,v in geneidxs.items()}#same as geneidxs but reverse
+    dmat = np.ones((len(genes),len(genes))) #set everything to have distance of 1 (max difference)
     for n,row in tqdm(data.iterrows(),total=len(data)):
         i = geneidxs[row['qseqid']]
         j = geneidxs[row['sseqid']]
@@ -37,7 +35,6 @@ def fasterbuilddmat(data,genes):
         dmat[j][i] = 0
     for i in range(len(genes)):
         dmat[i][i] = 0 #self hits suppressed, defualt dist is 1, set diagonal to 0 manual
-    idxgenes = {v:k for k,v in geneidxs.items()}
     return dmat,idxgenes
 
 def linkage(dmat):
@@ -62,11 +59,8 @@ def filtersingletons(families):
     return newfams,singletons
 
 def singlegenelisttofasta(genelist,fastaname,outname):
-    singlerecords = []
-    with open(fastaname) as fasta:
-        for record in SeqIO.parse(fasta,'fasta'):
-            if record.id in genelist:
-                singlerecords.append(record)
+    with SeqIO.parse(open(fastaname),'fasta') as fasta:
+        singlerecords = [seq for seq in fasta if seq.id in genelist]
     foutname = 'singletons_{}.faa'.format(outname)
     with open(foutname,'w') as singleout:
         SeqIO.write(singlerecords,foutname,'fasta')
@@ -74,7 +68,7 @@ def singlegenelisttofasta(genelist,fastaname,outname):
 
 def main(ogdata,allgenesfasta,outname):
     genes = getgenelist(allgenesfasta)
-    data= filterblasttable(ogdata,0.85,85,0.05)
+    data = filterblasttable(ogdata,0.85,85,0.05)
     print('building distance matrix...')
     dmat,idxgenes = fasterbuilddmat(data,genes)
     print('{} unique genes'.format(len(list(idxgenes))))

@@ -1,0 +1,103 @@
+%Preamble
+\documentclass[12pt,letter]{article}
+\usepackage[utf8]{inputenc}
+%Layout/Spacing
+\usepackage[margin=1in]{geometry} %sets margins
+\usepackage[compact]{titlesec}%sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{fullpage} %use entire page
+\usepackage{authblk} %allows multiple athors and affiliations
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%Referenes
+\usepackage[natbib=true,style=numeric,backend=biber,useprefix=true]{biblatex}
+\addbibresource{../../refs.bib}
+%Misc
+\usepackage{amsmath} %for math command
+%Abbreviations
+\usepackage{acro}
+%CRISPR-Cas
+\DeclareAcronym{crspc}{
+    short = CRISPR-Cas,
+    long  = CRISPR associated
+}
+%crispr
+\DeclareAcronym{cas}{
+    short = Cas,
+    long  = CRISPR-associated
+}
+%crispr
+\DeclareAcronym{crsp}{
+    short = CRISPR,
+    long  = Clustered Regularly Interspaced Short Palindromic Repeat
+}
+%ctmc-fss
+\DeclareAcronym{mc}{
+    short = CTMC-FFS,
+    long  = Continuous-time Markov cain with finite state space
+}
+%s areus
+\DeclareAcronym{sau}{
+    short = \textit{S. aureus},
+    long  = \textit{Staphylococcus aureus}
+}
+%ecoli
+\DeclareAcronym{ecoli}{
+    short = \textit{E. coli},
+    long  = \textit{Escherichia coli}
+}
+%mge
+\DeclareAcronym{mge}{
+    short = MGE,
+    long  = Mobile Genetic Element
+}
+%hgt
+\DeclareAcronym{hgt}{
+    short = HGT,
+    long  = Horiznotal Gene Transfer
+}
+%otu
+\DeclareAcronym{otu}{
+    short = OTU,
+    long  = Operation Taxonomic Unit
+}
+%pa
+\DeclareAcronym{pa}{
+    short = P/A,
+    long  = Presence/Absence,
+}
+\begin{document}
+%Title
+\title{The Effects Of CRISPRs On Horizontal Gene Transfer:\\
+        A Network Theoretic Approach\\ \vspace{0.5cm}
+       \Large MolBiol 4C12 Research Proposal}
+%Authors
+\author[1]{Siddharth Reed\thanks{To whom correspondence should be addressed; reeds4@mcmaster.ca}}
+\author[1]{G. Brian Golding}
+\affil[1]{Department of Biology, McMaster University\authorcr
+                Hamilton,Canada}
+\date{\today}
+\maketitle
+\include{./sections/abstract.tex}
+\newpage
+\linespread{1.25}%default is 1.2, 1.2*1.25 = 1.5 spacing
+\input{./sections/crispr_systems.tex}
+\input{./sections/hgt.tex}
+\input{./sections/network_theory.tex}
+\input{./sections/phylogenetic_networks.tex}
+\input{./sections/crispr_vs_hgt.tex}
+\input{./sections/hypothesis.tex}
+\input{./sections/objectives.tex}
+\input{./sections/methods.tex}
+\printbibliography
+\end{document}
+

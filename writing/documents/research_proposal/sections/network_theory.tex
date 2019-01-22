@@ -1,0 +1,21 @@
+\section{Network Theory}
+Network theory is an extension of graph theory, a branch of mathematics concerning the properties of "graphs".
+Graph in this context refers to a set of nodes and a set of edges between those nodes, with edges typically representing some kind of relationship between those nodes\citep{netgen}.
+Network theory focuses on modeling interactions using graphs and applying tools built to analyze graphs to gain an understanding of networks and how they function.\par
+Consider a social networking site like Facebook, are people more likely to be friends with people who have a similar number of friends?
+Modeling this with a network, nodes represent users and an edge between nodes represent whether two users are Facebook friends.
+To answer the above question the assortativity of the network can be calculated.
+Assortativity is a measure of the network's nodes preference to form edges with more similar nodes\citep{netgen}.
+Similarity here refers the difference in the number of edges connected to each node, \textit{i.e.} the number of friends either user has.
+If a network has a large assortativity value, it means that similar nodes do connect to each other more often than different ones.\citep{netgen}.
+Thus our question can be reformed through the lens of network theory as "Does a network constructed from Facebook user data have high assortativity?"\\\\
+While the above example is a simple network, this model can be further extended through:
+\begin{itemize}
+    \item Adding directions to edges (from one node to another)
+    \item Adding weights to edges (often representing data about node interactions)
+    \item Adding attributes to nodes themselves (binary,discrete or continuous)
+\end{itemize}
+An example of a directed, weighted biological network with low assortativity be a gene expression network (nodes:genes, edges:transcription level correlations) with few transcription factors which each modulates expression of multiple unrelated genes.
+For this project, nodes will represent \ac{otu}s and edges will represent genetic exchange between those \ac{otu}s, whereas in a normal phylogenies, edges only represent taxonomic relationships.
+Despite the complexity of \ac{hgt}, network theory allows a flexible theoretic framework to analyze these interactions that are normally ignored by traditional phylogenetic methods.
+

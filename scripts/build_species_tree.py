@@ -142,5 +142,5 @@ if __name__ == '__main__':
     nucFasta = sys.argv[4]
     genusname = sys.argv[5]
     genes_for_species_tree = 50
-    processes = 8
+    processes = 32
     main(pamat,colidx,famidx,nucFasta,genusname,genes_for_species_tree,processes)

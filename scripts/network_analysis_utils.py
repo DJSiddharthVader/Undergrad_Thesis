@@ -5,8 +5,9 @@ import glob
 import numpy as np
 import pandas as pd
 import networkx as nx
+from networkx.algorithms import approximation as aprx
+from networkx.algorithms import community
 from tqdm import tqdm
-from Bio import Phylo
 import matplotlib.cm as cmx
 import plotly.offline as py
 import plotly.graph_objs as go
@@ -80,3 +81,31 @@ def drawNetwork(network,title,colormap=cmx.viridis):
           )
     return fig
 
+#stats
+def avgEdgeWeight(net):
+    total = 0
+    for e in net.edges(data=True):
+        total += e[2]['weight']
+    return total/nx.number_of_edges(net)
+
+def sumEdges(net):
+    return sum([x[2]['weight'] for x in net.edges(data=True)])
+
+def whitneyDegreeTest(netlist):
+    whitney = 0
+    for net in netlist:
+        for node in net.nodes(data=True):
+            print(node)
+    return whitney
+
+def printStats(net):
+    print(nx.density(net))
+    print(avgEdgeWeight(net))
+    print(aprx.node_connectivity(net))
+    print(aprx.average_clustering(net))
+    print(np.mean(nx.closeness_centrality(net).values()))
+    print(np.mean(nx.communicability_betweenness_centrality(net).values()))
+    print(nx.average_node_connectivity(net))
+    print(nx.edge_connectivity(net))
+    #print(nx.numeric_assortativity_coefficient(net,'No. Cas Proteins (CRISPRone)'))
+    return None

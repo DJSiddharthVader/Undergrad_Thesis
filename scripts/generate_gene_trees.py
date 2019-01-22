@@ -136,5 +136,5 @@ if __name__ == '__main__':
     nucFasta = sys.argv[4]
     genusname = sys.argv[5]
     minsize = 0.3
-    processes = 16
+    processes = 32
     main(pamat,colidx,famidx,nucFasta,genusname,minsize,processes)

@@ -132,7 +132,7 @@ def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=Fals
 
 if __name__ == '__main__':
     basedir = sys.argv[1]
-    processes = 16
+    processes = 32
 #    pathToLua = os.path.join(basedir,'hide_for_linux/score.lua')
 #    pathToHide = os.path.join(basedir,'hide_for_linux/lua')
     genetreefilesdir = os.path.join(basedir,'gene_tree_files/trees/')

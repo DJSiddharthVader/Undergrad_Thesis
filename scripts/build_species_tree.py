@@ -31,7 +31,6 @@ def pickGeneFamilies(pamat,columnindex,genes):
     #family_idxs = [str(i) for i,pavec in enumerate(pamat.T) if np.array_equal(pavec,np.ones(pamat.shape[0]))]
     family_idxs = [str(i) for i,sumvec in enumerate(sizes) if sumvec == bmat.shape[0]]
     print('using {} of {} usable of {} total genes for species tree'.format(genes,len(family_idxs),pamat.shape[1]))
-    #usable means that the gene family has exactly 1 gene in each organism
     return family_idxs[:genes]
 
 def extractSeqsForTree(headerlist,nucFasta,outdir,genefam):
@@ -134,6 +133,7 @@ def main(pamat,columns,familys,nucFasta,genusname,genes,processes):
     print('building species tree with concatenated alingment...')
     treedir = buildSpeciesTree(concatfilename,outdir,genusname)
     return None
+
 
 if __name__ == '__main__':
     pamat = np.load(sys.argv[1])

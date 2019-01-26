@@ -12,21 +12,16 @@ from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO,AlignIO,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
-def matrix_to_binary(pamat):
-    binarize = lambda x:np.where(x > 0, 1, 0)
-    vecbin = np.vectorize(binarize)
-    return vecbin(pamat)
+def getNumTaxa():
+    return len(glob.glob('./protein_fastas/*.faa'))
 
-def pickGeneFamiliesForTrees(pamat,columnindex,minsize):
-    gene_family_list = []
+def pickGeneFamiliesForTrees(genefamilies,minsize):
+    #list of families that have exactly maxtax members and contain genes from every taxa being considered
+    maxtax = getNumTaxa()
     if type(minsize) == float and (minsize > 0 and minsize < 1):
-        minsize = int(math.floor(minsize*pamat.shape[0]))
+        minsize = int(math.floor(minsize*maxtax))
     print('minimum organisms gene family must be present in: {}'.format(minsize))
-    binmat = matrix_to_binary(pamat)
-    sizes = np.apply_along_axis(sum,0,binmat)
-    family_idxs = [str(i) for i,size in enumerate(sizes) if size >= minsize]
-    print('using {} of {} gene families for trees'.format(len(family_idxs),pamat.shape[1]))
-    return family_idxs
+    return [fam for fam,members in tqdm(genefamilies.items(),total=len(genefamilies),desc='picking') if (len(set([x.split(':')[0] for x in members])) >= minsize)]
 
 def extractSeqsForTree(headersNameTuple,nucFasta,outdir):
     genefam,headerlist = headersNameTuple
@@ -108,7 +103,7 @@ def parallelBuildTrees(outdir,processes):
     #test = tqdm(pool.map(treefnc,alnfiles))
     return None
 
-def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
+def main(familys,nucFasta,genusname,minsize,processes):
     #set up out directories
     outdir = 'gene_tree_files'
     os.system('mkdir -p {}'.format(outdir))
@@ -116,8 +111,10 @@ def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     os.system('mkdir -p {}/nexus'.format(outdir))
     os.system('mkdir -p {}/trees'.format(outdir))
     #pick families
-    family_col_idxs = pickGeneFamiliesForTrees(pamat,columns,minsize)
-    family_idxs = [columns[col_idx] for col_idx in family_col_idxs]
+    maxtax = getNumTaxa()
+    family_idxs = pickGeneFamiliesForTrees(familys,minsize)
+    print('Using {} of {} total families'.format(len(family_idxs),len(familys)))
+    headerlists = {famidx:familys[famidx] for famidx in family_idxs}
     headerTuples = [(famidx,familys[famidx]) for famidx in family_idxs]
     #write families to fasta files
     seqs_to_write = extractSeqsParallel(headerTuples,outdir,nucFasta)
@@ -129,12 +126,22 @@ def main(pamat,columns,familys,nucFasta,genusname,minsize,processes):
     parallelBuildTrees(outdir,processes)
     return None
 
+
 if __name__ == '__main__':
-    pamat = np.load(sys.argv[1])
-    colidx = json.load(open(sys.argv[2]))
-    famidx = json.load(open(sys.argv[3]))
-    nucFasta = sys.argv[4]
-    genusname = sys.argv[5]
-    minsize = 0.3
-    processes = 32
-    main(pamat,colidx,famidx,nucFasta,genusname,minsize,processes)
+    famidx = json.load(open(sys.argv[1]))
+    nucFasta = sys.argv[2]
+    genusname = sys.argv[3]
+    minsize = 0.4
+    processes = 48
+    main(famidx,nucFasta,genusname,minsize,processes)
+
+#DEPRECIATED
+def pickGeneFamiliesForTrees(pamat,columnindex,minsize):
+    gene_family_list = []
+    if type(minsize) == float and (minsize > 0 and minsize < 1):
+        minsize = int(math.floor(minsize*pamat.shape[0]))
+    print('minimum organisms gene family must be present in: {}'.format(minsize))
+    binmat = matrix_to_binary(pamat)
+    sizes = np.apply_along_axis(sum,0,binmat)
+    family_idxs = [str(i) for i,size in enumerate(sizes) if size >= minsize]
+    return family_idxs

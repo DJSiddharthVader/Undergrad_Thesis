@@ -24,15 +24,15 @@ def parse(lines):
 def mergeDOLs(dols):
     base = dols[0]
     singletons = []
-    for d in tqdm(dols[1:]):
+    for d in tqdm(dols[1:],desc='merging'):
         for k,v in d.items():
+            base[k].extend(v)
+    finalcopy = defaultdict(list)
+    for i, (k,v) in enumerate(base.items()):
             if len(v) == 1:
                 singletons.extend(v)
             else:
-                base[k].extend(v)
-    finalcopy = defaultdict(list)
-    for i, (k,v) in enumerate(base.items()):
-        finalcopy['fam{}'.format(i)].extend(v)
+                finalcopy['fam{}'.format(i)].extend(v)
     return finalcopy,singletons
 
 def parseParallel(cfile,processes):

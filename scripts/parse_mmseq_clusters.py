@@ -23,16 +23,16 @@ def parse(lines):
 
 def mergeDOLs(dols):
     base = dols[0]
-    singletons = []
     for d in tqdm(dols[1:],desc='merging'):
         for k,v in d.items():
             base[k].extend(v)
-    finalcopy = defaultdict(list)
-    for i, (k,v) in enumerate(base.items()):
+    finalcopy = {}
+    singletons = []
+    for i, (k,v) in enumerate(tqdm(base.items(),total=len(base),desc='singletons')):
             if len(v) == 1:
-                singletons.extend(v)
+                singletons.append(v)
             else:
-                finalcopy['fam{}'.format(i)].extend(v)
+                finalcopy['fam{}'.format(i)] = v
     return finalcopy,singletons
 
 def parseParallel(cfile,processes):
@@ -42,16 +42,18 @@ def parseParallel(cfile,processes):
     clusters, singletons = mergeDOLs(clusterlists)
     return clusters,singletons
 
-def writeSingletons(genelist,allfasta):
-    parser = SeqIO.parse(open(allfasta),'fasta')
-    singlerecords = [seq for seq in parser if seq.id in genelist]
+def writeSingletons(genelist,allfasta,processes):
+    singlerecords = []
+    for seq in tqdm(SeqIO.parse(open(allfasta),'fasta'),total=len(list(SeqIO.parse(open(allfasta),'fasta')))):
+        if seq.id in genelist:
+            singlerecords.append(seq)
     SeqIO.write(singlerecords,'singletons.faa','fasta')
     return None
 
 def main(clusters,allfasta,processes=32):
     clusters,singletons = parseParallel(clusters,processes)
-    writeSingletons(singletons,allfasta)
     json.dump(clusters,open('gene_families.json','w'))
+    writeSingletons(singletons,allfasta,processes)
 
 if __name__ == '__main__':
     #arg1 is clusters.tsv output, arg2 is all_proteins.faa file

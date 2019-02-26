@@ -4,10 +4,11 @@ import sys
 import glob
 import numpy as np
 import pandas as pd
-import networkx as nx
-from networkx.algorithms import approximation as aprx
-from networkx.algorithms import community
 from tqdm import tqdm
+import networkx as nx
+from networkx.algorithms import community
+from networkx.algorithms import approximation as aprx
+from scipy.stats import mannwhitneyu
 import matplotlib.cm as cmx
 import plotly.offline as py
 import plotly.graph_objs as go
@@ -92,11 +93,17 @@ def sumEdges(net):
     return sum([x[2]['weight'] for x in net.edges(data=True)])
 
 def whitneyDegreeTest(netlist):
-    whitney = 0
+    crispr, noncrispr = [],[]
     for net in netlist:
         for node in net.nodes(data=True):
-            print(node)
-    return whitney
+            weight = sum([net[node[0]][v]['weight'] for v in net[node[0]]])
+            if node[1]['isCRISPR']:
+                crispr.append(weight)
+            else:
+                noncrispr.append(weight)
+    print(crispr)
+    print(noncrispr)
+    return mannwhitneyu(crispr,noncrispr,alternative='two-sided')
 
 def printStats(net):
     print(nx.density(net))

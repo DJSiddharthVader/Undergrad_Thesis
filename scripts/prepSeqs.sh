@@ -30,10 +30,10 @@ main() {
     extractFastas "$1" "$2/$pdir" "$2/$ndir"
     cd "$2"
     cat "$pdir"/*.faa >| all_proteins.faa
-    dedupFasta all_proteins.faa
+    #dedupFasta all_proteins.faa
     rmEmptyHeads all_proteins.faa
     cat "$ndir"/*.fna >| all_nucleotides.fna
-    dedupFasta all_nucleotides.fna
+    #dedupFasta all_nucleotides.fna
     rmEmptyHeads all_nucleotides.fna
     cd -
 }

@@ -14,10 +14,11 @@ python "$scriptdir"/parse_mmseq_clusters.py ./mmseq_clustering/clusters_"$genusn
 echo "creating PA matrix"
 python "$scriptdir"/createPAMatrix.py gene_families.json protein_fastas/ "$genusname"
 echo "building species trees"
-python "$scriptdir"/build_species_tree.py pa_matrix.npy column_indexes_families.json gene_families.json all_nucleotides.fna "$genusname"
+python "$scriptdir"/build_species_tree.py gene_families.json all_nucleotides.fna "$genusname"
 echo "building gene trees"
-python "$scriptdir"/generate_gene_trees.py pa_matrix.npy column_indexes_families.json gene_families.json all_nucleotides.fna "$genusname"
+python "$scriptdir"/generate_gene_trees.py gene_families.json all_nucleotides.fna "$genusname"
 python "$scriptdir"/build_network_from_trees.py ../"$genusname"
+
 #old main
 #echo "preping sequences"
 #"$scriptdir"/prepSeqs.sh "$fps" "$genusname"

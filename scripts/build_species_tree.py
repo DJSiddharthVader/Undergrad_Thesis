@@ -12,11 +12,11 @@ from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO,AlignIO,Phylo,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
+#will extract all genes present in only 1 copy in every taxa and spit to a fasta file for alignment and tree creation
 #args
 #arg 1 is actualy genefamilies dict
 #arg 2 is concatenated fasta fle with all genes (nuc seqs)
 #arg 3 is genusname
-#will extract all genes present in only 1 copy in every taxa and spit to a fasta file for alignment and tree creation
 
 def getNumTaxa():
     return len(glob.glob('./protein_fastas/*.faa'))
@@ -42,6 +42,12 @@ def pickGeneFamilies(genefamilies,maxtax,inclusion):
     print('trees for species tree must have between {} and {} leaves (total tax is {})'.format(lower,upper,maxtax))
     inclusionfnc = partial(toInclude,maxtax=maxtax,lower=lower,upper=upper)
     return [fam for fam,members in tqdm(genefamilies.items(),total=len(genefamilies),desc='picking') if inclusionfnc(members,fam)]
+
+#def iterativePickFamilies(families,maxtax,inclusion,iterations=5,threshold=50):
+#    enoughFamilies = False
+#    while not enoughFamilies:
+#        famlist = pickGeneFamilies(families,maxtax,inclusion)
+#        if len(famlist)
 
 def extractSeqsForTree(headerlist,nucFasta,outdir,genefam):
     seqRecordlist = []

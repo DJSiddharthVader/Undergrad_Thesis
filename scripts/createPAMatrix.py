@@ -8,8 +8,7 @@ from Bio import SeqIO
 
 #ARGS
 #arg 1 is the json with the list of gene families (including singletons verified by blasting against NR database)
-#arg 2 should be path to a directory that contains all .faa files for every taxa in the matrix
-## the gene names in the files in arg 2 should match the gene names from the families in arg 1
+#arg 2 should be path to a directory that contains all .faa files for every taxa in the matrix. The gene names in the files in arg 2 should match the gene names from the families in arg 1
 #arg 3 is the genus name
 #python scripst/createPAMatrix.py gene_families.json protein_fastas/ genusname
 
@@ -18,15 +17,16 @@ def getOrganismGeneList(fastapath):
     with open(fastapath) as fasta:
         for record in SeqIO.parse(fasta,'fasta'):
             genelist.append(record.id)
-    return genelist
+    accession = genelist[0].strip('>').split(':')[0]
+    return accession,genelist
 
 def allOrganismsGeneLists(fastadirpath):
     organismGenes = {}
     for fastapath in os.listdir(fastadirpath):
         if fastapath.endswith('.faa'):
             fullfastapath = os.path.join(fastadirpath,fastapath)
-            organism = fastapath.split('.faa')[0]
-            organismGenes[organism] = getOrganismGeneList(fullfastapath)
+            accession,genelist = getOrganismGeneList(fullfastapath)
+            organismGenes[accession] = genelist
     return organismGenes
 
 def buildmatrix(organismGenes,geneFamilies):
@@ -51,7 +51,7 @@ def namegenerator(basename):
 #    orgidxname = 'row_organism_idxs_{}.json'.format(basename)
 #    famidxname = 'column_indexes_families_{}.json'.format(basename)
     matname = 'pa_matrix.npy'
-    biname = 'binary_pa_matrix.npy'
+    biname = 'binary_pa_matrix.csv'
     orgidxname = 'row_organism_idxs.json'
     famidxname = 'column_indexes_families.json'
     return matname,biname,orgidxname,famidxname
@@ -77,6 +77,12 @@ if __name__ == '__main__':
     print('family numbers in {} correspond to those in {}'.format(famidxn,sys.argv[1]))
 
     binmat = matrix_to_binary(pamat)
-    np.save(open(binn,'wb'),binmat)
+    np.savetxt(binn,binmat,fmt="%d",delimiter=',',newline='\n')
     print('binary P/A matrix saved to {}'.format(binn))
 
+#DEPRECIATED
+#def accessionFromGBFF(fastapath):
+#    gbff_dir = "/home/sid/thesis_SidReed/bacterialGBFFs/rawdata_s1"
+#    gbff_base = fastapath.split('.faa')[0]
+#    gbff_file = os.path.join(gbff_dir,gbff_base)
+#    return SeqIO.read(open(gbff_file,'r'),'genbank').name

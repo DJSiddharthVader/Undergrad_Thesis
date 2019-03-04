@@ -30,7 +30,7 @@ def mergeDOLs(dols):
     singletons = []
     for i, (k,v) in enumerate(tqdm(base.items(),total=len(base),desc='singletons')):
             if len(v) == 1:
-                singletons.append(v)
+                singletons.extend(v)
             else:
                 finalcopy['fam{}'.format(i)] = v
     return finalcopy,singletons

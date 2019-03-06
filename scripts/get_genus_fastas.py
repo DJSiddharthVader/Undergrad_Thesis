@@ -6,10 +6,10 @@ import pandas as pd
 
 #suffixes and directories
 nuc_suffix = "_cds_from_genomic.fna.gz"
-source_nuc_dir = "/home/sid/thesis_SidReed/bacterialGBFFs/nuc_cds_genomic"
+source_nuc_dir = "/home/sid/thesis_SidReed/data/nuc_cds_genomic"
 prot_suffix = "_translated_cds.faa.gz"
-source_prot_dir = "/home/sid/thesis_SidReed/bacterialGBFFs/prot_cds_genomic"
-df_path = '/home/sid/thesis_SidReed/pop_annotation_data_frame.json'
+source_prot_dir = "/home/sid/thesis_SidReed/data/prot_cds_genomic"
+df_path = '/home/sid/thesis_SidReed/data/full_annotation_data_frame.json'
 
 #args
 genus = sys.argv[1]

@@ -15,7 +15,7 @@ function downloadSuffix(){
     cd -
 }
 
-summary="/home/sid/thesis_SidReed/bacterialGBFFs/pathfiles/assembly_summary.txt"
+summary="/home/sid/thesis_SidReed/data/bacterialGBFFs/assembly_summary.txt"
 #filesuffix="_genomic.gbff.gz" #file suffix for every organism
 nuc_filesuffix="_cds_from_genomic.fna.gz" #file suffix for genomic dna fasta
 prot_filesuffix="_translated_cds.faa.gz" #file suffix for protien fasta, all headers match genomic fasta

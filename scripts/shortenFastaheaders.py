@@ -52,18 +52,17 @@ def fixFasta(fasta,outname=-1):
     SeqIO.write(fixedrecords,outname,'fasta')
     return allinfodirs
 
-def main(fasta_dir,genus):
+def main(fasta_dir):
     allinfodirs = []
     globstr = '{}/*.f*a'.format(fasta_dir)
     for fasta in tqdm(glob.glob(globstr),desc='fixingfastas'):
         fastapath = os.path.join(os.getcwd(),fasta)
         infodir = fixFasta(fastapath)
         allinfodirs.extend(infodir)
-    with open('{}_fastas_info.json'.format(genus),'w') as outf:
+    with open('fasta_headers_info.json','w') as outf:
         json.dump(allinfodirs,outf)
     return None
 
 if __name__ == '__main__':
     fasta_dir  = sys.argv[1]
-    genus_name = sys.argv[2]
-    main(fasta_dir,genus_name)
+    main(fasta_dir)

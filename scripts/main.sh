@@ -9,11 +9,9 @@ python "$scriptdir"/get_genus_fastas.py "$genus"
 #nucleotide
 python "$scriptdir"/shortenFastaheaders.py nucleotide_fastas "$genus"
 cat nucleotide_fastas/*.fna >| all_nucleotides.fna
-#python "$scriptdir"/dedupFasta.py all_nucleotides.fna
 #protein
 python "$scriptdir"/shortenFastaheaders.py protein_fastas
 cat protein_fastas/*.faa >| all_proteins.faa
-#python "$scriptdir"/dedupFasta.py all_proteins.faa
 echo "single link clustering to gene families"
 mkdir -p ./mmseq_clustering
 cd ./mmseq_clustering
@@ -21,19 +19,14 @@ cd ./mmseq_clustering
 cd ..
 python "$scriptdir"/parse_mmseq_clusters.py ./mmseq_clustering/clusters_"$genus".tsv ./all_proteins.faa
 echo "creating PA matrix"
-python "$scriptdir"/createPAMatrix.py gene_families.json protein_fastas/ "$genus"
+python "$scriptdir"/createPAMatrix.py gene_families.json protein_fastas/
 echo "building species trees"
 python "$scriptdir"/build_16S_species_tree_from_families.py all_nucleotides.fna fasta_headers_info.json
-if [ "$?" -neq 0 ]; then
-    echo "Issue with building species tree, aborting"
-    exit 1
-fi
+echo "running markophylo"
+Rscript "$scriptdir"/markophylo_indel_estiamtes.R "species_tree_files/species_tree/species_tree.con.tre" binary_pa_matrix.csv "$crispr_annotation_info" 2>| markophylo.errs
 echo "building gene trees"
 python "$scriptdir"/generate_gene_trees.py gene_families.json all_nucleotides.fna
-exit 1
-echo "running markophylo"
-Rscript "$scriptdir"/markophylo_indel_estimates.R
-"species_tree_files/species_tree_$genus/species_tree_$genus.con.tre" binary_pa_matrix.csv column_indexes_families.json row_organism_idxs.json "$crispr_annotation_info"
+exit 0
 echo "building  network"
 python "$scriptdir"/build_network_from_trees.py ../"$genus"
 

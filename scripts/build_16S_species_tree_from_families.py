@@ -127,22 +127,25 @@ quit""".format(concat_nexus_aln)
     return treedir
 
 def main(allNucFasta,fastaInfoJson,processes,maxfams):
+    #make dirs
     base = 'species_tree_files'
     os.system('mkdir -p {}'.format(base))
     os.system('mkdir -p {}/fastas/'.format(base))
     os.system('mkdir -p {}/nexus'.format(base))
+    #Get 16S Gene Fastas
     headers16s = get16SHeaders(fastaInfoJson)
     fams16 = pick16Sprots(headers16s)
     famsdict16 = getFamDict16s(fams16[:maxfams])
+    namesAndRecords = extractSeqsForTree(famsdict16,allNucFasta)
+    writeFastas(namesAndRecords)
+    #print how many fams being used
     if len(famsdict16) == 0:
         print('No 16S sequences common to all organisms')
         sys.exit(1)
     if maxfams > len(fams16):
-        print('using {} of {} available 16S rRNA genesfor species tree'.format(len(list(famsdict16.keys())),len(fams16)))
+        print('using {} of {} available 16S rRNA genes for species tree'.format(len(list(famsdict16.keys())),len(fams16)))
     else:
-        print('using {} of {} available 16S rRNA genesfor species tree'.format(maxfams,len(fams16)))
-    namesAndRecords = extractSeqsForTree(famsdict16,allNucFasta)
-    writeFastas(namesAndRecords)
+        print('using {} of {} available 16S rRNA genes for species tree'.format(maxfams,len(fams16)))
     print('aligning seqs')
     parallelAlignFastas(processes)
     combinedNexusName = concatNexAlns()
@@ -155,7 +158,7 @@ if __name__ == '__main__':
     nucFasta = sys.argv[1]
     fastaInfoJson = json.load(open(sys.argv[2]))
     maxfams = 50
-    processes = 32
+    processes = 16
     main(nucFasta,
          fastaInfoJson,
          processes,

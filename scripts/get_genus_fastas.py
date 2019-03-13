@@ -9,7 +9,7 @@ nuc_suffix = "_cds_from_genomic.fna.gz"
 source_nuc_dir = "/home/sid/thesis_SidReed/data/nuc_cds_genomic"
 prot_suffix = "_translated_cds.faa.gz"
 source_prot_dir = "/home/sid/thesis_SidReed/data/prot_cds_genomic"
-df_path = '/home/sid/thesis_SidReed/data/full_annotation_data_frame.json'
+df_path = '/home/sid/thesis_SidReed/data/pop_annotation_data_frame.json'
 
 #args
 genus = sys.argv[1]
@@ -27,9 +27,9 @@ os.system("mkdir -p {}".format(protdir))
 #Copy,Rename fasta files
 meta_data_df = pd.DataFrame(json.load(open(df_path)))
 genus_df = meta_data_df[meta_data_df['Genus'] == genus]
+print(len(genus_df))
 for i,row in genus_df.iterrows():
     filename = 'GCF_' + '_'.join(row['GCA'].split('_')[1:])
-    #print(filename)
     cpnuc = "cp {}/{}{} {}/{}{}".format(source_nuc_dir,
                                         filename,
                                         nuc_suffix,

@@ -9,8 +9,8 @@ from Bio import Phylo
 from ete3 import Tree
 from tqdm import tqdm
 import dendropy as dp
-from functools import partial
 from io import StringIO
+from functools import partial
 from multiprocessing.dummy import Pool as ThreadPool
 
 #Docs
@@ -44,7 +44,6 @@ from multiprocessing.dummy import Pool as ThreadPool
 #    networks_json/all_gene_trees.json
 #                  subset_01.json
 #                  ...
-
 #make network
 def writeNewickWithOutBrLen(treefile,outpath):
     nextree = dp.Tree.get(path=treefile,schema='nexus')
@@ -56,7 +55,7 @@ def writeNewickWithOutBrLen(treefile,outpath):
     else:
         hascopy = 0
         nwktree = Tree(treestr,format=0)
-        nwktree.resolve_polytomy(recursive=True)
+        #nwktree.resolve_polytomy(recursive=True)
         #r = nwktree.get_midpoint_outgroup()
         #nwktree.set_outgroup(r)
         nwktree.write(format=9,outfile=outpath)
@@ -82,7 +81,6 @@ def fixNewickTrees(speciesdir,genedir,processes):
     numgenetrees = len(os.listdir('network_files/all_newick_trees')) -1 #-1 for the species tree
     return '{}/all_newick_trees'.format(maindir), numgenetrees
 
-#cd to hide dir
 def runHideOnTreeDir(treedir,networkfile):
 #run hide and capture output
 #write network to file
@@ -92,6 +90,7 @@ def runHideOnTreeDir(treedir,networkfile):
                             stdout=networkfile,
                             check=True)
     return None
+
 
 #parse network
 def parseEdge(edge):
@@ -130,13 +129,14 @@ def parseRawNetwork(raw_network_filename,totalgenetrees,crisprdata,internal=Fals
     network = nx.from_pandas_edgelist(df,'source','target',edge_attr=True)
     return annotateCRISPR(network,crisprdata)
 
+
 if __name__ == '__main__':
     basedir = sys.argv[1]
-    processes = 32
+    processes = 16
 #    pathToLua = os.path.join(basedir,'hide_for_linux/score.lua')
 #    pathToHide = os.path.join(basedir,'hide_for_linux/lua')
     genetreefilesdir = os.path.join(basedir,'gene_tree_files/trees/')
     genusname = os.path.basename(os.path.normpath(basedir))
-    speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree_{}/'.format(genusname))
+    speciestreefilesdir = os.path.join(basedir,'species_tree_files/species_tree/')
     treedir, totalgenetrees = fixNewickTrees(speciestreefilesdir,genetreefilesdir,processes)
     print(totalgenetrees)

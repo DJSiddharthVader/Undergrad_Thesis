@@ -27,7 +27,7 @@ readSpeciesTree <- function(filepath){
     rootfp <- newfp(filepath)
     ape::write.nexus(rspt,file=rootfp[1])
  #   ape::write.tree(rspt,file=rootfp[2])
-    rspt <- ape::read.tree(file=rootfp[2])
+    rspt <- ape::read.nexus(file=rootfp[1])
     return(rspt)
 }
 loadAnnotationInfo <- function(filepath){

@@ -1,7 +1,7 @@
 Cas-Finder_macsyfinder/
 athena/genomedata/
 apps/
-bacterialGBFFs/
+data/
 genus_filepaths/
 testing/
 .ipynb_checkpoints/*
@@ -20,3 +20,6 @@ testing/
 *.gbff
 *.faa
 *.fna
+cpHiDe/
+hide_program/
+hide_source/

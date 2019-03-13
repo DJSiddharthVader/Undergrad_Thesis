@@ -130,7 +130,7 @@ if __name__ == '__main__':
     famidx = json.load(open(sys.argv[1]))
     nucFasta = sys.argv[2]
     minsize = 0.4
-    processes = 48
+    processes = 16
     main(famidx,nucFasta,minsize,processes)
 
 #DEPRECIATED

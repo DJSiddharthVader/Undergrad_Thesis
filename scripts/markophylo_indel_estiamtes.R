@@ -7,6 +7,7 @@ library("ape")
 library("markophylo")
 suppressMessages(library("jsonlite"))
 suppressMessages(library("phangorn")) #map warnings
+set.seed(9)
 
 newfp <- function(fp){
     base <- basename(fp)
@@ -20,10 +21,13 @@ newfp <- function(fp){
 readSpeciesTree <- function(filepath){
     spt <- ape::read.nexus(file=filepath)
     rspt <- phangorn::midpoint(spt)
+    if (!is.binary.tree(rspt)){
+        rspt <- multi2di(rspt)
+    }
     rootfp <- newfp(filepath)
     ape::write.nexus(rspt,file=rootfp[1])
-    ape::write.tree(rspt,file=rootfp[2])
-    rspt <- ape::read.nexus(file=rootfp[1])
+ #   ape::write.tree(rspt,file=rootfp[2])
+    rspt <- ape::read.tree(file=rootfp[2])
     return(rspt)
 }
 loadAnnotationInfo <- function(filepath){
@@ -60,27 +64,11 @@ partitionByCRISPR <- function(spt,crisprAnnotation){
     #check partition not empty and dedup
     if (length(crispr) == 0 || length(not_crispr) == 0){
         allnodes <- 1:(length(spt$tip.label)+spt$Nnode)
-        partition <- list(allnodes) #all nodes in tree
-        return(partitions)
+        partitions <- list(non_crispr=allnodes) #all nodes in tree
     } else {
-        return(list(unique(crispr),unique(not_crispr)))
+        partitions <- list(crispr=unique(crispr),non_crispr=unique(not_crispr))
     }
-}
-markophyloEstimate <- function(speciesTree,paMatrix,crisprAnnotation){
-    partition <- partitionByCRISPR(speciesTree,crisprAnnotation)
-    estrates <- markophylo::estimaterates(usertree=speciesTree,
-                                         userphyl=paMatrix,
-                                         alphabet=c(0,1),
-                                         bgtype="listofnodes",
-                                         bg=partition,
-                                         rootprob="maxlik",
-                                         modelmat="BDSYM",
-                                         matchtiptodata=TRUE)
-    #write to file
-    sink("markophylo_results.txt")
-    print(estrates)
-    sink()
-    return(estrates)
+    return(partitions)
 }
 plotTree <- function(speciesTree,crisprAnnotation){
     pdf(file='labelled_cladogram.pdf',width=25,height=15)
@@ -105,17 +93,47 @@ plotTree <- function(speciesTree,crisprAnnotation){
             not_crispr <- c(not_crispr,nodenum)
         }
     }
-    tiplabels(paste('CRISPR',crispr,sep=' '),crispr)
-    tiplabels(paste('Non-CRISPR',not_crispr,sep=' '),not_crispr)
+    #label tips
+    if (length(crispr) != 0){
+        tiplabels(paste('CRISPR',crispr,sep=' '),crispr)
+    }
+    if (length(not_crispr) != 0){
+        tiplabels(paste('Non-CRISPR',not_crispr,sep=' '),not_crispr)
+    }
     nodelabels()
     dev.off()
+}
+markophyloEstimate <- function(speciesTree,paMatrix,crisprAnnotation){
+    partition <- partitionByCRISPR(speciesTree,crisprAnnotation)
+    estrates <- markophylo::estimaterates(usertree=speciesTree,
+                                          userphyl=paMatrix,
+                                          alphabet=c(0,1),
+                                          bgtype="listofnodes",
+                                          bg=partition,
+                                          rootprob="maxlik",
+                                          modelmat="BDSYM",
+                                          matchtiptodata=TRUE)
+    return(estrates)
+}
+resultToJson <- function(mpresult){
+    #plaintxt
+    sink("markophylo_results.txt")
+    print(mpresult)
+    sink()
+    #tojson
+#    js <- toJSON(mpresult)
+#    sink("markophylo_results.json")
+#    cat(js)
+#    sink()
 }
 main <- function(speciesTreePath,paMatrixPath,crisprAnnotationPath){
     speciesTree <- readSpeciesTree(speciesTreePath)
     paMatrix <- read.csv(paMatrixPath,header=TRUE,row.names="gene_family")
     crisprAnnotation <- loadAnnotationInfo(crisprAnnotationPath)
-    markophyloEstimate(speciesTree,paMatrix,crisprAnnotation)
     plotTree(speciesTree,crisprAnnotation)
+    rates <- markophyloEstimate(speciesTree,paMatrix,crisprAnnotation)
+    #return(rates)
+    resultToJson(rates)
 }
 
 if (sys.nframe() == 0){

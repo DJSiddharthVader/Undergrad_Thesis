@@ -1,6 +1,7 @@
 library("ape")
 suppressMessages(library("phangorn")) #map warnings
 
+set.seed(9)
 #Docs
 #STEPS
 #1. convert species nexus_tree to newick tree
@@ -40,12 +41,27 @@ setUpDirs <- function(rootDir){
     mkdir(paste(netbase,'subsets',sep='/'))
 }
 
-convertToNwk <- function(pathToNexus,netbase){
+convertToNwk <- function(pathToNexus,isSpecies=FALSE){
     #newbase = .../genusname/
-    nexus <- ape::read.nexus(file=paste()
-    nwkpath <-
+    tree <- ape::read.nexus(file=pathToNexus)
+    if (isSpecies){
+        nwkpath <- 'networkfiles/all_newick_trees/sepcies.newick'
+    } else{
+        nwkpath <- paste('networkfiles/all_newick_trees/',strsplit(basename(pathToNexus),'.')[1],'.newicl',sep='')
+    }
+    ape::write.tree(tree,nwkpath)
 }
 
+
+main <- function(rootDir){
+    setUpDirs(rootDir)
+    speciesTreePath <- paste(rootDir,'species_tree_files/species_tree/rooted_species_tree.con.tre',sep=''
+    convertToNwk(speciesTreePath,isSpecies=TRUE)
+    geneTreeFiles <- list.files(paste(rootDir,'gene_tree_files/trees/',sep=''),pattern='**/*.con.tre',full.names=TRUE)
+    print(geneTreeFiles)
+}
+
+#Markophylo Functions
 newfp <- function(fp){
     base <- basename(fp)
     newbase <- paste('rooted_',base,sep='')

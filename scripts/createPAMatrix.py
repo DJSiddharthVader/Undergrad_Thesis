@@ -29,56 +29,41 @@ def allOrganismsGeneLists(fastadirpath):
             organismGenes[accession] = genelist
     return organismGenes
 
-def buildmatrix(organismGenes,geneFamilies):
-    pamat = np.zeros((len(list(organismGenes.keys())),len(list(geneFamilies.keys()))))
-    orgIdxs = {i:o for i,o in enumerate(organismGenes.keys())}
-    famIdxs = {i:f for i,f in enumerate(geneFamilies.keys())}
-    for oidx,org in tqdm(orgIdxs.items(),total=len(list(orgIdxs.keys()))):
-        for fidx,fam in tqdm(famIdxs.items(),total=len(list(famIdxs.keys()))):
-            orgGenes = set(organismGenes[org])
-            famGenes = set(geneFamilies[fam])
-            pamat[oidx][fidx] = len(orgGenes.intersection(famGenes))
-    return pamat,orgIdxs,famIdxs
+def buildmatrix(organismGenes,genefamilies):
+    pajson = []
+    organisms = list(organismGenes.keys())
+    genefams = list(genefamilies.keys())
+    for org in tqdm(organisms):
+        orgcol = {'organism':org}
+        for fam in tqdm(genefams):
+            orggenes = set(organismGenes[org])
+            famgenes = set(genefamilies[fam])
+            orgcol[fam] = len(orggenes.intersection(famgenes))
+        pajson.append(orgcol)
+    return pajson
 
-def matrix_to_binary(pamat):
-    binarize = lambda x:np.where(x > 0, 1, 0)
-    vecbin = np.vectorize(binarize)
-    return vecbin(pamat)
+def jsonToCsv(jsondata,outfile):
+    df = pd.DataFrame(jsondata).T
+    df.columns = df.loc['organism']
+    df = df.drop('organism',axis=0)
+    binarize = lambda x: 1 if x > 0 else x
+    df = df.applymap(binarize)
+    df.to_csv(outfile,index_label='gene_family')
+    return None
 
-def namegenerator(basename):
-#    matname = 'pa_matrix_{}.npy'.format(basename)
-#    biname = 'binary_pa_matrix_{}.npy'.format(basename)
-#    orgidxname = 'row_organism_idxs_{}.json'.format(basename)
-#    famidxname = 'column_indexes_families_{}.json'.format(basename)
-    matname = 'pa_matrix.npy'
-    biname = 'binary_pa_matrix.csv'
-    orgidxname = 'row_organism_idxs.json'
-    famidxname = 'column_indexes_families.json'
-    return matname,biname,orgidxname,famidxname
-
-def main(families,fastadir):
-    families = json.load(open(families))
-    orggenes = allOrganismsGeneLists(fastadir)
-    pamat = buildmatrix(orggenes,families)
-    return pamat
-
+def main(genefamilies,fastadir,outfile):
+    genefamilies = json.load(open(genefamilies))
+    organismGenes = allOrganismsGeneLists(fastadir)
+    pajson = buildmatrix(organismGenes,genefamilies)
+    jsonToCsv(pajson,outfile)
+    return
 
 if __name__ == '__main__':
-    pamat,orgidxs,famidxs = main(sys.argv[1],sys.argv[2])
-    matn,binn,orgidxn,famidxn = namegenerator(sys.argv[3])
-
-    np.save(open(matn,'wb'),pamat)
-    print('\nP/A matrix saved to {}'.format(matn))
-
-    json.dump(orgidxs,open(orgidxn,'w'))
-    print('row index organisms saved to {}'.format(orgidxn))
-    json.dump(famidxs,open(famidxn,'w'))
-    print('col index families saved to {}'.format(famidxn))
-    print('family numbers in {} correspond to those in {}'.format(famidxn,sys.argv[1]))
-
-    binmat = matrix_to_binary(pamat)
-    np.savetxt(binn,binmat,fmt="%d",delimiter=',',newline='\n')
-    print('binary P/A matrix saved to {}'.format(binn))
+    genefamilies = sys.argv[1]
+    fastadir = sys.argv[2]
+    outfile = 'binary_pa_matrix.csv'
+    main(genefamilies,fastadir,outfile)
+    print('\nPA Matrix csv written to {}'.format(outfile))
 
 #DEPRECIATED
 #def accessionFromGBFF(fastapath):
@@ -86,3 +71,44 @@ if __name__ == '__main__':
 #    gbff_base = fastapath.split('.faa')[0]
 #    gbff_file = os.path.join(gbff_dir,gbff_base)
 #    return SeqIO.read(open(gbff_file,'r'),'genbank').name
+#def buildmatrix(organismgenes,genefamilies):
+#    pamat = np.zeros((len(list(organismgenes.keys())),len(list(genefamilies.keys()))))
+#    orgidxs = {i:o for i,o in enumerate(organismgenes.keys())}
+#    famidxs = {i:f for i,f in enumerate(genefamilies.keys())}
+#    for oidx,org in tqdm(orgidxs.items(),total=len(list(orgidxs.keys()))):
+#        for fidx,fam in tqdm(famidxs.items(),total=len(list(famidxs.keys()))):
+#            orggenes = set(organismgenes[org])
+#            famgenes = set(genefamilies[fam])
+#            pamat[oidx][fidx] = len(orggenes.intersection(famgenes))
+#    return pamat,orgidxs,famidxs
+#def matrix_to_binary(pamat):
+#    binarize = lambda x:np.where(x > 0, 1, 0)
+#    vecbin = np.vectorize(binarize)
+#    return vecbin(pamat)
+#def namegenerator(basename):
+#    matname = 'pa_matrix.npy'
+#    biname = 'binary_pa_matrix.csv'
+#    orgidxname = 'row_organism_idxs.json'
+#    famidxname = 'column_indexes_families.json'
+#    return matname,biname,orgidxname,famidxname
+#def main(families,fastadir):
+#    families = json.load(open(families))
+#    orggenes = allOrganismsGeneLists(fastadir)
+#    pamat = buildmatrix(orggenes,families)
+#    return pamat
+#if __name__ == '__main__':
+#    pamat,orgidxs,famidxs = main(sys.argv[1],sys.argv[2])
+#    matn,binn,orgidxn,famidxn = namegenerator(sys.argv[3])
+#
+#    np.save(open(matn,'wb'),pamat)
+#    print('\nP/A matrix saved to {}'.format(matn))
+#
+#    json.dump(orgidxs,open(orgidxn,'w'))
+#    print('row index organisms saved to {}'.format(orgidxn))
+#    json.dump(famidxs,open(famidxn,'w'))
+#    print('col index families saved to {}'.format(famidxn))
+#    print('family numbers in {} correspond to those in {}'.format(famidxn,sys.argv[1]))
+#
+#    binmat = matrix_to_binary(pamat)
+#    np.savetxt(binn,binmat,fmt="%d",delimiter=',',newline='\n')
+#    print('binary P/A matrix saved to {}'.format(binn))

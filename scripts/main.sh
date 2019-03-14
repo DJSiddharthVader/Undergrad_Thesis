@@ -1,4 +1,6 @@
 #!/bin/bash
+start="$(date +%s)"
+echo "start time: $start"
 scriptdir="/home/sid/thesis_SidReed/scripts"
 crispr_annotation_info="/home/sid/thesis_SidReed/data/pop_annotation_data_frame.json"
 genus="$1" #genus name, capitalize first lettter
@@ -26,9 +28,12 @@ echo "running markophylo"
 Rscript "$scriptdir"/markophylo_indel_estiamtes.R "species_tree_files/species_tree/species_tree.con.tre" binary_pa_matrix.csv "$crispr_annotation_info" 2>| markophylo.errs
 echo "building gene trees"
 python "$scriptdir"/generate_gene_trees.py gene_families.json all_nucleotides.fna
-exit 0
 echo "building  network"
-python "$scriptdir"/build_network_from_trees.py ../"$genus"
+Rscript "$scriptdir"/network_builder.R ./
+end="$(date +%s)"
+echo "end time: $end"
+runtime=$((end-start))
+echo "runtime: $runtime"
 
 #DEPRECIATED
 #old main

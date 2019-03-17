@@ -103,7 +103,7 @@ def parallelBuildTrees(processes):
     treefiles = list(tqdm(pool.imap(treefnc,alnfiles),total=len(alnfiles),desc='trees'))
     return None
 
-def main(familys,nucFasta,minsize,processes):
+def main(familys,nucFasta,minsize,processes,maxtrees):
     #set up out directories
     outdir = 'gene_tree_files'
     os.system('mkdir -p {}'.format(outdir))
@@ -111,8 +111,13 @@ def main(familys,nucFasta,minsize,processes):
     os.system('mkdir -p {}/nexus'.format(outdir))
     os.system('mkdir -p {}/trees'.format(outdir))
     #pick families
-    family_idxs = pickGeneFamiliesForTrees(familys,minsize)
-    print('Using {} of {} total families'.format(len(family_idxs),len(familys)))
+    if maxtrees != -1:
+        family_idxs = pickGeneFamiliesForTrees(familys,minsize)
+        print('Using {} of {} usable families of {} total families'.format(maxtrees,len(family_idxs),len(familys)))
+        family_idxs = family_idxs[:maxtrees]
+    else:
+        family_idxs = pickGeneFamiliesForTrees(familys,minsize)
+        print('Using {} usable families of {} total families'.format(len(family_idxs),len(familys)))
     headerlists = {famidx:familys[famidx] for famidx in family_idxs}
     headerTuples = [(famidx,familys[famidx]) for famidx in family_idxs]
     #write families to fasta files
@@ -131,7 +136,11 @@ if __name__ == '__main__':
     nucFasta = sys.argv[2]
     minsize = 0.4
     processes = 16
-    main(famidx,nucFasta,minsize,processes)
+    if len(sys.argv) > 3:
+        maxtrees = sys.argv[3]
+    else:
+        maxtrees = 1500
+    main(famidx,nucFasta,minsize,processes,maxtrees)
 
 #DEPRECIATED
 def pickGeneFamiliesForTrees(pamat,columnindex,minsize):

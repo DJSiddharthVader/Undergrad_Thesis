@@ -74,27 +74,21 @@ def main(reffile,outfile):
 
 def main_mp(reffile,outfile,processes):
     pool = ThreadPool(processes)
-    linkinfo = pool.map(getGCA_Tax_link,geturllist(reffile))
-    allinfo = pool.map(addCRISPRToGCA,linkinfo)
+    #linkinfo = pool.map(getGCA_Tax_link,geturllist(reffile))
+    #allinfo = pool.map(addCRISPRToGCA,linkinfo)
+    urllist = geturllist(reffile)
+    linkinfo = list(tqdm(pool.imap(getGCA_Tax_link,urllist),total=len(urllist),desc='scrape'))
+    allinfo = list(tqdm(pool.imap(addCRISPRToGCA,linkinfo),total=len(linkinfo),desc='extracting'))
     json.dump(allinfo,open(outfile,'w'))
 
-def timefnc(fnc,args):
-    start = time.clock()
-    fnc(*args)
-    end = time.clock()
-    return {'start':start,'end':end,'elapsed':end-start,'fnc':fnc}
 
 if __name__ == '__main__':
-    reffile = '/home/sid/thesis_SidReed/CRISPRone_files/allCRISPRonelinks.html'
+    reffile = '/home/sid/thesis_SidReed/data/CRISPRone_files/allCRISPRonelinks.html'
     outfile = str(sys.argv[1])
     if len(sys.argv) == 3:
         processes = int(sys.argv[2])
     else:
         processes = 8
-    #print(timefnc(main,[reffile,outfile]))
-    #print(timefnc(main_mp,[reffile,'mp_' + outfile,processes]))
-    #print(timefnc(main_mp,[reffile,'mp_' + outfile,8]))
-    #main(reffile,outfile)
     main_mp(reffile,'mp_' + outfile,processes)
 
 

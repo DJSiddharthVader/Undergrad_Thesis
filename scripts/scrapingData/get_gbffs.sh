@@ -14,7 +14,6 @@ function downloadSuffix(){
     parallel --eta --bar --eta -a "$urlfile" wget -q
     cd -
 }
-
 summary="/home/sid/thesis_SidReed/data/bacterialGBFFs/assembly_summary.txt"
 #filesuffix="_genomic.gbff.gz" #file suffix for every organism
 nuc_filesuffix="_cds_from_genomic.fna.gz" #file suffix for genomic dna fasta

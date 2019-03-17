@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import json
 import glob
@@ -60,8 +61,7 @@ def extractSeqsForTree(famdict,nucFasta):
         seqiter = SeqIO.parse(open(nucFasta),'fasta') #open fasta file
         seqRecordlist = [seq for seq in seqiter if seq.id in headerlist]
         seqRecordlist = fixNames(seqRecordlist)
-        for char in '\' ()':
-            name = name.replace(char,'-')
+        name = re.sub('[^0-9a-zA-Z]+','-',name)
         fastafilename = 'species_tree_files/fastas/{}.fna'.format(name)
         namesAndRecords.append((fastafilename,seqRecordlist))
     return namesAndRecords
@@ -162,6 +162,5 @@ if __name__ == '__main__':
     main(nucFasta,
          fastaInfoJson,
          processes,
-         maxfams,
-        )
+         maxfams)
 

@@ -1,13 +1,14 @@
 #!/bin/bash
 start="$(date +%s)"
-echo "start time: $start"
+echo "start time: $(date)"
 scriptdir="/home/sid/thesis_SidReed/scripts"
-crispr_annotation_info="/home/sid/thesis_SidReed/data/pop_annotation_data_frame.json"
+#crispr_annotation_info="/home/sid/thesis_SidReed/data/pop_annotation_data_frame.json"
+crispr_annotation_info="/home/sid/thesis_SidReed/data/fasta_crispr_annotation_df.json"
 genus="$1" #genus name, capitalize first lettter
 echo "fetching/formatting sequences"
 mkdir -p "$genus"
 cd "$genus"
-python "$scriptdir"/get_genus_fastas.py "$genus"
+python "$scriptdir"/get_genus_fastas.py "$genus" "$crispr_annotation_info"
 #nucleotide
 python "$scriptdir"/shortenFastaheaders.py nucleotide_fastas "$genus"
 cat nucleotide_fastas/*.fna >| all_nucleotides.fna
@@ -31,23 +32,7 @@ python "$scriptdir"/generate_gene_trees.py gene_families.json all_nucleotides.fn
 echo "building  network"
 Rscript "$scriptdir"/network_builder.R ./
 end="$(date +%s)"
-echo "end time: $end"
-runtime=$((end-start))
-echo "runtime: $runtime"
+echo "end time: $(date)"
+runtime="$(echo "($end-$start)/60" | bc)"
+echo "runtime for $genus: $runtime mins"
 
-#DEPRECIATED
-#old main
-#echo "preping sequences"
-#"$scriptdir"/prepSeqs.sh "$fps" "$genus"
-#echo "all vs all alingment"
-#"$scriptdir"/diamondAlign.sh "$genus"
-#cd "$genus"
-#echo "single link clustering to gene families"
-#python "$scriptdir"/single_link_clustering_blast_hits.py allvsallproteins.dmnd.out all_proteins.faa "$genus"
-#echo "creating PA matrix"
-#python "$scriptdir"/createPAMatrix.py gene_families.json protein_fastas/ "$genus"
-#echo "building species trees"
-#python "$scriptdir"/build_species_tree.py pa_matrix_"$genus".npy column_indexes_families_"$genus".json gene_families_"$genus".json all_nucleotides.fna "$genus"
-#echo "building gene trees"
-#python "$scriptdir"/generate_gene_trees.py pa_matrix_"$genus".npy column_indexes_families_"$genus".json gene_families_"$genus".json all_nucleotides.fna "$genus"
-#python "$scriptdir"/build_network_from_trees.py ../"$genus"

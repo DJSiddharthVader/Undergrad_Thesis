@@ -51,7 +51,7 @@ partitionByCRISPR <- function(spt,crisprAnnotation){
     crispr <- c()
     not_crispr <- c()
     for (acc in taxlist){
-        rowidx <- match(trimVersion(acc),crisprAnnotation[[accession_col_idx]])
+        rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
         iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
         nodenum <- match(acc,taxlist)
         pathToRoot <- nodepath(spt,from=nodenum,to=root)
@@ -84,7 +84,7 @@ plotTree <- function(speciesTree,crisprAnnotation){
     crispr <- c()
     not_crispr <- c()
     for (acc in taxlist){
-        rowidx <- match(trimVersion(acc),crisprAnnotation[[accession_col_idx]])
+        rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
         iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
         nodenum <- match(acc,taxlist)
         if (iscrispr){

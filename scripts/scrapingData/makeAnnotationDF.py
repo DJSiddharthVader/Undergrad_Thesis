@@ -11,11 +11,13 @@ def prepCrispr(path):
     df = loaddf(path)
     df['align'] = df['GCA'].apply(lambda x: '_'.join(x.split('_')[1:]))
     df['Genus'] = df['Name'].apply(lambda x: re.sub('[^a-zA-Z]','',x.split(' ')[0]))
+    df['isCRISPR'] =df['System Types (CRISPRone)'].apply(lambda x: x not in ['NA','No System'])
     return(df)
 
 def prepNCBI(path):
     df = loaddf(path)
     df['align'] = df['GCA'].apply(lambda x: '_'.join(x.split('_')[1:]))
+    df['acctrim'] = df['Accession Number'].apply(lambda x: x.split('.')[0])
     return df
 
 def prepDownloads():
@@ -24,10 +26,10 @@ def prepDownloads():
     nucpath = '/home/sid/thesis_SidReed/data/nuc_cds_genomic'
     protsuffix = '_translated_cds.faa.gz'
     gcanames = ['_'.join(x.split('_')[:3]) for x in os.listdir(protpath)]
-    ppaths = ['{}/{}{}'.format(protpath,x,protsuffix) for x in gcanames]
-    npaths = ['{}/{}{}'.format(nucpath,x,nucsuffix) for x in gcanames]
-    align = ['_'.join(x.split('_')[1:3]) for x in gcanames]
-    df = pd.DataFrame({'protPath':ppaths,'nucPath':npaths,'align':align})
+    df = pd.DataFrame({'gcanames':gcanames})
+    df['protPath'] = df['gcanames'].apply(lambda x:'{}/{}{}'.format(protpath,x,protsuffix))
+    df['nucPath'] = df['gcanames'].apply(lambda x:'{}/{}{}'.format(nucpath,x,nucsuffix))
+    df['align'] = df['gcanames'].apply(lambda x: '_'.join(x.split('_')[1:3]))
     return(df)
 
 def main(crisprpath,ncbipath,outpath):

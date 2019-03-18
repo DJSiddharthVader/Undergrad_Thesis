@@ -5,7 +5,7 @@ scriptdir="/home/sid/thesis_SidReed/scripts"
 #crispr_annotation_info="/home/sid/thesis_SidReed/data/pop_annotation_data_frame.json"
 crispr_annotation_info="/home/sid/thesis_SidReed/data/fasta_crispr_annotation_df.json"
 genus="$1" #genus name, capitalize first lettter
-echo "fetching/formatting sequences"
+echo "fetching/formatting sequences for $genus"
 mkdir -p "$genus"
 cd "$genus"
 python "$scriptdir"/get_genus_fastas.py "$genus" "$crispr_annotation_info"

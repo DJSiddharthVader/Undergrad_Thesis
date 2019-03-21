@@ -151,7 +151,7 @@ hideToEdgeList <- function(hidefile){
 alltreenetwork <- function(){
     return(1)
 }
-combineNetworks <- function(graphcsvs){
+removeCopyNetworks <- function(graphcsvs){
     glist <- c()
 }
 
@@ -171,8 +171,8 @@ main <- function(rootDir,num,size){
         geneTreePaths <- c(geneTreePaths,gpath)
         pb$tick()
     }
-    #generate samples of gene trees
     print('generating samples')
+    #generate samples of gene trees
     allGeneTrees <- list.files('network_files/all_newick_trees',full.names=TRUE)
     allGeneTrees <- allGeneTrees[!grepl('species.newick',allGeneTrees)]
     pb <- makepb(num)
@@ -181,16 +181,16 @@ main <- function(rootDir,num,size){
         pb$tick()
     }
     #sampleUntillAllUsed(size)
-    #build networks
     print('running HiDe')
+    #build networks
     subsets <- list.files('network_files/subsets',full.names=TRUE)
     pb <- makepb(length(subsets))
     for (sample in subsets){
         runHide(sample)
         pb$tick()
     }
-    #parse and write networks
     print('parsing and writing networks')
+    #parse and write networks
     hidefiles <- list.files('network_files/raw_hide',full.names=TRUE)
     pb <- makepb(length(hidefiles))
     for (hide in hidefiles){

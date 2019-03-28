@@ -94,16 +94,16 @@
     long = Horizontal Gene Transfer
 }
 %Title
-\title{The Effects Of CRISPR-Cas Systems On\newline
-        The Rate Of Horizontal Gene Transfer}
-\subtitle{\vspace{0.1in} A Network Theoretic Approach}
+\title{\Huge Is Sharing Caring?}
+\subtitle{Effects of the Presence of CRISPR-Cas Systems on Rates of Horizontal Gene Transfer Using Network Analysis}
 \date{\today}
 \author{Siddharth Reed\\
-        Undergraduate Thesis}
+        MolBiol 4C12 Thesis
+       }
 \institute{Golding Lab,\\
            Biology Department,\\
            McMaster University
-}
+          }
 \begin{document}
 \watermarkoff %theme has watermark on every slide, turning that off
 %Title Slide
@@ -326,7 +326,7 @@
 \begin{center}
     \begin{tikzpicture}
         % boxes
-        \onslide<1->  \node [slock]                       (node1)  {Get Genomes};
+        \onslide<1->  \node [slock]                       (node1)  {Get Fastas};
         \onslide<2->  \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};
         \onslide<3->  \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};
         \onslide<4->  \node [block,right=0.5cm of node2]  (node4)  {P/A Matrix};
@@ -356,13 +356,13 @@
 \end{frame}
 \begin{frame}[fragile]{Network Statistics}
     \begin{itemize}
-        \item<2-> \textbf{Total/Average edge weight}: $\sum_i w_i$,$\frac{\sum_i w_i}{N}$
-        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
-        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
-        \item<5-> \textbf{Node Closeness Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.
+        \item<2-> \textbf{Average Node Degree}: $\sum_i w_i$,$\frac{\sum_i w_i}{N}$
         \item<6-> \textbf{Node Clustering Coefficient}: $\frac{2e}{k(k-1)}$ where $k$ is the neighbors and $e$ is the edges between all neighbors.
         \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
         \item<8-> \textbf{Node Associativity}: $\frac{j(j+1)(\overline{k}-\mu_q)}{2E\sigma^2_q}$ where $j$ is the excess degree of the node and $\overline{k}$ is the average excess degree of the node's neighbors and $\mu_q$ and $\sigma_q$ are the mean and standard variation of the excess degree distribution.
+        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+        \item<5-> \textbf{Node Closeness Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.
+        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile,noframenumbering]{Thanks}

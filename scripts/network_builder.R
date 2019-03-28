@@ -55,6 +55,9 @@ setUpDirs <- function(rootDir){
 
 convertToNwk <- function(pathToNexus,isSpecies=FALSE){
     tree <- ape::read.nexus(file=pathToNexus)
+    if (length(grep('copy',tree$tip.label)) != 0){
+        return(FALSE)
+    }
     if (!is.rooted(tree)){
         tree <- phangorn::midpoint(tree)
     }
@@ -148,13 +151,6 @@ hideToEdgeList <- function(hidefile){
     }
     return(parsed_edge_list)
 }
-alltreenetwork <- function(){
-    return(1)
-}
-removeCopyNetworks <- function(graphcsvs){
-    glist <- c()
-}
-
 main <- function(rootDir,num,size){
     setUpDirs(rootDir)
     print('converting trees to newick')
@@ -168,7 +164,9 @@ main <- function(rootDir,num,size){
     for (dir in dirlist){
         tree <- list.files(dir,patter='*.con.tre',full.names=TRUE)
         gpath <- convertToNwk(tree[1])
-        geneTreePaths <- c(geneTreePaths,gpath)
+        if (typeof(gpath) == 'character'){
+            geneTreePaths <- c(geneTreePaths,gpath)
+        }
         pb$tick()
     }
     print('generating samples')

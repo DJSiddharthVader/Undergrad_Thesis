@@ -23,3 +23,10 @@ testing/
 cpHiDe/
 hide_program/
 hide_source/
+Pseudoalteromonas/
+json_reports/
+marko_reports/
+plotnets/
+dehalococcoides_test_network.html
+ehrlichia_test_network.html
+ inference_programs/

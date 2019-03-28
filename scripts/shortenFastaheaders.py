@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import json
 import glob
@@ -7,7 +8,7 @@ from tqdm import tqdm
 from Bio.Alphabet import IUPAC
 from Bio import SeqIO,Seq,SeqRecord
 
-def getHeaderAsDict(seqrecord):
+def getHeaderAsDict(seqrecord,meregex):
     raw = seqrecord.id.strip('lcl|')
     acc = '_'.join(raw.split('_')[:2])
     wp  = '_'.join(raw.split('_')[3:5])
@@ -18,8 +19,13 @@ def getHeaderAsDict(seqrecord):
                }
     desc = ' '.join(seqrecord.description.split(' ')[1:]).strip('[]')
     features = desc.split('] [')
+    proteinname = [x for x in features if 'protein' in x][0].split('=')[1]
+    notadd = any(rex.search(proteinname) for rex in meregex)
     for feat in features:
-        infodir[feat.split('=')[0]] = feat.split('=')[1]
+        if notadd:
+            return None
+        else:
+            infodir[feat.split('=')[0]] = feat.split('=')[1]
     return infodir
 
 def strToSeqObj(seq):
@@ -39,25 +45,30 @@ def fixHeader(infodir):
                                     description='')
     return fixedrecord
 
-def fixFasta(fasta,outname=-1):
+def fixFasta(fasta,meregex,outname=-1):
     if outname == -1:
         outname = fasta
     allinfodirs = []
     fixedrecords = []
     for seqrecord in SeqIO.parse(open(fasta),'fasta'):
-        infodir = getHeaderAsDict(seqrecord)
-        allinfodirs.append(infodir)
-        fixedrecord = fixHeader(infodir)
-        fixedrecords.append(fixedrecord)
+        infodir = getHeaderAsDict(seqrecord,meregex)
+        if infodir != None:
+            allinfodirs.append(infodir)
+            fixedrecord = fixHeader(infodir)
+            fixedrecords.append(fixedrecord)
+        else:
+            pass
     SeqIO.write(fixedrecords,outname,'fasta')
     return allinfodirs
 
 def main(fasta_dir):
+    mobileElements = ['phage','mobile.element','insertion.sequence*','viral.element','transposase','[^sA-Z]IS\d','^IS\d','viral.([^A-Z]|enhancin)','holin']
+    meregex= [re.compile(x) for x in mobileElements]
     allinfodirs = []
     globstr = '{}/*.f*a'.format(fasta_dir)
     for fasta in tqdm(glob.glob(globstr),desc='fixingfastas'):
         fastapath = os.path.join(os.getcwd(),fasta)
-        infodir = fixFasta(fastapath)
+        infodir = fixFasta(fastapath,meregex)
         allinfodirs.extend(infodir)
     with open('fasta_headers_info.json','w') as outf:
         json.dump(allinfodirs,outf)

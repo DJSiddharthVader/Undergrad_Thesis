@@ -2,6 +2,7 @@
 %Text
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{anyfontsize}
 \usepackage{xcolor}
 %Theme
 \usetheme[pageofpages=of,% String used between current and total page counts
@@ -78,12 +79,12 @@
     short = \textit{E. coli},
     long  = \textit{Escherichia coli}
 }
-%crispr
+%cas
 \DeclareAcronym{cas}{
     short = Cas,
     long  = CRISPR-associated
 }
-%crispr
+%crsp
 \DeclareAcronym{crsp}{
     short = CRISPR,
     long  = Clustered Regularly Interspaced Short Palindromic Repeat
@@ -94,8 +95,9 @@
     long = Horizontal Gene Transfer
 }
 %Title
-\title{\Huge Is Sharing Caring?}
-\subtitle{Effects of the Presence of CRISPR-Cas Systems on Rates of Horizontal Gene Transfer Using Network Analysis}
+%\title{\vspace{-0.05in}\HUGE Is Sharing Caring?}
+\title{{\fontsize{40}{50}\selectfont Is Sharing Caring?}}
+\subtitle{Elucidating the Effects of the Presence of CRISPR-Cas Systems on Rates of Horizontal Gene Transfer Using Network Analysis}
 \date{\today}
 \author{Siddharth Reed\\
         MolBiol 4C12 Thesis
@@ -104,6 +106,7 @@
            Biology Department,\\
            McMaster University
           }
+
 \begin{document}
 \watermarkoff %theme has watermark on every slide, turning that off
 %Title Slide
@@ -285,12 +288,12 @@
 \end{frame}
 \begin{frame}[fragile]{Previous Findings}
     \begin{itemize}
-        \item<2-> Gophna et al. (2015) found that CRISPR has no effect on HGT over short evolutionary timescales\autocite{gophna15}
+        \item<2-> Gophna et al. (2015) found no realtion between the presence of \ac{crsp} systems and HGT over short evolutionary timescales\autocite{gophna15}
         \begin{itemize}
             \item<3-> Assume all singletons arrose from HGT
             \item<4-> Used GC\% to identify HGT
         \end{itemize}
-        \item<5-> Contradicted by a former thesis student
+        \item<5-> Contradicted by a former underdraduate thesis student
         \begin{itemize}
             \item<6-> Can see inhibitory effects of CRIPSR on HGT over short evolutionary time scales
             \item<7-> Higher gene indel rates for CRISPR containg genera than non-CRISPR containing outgroups
@@ -315,10 +318,10 @@
     \onslide<2-> \begin{block}{Within Network Comparisons}
         For genera with CRISPR conatining strains, compare the node statistics of CRIPSR-containing strain to non-CRISPR-containing strains.
     \end{block}
-    \onslide<3-> \begin{block}{Between Network Comparisons}
-        For genera with no CRISPR conatining strains, compare the network statistics of mixed to non-CRISPR-containing networks.
-    \end{block}
-    \onslide<4-> \begin{block}{Gene Indel Rates vs. Network Statistics}
+%    \onslide<3-> \begin{block}{Between Network Comparisons}
+%        For genera with no CRISPR conatining strains, compare the network statistics of mixed to non-CRISPR-containing networks.
+%    \end{block}
+    \onslide<3-> \begin{block}{Gene Indel Rates vs. Network Statistics}
         Compare gene InDel rates to node/network statistics for CRISPR-containing and non-CRISPR-containing strains/genera.
     \end{block}
 \end{frame}
@@ -329,52 +332,77 @@
         \onslide<1->  \node [slock]                       (node1)  {Get Fastas};
         \onslide<2->  \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};
         \onslide<3->  \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};
-        \onslide<4->  \node [block,right=0.5cm of node2]  (node4)  {P/A Matrix};
-        \onslide<5->  \node [block,right=0.5cm of node4]  (node5)  {Species Tree};
-        \onslide<6->  \node [block,below=0.5cm of node5]  (node6)  {Gene InDel Rates};
-        \onslide<7->  \node [block,above=0.5cm of node5]  (node7)  {Gene Trees};
-        \onslide<8->  \node [block,right=0.5cm of node7]  (node8)  {Infer Network};
-        \onslide<9->  \node [block,right=0.5cm of node8]  (node9)  {Annotate CRISPR};
-        \onslide<10-> \node [block,below=0.5cm of node9]  (node10) {Compute Stats};
-        \onslide<11-> \node [flock,below=0.5cm of node10] (node11) {Look For Trends};
+        \onslide<6->  \node [block,right=0.8cm of node3]  (node4)  {P/A Matrix};
+        \onslide<4->  \node [block,above=0.5cm of node4]  (node5)  {Get 16S Genes};
+        \onslide<8->  \node [block,above=0.5cm of node5]  (node6)  {Gene Tree};
+        \onslide<5->  \node [block,right=0.5cm of node5]  (node7)  {Species Tree};
+        \onslide<7->  \node [block,below=0.5cm of node7]  (node8)  {Gene InDel Rates};
+        \onslide<9->  \node [block,above=0.5cm of node7]  (node9)  {Infer Network};
+        \onslide<10->  \node [block,right=0.5cm of node9]  (node10)  {Annotate CRISPR};
+        \onslide<11-> \node [block,below=0.5cm of node10]  (node11) {Compute Stats};
+        \onslide<12-> \node [flock,below=0.5cm of node11] (node12) {Look For Trends};
         %lines
         \onslide<2->  \path [line] (node1) -- (node2);
         \onslide<3->  \path [line] (node2) -- (node3);
-        \onslide<4->  \path [line] (node3) -- (node4);
-        \onslide<5->  \path [line] (node4) -- (node5);
-        \onslide<6->  \path [line] (node4) -- (node6);
-        \onslide<6->  \path [line] (node5) -- (node6);
-        \onslide<7->  \path [line] (node4) -- (node7);
-        \onslide<8->  \path [line] (node5) -- (node8);
-        \onslide<8->  \path [line] (node7) -- (node8);
-        \onslide<9->  \path [line] (node8) -- (node9);
+        \onslide<4->  \path [line] (node3) -- (node5);
+        \onslide<5->  \path [line] (node5) -- (node7);
+        \onslide<6->  \path [line] (node3) -- (node4);
+        \onslide<7->  \path [line] (node4) -- (node8);
+        \onslide<7->  \path [line] (node7) -- (node8);
+        \onslide<8->  \path [line] (node3) -- (node6);
+        \onslide<9->  \path [line] (node6) -- (node9);
+        \onslide<9->  \path [line] (node7) -- (node9);
         \onslide<10-> \path [line] (node9) -- (node10);
-        \onslide<11-> \path [line] (node6) -- (node11);
         \onslide<11-> \path [line] (node10) -- (node11);
+        \onslide<12-> \path [line] (node11) -- (node12);
+        \onslide<12-> \path [line] (node8) -- (node12);
     \end{tikzpicture}
 \end{center}
 \end{frame}
 \begin{frame}[fragile]{Network Statistics}
     \begin{itemize}
-        \item<2-> \textbf{Average Node Degree}: $\sum_i w_i$,$\frac{\sum_i w_i}{N}$
-        \item<6-> \textbf{Node Clustering Coefficient}: $\frac{2e}{k(k-1)}$ where $k$ is the neighbors and $e$ is the edges between all neighbors.
-        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
-        \item<8-> \textbf{Node Associativity}: $\frac{j(j+1)(\overline{k}-\mu_q)}{2E\sigma^2_q}$ where $j$ is the excess degree of the node and $\overline{k}$ is the average excess degree of the node's neighbors and $\mu_q$ and $\sigma_q$ are the mean and standard variation of the excess degree distribution.
-        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
-        \item<5-> \textbf{Node Closeness Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.
-        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
+        \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
+        \item<3-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
+        \item<4-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (w_{uw} w_{vw} w_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of traingles containing $u$ \autocite{clustering}
+        \item<5-> \textbf{Node Assortativity}: $\frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$.\autocite{newmanmix}
+        \item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.\autocite{egcen}
+        \item<7-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
+%        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
+%        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+%        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Limitations \& Caveats}
+    \begin{itemize}
+        \item<2-> \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
+        \item<3-> \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees were generated for each genus
+        \item<4-> \textbf{Signifigance Testing}: Samples are not necessairily independant in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+        \item<5-> \textbf{Taxonomic Mistakes}: Inconsistencies in taxonomic labelling can result in ignored or misplaced \ac{otu}s.
+        \item<6-> \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Possible Future Directions}
+    \begin{itemize}
+        \item<2-> \textbf{Infering direction}: Directed networks have a host of available analytic tools undirected networks do not
+        \item<3-> \textbf{Gene function analysis}: Considering the transfer dynamics of different functional classes of genes
+        \item<4-> \textbf{Studying movement of \ac{crsp} systems}: Studying how frequently \ac{crsp} systems themselves are transfered from arrays, cas genes
+        \item<5-> \textbf{Intergenic comparisons}: Combine any set of fasta files for \ac{otu}s for analyzing transfer dynamics
+        \item<6-> \textbf{Continuous \ac{crsp} activity}: Labelling nodes by estimated \ac{crsp} activity (array length, transciptomic data, etc.)
+        \item<7-> \textbf{Considering bacterial ecology and environments}: Consider geographically close \ac{otu}s or differences between networks due to environmental factors
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile,noframenumbering]{Thanks}
     Thank you to
     \begin{itemize}
         \item Dr. G. Brian Golding
+        \item Dr. Ben Evans
         \item The Golding lab
             \begin{itemize}
                 \item Caitlin Simopoulos
                 \item Daniella Lato
                 \item Zachery Dickson
                 \item Sam Long
+                \item Geoge Long
                 \item Lucy Zhang
                 \item Brianne Laverty
                 \item Nicole Zhang

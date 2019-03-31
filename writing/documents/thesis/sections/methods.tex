@@ -1,5 +1,29 @@
-\section*{\huge Methods}
-\subsection*{Summary}
+%Tikz Styles
+\tikzstyle{block} = [circle,
+                     fill=green!20,
+                     text centered,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     rounded corners,
+                     draw]
+\tikzstyle{slock} = [circle,
+                     fill=red!20,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     text centered,
+                     rounded corners,
+                     draw]
+\tikzstyle{flock} = [circle,
+                     fill=blue!20,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     text centered,
+                     rounded corners,
+                     draw]
+\tikzstyle{line} = [draw, -latex']
+\newcommand{\Checkmark}{$\mathbin{\tikz [x=2.4ex, y=2.4ex, line width=.2ex, green] \draw (0,1) -- (1,0) -- (3,3);}$}
+\section{Methods}
+\subsection{Summary}
 The goal of the project is to create a phylogenetic network from a set of protein fasta files and the corresponding nucleotide sequences.
 In this case all full genomes for a given bacterial genus, for analysis of \ac{hgt}.
 The workflow is as follows for a single genus:
@@ -27,8 +51,9 @@ The workflow is as follows for a single genus:
     \item Using the gene indel rates estimated and the annotated networks examine if there are any trends or effects on the dynamics of \ac{hgt} between organisms with and without CRISPR-Cas systems.
 \end{enumerate}
 %Summary Figure
+\FloatBarrier
 \begin{center}
-\begin{figure}
+\begin{figure}[htb!]
     \begin{tikzpicture}
         % boxes
         \node [slock]                       (node1)  {Get Fastas};
@@ -61,11 +86,11 @@ The workflow is as follows for a single genus:
 \end{figure}
 \end{center}
 \FloatBarrier
-\subsection*{Data Collection}
+\subsection{Data Collection}
 Protein and nucleotide fastas of all CDS sequences were downloaded from NCBI RefSeq.
 \ac{crsp} annotations of \ac{cas} and Cfp proteins from the \ac{crsp}one tool from Zhang and Ye will be used to assess the presence of \ac{crsp} systems \citep{ineqcas}.
 %and the \ac{crsp}db (along with a python script) is used to annotate genera as being mixed (containing strains with and without \ac{crspc} systems) or Non-\ac{crsp} (containing no strains with a \ac{crspc} system) \citep{crispdb}.
-\subsection*{Gene Presence/Absence Matrix}
+\subsection{Gene Presence/Absence Matrix}
 In order to use the program markophylo to estimate indel rates, a \ac{pa} matrix of gene families and organisms and a species tree are required.
 First any genes classified as \ac{mge}s (from NCBI annotations) are removed.
 Next genes are grouped into families by reciprocal BLAST hits and single link clustering.
@@ -73,11 +98,11 @@ The remaining unclassified genes are compared to the NCBI non-redundant database
 The \ac{pa} matrix is constructed as follows, for each \ac{otu} a binary vector is created, where each entry represents a gene family and a 1 indicates that that \ac{otu} contains at least 1 gene in that family.
 This is repeated for all \ac{otu}s, creating a $G \times O$ binary matrix, where $G$ is the total number of gene families and $O$ is the number \ac{otu}s.\par
 There are many ways to construct a species tree, but for this project the tree will be constructed with 16S rRNA genes, using Bayesian methods, as implemented in the program MrBayes.
-\subsection*{Makophylo Rate Estimations}
+\subsection{Makophylo Rate Estimations}
 Given a species tree and a gene family \ac{pa} matrix for the \ac{otu}s of the species tree the R package \textit{markophylo} can provide gene insertion and gene deletion rate estimates \citep{marko}.
 The presence or absence of gene families are considered 2 discrete states, for which a $(2\times 2)$ transition rate matrix (of a \ac{mc} model) can be estimated using maximum likelihood techniques.
 The values in this estimated transition matrix are the insertion rate (transition probability of gene absence $\to$ presence) and deletion rate (transition probability of gene presence $\to$ absence) \citep{marko}.
-\subsection*{Network Construction}
+\subsection{Network Construction}
 Quartet decomposition is method by which \ac{hgt} events can be identified using a set of gene trees and a species tree.
 Given a tree $T$ a quartet is a subtree contain 4 of the leaf nodes in $T$, meaning that for a tree with $N$ leaf nodes (or \ac{otu}s) there are $\binom{N}{4}$ unique quartets in that tree.
 A quartet $Q$ is considered consistent with a tree if $Q = T|Le(Q)$ where $T|Le(Q)$ is the tree obtained by suppressing all degree-two nodes in $T[X]$ and $T[X]$ is the minimal subtree of T with all nodes in $X$, which is a leaf set of $T$ \citep{hide}.
@@ -89,21 +114,23 @@ To calculate the weight of an edge for the network, given a species tree $S$ and
     \item Remove all quartets consistent with $S$ or previously explained from $\phi_i$
     \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the edge $(u,v)$
     \item Set $NS((u,v),\phi_i)$ to be $RS((u,v),\phi_i)$ divided by $\lambda$, which is the total number of quartets in $S$ that are consistent with the edge $(u,v)$.
-    \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phii),NS((v,u),\phi_i)\}$
+    \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phi_i),NS((v,u),\phi_i)\}$
     \item The total score for the edge $H$ is the sum of scores for each tree $G_i$
     \item This total score calculation is repeated for each horizontal edge $H_i$ in S, resulting in a list of edges, which is a complete description of the network.
 \end{enumerate}
 This is further explained in the original work, \citep{hide}.
-\subsection*{Network Statistics}
+\subsection{Network Statistics}
 All networks will be comprised of nodes representing \ac{otu}s and weighted edges represent the estimated amount of \ac{hgt} events between the two incident nodes.
 As multiple sets of networks can be computed for a single set of genera (using different sets of gene trees), bootstrap support for edges and confidence intervals on edge weights can also be calculated.
 Given a network, with a set of nodes $V = \{V_0$ \dots $V_i\}$ of cardinality $N$ and a set of weighted edges (an unordered 2-tuple and weight) $T = \{((V_1,V_2),W_{1,2})$ \dots $((V_i,V_j),W_{i,j})\}$ with cardinality $E$ descriptive statistics can be computed as follows \citep{netstat}:
-\begin{itemize}
-    \item Total edge weight: sum of all edge weights in a network
-    \item Average degree weight: sum of all edge weights divided by $N$
-    \item Node Associativity:$ \frac{j(j+1)(\overline{k}-\mu_q)}{2E\sigma^2_q}$ where $j$ is the excess degree of the node and $\overline{k}$ is the average excess degree of the node's neighbors and $\mu_q$ and $\sigma_q$ are the mean and standard variation of the excess degree distribution.
-    \item Node Clustering Coefficient:$ \frac{2e}{k(k-1)}$ where $k$ is the number of neighbors and $e$ is the number of edges between all neighbors.
-    \item Node Eigenvector Centrality:$ \frac{N-1}{\sum_v d(x,v)}$ where $d(x,y)$ is the length of the shortest path between node v and x.
-%    \item Network Density:$ \frac{2(E-N+1)}{N(N-3)+2}$
-%    \item Network Diameter: The shortest path between the 2 furthest nodes in a network.
-\end{itemize}
+    \begin{itemize}
+        \item \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
+        \item \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
+        \item \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of traingles containing $u$ \autocite{clustering}
+        \item \textbf{Node Assortativity}: $\frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$.\autocite{newmanmix}
+        \item \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
+        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.\autocite{egcen}
+%        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
+%        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+%        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
+    \end{itemize}

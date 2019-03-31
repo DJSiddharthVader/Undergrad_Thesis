@@ -1,2 +1,10 @@
-\section*{\Huge Discussion}
-tmp
+\section{Discussion}
+\subsection{Limitations}
+Some factors that may have introduced bias or error into this analysis:
+\begin{itemize}
+        \item \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
+        \item \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees were generated for each genus
+        \item \textbf{Signifigance Testing}: Samples are not necessairily independant in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+        \item \textbf{Taxonomic Mistakes}: Inconsistencies in taxonomic labelling can result in ignored or misplaced \ac{otu}s.
+        \item \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
+\end{itemize}

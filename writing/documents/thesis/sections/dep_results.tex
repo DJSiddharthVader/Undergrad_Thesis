@@ -1,0 +1,29 @@
+\section{Results}
+Two networks were produced for the genera \textit{Ehrlichia} and \textit{Dehalococcoides}, using all available gene trees and the species tree for each.
+\textit{Ehrlichia} contains 15 fully sequenced genomes, none of which have both Cas proteins and CRISPR arrays according to CRISPR-one.
+\begin{figure}[htb!]
+    \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{ehrlichia_network.png}}
+    \caption{Phylogenetic network of all strains in the genus \textit{Ehrlichia}. Blue nodes indicate no CRISPR systems. Edge thickness is proportional to the number of gene transfers estimated between strains (thicker means more transfers)}
+\end{figure}
+\FloatBarrier
+\textit{Dehalococcoides} contains 15 fully sequenced genomes 4 of which have both Cas proteins and CRISPR arrays according to CRISPR-one.
+\begin{figure}[htb!]
+    \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{dehalodeicoccus_network.png}}
+    \caption{Phylogenetic network of all strains in the genus \textit{Dehalodeicoccus}. Blue nodes indicate no CRISPR systems. Edge thickness is proportional to the number of gene transfers estimated between strains (thicker means more transfers)}
+\end{figure}
+\FloatBarrier
+From looking at these diagrams there appears to be more thick (i.e. high transfer rate) edges for \textit{Ehrlichia} than \textit{Dehalococcoides}, but the rest of the edges in \textit{Ehrlichia} are fairly thin as compared to \textit{Dehalococcoides}.
+These networks do appear to be superficially different in how they are organized, but why is not obvious and may be more related to the differences between these genera not related to the presence of \ac{crspc} systems.
+%stats table
+\begin{center}
+    \begin{tabular}{l|r r}
+        Metric & Ehrlichia & Dehalococcoides\\
+        \hline
+        Density & 0.952&0.961\\
+        Average Edge Weight & 0.074&0.069\\
+        Average Node Clustering Coefficient & 0.956&0.96\\
+        Average Node Closeness Centrality & 0.955&0.964\\
+        Average Node Communicability Betweenness Centrality & 0.585 &0.589\\
+        Average Node Connectivity & 13.095 & 13.2\\
+    \end{tabular}
+\end{center}

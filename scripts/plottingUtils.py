@@ -150,20 +150,21 @@ def plotNetwork(net,df,width_scaling=4000,alpha=0.8,legend_entries=6,legend_deci
         fig.savefig(save,dpi=dpi,format='png',frameon=False)
     plt.show()
 
-def multiBarPlot(df,cols,xlabel,ylabel='Genera',width=1,dpi=50,
+def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
                 labels=['CRISPR','Non-CRISPR'],file=False):
-    sdf = df.sort_values(by=cols)
-    fig, ax = plt.subplots(figsize=(10,10))
+    #sdf = df.sort_values(by=cols)
+    sdf = df
+    fig, ax = plt.subplots(figsize=(20,10))
     pos = np.arange(0,len(sdf[cols[0]])*(len(cols)+1),len(cols)+1)
     pal = sns.color_palette('coolwarm')
     colors = [pal[0],pal[-1]]
     for i,col in enumerate(cols):
-        ax.barh(pos+width*i,sdf[cols[i]],width,
+        ax.bar(pos+width*i,sdf[cols[i]],width,
                 color=colors[i],label=labels[i])
     ax.set_ylabel(ylabel)
     ax.set_xlabel(xlabel)
-    ax.set_yticks(pos+0.5*width)
-    ax.set_yticklabels(sdf.index)
+    ax.set_xticks(pos+0.5*width)
+    ax.set_xticklabels(sdf.index,rotation=45,ha='right')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     plt.legend()
@@ -210,6 +211,36 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
 
+def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
+    fig, ax = plt.subplots(figsize=size)
+    #data
+    x,y = 'c_mean_clust', 'nc_mean_clust'
+    #main fig
+    sns.scatterplot(x=x,y=y,data=nohdf,ax=ax)
+    ax.set_xlabel('Non-CRISPR Mean Clustering Coefficient')
+    ax.set_ylabel('CRISPR Mean Clustering Coefficient')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    #inlet fig
+#    axins = ins.zoomed_inset_axes(ax,2.5,loc=1)
+#    sns.scatterplot(x=x,y=y,data=nohdf,ax=axins)
+#    axins.set_xlim(0,10)
+#    axins.set_ylim(0,20)
+#    axins.xaxis.set_ticks_position('none')
+#    axins.yaxis.set_ticks_position('none')
+#    axins.set_xticklabels([])
+#    axins.set_yticklabels([])
+#    axins.set_xlabel('')
+#    axins.set_ylabel('')
+#    ins.mark_inset(ax,axins,loc1=2,loc2=4,fc='none',ec='0.5')
+    #wilcoxon annotate
+#    wilx = sst.wilcoxon(nohdf[x],nohdf[y],zero_method='pratt')
+#    text = 'Wilcoxon Rank: {}\nP-Value: {}'.format(wilx.statistic,
+#                                                np.round(wilx.pvalue,5))
+#    axins.annotate(text,xy=(0.05,0.75),xycoords='axes fraction')
+    if type(file) != bool:
+        fig.savefig(file,dpi=dpi,format='png',frameon=False)
+    plt.show()
 def rateVsCFrac(nohdf,size=(10,5),dec=4,dpi=50,file=False):
     #Data
     x = nohdf['c_otus']

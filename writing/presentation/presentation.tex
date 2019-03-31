@@ -433,6 +433,45 @@
     \end{center}
     \addtocounter{framenumber}{-1}
 \end{frame}
+\begin{frame}[fragile]{Example “Consensus” Network}
+    \vspace{-0.05in}
+    \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{network.png}}
+\end{frame}
+\begin{frame}[fragile]{Mean Node Degree}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{c_nc_deg_bar.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Gene Indel Rates}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{c_nc_indel_bar.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Gene Indel Rates}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{c_nc_rate_scatter.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Gene Indel Rate Difference Vs. Fraction CRISPR Species}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{cfrac_cncRateDiff_scattter.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Modularity Distributions}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{mod_violin.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Assortativity Distributions}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
+    \end{figure}
+\end{frame}
+%\begin{frame}[fragile]{Pair Plot}
+%    \begin{figure}[htb!]
+%        \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{pairplot.png}}
+%    \end{figure}
+%\end{frame}
 \begin{frame}[fragile]{Limitations \& Caveats}
     \begin{itemize}
         \item<2-> \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
@@ -442,6 +481,7 @@
         \item<6-> \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
     \end{itemize}
 \end{frame}
+\section*{Conclusion}
 \begin{frame}[fragile]{Possible Future Directions}
     \begin{itemize}
         \item<2-> \textbf{Infering direction}: Directed networks have a host of available analytic tools undirected networks do not
@@ -452,7 +492,6 @@
         \item<7-> \textbf{Considering bacterial ecology and environments}: Consider geographically close \ac{otu}s or differences between networks due to environmental factors
     \end{itemize}
 \end{frame}
-\section*{Conclusion}
 \begin{frame}[fragile]{}
     \begin{center}
         \Huge \textcolor{OliveGreen}{Conclusion}
@@ -499,4 +538,5 @@
     \printbibliography
 \end{frame}
 \end{document}
+
 

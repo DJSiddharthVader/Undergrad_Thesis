@@ -1,67 +1,71 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}CRISPR-Cas Systems}{3}
+\contentsline {section}{\numberline {1}CRISPR-Cas Systems}{3}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1}What Are They?}{3}
+\contentsline {subsection}{\numberline {1.1}What Are They?}{3}{subsection.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2}Diversity, Ubiquity And Detection}{3}
+\contentsline {subsection}{\numberline {1.2}Diversity, Ubiquity And Detection}{3}{subsection.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3}Applications In Biotechnology}{3}
+\contentsline {subsection}{\numberline {1.3}Applications In Biotechnology}{3}{subsection.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Horizontal Gene Transfer}{4}
+\contentsline {section}{\numberline {2}Horizontal Gene Transfer}{4}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Mechanisms}{4}
+\contentsline {subsection}{\numberline {2.1}Mechanisms}{4}{subsection.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Transformation}{4}
+\contentsline {paragraph}{Transformation}{4}{section*.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Conjugation}{4}
+\contentsline {paragraph}{Conjugation}{4}{section*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Transduction}{4}
+\contentsline {paragraph}{Transduction}{4}{section*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Rate Influencing Factors}{4}
+\contentsline {subsection}{\numberline {2.2}Rate Influencing Factors}{4}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Pan-genomes}{5}
+\contentsline {subsection}{\numberline {2.3}Pan-genomes}{5}{subsection.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4}Applications}{5}
+\contentsline {subsection}{\numberline {2.4}Applications}{5}{subsection.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Network Theory}{6}
+\contentsline {section}{\numberline {3}Network Theory}{6}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Parametric}{7}
+\contentsline {paragraph}{Parametric}{7}{section*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Phylogenetic}{7}
+\contentsline {paragraph}{Phylogenetic}{7}{section*.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Do CRISPR Systems Affect Horizontal Gene Transfer?}{8}
+\contentsline {section}{\numberline {4}Do CRISPR Systems Affect Horizontal Gene Transfer?}{8}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Interference Mechanisms}{8}
+\contentsline {subsection}{\numberline {4.1}Interference Mechanisms}{8}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Complexities And Costs Of CRISPR-Cas Systems}{8}
+\contentsline {subsection}{\numberline {4.2}Complexities And Costs Of CRISPR-Cas Systems}{8}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Potential Strategies For Reducing CRISPR-\ac {hgt} Trade-off Costs}{9}
+\contentsline {subsection}{\numberline {4.3}Potential Strategies For Reducing CRISPR-\ac {hgt} Trade-off Costs}{9}{subsection.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Hypothesis \& Objectives}{9}
+\contentsline {section}{\numberline {5}Hypothesis \& Objectives}{9}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Hypothesis}{9}
+\contentsline {subsection}{\numberline {5.1}Hypothesis}{9}{subsection.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Objectives}{9}
+\contentsline {subsection}{\numberline {5.2}Objectives}{9}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Methods}{10}
+\contentsline {section}{\numberline {6}Methods}{10}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Summary}{10}
+\contentsline {subsection}{\numberline {6.1}Summary}{10}{subsection.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Data Collection}{11}
+\contentsline {subsection}{\numberline {6.2}Data Collection}{11}{subsection.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3}Gene Presence/Absence Matrix}{11}
+\contentsline {subsection}{\numberline {6.3}Gene Presence/Absence Matrix}{11}{subsection.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4}Makophylo Rate Estimations}{12}
+\contentsline {subsection}{\numberline {6.4}Makophylo Rate Estimations}{12}{subsection.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.5}Network Construction}{12}
+\contentsline {subsection}{\numberline {6.5}Network Construction}{12}{subsection.6.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.6}Network Statistics}{12}
+\contentsline {subsection}{\numberline {6.6}Network Statistics}{12}{subsection.6.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Results}{13}
+\contentsline {section}{\numberline {7}Results}{13}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Discussion}{19}
+\contentsline {section}{\numberline {8}Discussion}{19}{section.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.1}Limitations}{19}
+\contentsline {subsection}{\numberline {8.1}Limitations}{19}{subsection.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Future Work}{20}
+\contentsline {section}{\numberline {9}Significance \& Future Work}{19}{section.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.1}Significance}{19}{subsection.9.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.2}Future Work}{19}{subsection.9.2}

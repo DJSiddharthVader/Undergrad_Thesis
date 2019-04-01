@@ -213,35 +213,46 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
 
 def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
-    #data
+    cols = sns.color_palette('coolwarm')
+    blue,red = cols[0],cols[-1]
+    #lin reg
     x,y = 'c_mean_clust', 'nc_mean_clust'
+    xdata = nohdf[x].astype(float).values
+    ydata = nohdf[y].astype(float).values
+    m,b,r,p,se = sst.linregress(xdata,ydata)
+    y = lambda x:m*x+b
     #main fig
-    sns.scatterplot(x=x,y=y,data=nohdf,ax=ax)
+    ax.scatter(xdata,ydata,color=blue)
+    ax.plot(xdata,y(xdata),color=red,
+       label='$R^2$: {}  P-val: {}'.format(np.round(r**2,5),np.round(p,20)))
     ax.set_xlabel('Non-CRISPR Mean Clustering Coefficient')
     ax.set_ylabel('CRISPR Mean Clustering Coefficient')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
+    ax.legend()
     #inlet fig
-#    axins = ins.zoomed_inset_axes(ax,2.5,loc=1)
-#    sns.scatterplot(x=x,y=y,data=nohdf,ax=axins)
-#    axins.set_xlim(0,10)
-#    axins.set_ylim(0,20)
-#    axins.xaxis.set_ticks_position('none')
-#    axins.yaxis.set_ticks_position('none')
-#    axins.set_xticklabels([])
-#    axins.set_yticklabels([])
-#    axins.set_xlabel('')
-#    axins.set_ylabel('')
-#    ins.mark_inset(ax,axins,loc1=2,loc2=4,fc='none',ec='0.5')
+    axins = ins.zoomed_inset_axes(ax,1.35,loc=4)
+    axins.scatter(xdata,ydata,color=blue)
+    axins.plot(xdata,y(xdata),color=red)
+    axins.set_xlim(0.03,0.16)
+    axins.set_ylim(0.02,0.17)
+    axins.xaxis.set_ticks_position('none')
+    axins.yaxis.set_ticks_position('none')
+    axins.set_xticklabels([])
+    axins.set_yticklabels([])
+    axins.set_xlabel('')
+    axins.set_ylabel('')
+    ins.mark_inset(ax,axins,loc1=2,loc2=4,fc='none',ec='0.5')
     #wilcoxon annotate
-#    wilx = sst.wilcoxon(nohdf[x],nohdf[y],zero_method='pratt')
-#    text = 'Wilcoxon Rank: {}\nP-Value: {}'.format(wilx.statistic,
-#                                                np.round(wilx.pvalue,5))
-#    axins.annotate(text,xy=(0.05,0.75),xycoords='axes fraction')
+    wilx = sst.wilcoxon(xdata,ydata,zero_method='pratt')
+    text = 'Wilcoxon Rank: {}\nP-Value: {}'.format(wilx.statistic,
+                                                np.round(wilx.pvalue,5))
+    axins.annotate(text,xy=(0.43,0.05),xycoords='axes fraction')
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-def rateVsCFrac(nohdf,size=(10,5),dec=4,dpi=50,file=False):
+
+def rateVsCFrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     #Data
     x = nohdf['c_otus']
     y1 = nohdf['c_indel']
@@ -251,20 +262,16 @@ def rateVsCFrac(nohdf,size=(10,5),dec=4,dpi=50,file=False):
     cols = sns.color_palette('coolwarm')
     ax.scatter(x=x,y=y1,color=cols[0],marker='+',label='CRISPR')
     ax.scatter(x=x,y=y2,color=cols[-1],marker='x',label='Non-CRISPR')
-    plt.legend()
     #CRISPR
     m,b,r,p,se = sst.linregress(x,y1)
     y = lambda x:m*x+b
-    ax.plot(x,y(x),color=cols[0])
-    text = 'CRISPR\n$R^2$: {}\nP-value: {}'.format(np.round(r**2,dec),np.round(p,dec))
-    ax.annotate(text,xy=(0.3,0.80),xycoords='axes fraction')
+    ax.plot(x,y(x),color=cols[0],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
     #Non-CRISPR
     m,b,r,p,se = sst.linregress(x,y2)
     y = lambda x:m*x+b
-    ax.plot(x,y(x),color=cols[-1])
-    text='Non-CRISPR\n$R^2$: {}\nP-value: {}'.format(np.round(r**2,dec),np.round(p,dec))
-    ax.annotate(text,xy=(0.5,0.80),xycoords='axes fraction')
+    ax.plot(x,y(x),color=cols[-1],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
     #plot formatting
+    plt.legend()
     ax.set_xlabel('Fraction of OTUs With A CRISPR System')
     ax.set_ylabel('Gene Indel Rate of OTUs')
     ax.spines['right'].set_visible(False)

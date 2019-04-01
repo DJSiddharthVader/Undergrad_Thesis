@@ -231,7 +231,7 @@ def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     ax.spines['top'].set_visible(False)
     ax.legend()
     #inlet fig
-    axins = ins.zoomed_inset_axes(ax,1.35,loc=4)
+    axins = ins.zoomed_inset_axes(ax,1.55,loc=4)
     axins.scatter(xdata,ydata,color=blue)
     axins.plot(xdata,y(xdata),color=red)
     axins.set_xlim(0.03,0.16)

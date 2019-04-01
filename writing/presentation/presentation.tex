@@ -24,9 +24,9 @@
 \usepackage{appendixnumberbeamer}
 \usepackage[natbib=true,
             bibencoding=utf8,
-            style=numeric,
+            style=authoryear,
             backend=biber,
-            autocite=superscript,
+            %autocite=superscript,
             sorting=none,
             useprefix=true]{biblatex}
 \addbibresource{../refs.bib}
@@ -235,7 +235,7 @@
             \item<2-> Conjugation: Transfer of DNA through cell-cell connections\autocite{trendslgt}
             \item<3-> Transformation: Incorportaion of free-floating DNA into the genome\autocite{trendslgt}
             \item<4-> Transduction: Transfer of DNA through phage\autocite{trendslgt}
-            \item<5-> \textbf{CRISPR-Cas directly affects Transduction and Transformation}\autocite{trendslgt}
+            \item<5-> \textbf{CRISPR-Cas directly affects \ac{hgt}}\autocite{trendslgt}
         \end{itemize}
     \end{column}
     \end{columns}
@@ -341,7 +341,7 @@
 \end{frame}
 \begin{frame}[fragile]{Previous Findings}
     \begin{itemize}
-        \item<2-> Gophna et al. (2015) found no realtion between the presence of \ac{crsp} systems and HGT over short evolutionary timescales\autocite{gophna15}
+        \item<2-> Gophna et al. (2015) found no realtion between the presence of \ac{crsp} systems and HGT over short evolutionary timescales
         \begin{itemize}
             \item<3-> Assume all singletons arrose from HGT
             \item<4-> Used GC\% to identify HGT
@@ -418,7 +418,7 @@
         \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
         \item<3-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
         \item<4-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of traingles containing $u$ \autocite{clustering}
-        \item<5-> \textbf{Node Assortativity}: $\frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$.\autocite{newmanmix}
+        \item<5-> \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$.\autocite{newmanmix}
         \item<6-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
         %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.\autocite{egcen}
 %        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
@@ -487,7 +487,7 @@
 \begin{frame}[fragile]{Limitations \& Caveats}
     \begin{itemize}
         \item<2-> \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
-        \item<3-> \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees were generated for each genus
+        \item<3-> \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees at most were generated for each genus
         \item<4-> \textbf{Signifigance Testing}: Samples are not necessairily independant in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
         \item<5-> \textbf{Taxonomic Mistakes}: Inconsistencies in taxonomic labelling can result in ignored or misplaced \ac{otu}s.
         \item<6-> \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
@@ -505,7 +505,7 @@
 \end{frame}
 \begin{frame}[fragile,plain]{Thanks}
     \begin{multicols}{2}
-     %Names
+    %Names
     \begin{minipage}[b][40ex][t]{\linewidth}
     Thank you to
     \begin{itemize}
@@ -541,6 +541,7 @@
 \end{frame}
 \begin{frame}[allowframebreaks,plain]{References}
     \printbibliography
+    \addtocounter{framenumber}{-5}
 \end{frame}
 \end{document}
 

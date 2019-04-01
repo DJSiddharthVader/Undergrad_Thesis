@@ -214,12 +214,8 @@
 \headcommand {\slideentry {8}{0}{0}{109/112}{}{0}}
 \defcounter {refsection}{0}\relax 
 \headcommand {\beamer@framepages {109}{112}}
-\defcounter {refsection}{0}\relax 
-\headcommand {\slideentry {8}{0}{0}{109/113}{}{0}}
-\defcounter {refsection}{0}\relax 
-\headcommand {\beamer@framepages {109}{113}}
-\headcommand {\beamer@partpages {1}{113}}
-\headcommand {\beamer@subsectionpages {94}{113}}
-\headcommand {\beamer@sectionpages {94}{113}}
-\headcommand {\beamer@documentpages {113}}
-\headcommand {\gdef \inserttotalframenumber {35}}
+\headcommand {\beamer@partpages {1}{112}}
+\headcommand {\beamer@subsectionpages {94}{112}}
+\headcommand {\beamer@sectionpages {94}{112}}
+\headcommand {\beamer@documentpages {112}}
+\headcommand {\gdef \inserttotalframenumber {29}}

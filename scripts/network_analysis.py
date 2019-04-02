@@ -52,7 +52,7 @@ def dfToNetwork(df,attrdict=None):
         nx.set_edge_attributes(network,attrdict)
     return network
 
-def loadAll(cdir,cdfpath=crisprdfpath,processes=8):
+def loadAll(cdir,cdfpath=crisprdfpath,processes=16):
     andf = pd.DataFrame(json.load(open(cdfpath)))
     pool = ThreadPool(processes)
     ldf = partial(loaddf,andf=andf,filterInternal=True)
@@ -87,18 +87,25 @@ def computeModularity(net):
         q += ave*d
     return q/m
 
-def diffStats_perBS(netlist,netstat,asdict=False):
+def diffStats_perBS(netlist,netstat,format=False):
     statlist = defaultdict(list)
     for net in tqdm(netlist):
         cnodes = [x for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']
         ncnodes = [x for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']
-        if not asdict:
+        if format == 'dict':
             cstats = list(dict(netstat(net,cnodes,weight='weight')).values())
             ncstats = list(dict(netstat(net,ncnodes,weight='weight')).values())
-        else:
+        elif format == 'list':
             alls = netstat(net,weight='weight')
             cstats = [alls[x] for x in cnodes]
             ncstats = [alls[x] for x in ncnodes]
+        elif format == 'edge_avg':
+            cnet = nx.edges(net,nbunch=cnodes)
+            cstats.append(cnet.size(weight='weight')/cnet.number_of_edges())
+            ncnet = nx.edges(net,nbunch=ncnodes)
+            cstats.append(ncnet.size(weight='weight')/ncnet.number_of_edges())
+        else:
+            raise ValueError('invalid calculation')
         statlist['crispr_mean'].append(np.mean(cstats))
         statlist['crispr_sem'].append(sst.sem(cstats))
         statlist['non-crispr_means'].append(np.mean(ncstats))
@@ -108,19 +115,36 @@ def diffStats_perBS(netlist,netstat,asdict=False):
         statlist['mw_pvals'].append(mwu.pvalue)
     return statlist
 
-def diffStats_total(netlist,netstat,asdict=False):
+def diffStats_total(netlist,netstat,format='dict'):
     statdict = {}
-    cnodes = list(set([x for net in netlist for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']))
-    ncnodes = list(set([x for net in netlist for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']))
+    #partition nodes
+#    cnodes = list(set([x for net in netlist for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']))
+#    ncnodes = list(set([x for net in netlist for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']))
     cstats,ncstats = [],[]
     for net in netlist:
-        if not asdict:
+        cnodes = list(set([x for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']))
+        ncnodes = list(set([x for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']))
+        if format == 'dict':
             cstats.extend(list(dict(netstat(net,cnodes,weight='weight')).values()))
             ncstats.extend(list(dict(netstat(net,ncnodes,weight='weight')).values()))
-        else:
+        elif format == 'list':
             alls = netstat(net,weight='weight')
             cstats.extend([alls[x] for x in cnodes])
             ncstats.extend([alls[x] for x in ncnodes])
+        elif format == 'edge_avg':
+            cnet = nx.subgraph(net,nbunch=cnodes)
+            ncnet = nx.subgraph(net,nbunch=ncnodes)
+            try:
+                cstats.append(cnet.size(weight='weight')/cnet.number_of_edges())
+            except ZeroDivisionError:
+                cstats.append(0)
+            try:
+                ncstats.append(ncnet.size(weight='weight')/ncnet.number_of_edges())
+            except ZeroDivisionError:
+                cstats.append(0)
+        else:
+            raise ValueError('invalid calculation')
+    #write stats
     statdict['crispr_mean'] = np.mean(cstats)
     statdict['crispr_sem'] = sst.sem(cstats)
     statdict['non-crispr_means'] = np.mean(ncstats)
@@ -144,10 +168,12 @@ def makeReport(netlist,genusname,perbs=False):
         report['degree'] = diffStats_perBS(netlist,nx.degree,False)
         report['eg_centrality'] = diffStats_perBS(netlist,nx.eigenvector_centrality_numpy,True)
         report['clustering'] = diffStats_perBS(netlist,nx.clustering,True)
+        report['avg_edge'] = diffStats_total(netlist,edgeaverage,False)
     else:
-        report['degree'] = diffStats_total(netlist,nx.degree,False)
-        report['eg_centrality'] = diffStats_total(netlist,nx.eigenvector_centrality_numpy,True)
-        report['clustering'] = diffStats_total(netlist,nx.clustering,True)
+        report['degree'] = diffStats_total(netlist,nx.degree,'dict')
+        #report['eg_centrality'] = diffStats_total(netlist,nx.eigenvector_centrality_numpy,'dict')
+        report['clustering'] = diffStats_total(netlist,nx.clustering,'list')
+        report['avg_edge'] = diffStats_total(netlist,nx.degree,'edge_avg')
     #report['c_vitaltiy'] = na.diffStats_perBS(netlist,nx.closeness_vitality,True)
     return basenet,report
 
@@ -159,17 +185,45 @@ def writeReport(plotnet,report,genusdir):
     json.dump(report,open(repath,'w'))
     return None
 
-if __name__ == '__main__':
-    genusdir = sys.argv[1]
-    perbs = bool(int(sys.argv[2]))
-    print(perbs)
+def main(genusdir):
+    perbs = False
     csvs = os.path.join(genusdir,'network_files/csvs')
-    print(csvs)
     genus = os.path.basename(genusdir)
     print(genus)
     netlist = loadAll(csvs)
     plotnet, report = makeReport(netlist,genusdir,perbs)
     writeReport(plotnet,report,genusdir)
+    return genus
+
+if __name__ == '__main__':
+    main(sys.argv[1])
+#    datadir = '/home/sid/thesis_SidReed/data/genus_data/smallEnough'
+#    gdirs = [os.path.join(datadir,gdir) for gdir in os.listdir(datadir)]
+#    pool = ThreadPool(processes=8)
+#    genera = list(tqdm(pool.imap(main,gdirs),total=len(gdirs),desc='genera'))
+#    for gdir in tqdm(gdirs,desc='genera'):
+#        main(gdir)
+
+
+#Pseudoalteromonas Serratia Phaeobacter Pediococcus Mycolicibacterium Stenotrophomonas Acetobacter Leptospira Citrobacter Paenibacillus Lactococcus Elizabethkingia Paraburkholderia Streptomyces Shewanella Geobacillus Pasteurella Cutibacterium Rhizobium Dehalococcoides Pantoea Spiroplasma Aeromonas Bradyrhizobium Porphyromonas Proteus Leuconostoc Propionibacterium Pectobacterium Capnocytophaga Alteromonas Ralstonia Flavobacterium Sphingomonas Mannheimia Mycobacteroides
+
+
+
+
+
+
+
+
+#    genusdir = sys.argv[1]
+#    perbs = bool(int(sys.argv[2]))
+#    print(perbs)
+#    csvs = os.path.join(genusdir,'network_files/csvs')
+#    print(csvs)
+#    genus = os.path.basename(genusdir)
+#    print(genus)
+#    netlist = loadAll(csvs)
+#    plotnet, report = makeReport(netlist,genusdir,perbs)
+#    writeReport(plotnet,report,genusdir)
 
 #Node stats (compares crispr vs non-crispr with test)
 #edge weight

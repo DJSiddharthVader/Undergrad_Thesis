@@ -60,12 +60,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7}Results}{13}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Discussion}{19}{section.8}
+\contentsline {section}{\numberline {8}Discussion}{21}{section.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.1}Limitations}{19}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.1}Gene Indel Rates are Different for \ac {crsp} and Non-\ac {crsp} \ac {otu}s}{21}{subsection.8.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Significance \& Future Work}{20}{section.9}
+\contentsline {subsection}{\numberline {8.2}Phylogenomic Networks Have Low Assortativity}{22}{subsection.8.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {9.1}Significance}{20}{subsection.9.1}
+\contentsline {subsection}{\numberline {8.3}\ac {hgt} Dynamics Vary Across Bacterial Genera}{22}{subsection.8.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {9.2}Future Work}{20}{subsection.9.2}
+\contentsline {subsection}{\numberline {8.4}Limitations}{22}{subsection.8.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9}Significance \& Future Work}{23}{section.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.1}Significance}{23}{subsection.9.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {9.2}Future Work}{23}{subsection.9.2}

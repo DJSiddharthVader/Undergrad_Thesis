@@ -4,6 +4,7 @@
 \usepackage[english]{babel}
 \usepackage{anyfontsize}
 \usepackage{xcolor}
+\newcommand{\myurl}[2][blue]{{\color{#1}\url{#2}}}
 %Theme
 \usetheme[pageofpages=of,% String between current/total page counts
           bullet=circle,% Use circles instead of squares for bullets.
@@ -19,9 +20,7 @@
 \graphicspath{{../nontext/figures/}{../nontext/images/}}
 \usepackage[section]{placeins} %for FloatBarrier
 \usepackage{multicol}
-\newcommand{\myurl}[2][blue]{{\color{#1}\url{#2}}}
 %Refernces
-\usepackage{appendixnumberbeamer}
 \usepackage[natbib=true,
             bibencoding=utf8,
             style=authoryear,
@@ -105,6 +104,15 @@
   \vspace{-0.25in}
 }
 \makeatother
+%Dont Count backup Slide Numbers
+\newcommand{\backupbegin}{
+       \newcounter{framenumbervorappendix}
+          \setcounter{framenumbervorappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+     \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+        \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
 %Abbreviations
 \usepackage{acro}
 %otu
@@ -170,10 +178,10 @@
 \begin{frame}[plain]{Table of Contents}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
-    \addtocounter{framenumber}{-1}
+  \addtocounter{framenumber}{-1}
 \end{frame}
-\section{CRISPR-Cas systems}
-\begin{frame}[fragile,plain]{}
+\section{Background}
+\begin{frame}[fragile,plain]{}%CRISPR-Cas Systems}
     \begin{center}
         \Huge \textcolor{OliveGreen}{CRISPR-Cas systems}
     \end{center}
@@ -184,8 +192,10 @@
     \begin{column}{0.5\textwidth}
         \begin{itemize}
             \item<2-> Adaptive Bacterial Immune System
-            \item<3-> Protects against foreign DNA
-            \item<4-> Requires Cas proteins and CRISPR loci
+            \item<3-> Failed “infection” $\to$ spacer acquisition $\to$ targeted degredation for next “infection”
+            \item<4-> Protects against foreign DNA
+            \item<5-> Requires Cas proteins and CRISPR loci
+            \item<6-> $45\%$ of bacteria have CRISPR loci $(n=6782)$ \autocite{crispdb}
         \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -196,38 +206,13 @@
     \end{column}
     \end{columns}
 \end{frame}
-\begin{frame}[fragile]{Diversity \& Ubiquity}
-    \begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}
-            \item<2-> $45\%$ of bacteria have CRISPR loci $(n=6782)$ \autocite{crispdb}
-            \item<3-> 3 Main Types, multiple sub types \autocite{acqorres}
-            \item<4-> CRISPR arrays represent unique life history of an organism
-            \item<5-> $11\%-28\%$ are false or orphaned CRISPR loci \autocite{ineqcas}
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-    \begin{figure}[htb!]\onslide<2->
-        \makebox[\textwidth][c]{\includegraphics[width=0.9\linewidth]{CRISPR-types_evocas.jpg}}
-        \autocite{evocas}
-    \end{figure}
-    \end{column}
-    \end{columns}
-\end{frame}
-\begin{frame}[fragile]{Biotech Application}
-        \begin{figure}[htb!]\onslide<2->
-            \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{CRISPR-apps.jpg}}
-            \autocite{crispgen}
-        \end{figure}
-\end{frame}
-\section{Horizontal Gene Transfer}
-\begin{frame}[fragile,plain]{}
+\begin{frame}[fragile,plain]{}%HGT}
     \begin{center}
         \Huge \textcolor{OliveGreen}{Horizontal Gene Transfer}
     \end{center}
     \addtocounter{framenumber}{-1}
 \end{frame}
-\begin{frame}[fragile]{Mechanisms}
+\begin{frame}[fragile]{Horizontal Gene Transfer Mechanisms}
     \begin{columns}
     \begin{column}{0.5\textwidth}
         \begin{figure}[htb!]\onslide<1->
@@ -245,22 +230,6 @@
     \end{column}
     \end{columns}
 \end{frame}
-\begin{frame}[fragile]{Pan-Genomes}
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{figure}[htb!]\onslide<2->
-            \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{pangenome_pang.jpg}}
-            \autocite{pang}
-        \end{figure}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-        \begin{figure}[htb!]\onslide<3->
-            \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{pangGrapgs_ecopan.jpg}}
-            \autocite{ecopan}
-        \end{figure}
-    \end{column}
-\end{columns}
-\end{frame}
 \begin{frame}[fragile]{Rate Influencing Factors}
     \begin{itemize}
         \item<2-> Amount of exogenous DNA/cell density/phage density
@@ -269,14 +238,7 @@
         \item<5-> Sequence compatibility
     \end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Applications}
-    \begin{figure}[htb!]\onslide<2->
-        \makebox[\textwidth][c]{\includegraphics[width=0.6\linewidth]{spreadDiagram_argspread.png}}
-        \autocite{argspread}
-    \end{figure}
-\end{frame}
-\section{Phylogenomic Networks}
-\begin{frame}[fragile,plain]{}
+\begin{frame}[fragile,plain]{}%Phylonets}
     \begin{center}
         \Huge \textcolor{OliveGreen}{Phylogenomic Networks}
     \end{center}
@@ -294,55 +256,49 @@
         \begin{itemize}
             \item<2-> Useful mathematical abstraction of real world system
             \item<3-> Nodes can have attributes
-            \item<4-> Directed or Undirected Edges
-            \item<5-> Weighted or Unweighted Edges
+            \item<4-> Edges can have weights
+            %\item<5-> Directed or Undirected Edges
         \end{itemize}
     \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[fragile]{Prokaryotic ``Net of Life''}
-    \begin{figure}[htb!]\onslide<2->
-        \makebox[\textwidth][c]{\includegraphics[width=0.7\linewidth]{net_netoflife.png}}
-        \autocite{netoflife}
-    \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Construction}
-        \begin{figure}[htb!]\onslide<1->
-            \makebox[\textwidth][c]{\includegraphics[width=0.6\linewidth]{hgtiInferenceMethods_ihgt.png}}
-            \autocite{ihgt}
-        \end{figure}
-\end{frame}
-\section{Do CRISPR Systems Affect Horizontal Gene Transfer?}
-\begin{frame}[fragile,plain]{}
+\begin{frame}[fragile,plain]{}%Do  They?}
     \begin{center}
         \Huge \textcolor{OliveGreen}{Do CRISPR Systems Affect Horizontal Gene Transfer?}
     \end{center}
     \addtocounter{framenumber}{-1}
 \end{frame}
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{}%Yes}
     \begin{center}
         \Huge Yes
     \end{center}
 \end{frame}
-\begin{frame}[fragile]{CRISPR Cost Complexity}
-    \begin{itemize}
+\begin{frame}[fragile]{CRISPR Cost Complexity and Curbing It}
+    \begin{columns}
+    \begin{column}{0.5\textwidth} %Costs
+        \begin{itemize}
         \item<2-> Cost trade off factors:
         \begin{itemize}
             \item<3-> Metabolic maintenance \autocite{crispgen}
-            \item<4-> Environmental pressures \autocite{hospital}
-            \item<5-> Off-target effects (autoimmune) \autocite{selfcrisp}
-            \item<6-> Anti-CRISPR systems \autocite{acqorres}
+            \item<4-> Off-target effects (autoimmune) \autocite{selfcrisp}
+            \item<5-> Environmental pressures \autocite{hospital}
             \item<7-> Phage virulence/density \autocite{acqorres}
-            \item<8-> Prophage abundance \autocite{transhgt}
+            \item<8-> Anti-CRISPR systems \autocite{acqorres}
+            \item<10-> Prophage abundance \autocite{transhgt}
+        \end{itemize}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth} %Curbing it
+    \begin{itemize}
+        \item<2-> Cost Reduction Strategies
+        \begin{itemize}
+            \item<6-> Selective CRISPR inactivation \autocite{crispgen}
+            \item<9-> CRISPRs themselves can be transferred $\implies$ population level immunity \autocite{crisprlgt}
+            \item<11-> CRISPR can enhance transduction-mediated HGT \autocite{transhgt}
         \end{itemize}
     \end{itemize}
-\end{frame}
-\begin{frame}[fragile]{Curbing CRISPR Cost}
-    \begin{itemize}
-        \item<2-> CRISPRs themselves can be transferred $\implies$ population level immunity \autocite{crisprlgt}
-        \item<3-> Selective CRISPR inactivation \autocite{crispgen}
-        \item<4-> CRISPR can enhance transduction-mediated HGT \autocite{transhgt}
-    \end{itemize}
+    \end{column}
+\end{columns}
 \end{frame}
 \begin{frame}[fragile]{Previous Findings}
     \begin{itemize}
@@ -359,19 +315,11 @@
     \end{itemize}
 \end{frame}
 \section{My Project}
-\begin{frame}[fragile,plain]{}
+\begin{frame}[fragile,plain]{}%My Project}
     \begin{center}
         \Huge \textcolor{OliveGreen}{My Project}
     \end{center}
     \addtocounter{framenumber}{-1}
-\end{frame}
-\begin{frame}[fragile]{Hypothesis}
-    \onslide<2-> \begin{block}{Null Hypothesis}
-     Bacterial strains or genera with known CRISPR systems will show no significant differences in network statistics compared to those strains or genera without known CRISPR systems\onslide<1>.
-    \end{block}
-    \onslide<3-> \begin{block}{Alternative Hypothesis}
-     Bacterial strains or genera with known \ac{crsp} systems will show a significant difference in at least 1 network statistic compared to those strains or  genera without known \ac{crsp} systems.\onslide<2>
-    \end{block}
 \end{frame}
 \begin{frame}[fragile]{Objectives}
     \onslide<2-> \begin{block}{Within Network Comparisons}
@@ -384,7 +332,7 @@
         Compare gene Indel rates to node/network statistics for CRISPR containing and non-CRISPR containing \ac{otu}s
     \end{block}
 \end{frame}
-\begin{frame}[fragile]{Workflow}
+\begin{frame}[fragile]{Workflow (Per Genus)}
 \begin{center}
     \begin{tikzpicture}
         % boxes
@@ -417,19 +365,6 @@
         \onslide<12-> \path [line] (node8) -- (node12);
     \end{tikzpicture}
 \end{center}
-\end{frame}
-\begin{frame}[fragile]{Network Statistics}
-    \begin{itemize}
-        %\item<2-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
-        \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incident to $u$
-        \item<3-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of triangles containing $u$ \autocite{clustering}
-        \item<4-> \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$. \autocite{newmanmix}
-        \item<5-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
-        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$. \autocite{egcen}
-%        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
-%        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
-%        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
-    \end{itemize}
 \end{frame}
 \section{Results}
 \begin{frame}[fragile,plain]{}
@@ -467,18 +402,8 @@
     \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{c_nc_clust_scatter.png}}
 \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Modularity Distributions}
-    \begin{figure}[htb!]
-        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{mod_violin.png}}
-    \end{figure}
-\end{frame}
-\begin{frame}[fragile]{Assortativity Distributions}
-    \begin{figure}[htb!]
-        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
-    \end{figure}
-\end{frame}
-\section*{Conclusion}
-\begin{frame}[fragile]{}
+\section{Conclusion}
+\begin{frame}[fragile]{}%Conclusion}
     \begin{center}
         \Huge \textcolor{OliveGreen}{Conclusion}
     \end{center}
@@ -488,9 +413,9 @@
     \begin{itemize}
         \item<2-> Large variation in \ac{hgt} rate between genera.
         \item<3-> \ac{crspc} systems broadly associated with lower \ac{hgt} rates, with prominent exceptions
-        \item<4-> High mixing between \ac{crsp} and non-\ac{crsp} \ac{otu}s
-        \item<5-> Population level effects of \ac{crspc} systems may decrease \ac{hgt} rates
-        \item<6-> Interplay of \ac{crspc} systems  and \ac{hgt} is complex and warrants further study
+        %\item<4-> High mixing between \ac{crsp} and non-\ac{crsp} \ac{otu}s
+        \item<4-> Population level effects of \ac{crspc} systems may decrease \ac{hgt} rates
+        \item<5-> Interplay of \ac{crspc} systems  and \ac{hgt} is complex and warrants further study
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Possible Future Directions}
@@ -503,7 +428,7 @@
     \item<7-> \textbf{Considering bacterial ecology and environments}: Consider geographically close \ac{otu}s or differences between networks due to environmental factors
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{}%Is Sharing Caring?}
     \begin{center}
         \onslide<1-> \Huge \textcolor{OliveGreen}{Is Sharing Caring?}\\
         \vspace{0.2in}
@@ -512,7 +437,7 @@
         \onslide<3-> Jury's still out for bacteria
     \end{center}
 \end{frame}
-\begin{frame}[fragile,plain]{Thanks}
+\begin{frame}[fragile]{Thanks}
     \begin{multicols}{2}
     %Names
     \begin{minipage}[b][40ex][t]{\linewidth}
@@ -548,10 +473,122 @@
     \end{minipage}
     \end{multicols}
 \end{frame}
+\backupbegin
 \begin{frame}[allowframebreaks,plain]{References}
     \printbibliography
     \addtocounter{framenumber}{-5}
 \end{frame}
+\section*{Backup Slides}
+\begin{frame}[fragile]{Diversity \& Ubiquity}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item<2-> $45\%$ of bacteria have CRISPR loci $(n=6782)$ \autocite{crispdb}
+            \item<3-> 3 Main Types, multiple sub types \autocite{acqorres}
+            \item<4-> CRISPR arrays represent unique life history of an organism
+            \item<5-> $11\%-28\%$ are false or orphaned CRISPR loci \autocite{ineqcas}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{figure}[htb!]\onslide<2->
+        \makebox[\textwidth][c]{\includegraphics[width=0.9\linewidth]{CRISPR-types_evocas.jpg}}
+        \autocite{evocas}
+    \end{figure}
+    \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}[fragile]{CRISPR Biotech Application}
+        \begin{figure}[htb!]\onslide<2->
+            \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{CRISPR-apps.jpg}}
+            \autocite{crispgen}
+        \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Pan-Genomes}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{figure}[htb!]\onslide<2->
+            \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{pangenome_pang.jpg}}
+            \autocite{pang}
+        \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{figure}[htb!]\onslide<3->
+            \makebox[\textwidth][c]{\includegraphics[width=0.8\linewidth]{pangGrapgs_ecopan.jpg}}
+            \autocite{ecopan}
+        \end{figure}
+    \end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[fragile]{HGT Applications}
+    \begin{figure}[htb!]\onslide<2->
+        \makebox[\textwidth][c]{\includegraphics[width=0.6\linewidth]{spreadDiagram_argspread.png}}
+        \autocite{argspread}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Prokaryotic ``Net of Life''}
+    \begin{figure}[htb!]\onslide<2->
+        \makebox[\textwidth][c]{\includegraphics[width=0.7\linewidth]{net_netoflife.png}}
+        \autocite{netoflife}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Phylogenomic Network Construction}
+        \begin{figure}[htb!]\onslide<1->
+            \makebox[\textwidth][c]{\includegraphics[width=0.6\linewidth]{hgtiInferenceMethods_ihgt.png}}
+            \autocite{ihgt}
+        \end{figure}
+\end{frame}
+%\begin{frame}[fragile]{CRISPR Cost Complexity}
+%    \begin{itemize}
+%        \item<2-> Cost trade off factors:
+%        \begin{itemize}
+%            \item<3-> Metabolic maintenance \autocite{crispgen}
+%            \item<4-> Environmental pressures \autocite{hospital}
+%            \item<5-> Off-target effects (autoimmune) \autocite{selfcrisp}
+%            \item<6-> Anti-CRISPR systems \autocite{acqorres}
+%            \item<7-> Phage virulence/density \autocite{acqorres}
+%            \item<8-> Prophage abundance \autocite{transhgt}
+%        \end{itemize}
+%    \end{itemize}
+%\end{frame}
+%\begin{frame}[fragile]{Curbing CRISPR Cost}
+%    \begin{itemize}
+%        \item<2-> CRISPRs themselves can be transferred $\implies$ population level immunity \autocite{crisprlgt}
+%        \item<3-> Selective CRISPR inactivation \autocite{crispgen}
+%        \item<4-> CRISPR can enhance transduction-mediated HGT \autocite{transhgt}
+%    \end{itemize}
+%\end{frame}
+%\begin{frame}[fragile]{Hypothesis}
+%    \onslide<2-> \begin{block}{Null Hypothesis}
+%     Bacterial strains or genera with known CRISPR systems will show no significant differences in network statistics compared to those strains or genera without known CRISPR systems\onslide<1>.
+%    \end{block}
+%    \onslide<3-> \begin{block}{Alternative Hypothesis}
+%     Bacterial strains or genera with known \ac{crsp} systems will show a significant difference in at least 1 network statistic compared to those strains or  genera without known \ac{crsp} systems.\onslide<2>
+%    \end{block}
+%\end{frame}
+\begin{frame}[fragile]{Network Statistics}
+    \begin{itemize}
+        %\item<2-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
+        \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incident to $u$
+        \item<3-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of triangles containing $u$ \autocite{clustering}
+        \item<4-> \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$. \autocite{newmanmix}
+        \item<5-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
+        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$. \autocite{egcen}
+%        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
+%        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+%        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Modularity Distributions}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{mod_violin.png}}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Assortativity Distributions}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
+    \end{figure}
+\end{frame}
+\backupend
 \end{document}
 
 

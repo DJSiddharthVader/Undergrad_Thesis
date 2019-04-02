@@ -130,12 +130,17 @@
 %cas
 \DeclareAcronym{cas}{
     short = Cas,
-    long  = CRISPR-associated
+    long  = CRISPR-associated protein
 }
 %crsp
 \DeclareAcronym{crsp}{
     short = CRISPR,
     long  = Clustered Regularly Interspaced Short Palindromic Repeat
+}
+%crspc
+\DeclareAcronym{crspc}{
+    short = CRISPR-Cas,
+    long  = CRISPR-Cas
 }
 %HGT
 \DeclareAcronym{hgt}{
@@ -195,10 +200,10 @@
     \begin{columns}
     \begin{column}{0.5\textwidth}
         \begin{itemize}
-            \item<2-> $45\%$ of bacteria have CRISPR loci $(n=6782)$\autocite{crispdb}
-            \item<3-> 3 Main Types, multiple subtypes\autocite{acqorres}
+            \item<2-> $45\%$ of bacteria have CRISPR loci $(n=6782)$ \autocite{crispdb}
+            \item<3-> 3 Main Types, multiple sub types \autocite{acqorres}
             \item<4-> CRISPR arrays represent unique life history of an organism
-            \item<5-> $11\%-28\%$ are false or orphaned CRISPR loci\autocite{ineqcas}
+            \item<5-> $11\%-28\%$ are false or orphaned CRISPR loci \autocite{ineqcas}
         \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -232,10 +237,10 @@
     \end{column}
     \begin{column}{0.5\textwidth}
         \begin{itemize}
-            \item<2-> Conjugation: Transfer of DNA through cell-cell connections\autocite{trendslgt}
-            \item<3-> Transformation: Incorportaion of free-floating DNA into the genome\autocite{trendslgt}
-            \item<4-> Transduction: Transfer of DNA through phage\autocite{trendslgt}
-            \item<5-> \textbf{CRISPR-Cas directly affects \ac{hgt}}\autocite{trendslgt}
+            \item<2-> Transformation: Incorporation of free-floating DNA into the genome \autocite{trendslgt}
+            \item<3-> Conjugation: Transfer of DNA through cell-cell connections \autocite{trendslgt}
+            \item<4-> Transduction: Transfer of DNA through phage \autocite{trendslgt}
+            \item<5-> \textbf{CRISPR-Cas directly affects \ac{hgt}} \autocite{trendslgt}
         \end{itemize}
     \end{column}
     \end{columns}
@@ -307,10 +312,10 @@
             \autocite{ihgt}
         \end{figure}
 \end{frame}
-\section{Do CRRISPR Systems Affect Horizontal Gene Transfer?}
+\section{Do CRISPR Systems Affect Horizontal Gene Transfer?}
 \begin{frame}[fragile,plain]{}
     \begin{center}
-        \Huge \textcolor{OliveGreen}{Do CRRISPR Systems Affect Horizontal Gene Transfer?}
+        \Huge \textcolor{OliveGreen}{Do CRISPR Systems Affect Horizontal Gene Transfer?}
     \end{center}
     \addtocounter{framenumber}{-1}
 \end{frame}
@@ -321,35 +326,35 @@
 \end{frame}
 \begin{frame}[fragile]{CRISPR Cost Complexity}
     \begin{itemize}
-        \item<2-> Cost tradeoff factors:
+        \item<2-> Cost trade off factors:
         \begin{itemize}
-            \item<3-> Metabolic maintenace\autocite{crispgen}
-            \item<4-> Environmental pressures\autocite{hospital}
-            \item<5-> Off-target effects (autoimmune)\autocite{selfcrisp}
-            \item<6-> Anti-CRISPR systems\autocite{acqorres}
-            \item<7-> Phage virulence/density\autocite{acqorres}
-            \item<8-> Prophage abundance\autocite{transhgt}
+            \item<3-> Metabolic maintenance \autocite{crispgen}
+            \item<4-> Environmental pressures \autocite{hospital}
+            \item<5-> Off-target effects (autoimmune) \autocite{selfcrisp}
+            \item<6-> Anti-CRISPR systems \autocite{acqorres}
+            \item<7-> Phage virulence/density \autocite{acqorres}
+            \item<8-> Prophage abundance \autocite{transhgt}
         \end{itemize}
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Curbing CRISPR Cost}
     \begin{itemize}
-        \item<2-> CRISPRs themselves can be transfered $\implies$ population level immunity\autocite{crisprlgt}
-        \item<3-> Selective CRISPR inactivation\autocite{crispgen}
-        \item<4-> CRISPR can enhance transduction-mediated HGT\autocite{transhgt}
+        \item<2-> CRISPRs themselves can be transferred $\implies$ population level immunity \autocite{crisprlgt}
+        \item<3-> Selective CRISPR inactivation \autocite{crispgen}
+        \item<4-> CRISPR can enhance transduction-mediated HGT \autocite{transhgt}
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Previous Findings}
     \begin{itemize}
-        \item<2-> Gophna et al. (2015) found no realtion between the presence of \ac{crsp} systems and HGT over short evolutionary timescales
+        \item<2-> Gophna et al. (2015) found no relation between the presence of \ac{crsp} systems and HGT over short evolutionary timescales
         \begin{itemize}
-            \item<3-> Assume all singletons arrose from HGT
+            \item<3-> Assume all singletons arose from HGT
             \item<4-> Used GC\% to identify HGT
         \end{itemize}
-        \item<5-> Contradicted by a former underdraduate thesis student
+        \item<5-> Contradicted by a former undergraduate thesis student
         \begin{itemize}
             \item<6-> Can see inhibitory effects of CRIPSR on HGT over short evolutionary time scales
-            \item<7-> Higher gene indel rates for CRISPR containg genera than non-CRISPR containing outgroups
+            \item<7-> Higher gene indel rates for CRISPR containing \ac{otu}s than non-CRISPR containing outgroups
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -361,22 +366,22 @@
     \addtocounter{framenumber}{-1}
 \end{frame}
 \begin{frame}[fragile]{Hypothesis}
-    \onslide<1-> \begin{block}{Null Hypothesis}
+    \onslide<2-> \begin{block}{Null Hypothesis}
      Bacterial strains or genera with known CRISPR systems will show no significant differences in network statistics compared to those strains or genera without known CRISPR systems\onslide<1>.
     \end{block}
-    \onslide<2-> \begin{block}{Alternative Hypothesis}
+    \onslide<3-> \begin{block}{Alternative Hypothesis}
      Bacterial strains or genera with known \ac{crsp} systems will show a significant difference in at least 1 network statistic compared to those strains or  genera without known \ac{crsp} systems.\onslide<2>
     \end{block}
 \end{frame}
 \begin{frame}[fragile]{Objectives}
     \onslide<2-> \begin{block}{Within Network Comparisons}
-        For genera with CRISPR conatining strains, compare the node statistics of CRIPSR-containing strain to non-CRISPR-containing strains.
+        For genera with CRISPR containing \ac{otu}s, compare the node statistics of CRIPSR containing \ac{otu}s to non-CRISPR containing \ac{otu}s.
     \end{block}
 %    \onslide<3-> \begin{block}{Between Network Comparisons}
-%        For genera with no CRISPR conatining strains, compare the network statistics of mixed to non-CRISPR-containing networks.
+%        For genera with no CRISPR containing strains, compare the network statistics of mixed to non-CRISPR-containing networks.
 %    \end{block}
     \onslide<3-> \begin{block}{Gene Indel Rates vs. Network Statistics}
-        Compare gene InDel rates to node/network statistics for CRISPR-containing and non-CRISPR-containing strains/genera.
+        Compare gene Indel rates to node/network statistics for CRISPR containing and non-CRISPR containing \ac{otu}s
     \end{block}
 \end{frame}
 \begin{frame}[fragile]{Workflow}
@@ -390,10 +395,10 @@
         \onslide<4->  \node [block,above=0.5cm of node4]  (node5)  {Get 16S Genes};
         \onslide<8->  \node [block,above=0.5cm of node5]  (node6)  {Gene Trees};
         \onslide<5->  \node [block,right=0.5cm of node5]  (node7)  {Species Tree};
-        \onslide<7->  \node [block,below=0.5cm of node7]  (node8)  {Gene InDel Rates};
+        \onslide<7->  \node [block,below=0.5cm of node7]  (node8)  {Gene Indel Rates};
         \onslide<9->  \node [block,above=0.5cm of node7]  (node9)  {Infer Network};
-        \onslide<10->  \node [block,right=0.5cm of node9]  (node10)  {Annotate CRISPR};
-        \onslide<11-> \node [block,below=0.5cm of node10]  (node11) {Compute Stats};
+        \onslide<10-> \node [block,right=0.5cm of node9]  (node10)  {Annotate CRISPR};
+        \onslide<11-> \node [block,below=0.5cm of node10] (node11) {Compute Stats};
         \onslide<12-> \node [flock,below=0.5cm of node11] (node12) {Look For Trends};
         %lines
         \onslide<2->  \path [line] (node1) -- (node2);
@@ -415,12 +420,12 @@
 \end{frame}
 \begin{frame}[fragile]{Network Statistics}
     \begin{itemize}
-        \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
-        \item<3-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
-        \item<4-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of traingles containing $u$ \autocite{clustering}
-        \item<5-> \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$.\autocite{newmanmix}
-        \item<6-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
-        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.\autocite{egcen}
+        %\item<2-> \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
+        \item<2-> \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incident to $u$
+        \item<3-> \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of triangles containing $u$ \autocite{clustering}
+        \item<4-> \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$. \autocite{newmanmix}
+        \item<5-> \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \autocite{modularity}
+        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$. \autocite{egcen}
 %        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
 %        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
 %        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
@@ -452,7 +457,7 @@
         \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{c_nc_rate_scatter.png}}
     \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Gene Indel Rate Difference Vs. Fraction CRISPR Species}
+\begin{frame}[fragile]{Gene Indel Rate Vs. Fraction of CRISPR OTUs}
     \begin{figure}[htb!]
         \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{cfrac_cncRateDiff_scattter.png}}
     \end{figure}
@@ -472,11 +477,6 @@
         \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
     \end{figure}
 \end{frame}
-%\begin{frame}[fragile]{Pair Plot}
-%    \begin{figure}[htb!]
-%        \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{pairplot.png}}
-%    \end{figure}
-%\end{frame}
 \section*{Conclusion}
 \begin{frame}[fragile]{}
     \begin{center}
@@ -484,24 +484,33 @@
     \end{center}
     \addtocounter{framenumber}{-1}
 \end{frame}
-\begin{frame}[fragile]{Limitations \& Caveats}
+\begin{frame}[fragile]{Findings}
     \begin{itemize}
-        \item<2-> \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
-        \item<3-> \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees at most were generated for each genus
-        \item<4-> \textbf{Signifigance Testing}: Samples are not necessairily independant in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
-        \item<5-> \textbf{Taxonomic Mistakes}: Inconsistencies in taxonomic labelling can result in ignored or misplaced \ac{otu}s.
-        \item<6-> \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
+        \item<2-> Large variation in \ac{hgt} rate between genera.
+        \item<3-> \ac{crspc} systems broadly associated with lower \ac{hgt} rates, with prominent exceptions
+        \item<4-> High mixing between \ac{crsp} and non-\ac{crsp} \ac{otu}s
+        \item<5-> Population level effects of \ac{crspc} systems may decrease \ac{hgt} rates
+        \item<6-> Interplay of \ac{crspc} systems  and \ac{hgt} is complex and warrants further study
     \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Possible Future Directions}
 \begin{itemize}
-    \item<2-> \textbf{Inferring direction}: Directed networks have a host of available analytic tools undirected networks do not
-    \item<3-> \textbf{Gene function analysis}: Considering the transfer dynamics of different functional classes of genes
-    \item<4-> \textbf{Studying movement of \ac{crsp} systems}: Studying how frequently \ac{crsp} systems themselves are transferred from arrays, \textit{Cas} genes
-    \item<5-> \textbf{Intergenic comparisons}: Combine any set of fasta files from \ac{otu}s for analyzing transfer dynamics
-    \item<6-> \textbf{Continuous \ac{crsp} activity}: Labelling nodes by estimated \ac{crsp} activity (array length, transciptomic data, etc.)
+    \item<2-> \textbf{Inferring direction}: Directed networks have a host of available analytic tools Undirected networks do not
+    \item<3-> \textbf{Continuous \ac{crsp} activity}: Labeling nodes by estimated \ac{crsp} activity (array length, transciptomic data, etc.)
+    \item<4-> \textbf{Gene function analysis}: Considering the transfer dynamics of different functional classes of genes
+    \item<5-> \textbf{Studying movement of \ac{crsp} systems}: Studying how frequently \ac{crsp} systems themselves are transferred from arrays, \textit{Cas} genes
+    \item<6-> \textbf{Intergenic comparisons}: Combine any set of fasta files from \ac{otu}s for analyzing transfer dynamics
     \item<7-> \textbf{Considering bacterial ecology and environments}: Consider geographically close \ac{otu}s or differences between networks due to environmental factors
 \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{}
+    \begin{center}
+        \onslide<1-> \Huge \textcolor{OliveGreen}{Is Sharing Caring?}\\
+        \vspace{0.2in}
+        \Large
+        \onslide<2-> Yes, for researchers\\
+        \onslide<3-> Jury's still out for bacteria
+    \end{center}
 \end{frame}
 \begin{frame}[fragile,plain]{Thanks}
     \begin{multicols}{2}

@@ -26,12 +26,17 @@ echo "building species trees"
 python "$scriptdir"/build_16S_species_tree_from_families.py all_nucleotides.fna fasta_headers_info.json
 echo "running markophylo"
 Rscript "$scriptdir"/markophylo_indel_estiamtes.R "species_tree_files/species_tree/species_tree.con.tre" binary_pa_matrix.csv "$crispr_annotation_info" 2>| markophylo.errs
+echo "parsing markophylo"
+python "$scriptdir"/parse_markophylo_output.py ./
 echo "building gene trees"
 python "$scriptdir"/generate_gene_trees.py gene_families.json all_nucleotides.fna
 echo "building  network"
 Rscript "$scriptdir"/network_builder.R ./
+echo "generating network report"
+python "$scriptdir"/network_analysis.py ./
 end="$(date +%s)"
 echo "end time: $(date)"
-runtime="$(echo "($end-$start)/60" | bc)"
-echo "runtime for $genus: $runtime mins"
+hrs="$(echo "($end-$start)/3600" | bc)"
+mins="$(echo "($end-$start-$hrs*3600)/60" | bc)"
+echo "runtime for $genus: $hrs hours $mins minutes"
 

@@ -1,10 +1,26 @@
 \section{Discussion}
+\subsection{Gene Indel Rates are Different for \ac{crsp} and Non-\ac{crsp} \ac{otu}s}
+For most genera, the gene indel rate for non-\ac{crsp} genera is larger than for \ac{crsp} genera.
+This is in-line with literature surrounding the mechanisms of \ac{hgt} as \ac{crspc} systems are meant to stop the integration of foreign DNA into the bacterial genome.
+Despite this, the mean node degree of \ac{crsp} and non-\ac{crsp} \ac{otu}s is relatively similar across genera.
+One reason for this discrepancy may be that there are often more non-\ac{crsp} \ac{otu}s than \ac{crsp} \ac{otu}s, thus more genes are exchanged between all non-\ac{crsp} \ac{otu}s, but each non-\ac{crsp} \ac{otu} transfers genes at a similar rate to \ac{crsp} \ac{otu}s.
+One possible explanation for certain genera having very high gene indel rates for \ac{crsp} \ac{otu}s may be that it is an efficient way to acquire new spacers.
+\ac{crspc} systems may enhance \ac{hgt} to preemptively acquire new spacers from the environment in response to environmental phage density.
+\subsection{Phylogenomic Networks Have Low Assortativity}
+There seems to be significant \ac{hgt} between \ac{crsp} and non-\ac{crsp} \ac{otu}s, with no clear clustering, assortativity or modularity among most of the networks examined.
+\ac{crspc} systems do not appear to have a segregating effect on the network, but do appear to have a population level effect of decreasing the rate  of \ac{hgt}.
+As suggested by \citep{transhgt} \ac{crspc} systems may have a population level effect on \ac{hgt} rate, but it appears to be suppressive in this case, as opposed to theirs.
+\subsection{\ac{hgt} Dynamics Vary Across Bacterial Genera}
+Despite some trends being observable, the one constant is that there is significant variability between genera with regards to \ac{hgt}.
+\ac{hgt} rates can be similar or significantly different between \ac{crsp} and non-\ac{crsp} \ac{otu}s, either can be larger, both can be similar and either large or small.
+While the means are similar, the shapes of the distributions of network assortativity and modularity are not homogeneous.
 \subsection{Limitations}
 Some factors that may have introduced bias or error into this analysis:
 \begin{itemize}
-        \item \textbf{Ignored Singletons}: Genes that did not cluster into any families were ingnored from future steps, but may have still represented horiznotally transferred genes
+        \item \textbf{Ignored Singletons}: Genes that did not cluster into any families were ignored from future steps, but may have still represented horizontally transferred genes
         \item \textbf{Ignored Some Gene Families}: For time considerations, only 1500 gene trees were generated for each genus
-        \item \textbf{Signifigance Testing}: Samples are not necessairily independant in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+        %\item \textbf{Significance Testing}: Samples are not necessarily independent in a network, further node statistics can only be tested for genera with $> 20$ \ac{crsp} and non-\ac{crsp} \ac{otu}s.
         \item \textbf{Taxonomic Mistakes}: Inconsistencies in taxonomic labelling can result in ignored or misplaced \ac{otu}s.
-        \item \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible.
+        \item \textbf{Multifurcation Error}: Some species trees contained multifurcations, which were resolved randomly to generate a bifurcating tree. Estimating this error by examining variance over different resolutions is possible, but was not done here.
 \end{itemize}
+More insight may be gained by examining specific genera more in-depth, or considering new network based metric for understanding the dynamics of \ac{hgt}.

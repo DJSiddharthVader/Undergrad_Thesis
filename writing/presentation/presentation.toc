@@ -1,14 +1,10 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {english}{}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {1}{CRISPR-Cas systems}{3}{0}{1}
+\beamer@sectionintoc {1}{Background}{3}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{Horizontal Gene Transfer}{15}{0}{2}
+\beamer@sectionintoc {2}{My Project}{46}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {3}{Phylogenomic Networks}{31}{0}{3}
+\beamer@sectionintoc {3}{Results}{62}{0}{3}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {4}{Do CRRISPR Systems Affect Horizontal Gene Transfer?}{40}{0}{4}
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{My Project}{61}{0}{5}
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Results}{85}{0}{6}
+\beamer@sectionintoc {4}{Conclusion}{69}{0}{4}

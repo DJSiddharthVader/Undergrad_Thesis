@@ -1,35 +1,4 @@
-\frametitle{Thanks}
-\begin{multicols}{2}
-    %Names
-    \begin{minipage}[b][40ex][t]{\linewidth}
-    Thank you to
-    \begin{itemize}
-        \item Dr. G. Brian Golding
-        \item Dr. Ben Evans
-        \item The Golding lab
-            \begin{itemize}
-                \item Caitlin Simopoulos
-                \item Daniella Lato
-                \item Zachery Dickson
-                \item Sam Long
-                \item Geoge Long
-                \item Lucy Zhang
-                \item Brianne Laverty
-                \item Nicole Zhang
-            \end{itemize}
-        \item Everyone here for listening
-    \end{itemize}
-    \end{minipage}
-    %mcmaster logo
-    \begin{minipage}[b][20ex][t]{\linewidth}
-    \begin{figure}[htb!]
-        \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{mcmaster_logo.png}}
+\frametitle{Assortativity Distributions}
+\begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
     \end{figure}
-    \end{minipage}
-    %Github link
-    \begin{minipage}[b][20ex][t]{\linewidth}
-        \vspace{0.1in}
-        All code used for this project is available at
-        \myurl[blue]{https://github.com/DJSiddharthVader/thesis_SidReed}
-    \end{minipage}
-    \end{multicols}

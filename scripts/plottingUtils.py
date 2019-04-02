@@ -24,6 +24,13 @@ def getNodeStatus(df):
     cdf['status'] =  cdf.apply(consensus,axis=1)
     return {i:row['status'] for i,row in cdf.iterrows()}
 
+def cnodescount(genus,andf):
+    gdf = andf[andf['Genus'] == genus].fillna(0)
+    gdf = gdf[gdf['nucPath'] != 0]
+    t = gdf.shape[0]
+    c = gdf[gdf['isCRISPR'] == True].shape[0]
+    return c/t,t
+
 def numCrisprNodes(genus):
     path = '/home/sidreed/thesis_SidReed/plotnets/{}_plot_network.json'.format(genus)
     df = pd.DataFrame(json.load(open(path)))
@@ -57,10 +64,18 @@ def loadnetwork(path,dfonly=False,returnname=False):
         else:
             return df
 
-def loadMarkoOnly():
-    mkdir = '/home/sidreed/thesis_SidReed/marko_reports/'
+def loadMarkoOnly(andf):
+    mkdir = '/home/sidreed/thesis_SidReed/marko_reports'
+    mkdir = '/home/sidreed/thesis_SidReed/all_markos/'
     markos = [json.load(open(os.path.join(mkdir,path))) for path in os.listdir(mkdir)]
-    mdf = pd.DataFrame(markos).set_index('genus')
+    mdf = pd.DataFrame(markos)
+    mdf = mdf[pd.notnull(mdf['genus'])]
+    ccount = partial(cnodescount,andf=andf)
+    counts = mdf['genus'].apply(ccount)
+    mdf['a'],mdf['b'] = [x[0] for x in counts],[x[1] for x in counts]
+    mdf = mdf.set_index('genus')
+    mdf.columns = ['c_indel','c_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
+    mdf = mdf[(mdf['c_indel'] != 100) & (mdf['nc_indel'] != 100)]
     return mdf
 
 def loadReports():
@@ -152,8 +167,7 @@ def plotNetwork(net,df,width_scaling=4000,alpha=0.8,legend_entries=6,legend_deci
 
 def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
                 labels=['CRISPR','Non-CRISPR'],file=False):
-    #sdf = df.sort_values(by=cols)
-    sdf = df
+    sdf = df.sort_values(by=cols)
     fig, ax = plt.subplots(figsize=(20,10))
     pos = np.arange(0,len(sdf[cols[0]])*(len(cols)+1),len(cols)+1)
     pal = sns.color_palette('coolwarm')
@@ -164,7 +178,7 @@ def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
     ax.set_ylabel(ylabel)
     ax.set_xlabel(xlabel)
     ax.set_xticks(pos+0.5*width)
-    ax.set_xticklabels(sdf.index,rotation=45,ha='right')
+    ax.set_xticklabels(sdf.index,rotation=65,ha='right')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     plt.legend()
@@ -180,19 +194,17 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     yerr = nohdf['c_sem_indel']
     #main fig
     sns.scatterplot(x=x,y=y,data=nohdf,ax=ax)
-    ax.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr,
-                 fmt='o',ecolor='lightgray')
+    #ax.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr, fmt='o',ecolor='lightgray')
     ax.set_xlabel('Non-CRISPR Gene Indel Rate')
     ax.set_ylabel('CRISPR Gene Indel Rate')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     #inlet fig
-    axins = ins.zoomed_inset_axes(ax,2.5,loc=1)
+    axins = ins.zoomed_inset_axes(ax,4.5,loc=1)
     sns.scatterplot(x=x,y=y,data=nohdf,ax=axins)
-    axins.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr,
-                 fmt='o',ecolor='lightgray')
-    axins.set_xlim(0,10)
-    axins.set_ylim(0,20)
+    #axins.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr, fmt='o',ecolor='lightgray')
+    axins.set_xlim(0,10.5)
+    axins.set_ylim(-2,15)
     axins.xaxis.set_ticks_position('none')
     axins.yaxis.set_ticks_position('none')
     axins.set_xticklabels([])
@@ -205,8 +217,8 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     #wilcoxon annotate
     wilx = sst.wilcoxon(nohdf[x],nohdf[y],zero_method='pratt')
     text = 'Wilcoxon Rank: {}\nP-Value: {}'.format(wilx.statistic,
-                                                np.round(wilx.pvalue,5))
-    axins.annotate(text,xy=(0.05,0.75),xycoords='axes fraction')
+                                                np.round(wilx.pvalue,10))
+    axins.annotate(text,xy=(0.05,0.80),xycoords='axes fraction')
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
@@ -294,7 +306,7 @@ def violinPlot(stats,col='modularity',thresh=np.inf,
     fig,ax = plt.subplots(figsize=size)
     sns.violinplot(y=col,x='genera',data=df,ax=ax,
                     inner='quart',scale='count')
-    ax.set_xticklabels(df['genera'],rotation=45,ha='right')
+    ax.set_xticklabels(s1,rotation=45,ha='right')
     ax.set_xlabel('Genera')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)

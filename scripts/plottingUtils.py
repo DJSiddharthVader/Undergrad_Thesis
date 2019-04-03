@@ -65,7 +65,7 @@ def loadnetwork(path,dfonly=False,returnname=False):
             return df
 
 def loadMarkoOnly(andf):
-    mkdir = '/home/sidreed/thesis_SidReed/marko_reports'
+    #mkdir = '/home/sidreed/thesis_SidReed/marko_reports'
     mkdir = '/home/sidreed/thesis_SidReed/all_markos/'
     markos = [json.load(open(os.path.join(mkdir,path))) for path in os.listdir(mkdir)]
     mdf = pd.DataFrame(markos)
@@ -74,8 +74,11 @@ def loadMarkoOnly(andf):
     counts = mdf['genus'].apply(ccount)
     mdf['a'],mdf['b'] = [x[0] for x in counts],[x[1] for x in counts]
     mdf = mdf.set_index('genus')
-    mdf.columns = ['c_indel','c_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
+    #mdf.columns = ['c_indel','c_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
+    #mdf.columns = ['c_indel','nc_indel','int_indel','c_otus','t_otus']
+    mdf.columns = ['c_indel','c_sem_indel','int_indel','int_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
     mdf = mdf[(mdf['c_indel'] != 100) & (mdf['nc_indel'] != 100)]
+    mdf = mdf[~((np.isnan(mdf['c_indel'])) | (np.isnan(mdf['nc_indel'])))]
     return mdf
 
 def loadReports():
@@ -202,23 +205,18 @@ def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
 
 def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
-    #data
     x,y = 'nc_indel', 'c_indel'
-    xerr = nohdf['nc_sem_indel']
-    yerr = nohdf['c_sem_indel']
     #main fig
     sns.scatterplot(x=x,y=y,data=nohdf,ax=ax)
-    #ax.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr, fmt='o',ecolor='lightgray')
     ax.set_xlabel('Non-CRISPR Gene Indel Rate')
     ax.set_ylabel('CRISPR Gene Indel Rate')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     #inlet fig
-    axins = ins.zoomed_inset_axes(ax,4.5,loc=1)
+    axins = ins.zoomed_inset_axes(ax,2.5,loc=1)
     sns.scatterplot(x=x,y=y,data=nohdf,ax=axins)
-    #axins.errorbar(nohdf[x], nohdf[y], xerr=xerr,yerr=yerr, fmt='o',ecolor='lightgray')
-    axins.set_xlim(0,10.5)
-    axins.set_ylim(-2,15)
+    axins.set_xlim(-0.5,22.5)
+    axins.set_ylim(-1,17)
     axins.xaxis.set_ticks_position('none')
     axins.yaxis.set_ticks_position('none')
     axins.set_xticklabels([])
@@ -231,8 +229,8 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     #wilcoxon annotate
     wilx = sst.wilcoxon(nohdf[x],nohdf[y],zero_method='pratt')
     text = 'Wilcoxon Rank: {}\nP-Value: {}'.format(wilx.statistic,
-                                                np.round(wilx.pvalue,10))
-    axins.annotate(text,xy=(0.05,0.80),xycoords='axes fraction')
+                                                np.round(wilx.pvalue,5))
+    axins.annotate(text,xy=(0.63,0.85),xycoords='axes fraction')
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()

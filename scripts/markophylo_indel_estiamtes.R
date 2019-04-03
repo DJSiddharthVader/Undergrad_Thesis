@@ -75,16 +75,17 @@ plotTree <- function(speciesTree,partitions){
         plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
         edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-0.25))
         taxlist <- speciesTree$tip.label
+        tipnums <-  1:length(taxlist)
         #label crispr tips
         if (length(crispr) != 0){
-            tc = crispr[which(crispr %in% speciesTree$tip.label)]
+            tc = crispr[which(crispr %in% tipnums)]
             acclist = taxlist[tc]
             acctext = paste('CRISPR',acclist,sep='   ')
             tiplabels(acctext,tc,frame='rect', bg='cadetblue')
         }
         #label non-crispr tips
         if (length(non_crispr) != 0){
-            tnc = non_crispr[which(non_crispr %in% speciesTree$tip.label)]
+            tnc = non_crispr[which(non_crispr %in% tipnums)]
             acclist = taxlist[tnc]
             acctext = paste('Non-CRISPR',acclist,sep='   ')
             tiplabels(acctext,tnc,frame='rect', bg='firebrick1')

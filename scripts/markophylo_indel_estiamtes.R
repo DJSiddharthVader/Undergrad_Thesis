@@ -73,7 +73,7 @@ plotTree <- function(speciesTree,partitions){
     with(partitions, {
         pdf(file='labelled_cladogram.pdf',width=25,height=15)
         plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
-        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-1.50))
+        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-1.75))
         taxlist <- speciesTree$tip.label
         tipnums <-  1:length(taxlist)
         #label crispr tips
@@ -98,14 +98,15 @@ plotTree <- function(speciesTree,partitions){
     })
 }
 markophyloEstimate <- function(speciesTree,paMatrix,partitions){
+    cleaned <- partitions[lapply(partitions,length)>0]
     estrates <- markophylo::estimaterates(usertree=speciesTree,
                                           userphyl=paMatrix,
                                           alphabet=c(0,1),
                                           bgtype="listofnodes",
-                                          bg=partitions,
+                                          bg=cleaned,
                                           rootprob="maxlik",
                                           modelmat="BDSYM",
-                                          numhessian=FALSE,
+                                          #numhessian=FALSE,
                                           matchtiptodata=TRUE)
     return(estrates)
 }
@@ -135,6 +136,9 @@ if (sys.nframe() == 0){
     crisprAnnotationPath = '/home/sid/thesis_SidReed/data/fasta_crispr_annotation_df.json'
     main(speciesTreePath,paMatrixPath,crisprAnnotationPath)
 }
+
+#Estimated parameters on interval bounds
+#this error indicates rate estimated just becomes 100.00, not sure why?
 
 ##DEPRECIATED
 #jsonToList <- function(filepath){

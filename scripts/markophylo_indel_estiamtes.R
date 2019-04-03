@@ -7,7 +7,6 @@ library("ape")
 library("markophylo")
 suppressMessages(library("jsonlite"))
 suppressMessages(library("phangorn")) #map warnings
-set.seed(9)
 
 newfp <- function(fp){
     base <- basename(fp)
@@ -22,7 +21,7 @@ readSpeciesTree <- function(filepath){
     spt <- ape::read.nexus(file=filepath)
     rspt <- phangorn::midpoint(spt)
     if (!is.binary.tree(rspt)){
-        rspt <- multi2di(rspt)
+        rspt <- multi2di(rspt,random=FALSE)
     }
     rootfp <- newfp(filepath)
     ape::write.nexus(rspt,file=rootfp[1])
@@ -49,102 +48,89 @@ partitionByCRISPR <- function(spt,crisprAnnotation){
     root <- getRoot(spt)
     #create tip partitions
     crispr <- c()
-    not_crispr <- c()
+    non_crispr <- c()
     for (acc in taxlist){
         rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
         iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
         nodenum <- match(acc,taxlist)
         pathToRoot <- nodepath(spt,from=nodenum,to=root)
+        tipbranch <- pathToRoot[1:2]
         if (iscrispr){
-            crispr <- c(crispr,pathToRoot)
+            crispr <- c(crispr,tipbranch)
         } else {
-            not_crispr <- c(not_crispr,pathToRoot)
+            non_crispr <- c(non_crispr,tipbranch)
         }
     }
-    #check partition not empty and dedup
-    if (length(crispr) == 0 || length(not_crispr) == 0){
-        allnodes <- 1:(length(spt$tip.label)+spt$Nnode)
-        partitions <- list(non_crispr=allnodes) #all nodes in tree
-    } else {
-        partitions <- list(crispr=unique(crispr),non_crispr=unique(not_crispr))
-    }
+    tipnodes <- 1:length(spt$tip.label)
+    allnodes <- 1:(length(spt$tip.label)+spt$Nnode)
+    internal <- allnodes[which(!allnodes %in% tipnodes)]
+    partitions <- list(crispr=unique(crispr),
+                       non_crispr=unique(non_crispr),
+                       internal=internal)
     return(partitions)
 }
-plotTree <- function(speciesTree,crisprAnnotation){
-    pdf(file='labelled_cladogram.pdf',width=25,height=15)
-    plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
-#    edf <- as.data.frame(tree$edge)
-#    edgelabels(apply(edf[,colnames(edf)],1,paste,collapse='\n'))
-    #annotation info
-    tmp <- t(do.call(rbind,crisprAnnotation))
-    accession_col_idx <- grep("Accession Number", colnames(tmp))
-    crispr_col_idx <- grep("isCRISPR", colnames(tmp))
-    taxlist <- speciesTree$tip.label
-    #create tip partitions
-    crispr <- c()
-    not_crispr <- c()
-    for (acc in taxlist){
-        rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
-        iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
-        nodenum <- match(acc,taxlist)
-        if (iscrispr){
-            crispr <- c(crispr,nodenum)
-        } else {
-            not_crispr <- c(not_crispr,nodenum)
+plotTree <- function(speciesTree,partitions){
+    with(partitions, {
+        pdf(file='labelled_cladogram.pdf',width=25,height=15)
+        plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
+        edgelabels(speciesTree$edge.length,frame='none')
+        taxlist <- speciesTree$tip.label
+        #label crispr tips
+        if (length(crispr) != 0){
+            acclist = taxlist[crispr]
+            acctext = paste('CRISPR',acclist,sep='   ')
+            tiplabels(acctext,crispr,frame='rect', bg='blue')
         }
-    }
-    #label tips
-    if (length(crispr) != 0){
-        tiplabels(paste('CRISPR',crispr,sep=' '),crispr)
-    }
-    if (length(not_crispr) != 0){
-        tiplabels(paste('Non-CRISPR',not_crispr,sep=' '),not_crispr)
-    }
-    nodelabels()
-    dev.off()
+        #label non-crispr tips
+        if (length(non_crispr) != 0){
+            acclist = taxlist[non_crispr]
+            acctext = paste('Non-CRISPR',acclist,sep='   ')
+            tiplabels(acctext,non_crispr,frame='rect', bg='red')
+        }
+    #label internal nodes
+        internal <- (length(taxlist)+1):(speciesTree$Nnode+length(taxlist))
+        nodelabels(paste('Internal',internal,sep=' '),internal,
+                   frame='circle', bg='green')
+        dev.off()
+    })
 }
-markophyloEstimate <- function(speciesTree,paMatrix,crisprAnnotation){
-    partition <- partitionByCRISPR(speciesTree,crisprAnnotation)
+markophyloEstimate <- function(speciesTree,paMatrix,partitions){
     estrates <- markophylo::estimaterates(usertree=speciesTree,
                                           userphyl=paMatrix,
                                           alphabet=c(0,1),
                                           bgtype="listofnodes",
-                                          bg=partition,
+                                          bg=partitions,
                                           rootprob="maxlik",
                                           modelmat="BDSYM",
+                                          numhessian=FALSE,
                                           matchtiptodata=TRUE)
     return(estrates)
-}
-resultToJson <- function(mpresult){
-    #plaintxt
-    sink("markophylo_results.txt")
-    print(mpresult)
-    sink()
-    #tojson
-#    js <- toJSON(mpresult)
-#    sink("markophylo_results.json")
-#    cat(js)
-#    sink()
 }
 main <- function(speciesTreePath,paMatrixPath,crisprAnnotationPath){
     speciesTree <- readSpeciesTree(speciesTreePath)
     paMatrix <- read.csv(paMatrixPath,header=TRUE,row.names="gene_family")
     crisprAnnotation <- loadAnnotationInfo(crisprAnnotationPath)
+    partitions <- partitionByCRISPR(speciesTree,crisprAnnotation)
     print('plotting tree')
-    plotTree(speciesTree,crisprAnnotation)
+    plotTree(speciesTree,partitions)
     print('running markophylo')
-    rates <- markophyloEstimate(speciesTree,paMatrix,crisprAnnotation)
-    #return(rates)
-    resultToJson(rates)
+    rates <- markophyloEstimate(speciesTree,paMatrix,partitions)
+    sink("markophylo_results.txt")
+    print(rates)
+    sink()
 }
 
 if (sys.nframe() == 0){
     #CLI Args
-    args <-  commandArgs(trailingOnly=TRUE)
-    if (length(args) != 3){
-        stop("args are species_tree.nexus, pa_matrix.csv, crispr_annotation_json .n",call.=FALSE)
-    }
-    main(args[1],args[2],args[3])
+#    args <-  commandArgs(trailingOnly=TRUE)
+#    if (length(args) != 3){
+#        stop("args are species_tree.nexus, pa_matrix.csv, crispr_annotation_json .n",call.=FALSE)
+#    }
+#    main(args[1],args[2],args[3])
+    speciesTreePath = './species_tree_files/species_tree/species_tree.con.tre'
+    paMatrixPath = 'binary_pa_matrix.csv'
+    crisprAnnotationPath = '/home/sid/thesis_SidReed/data/fasta_crispr_annotation_df.json'
+    main(speciesTreePath,paMatrixPath,crisprAnnotationPath)
 }
 
 ##DEPRECIATED
@@ -191,3 +177,72 @@ if (sys.nframe() == 0){
 #        return(partitions)
 #    }
 #}
+partitionByCRISPR <- function(spt,crisprAnnotation){
+    #annotation info
+    tmp <- t(do.call(rbind,crisprAnnotation))
+    accession_col_idx <- grep("Accession Number", colnames(tmp))
+    crispr_col_idx <- grep("isCRISPR", colnames(tmp))
+    #tree nodes
+    taxlist <- spt$tip.label
+    root <- getRoot(spt)
+    #create tip partitions
+    crispr <- c()
+    not_crispr <- c()
+    for (acc in taxlist){
+        rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
+        iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
+        nodenum <- match(acc,taxlist)
+        pathToRoot <- nodepath(spt,from=nodenum,to=root)
+        if (iscrispr){
+            crispr <- c(crispr,pathToRoot)
+        } else {
+            not_crispr <- c(not_crispr,pathToRoot)
+        }
+    }
+    #check partition not empty and dedup
+    if (length(crispr) == 0 || length(not_crispr) == 0){
+        allnodes <- 1:(length(spt$tip.label)+spt$Nnode)
+        partitions <- list(non_crispr=allnodes) #all nodes in tree
+    } else {
+        partitions <- list(crispr=unique(crispr),non_crispr=unique(not_crispr))
+    }
+    return(partitions)
+}
+plotTree <- function(speciesTree,crisprAnnotation){
+    pdf(file='labelled_cladogram.pdf',width=25,height=15)
+    plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
+    edgelabels(speciesTree$edge.length,frame='none')
+    #annotation info
+    tmp <- t(do.call(rbind,crisprAnnotation))
+    accession_col_idx <- grep("Accession Number", colnames(tmp))
+    crispr_col_idx <- grep("isCRISPR", colnames(tmp))
+    taxlist <- speciesTree$tip.label
+    #create tip partitions
+    crispr <- c()
+    not_crispr <- c()
+    for (acc in taxlist){
+        rowidx <- match(acc,crisprAnnotation[[accession_col_idx]])
+        iscrispr <- crisprAnnotation[[crispr_col_idx]][rowidx][[1]]
+        nodenum <- match(acc,taxlist)
+        if (iscrispr){
+            crispr <- c(crispr,nodenum)
+        } else {
+            not_crispr <- c(not_crispr,nodenum)
+        }
+    }
+    #label tips
+    if (length(crispr) != 0){
+        acclist = taxlist[crispr]
+        acctext = paste('CRISPR',acclist,sep='   ')
+        tiplabels(acctext,crispr,frame='rect', bg='blue')
+    }
+    if (length(not_crispr) != 0){
+        acclist = taxlist[not_crispr]
+        acctext = paste('Non-CRISPR',acclist,sep='   ')
+        tiplabels(acctext,not_crispr,frame='rect', bg='red')
+    }
+    internal <- (length(taxlist)+1):(speciesTree$Nnode+length(taxlist))
+    nodelabels(paste('Internal',internal,sep=' '),internal,
+               frame='circle', bg='green')
+    dev.off()
+}

@@ -73,19 +73,21 @@ plotTree <- function(speciesTree,partitions){
     with(partitions, {
         pdf(file='labelled_cladogram.pdf',width=25,height=15)
         plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
-        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5, 1.25))
+        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-0.25))
         taxlist <- speciesTree$tip.label
         #label crispr tips
         if (length(crispr) != 0){
-            acclist = taxlist[crispr]
+            tc = crispr[which(crispr %in% speciesTree$tip.label)]
+            acclist = taxlist[tc]
             acctext = paste('CRISPR',acclist,sep='   ')
-            tiplabels(acctext,crispr,frame='rect', bg='cadetblue')
+            tiplabels(acctext,tc,frame='rect', bg='cadetblue')
         }
         #label non-crispr tips
         if (length(non_crispr) != 0){
-            acclist = taxlist[non_crispr]
+            tnc = non_crispr[which(non_crispr %in% speciesTree$tip.label)]
+            acclist = taxlist[tnc]
             acctext = paste('Non-CRISPR',acclist,sep='   ')
-            tiplabels(acctext,non_crispr,frame='rect', bg='firebrick1')
+            tiplabels(acctext,tnc,frame='rect', bg='firebrick1')
         }
         #label internal nodes
         internal <- (length(taxlist)+1):(speciesTree$Nnode+length(taxlist))

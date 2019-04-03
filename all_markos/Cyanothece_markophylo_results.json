@@ -1,1 +1,1 @@
-{"genus": "Cyanothece", "crispr_indel_rate": 3.997169, "non-crispr_indel_rate": 0.9, "internal_indel_rate": 0.9003773}
+{"genus": "Cyanothece", "crispr_indel_rate": 3.997169, "non-crispr_indel_rate": 0, "internal_indel_rate": 0.9003773, "crispr_indel_sem": 0.04221798, "non-crispr_indel_sem": 0, "internal_indel_sem": 0.02280935}

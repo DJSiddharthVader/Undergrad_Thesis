@@ -1,1 +1,1 @@
-{"genus": "Polynucleobacter", "crispr_indel_rate": 0.9, "non-crispr_indel_rate": 1.663665, "internal_indel_rate": 1.281971}
+{"genus": "Polynucleobacter", "crispr_indel_rate": 0, "non-crispr_indel_rate": 2.330875, "internal_indel_rate": 0.3882519, "crispr_indel_sem": 0, "non-crispr_indel_sem": 0.02724807, "internal_indel_sem": 0.01461329}

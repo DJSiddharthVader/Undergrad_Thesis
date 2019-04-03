@@ -1,1 +1,1 @@
-{"genus": "Orientia", "crispr_indel_rate": 29.40464, "non-crispr_indel_rate": 63.24363, "internal_indel_rate": 4.903066}
+{"genus": "Orientia", "crispr_indel_rate": 29.40464, "non-crispr_indel_rate": 63.24363, "internal_indel_rate": 4.903066, "crispr_indel_sem": 1.002781, "non-crispr_indel_sem": 1.309936, "internal_indel_sem": 0.7698207}

@@ -1,1 +1,1 @@
-{"genus": "Aerococcus", "crispr_indel_rate": 1.718382, "non-crispr_indel_rate": 33.82922, "internal_indel_rate": 0.001}
+{"genus": "Aerococcus", "crispr_indel_rate": 1.718382, "non-crispr_indel_rate": 33.82922, "internal_indel_rate": 0.001, "crispr_indel_sem": 0.02321681, "non-crispr_indel_sem": 0.4365881, "internal_indel_sem": 0.06941684}

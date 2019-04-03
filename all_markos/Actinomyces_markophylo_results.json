@@ -1,1 +1,1 @@
-{"genus": "Actinomyces", "crispr_indel_rate": 2.979726, "non-crispr_indel_rate": 2.932634, "internal_indel_rate": 1.707669}
+{"genus": "Actinomyces", "crispr_indel_rate": 2.979726, "non-crispr_indel_rate": 2.932634, "internal_indel_rate": 1.707669, "crispr_indel_sem": 0.0670849, "non-crispr_indel_sem": 0.05630711, "internal_indel_sem": 0.04986178}

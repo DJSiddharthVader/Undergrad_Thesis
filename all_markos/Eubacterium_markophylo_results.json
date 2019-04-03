@@ -1,1 +1,1 @@
-{"genus": "Eubacterium", "crispr_indel_rate": 1.239719, "non-crispr_indel_rate": 0.1666806, "internal_indel_rate": 1.309783}
+{"genus": "Eubacterium", "crispr_indel_rate": 1.239719, "non-crispr_indel_rate": 0.1666806, "internal_indel_rate": 1.309783, "crispr_indel_sem": 0.01959286, "non-crispr_indel_sem": 0.008323462, "internal_indel_sem": 0.02208243}

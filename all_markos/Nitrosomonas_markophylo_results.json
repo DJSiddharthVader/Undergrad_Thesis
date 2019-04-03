@@ -1,1 +1,1 @@
-{"genus": "Nitrosomonas", "crispr_indel_rate": 2.694106, "non-crispr_indel_rate": 2.740361, "internal_indel_rate": 0.6830365}
+{"genus": "Nitrosomonas", "crispr_indel_rate": 2.694106, "non-crispr_indel_rate": 2.740361, "internal_indel_rate": 0.6830365, "crispr_indel_sem": 0.04434966, "non-crispr_indel_sem": 0.06727161, "internal_indel_sem": 0.01435732}

@@ -1,1 +1,1 @@
-{"genus": "Microcystis", "crispr_indel_rate": 11.54052, "non-crispr_indel_rate": 12.16377, "internal_indel_rate": 19.41844}
+{"genus": "Microcystis", "crispr_indel_rate": 11.54052, "non-crispr_indel_rate": 12.16377, "internal_indel_rate": 19.41844, "crispr_indel_sem": 0.2807004, "non-crispr_indel_sem": 0.5693942, "internal_indel_sem": 0.6193022}

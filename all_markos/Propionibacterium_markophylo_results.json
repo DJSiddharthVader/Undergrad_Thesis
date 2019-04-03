@@ -1,1 +1,1 @@
-{"genus": "Propionibacterium", "crispr_indel_rate": 100.0, "non-crispr_indel_rate": 4.632544, "internal_indel_rate": 1.356637}
+{"genus": "Propionibacterium", "crispr_indel_rate": 100.0, "non-crispr_indel_rate": 4.632544, "internal_indel_rate": 1.356637, "crispr_indel_sem": 1.712844, "non-crispr_indel_sem": 0.06691168, "internal_indel_sem": 0.03242798}

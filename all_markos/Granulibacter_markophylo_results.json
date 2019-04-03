@@ -1,1 +1,1 @@
-{"genus": "Granulibacter", "crispr_indel_rate": 14.96169, "non-crispr_indel_rate": 0.9, "internal_indel_rate": 1.224553}
+{"genus": "Granulibacter", "crispr_indel_rate": 14.96169, "non-crispr_indel_rate": 0, "internal_indel_rate": 1.224553, "crispr_indel_sem": 0.2820033, "non-crispr_indel_sem": 0, "internal_indel_sem": 0.05627334}

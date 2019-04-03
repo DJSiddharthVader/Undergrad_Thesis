@@ -1,1 +1,1 @@
-{"genus": "Glaesserella", "crispr_indel_rate": 31.58839, "non-crispr_indel_rate": 30.27075, "internal_indel_rate": 8.811356}
+{"genus": "Glaesserella", "crispr_indel_rate": 31.58839, "non-crispr_indel_rate": 30.27075, "internal_indel_rate": 8.811356, "crispr_indel_sem": 1.353891, "non-crispr_indel_sem": 0.6449993, "internal_indel_sem": 0.5240361}

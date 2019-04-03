@@ -1,1 +1,1 @@
-{"genus": "Leptolyngbya", "crispr_indel_rate": 5.214452, "non-crispr_indel_rate": 2.034678, "internal_indel_rate": 0.001065947}
+{"genus": "Leptolyngbya", "crispr_indel_rate": 5.214452, "non-crispr_indel_rate": 2.034678, "internal_indel_rate": 0.001065947, "crispr_indel_sem": 0.06575852, "non-crispr_indel_sem": 0.02007629, "internal_indel_sem": 0.0006154114}

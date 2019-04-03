@@ -1,1 +1,1 @@
-{"genus": "Trueperella", "crispr_indel_rate": 1.010925, "non-crispr_indel_rate": 14.22648, "internal_indel_rate": 45.88845}
+{"genus": "Trueperella", "crispr_indel_rate": 1.010925, "non-crispr_indel_rate": 14.22648, "internal_indel_rate": 45.88845, "crispr_indel_sem": 0.5054467, "non-crispr_indel_sem": 0.5311979, "internal_indel_sem": 2.994934}

@@ -1,1 +1,1 @@
-{"genus": "Acidovorax", "crispr_indel_rate": 22.78886, "non-crispr_indel_rate": 15.01788, "internal_indel_rate": 1.121063}
+{"genus": "Acidovorax", "crispr_indel_rate": 22.78886, "non-crispr_indel_rate": 15.01788, "internal_indel_rate": 1.121063, "crispr_indel_sem": 0.2163939, "non-crispr_indel_sem": 0.09430877, "internal_indel_sem": 0.01427419}

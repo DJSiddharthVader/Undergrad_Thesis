@@ -1,1 +1,1 @@
-{"genus": "Histophilus", "crispr_indel_rate": 0.9, "non-crispr_indel_rate": 49.60046, "internal_indel_rate": 0.9}
+{"genus": "Histophilus", "crispr_indel_rate": 0, "non-crispr_indel_rate": 75.33484, "internal_indel_rate": 0.001, "crispr_indel_sem": 0, "non-crispr_indel_sem": 1.970611, "internal_indel_sem": 1.695098}

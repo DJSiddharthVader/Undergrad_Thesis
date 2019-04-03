@@ -1,1 +1,1 @@
-{"genus": "Erwinia", "crispr_indel_rate": 4.546038, "non-crispr_indel_rate": 3.713318, "internal_indel_rate": 1.754905}
+{"genus": "Erwinia", "crispr_indel_rate": 4.546038, "non-crispr_indel_rate": 3.713318, "internal_indel_rate": 1.754905, "crispr_indel_sem": 0.05996258, "non-crispr_indel_sem": 0.06827991, "internal_indel_sem": 0.03705521}

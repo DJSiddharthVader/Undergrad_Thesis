@@ -1,1 +1,1 @@
-{"genus": "Shigella", "crispr_indel_rate": 15.33442, "non-crispr_indel_rate": 12.01096, "internal_indel_rate": 0.001}
+{"genus": "Shigella", "crispr_indel_rate": 15.33442, "non-crispr_indel_rate": 12.01096, "internal_indel_rate": 0.001, "crispr_indel_sem": 0.3186017, "non-crispr_indel_sem": 0.6166288, "internal_indel_sem": 0.4335419}

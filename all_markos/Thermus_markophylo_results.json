@@ -1,1 +1,1 @@
-{"genus": "Thermus", "crispr_indel_rate": 3.357305, "non-crispr_indel_rate": 14.47068, "internal_indel_rate": 4.211341}
+{"genus": "Thermus", "crispr_indel_rate": 3.357305, "non-crispr_indel_rate": 14.47068, "internal_indel_rate": 4.211341, "crispr_indel_sem": 0.05888801, "non-crispr_indel_sem": 0.1981057, "internal_indel_sem": 0.161519}

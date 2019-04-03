@@ -1,1 +1,1 @@
-{"genus": "Paenibacillus", "crispr_indel_rate": 11.13967, "non-crispr_indel_rate": 10.95844, "internal_indel_rate": 1.569958}
+{"genus": "Paenibacillus", "crispr_indel_rate": 11.13967, "non-crispr_indel_rate": 10.95844, "internal_indel_rate": 1.569958, "crispr_indel_sem": 0.0327424, "non-crispr_indel_sem": 0.02182128, "internal_indel_sem": 0.0043808}

@@ -1,1 +1,1 @@
-{"genus": "Chromobacterium", "crispr_indel_rate": 25.37225, "non-crispr_indel_rate": 9.107394, "internal_indel_rate": 3.686047}
+{"genus": "Chromobacterium", "crispr_indel_rate": 25.37225, "non-crispr_indel_rate": 9.107394, "internal_indel_rate": 3.686047, "crispr_indel_sem": 1.400925, "non-crispr_indel_sem": 0.1149817, "internal_indel_sem": 0.06504936}

@@ -1,1 +1,1 @@
-{"genus": "Exiguobacterium", "crispr_indel_rate": 9.091001, "non-crispr_indel_rate": 2.146229, "internal_indel_rate": 0.001}
+{"genus": "Exiguobacterium", "crispr_indel_rate": 9.091001, "non-crispr_indel_rate": 2.146229, "internal_indel_rate": 0.001, "crispr_indel_sem": 0.130074, "non-crispr_indel_sem": 0.03220476, "internal_indel_sem": 0.009534551}

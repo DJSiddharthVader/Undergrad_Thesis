@@ -1,1 +1,1 @@
-{"genus": "Shewanella", "crispr_indel_rate": 5.182715, "non-crispr_indel_rate": 4.605819, "internal_indel_rate": 2.744237}
+{"genus": "Shewanella", "crispr_indel_rate": 5.182715, "non-crispr_indel_rate": 4.605819, "internal_indel_rate": 2.744237, "crispr_indel_sem": 0.03033671, "non-crispr_indel_sem": 0.02058664, "internal_indel_sem": 0.0119667}

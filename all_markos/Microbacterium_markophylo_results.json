@@ -1,1 +1,1 @@
-{"genus": "Microbacterium", "crispr_indel_rate": 3.049878, "non-crispr_indel_rate": 11.85313, "internal_indel_rate": 2.482579}
+{"genus": "Microbacterium", "crispr_indel_rate": 3.049878, "non-crispr_indel_rate": 11.85313, "internal_indel_rate": 2.482579, "crispr_indel_sem": 0.03160479, "non-crispr_indel_sem": 0.1250416, "internal_indel_sem": 0.02939156}

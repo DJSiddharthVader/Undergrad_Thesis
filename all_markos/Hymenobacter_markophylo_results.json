@@ -1,1 +1,1 @@
-{"genus": "Hymenobacter", "crispr_indel_rate": 3.950154, "non-crispr_indel_rate": 3.353495, "internal_indel_rate": 5.290463}
+{"genus": "Hymenobacter", "crispr_indel_rate": 3.950154, "non-crispr_indel_rate": 3.353495, "internal_indel_rate": 5.290463, "crispr_indel_sem": 0.05494343, "non-crispr_indel_sem": 0.04487371, "internal_indel_sem": 0.07094761}

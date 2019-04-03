@@ -73,7 +73,7 @@ plotTree <- function(speciesTree,partitions){
     with(partitions, {
         pdf(file='labelled_cladogram.pdf',width=25,height=15)
         plot(speciesTree,show.tip.label=FALSE,use.edge.length=TRUE)
-        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-0.25))
+        edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-0.50))
         taxlist <- speciesTree$tip.label
         tipnums <-  1:length(taxlist)
         #label crispr tips

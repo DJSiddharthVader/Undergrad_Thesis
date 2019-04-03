@@ -1,1 +1,1 @@
-{"genus": "Bifidobacterium", "crispr_indel_rate": 22.55808, "non-crispr_indel_rate": 54.8562, "crispr_indel_sem": 0.03478704, "non-crispr_indel_sem": 0.09948938}
+{"genus": "Bifidobacterium", "crispr_indel_rate": 100.0, "non-crispr_indel_rate": 100.0, "internal_indel_rate": 3.639262}

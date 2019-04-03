@@ -1,1 +1,1 @@
-{"genus": "Anaplasma", "crispr_indel_rate": 0.8266925, "non-crispr_indel_rate": 4.865813, "crispr_indel_sem": 0.02757424, "non-crispr_indel_sem": 0.06137163}
+{"genus": "Anaplasma", "crispr_indel_rate": 100.0, "non-crispr_indel_rate": 14.22724, "internal_indel_rate": 0.001}

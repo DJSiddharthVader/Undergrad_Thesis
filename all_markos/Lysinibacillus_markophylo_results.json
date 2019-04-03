@@ -1,1 +1,1 @@
-{"genus": "Lysinibacillus", "crispr_indel_rate": 0, "non-crispr_indel_rate": 2.847105, "crispr_indel_sem": 0, "non-crispr_indel_sem": "0.016698"}
+{"genus": "Lysinibacillus", "crispr_indel_rate": 0.9, "non-crispr_indel_rate": 3.608653, "internal_indel_rate": 0.8122411}

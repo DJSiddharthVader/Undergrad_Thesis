@@ -1,1 +1,1 @@
-{"genus": "Brevibacillus", "crispr_indel_rate": 0, "non-crispr_indel_rate": 2.120152, "crispr_indel_sem": 0, "non-crispr_indel_sem": "0.01415706"}
+{"genus": "Brevibacillus", "crispr_indel_rate": 0.9, "non-crispr_indel_rate": 17.2725, "internal_indel_rate": 0.001}

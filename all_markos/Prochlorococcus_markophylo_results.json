@@ -1,1 +1,1 @@
-{"genus": "Prochlorococcus", "crispr_indel_rate": 0, "non-crispr_indel_rate": 1.632704, "crispr_indel_sem": 0, "non-crispr_indel_sem": "0.01280432"}
+{"genus": "Prochlorococcus", "crispr_indel_rate": 0.9, "non-crispr_indel_rate": 4.214102, "internal_indel_rate": 0.5630539}

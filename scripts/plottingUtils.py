@@ -165,6 +165,20 @@ def plotNetwork(net,df,width_scaling=4000,alpha=0.8,legend_entries=6,legend_deci
         fig.savefig(save,dpi=dpi,format='png',frameon=False)
     plt.show()
 
+def genusSizeDist(df,dpi=50,size=(10,5),file=False):
+    fig,ax = plt.subplots(figsize=size)
+    counts = df['t_otus']
+    sns.distplot(counts,ax=ax,bins=max(counts),
+                 hist=True,kde=False,norm_hist=False,
+                 axlabel='Genus Size')
+    yt = max(counts.value_counts().values)
+    ax.set_yticks(np.linspace(0,yt,8))
+    text = 'Total = {} Genera'.format(df.shape[0])
+    ax.annotate(text,xy=(.8,.90),xycoords='axes fraction')
+    if type(file) != bool:
+        fig.savefig(file,dpi=dpi,format='png',frameon=False)
+    plt.show()
+
 def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
                 labels=['CRISPR','Non-CRISPR'],file=False):
     sdf = df.sort_values(by=cols)
@@ -315,6 +329,7 @@ def violinPlot(stats,col='modularity',thresh=np.inf,
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
     return ax
+
 
 
 if __name__ == '__main__':

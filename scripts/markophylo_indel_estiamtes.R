@@ -82,7 +82,7 @@ plotTree <- function(speciesTree,partitions){
             acclist = taxlist[tc]
             #acctext = paste('CRISPR',acclist,sep='   ')
             acctext = acclist
-            tiplabels(acctext,tc,frame='rect',adj=1,bg='cadetblue')
+            tiplabels(acctext,tc,frame='rect',adj=-1,bg='cadetblue')
         }
         #label non-crispr tips
         if (length(non_crispr) != 0){
@@ -90,7 +90,7 @@ plotTree <- function(speciesTree,partitions){
             acclist = taxlist[tnc]
             #acctext = paste('Non-CRISPR',acclist,sep='   ')
             acctext = acclist
-            tiplabels(acctext,tnc,frame='rect',adj=1,bg='firebrick1')
+            tiplabels(acctext,tnc,frame='rect',adj=-1,bg='firebrick1')
         }
         #label internal nodes
         internal <- (length(taxlist)+1):(speciesTree$Nnode+length(taxlist))

@@ -1,4 +1,4 @@
-\frametitle{Assortativity Distributions}
+\frametitle{Branch Partition Example}
 \begin{figure}[htb!]
-        \makebox[\textwidth][c]{\includegraphics[width=1.2\linewidth]{asst_violin.png}}
+        \includegraphics[width=0.5\linewidth]{partition_example.png}
     \end{figure}

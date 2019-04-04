@@ -74,8 +74,6 @@ def loadMarkoOnly(andf):
     counts = mdf['genus'].apply(ccount)
     mdf['a'],mdf['b'] = [x[0] for x in counts],[x[1] for x in counts]
     mdf = mdf.set_index('genus')
-    #mdf.columns = ['c_indel','c_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
-    #mdf.columns = ['c_indel','nc_indel','int_indel','c_otus','t_otus']
     mdf.columns = ['c_indel','c_sem_indel','int_indel','int_sem_indel','nc_indel','nc_sem_indel','c_otus','t_otus']
     mdf = mdf[(mdf['c_indel'] != 100) & (mdf['nc_indel'] != 100)]
     mdf = mdf[~((np.isnan(mdf['c_indel'])) | (np.isnan(mdf['nc_indel'])))]
@@ -298,6 +296,50 @@ def rateVsCFrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     plt.legend()
     ax.set_xlabel('Fraction of OTUs With A CRISPR System')
     ax.set_ylabel('Gene Indel Rate of OTUs')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    if type(file) != bool:
+        fig.savefig(file,dpi=dpi,format='png',frameon=False)
+    plt.show()
+
+def cratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
+    #Data
+    x = nohdf['c_otus']
+    y1 = nohdf['c_indel']
+    #base plotting
+    fig,ax = plt.subplots(figsize=size)
+    cols = sns.color_palette('coolwarm')
+    ax.scatter(x=x,y=y1,color=cols[0],marker='+',label='CRISPR')
+    #lingresss
+    m,b,r,p,se = sst.linregress(x,y1)
+    y = lambda x:m*x+b
+    ax.plot(x,y(x),color=cols[0],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
+    #plot formatting
+    plt.legend()
+    ax.set_xlabel('Fraction of OTUs With A CRISPR System')
+    ax.set_ylabel('Gene Indel Rate of CRISPR OTUs')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    if type(file) != bool:
+        fig.savefig(file,dpi=dpi,format='png',frameon=False)
+    plt.show()
+
+def ncratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
+    #Data
+    x = nohdf['c_otus']
+    y2 = nohdf['nc_indel']
+    #base plotting
+    fig,ax = plt.subplots(figsize=size)
+    cols = sns.color_palette('coolwarm')
+    ax.scatter(x=x,y=y2,color=cols[-1],marker='x',label='Non-CRISPR')
+    #lingress
+    m,b,r,p,se = sst.linregress(x,y2)
+    y = lambda x:m*x+b
+    ax.plot(x,y(x),color=cols[-1],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
+    #plot formatting
+    plt.legend()
+    ax.set_xlabel('Fraction of OTUs With A CRISPR System')
+    ax.set_ylabel('Gene Indel Rate of Non-CRISPR OTUs')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     if type(file) != bool:

@@ -1,4 +1,4 @@
-\frametitle{Branch Partition Example}
+\frametitle{Indel Rate Pair Plot}
 \begin{figure}[htb!]
-        \includegraphics[width=0.5\linewidth]{partition_example.png}
+        \includegraphics[width=0.6\linewidth]{pairplot.png}
     \end{figure}

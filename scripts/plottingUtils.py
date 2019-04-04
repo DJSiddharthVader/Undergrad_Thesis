@@ -182,7 +182,7 @@ def genusSizeDist(df,dpi=50,size=(10,5),file=False):
 
 def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
                 labels=['CRISPR','Non-CRISPR'],file=False):
-    sdf = df.sort_values(by=cols)
+    sdf = df.sort_values(by=['c_otus'])
     fig, ax = plt.subplots(figsize=(20,10))
     pos = np.arange(0,len(sdf[cols[0]])*(len(cols)+1),len(cols)+1)
     pal = sns.color_palette('coolwarm')
@@ -369,7 +369,6 @@ def violinPlot(stats,col='modularity',thresh=np.inf,
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
     return ax
-
 
 
 if __name__ == '__main__':

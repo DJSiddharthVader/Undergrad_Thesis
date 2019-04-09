@@ -1,4 +1,17 @@
-\frametitle{Indel Rate Pair Plot}
-\begin{figure}[htb!]
-        \includegraphics[width=0.6\linewidth]{pairplot.png}
+\frametitle{Diversity \& Ubiquity}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item <2-> $45\%$ of bacteria have CRISPR loci $(n=6782)$ \autocite{crispdb}
+            \item <3-> 3 Main Types, multiple sub types \autocite{acqorres}
+            \item <4-> CRISPR arrays represent unique life history of an organism
+            \item <5-> $11\%-28\%$ are false or orphaned CRISPR loci \autocite{ineqcas}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{figure}[htb!]
+        \makebox[\textwidth][c]{\includegraphics[width=0.9\linewidth]{CRISPR-types_evocas.jpg}}
+        \autocite{evocas}
     \end{figure}
+    \end{column}
+    \end{columns}

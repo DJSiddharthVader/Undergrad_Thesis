@@ -112,13 +112,13 @@ To calculate the weight of an edge for the network, given a species tree $S$ and
     \item Pick a horizontal edge $H = ((u,v),(v,u))$ from $S$
     \item Pick a gene tree $G_i$ in $G$
     \item Decompose $G_i$ into it's set of quartets $\phi_i$
-    \item Remove all quartets consistent with $S$ or previously explained from $\phi_i$
-    \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the edge $(u,v)$
-    \item Set $NS((u,v),\phi_i)$ to be $RS((u,v),\phi_i)$ divided by $\lambda$, which is the total number of quartets in $S$ that are consistent with the edge $(u,v)$.
-    \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phi_i),NS((v,u),\phi_i)\}$
-    \item The total score for the edge $H$ is the sum of scores for each tree $G_i$
-    \item This total score calculation is repeated for each horizontal edge $H_i$ in S, resulting in a list of edges, which is a complete description of the network.
+    \item Remove all quartets from $\phi_i$ either consistent with $S$ or discordant with $S$ but accounted for previously by a quartet set from another tree $G_j \in G$
+    \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the existenc of edge $(u,v)$
+    \item Set $NS((u,v),\phi_i) = \frac{RS((u,v),\phi_i)}{\lambda}$, where $\lambda$ is the total number of quartets in $S$ that are consistent with the existence of edge $(u,v)$.
+    \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phi_i),NS((v,u),\phi_i)\} \in [0,1]$
+    \item The total score for the edge $H$ is the sum of scores for each tree $G_i \in G$
 \end{enumerate}
+This total score calculation is repeated for each horizontal edge $H_i$ in S, resulting in a list of edges, which is a complete description of the network.
 This is further explained in the original work, \citep{hide}.
 \subsection{Network Statistics}
 All networks will be comprised of nodes representing \ac{otu}s and weighted edges represent the estimated amount of \ac{hgt} events between the two incident nodes.

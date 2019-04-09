@@ -3,8 +3,8 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {1}{Background}{3}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{My Project}{46}{0}{2}
+\beamer@sectionintoc {2}{My Project}{38}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {3}{Results}{62}{0}{3}
+\beamer@sectionintoc {3}{Results}{54}{0}{3}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {4}{Conclusion}{72}{0}{4}
+\beamer@sectionintoc {4}{Conclusion}{64}{0}{4}

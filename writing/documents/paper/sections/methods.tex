@@ -1,0 +1,141 @@
+%Tikz Styles
+\tikzstyle{block} = [circle,
+                     fill=green!20,
+                     text centered,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     rounded corners,
+                     draw]
+\tikzstyle{slock} = [circle,
+                     fill=red!20,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     text centered,
+                     rounded corners,
+                     draw]
+\tikzstyle{flock} = [circle,
+                     fill=blue!20,
+                     font=\ssmall,
+                     text width=1.5cm,
+                     text centered,
+                     rounded corners,
+                     draw]
+\tikzstyle{line} = [draw, -latex']
+\newcommand{\Checkmark}{$\mathbin{\tikz [x=2.4ex, y=2.4ex, line width=.2ex, green] \draw (0,1) -- (1,0) -- (3,3);}$}
+\section{Methods}
+\subsection{Summary}
+The goal of the project is to create a phylogenetic network from a set of protein fasta files and the corresponding nucleotide sequences.
+In this case all full genomes for a given bacterial genus, for analysis of \ac{hgt}.
+The workflow is as follows for a single genus:
+\begin{enumerate}
+    \item Download fasta files
+    \item Filter mobile genetic elements from genomes
+    \item Cluster all genes into families using Diamond (\% identity $> 80\%$)
+    \item Construct a presence/absence matrix of gene families for organisms
+    \item Estimate gene family indel rates separately for the CRISPR and non-CRISPR containing genomes using the R package markophylo
+    \item Construct a species tree using all 16S rRNA genes that have 1 copy for each member of the genus
+    \begin{enumerate}
+        \item Align each 16S gene with mafft using defaul settings
+        \item Concatenate all alignments together as a nexus file
+        \item Build the tree using Mr Bayes (10000 generations, 25\% burn in)
+    \end{enumerate}
+    \item Construct the gene trees ($\leq 1500$)
+    \begin{enumerate}
+        \item Only consider families with a gene belonging in at least 40\% of the genomes analyzed (ex: a family with 6 genes in 6 of 15 genomes)
+        \item Align each family using mafft with default settings
+        \item Build a tree for each alignment using Mr Bayes (10000 generations, 25\% burn in)
+    \end{enumerate}
+    \item Create 1000 subsets of 50 gene trees through bootstrap sampling
+    \item For each subset, use the program HiDe to infer a phylogenetic network from the species tree and the 50 gene trees.
+    \item Annotate each network with CRISPR data scraped from the CRISPR-one database.
+    \item Using the gene indel rates estimated and the annotated networks examine if there are any trends or effects on the dynamics of \ac{hgt} between organisms with and without CRISPR-Cas systems.
+\end{enumerate}
+%Summary Figure
+\FloatBarrier
+\begin{figure}[htb!]
+    \centering
+    \begin{tikzpicture}
+        % boxes
+        \node [slock]                       (node1)  {Get Fastas};
+        \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};
+        \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};
+        \node [block,right=0.8cm of node3]  (node4)  {P/A Matrix};
+        \node [block,above=0.5cm of node4]  (node5)  {Get 16S Genes};
+        \node [block,above=0.5cm of node5]  (node6)  {Gene Trees};
+        \node [block,right=0.5cm of node5]  (node7)  {Species Tree};
+        \node [block,below=0.5cm of node7]  (node8)  {Gene InDel Rates};
+        \node [block,above=0.5cm of node7]  (node9)  {Infer Network};
+        \node [block,right=0.5cm of node9]  (node10) {Annotate CRISPR};
+        \node [block,below=0.5cm of node10] (node11) {Compute Stats};
+        \node [flock,below=0.5cm of node11] (node12) {Look For Trends};
+        %lines
+        \path [line] (node1) -- (node2);
+        \path [line] (node2) -- (node3);
+        \path [line] (node3) -- (node5);
+        \path [line] (node5) -- (node7);
+        \path [line] (node3) -- (node4);
+        \path [line] (node4) -- (node8);
+        \path [line] (node7) -- (node8);
+        \path [line] (node3) -- (node6);
+        \path [line] (node6) -- (node9);
+        \path [line] (node7) -- (node9);
+        \path [line] (node9) -- (node10);
+        \path [line] (node10) -- (node11);
+        \path [line] (node11) -- (node12);
+        \path [line] (node8) -- (node12);
+    \end{tikzpicture}
+    \caption{Diagram of the worfkflow for a single genus}
+\end{figure}
+\FloatBarrier
+\subsection{Data Collection}
+Protein and nucleotide fastas of all CDS sequences were downloaded from NCBI RefSeq.
+\ac{crsp} annotations of \ac{cas} and Cfp proteins from the \ac{crsp}one tool from Zhang and Ye will be used to assess the presence of \ac{crsp} systems \citep{ineqcas}.
+%and the \ac{crsp}db (along with a python script) is used to annotate genera as being mixed (containing strains with and without \ac{crspc} systems) or Non-\ac{crsp} (containing no strains with a \ac{crspc} system) \citep{crispdb}.
+\subsection{Gene Presence/Absence Matrix}
+In order to use the program markophylo to estimate indel rates, a \ac{pa} matrix of gene families and organisms and a species tree are required.
+First any genes classified as \ac{mge}s (from NCBI annotations) are removed.
+Next genes are grouped into families by reciprocal BLAST hits and single link clustering.
+The remaining unclassified genes are compared to the NCBI non-redundant database with BLAST to check if they are genes, and if they are then they are considered their own family with one member.
+The \ac{pa} matrix is constructed as follows, for each \ac{otu} a binary vector is created, where each entry represents a gene family and a 1 indicates that that \ac{otu} contains at least 1 gene in that family.
+This is repeated for all \ac{otu}s, creating a $G \times O$ binary matrix, where $G$ is the total number of gene families and $O$ is the number \ac{otu}s.\par
+There are many ways to construct a species tree, but for this project the tree will be constructed with 16S rRNA genes, using Bayesian methods, as implemented in the program MrBayes.
+\subsection{Makophylo Rate Estimations}
+Given a species tree and a gene family \ac{pa} matrix for the \ac{otu}s of the species tree the R package \textit{markophylo} can provide gene insertion and gene deletion rate estimates \citep{marko}.
+The presence or absence of gene families are considered 2 discrete states, for which a $(2\times 2)$ transition rate matrix (of a \ac{mc} model) can be estimated using maximum likelihood techniques.
+The values in this estimated transition matrix are the insertion rate (transition probability of gene absence $\to$ presence) and deletion rate (transition probability of gene presence $\to$ absence) \citep{marko}.
+\subsection{Network Construction}
+Quartet decomposition is method by which \ac{hgt} events can be identified using a set of gene trees and a species tree.
+Given a tree $T$ a quartet is a subtree contain 4 of the leaf nodes in $T$, meaning that for a tree with $N$ leaf nodes (or \ac{otu}s) there are $\binom{N}{4}$ unique quartets in that tree.
+A quartet $Q$ is considered consistent with a tree if $Q = T|Le(Q)$ where $T|Le(Q)$ is the tree obtained by suppressing all degree-two nodes in $T[X]$ and $T[X]$ is the minimal subtree of T with all nodes in $X$, which is a leaf set of $T$ \citep{hide}.
+To calculate the weight of an edge for the network, given a species tree $S$ and a set of gene trees $G$ \citep{hide}:
+\begin{enumerate}
+    \item Pick a horizontal edge $H = ((u,v),(v,u))$ from $S$
+    \item Pick a gene tree $G_i$ in $G$
+    \item Decompose $G_i$ into it's set of quartets $\phi_i$
+    \item Remove all quartets from $\phi_i$ either consistent with $S$ or discordant with $S$ but accounted for previously by a quartet set from another tree $G_j \in G$
+    \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the existenc of edge $(u,v)$
+    \item Set $NS((u,v),\phi_i) = \frac{RS((u,v),\phi_i)}{\lambda}$, where $\lambda$ is the total number of quartets in $S$ that are consistent with the existence of edge $(u,v)$.
+    \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phi_i),NS((v,u),\phi_i)\} \in [0,1]$
+    \item The total score for the edge $H$ is the sum of scores for each tree $G_i \in G$
+\end{enumerate}
+This total score calculation is repeated for each horizontal edge $H_i$ in S, resulting in a list of edges, which is a complete description of the network.
+This is further explained in the original work, \citep{hide}.
+\subsection{Network Statistics}
+All networks will be comprised of nodes representing \ac{otu}s and weighted edges represent the estimated amount of \ac{hgt} events between the two incident nodes.
+As multiple sets of networks can be computed for a single set of genera (using different sets of gene trees), bootstrap support for edges and confidence intervals on edge weights can also be calculated.
+Given a network, with a set of nodes $V = \{V_0$ \dots $V_i\}$ of cardinality $N$ and a set of weighted edges (an unordered 2-tuple and weight) $T = \{((V_1,V_2),W_{1,2})$ \dots $((V_i,V_j),W_{i,j})\}$ with cardinality $E$ descriptive statistics can be computed as follows \citep{netstat}:
+    \begin{itemize}
+        \item \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
+        \item \textbf{Average Edge Weight}: $\frac{1}{N_c}\sum_i w_i$, The average edge weight for all nodes with \ac{crsp} or without \ac{crsp}
+        \item \textbf{Node Clustering Coefficient}:$\frac{1}{k_u(k_u-1)} \sum_{vw}^{T(u)} (\hat{w}_{uw} \hat{w}_{vw} \hat{w}_{uv})^{\frac{1}{3}}$ where $T(u)$ is the set of traingles containing $u$ \citep{clustering}
+        \item \textbf{Node Assortativity}: $A = \frac{Tr(M)-||M^2||}{1-||M^2||}$ Where $M$ is the mixing matrix of a given attribute and $||M||$ is the sum of all elements of $M$. $A \in [-1,1]$.\citep{newmanmix}
+        \item \textbf{Network Modularity}: $Q=\frac{1}{2m}\sum_{uv}^W [W_{uv} - \frac{k_u k_v}{2m}]\delta(u,v)$ where $m$ is the total weight of alledges, $k_u$ is the degree of $u$ and $\delta(u,v)$ is 1 if $u$ and $v$ both have or do not have \ac{crsp} systems and 0 otherwise. $Q \in [-1,1]$ \citep{modularity}
+        %\item<6-> \textbf{Node Eigenvector Centrality}: $\frac{N-1}{\sum_v d(u,v)}$ where $d(x,y)$ is the length of the shortest path $v \to u$.\citep{egcen}
+%        \item<7-> \textbf{Edge Weight KL Divergence}: $D_{KL}(P||Q)= \int_{-\infty}^{\infty} p(x)log(\frac{p(x)}{q(x)})dx$
+%        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
+%        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
+    \end{itemize}
+Each statistic was computed, either separately for the \ac{crsp} and Non-\ac{crsp} nodes or for the entire network for each of the 1000 bootstraps replicates.
+Each replicate was produced with 50 gene trees sampled randomly from all gene trees produced for that genus.
+%For the statistics estimated separately for \ac{crsp} and Non-\ac{crsp} nodes, the average and standard error was calculated across all replicates.
+

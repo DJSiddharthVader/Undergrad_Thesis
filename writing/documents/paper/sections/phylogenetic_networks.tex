@@ -1,0 +1,41 @@
+\subsection{Phylogenomic Networks}
+\ac{hgt} is an important factor in understanding evolution in prokaryotes.
+%\subsection*{Prokaryotic Net Of Life}
+In graph theory a tree is defined as a graph where there is only one path between every pair of nodes.
+In phylogenetics this implies there is only one path for genetic material to transfer between organisms, that path being vertical inheritance.
+The existence of \ac{hgt} demonstrates that the tree model is clearly an incomplete representation of genetic relationships between bacterial \ac{otu}s.
+Genetic material can be transferred outside of reproduction, allowing for multiple paths by which a single gene can be found in two \ac{otu}s (either inheritance, transfer or some combination of the two) \citep{lgt}.
+Since \ac{hgt} has been found to be frequent throughout the prokaryotic tree of life, this has lead many to re-evaluate the concept of a ``tree of life'', which by definition ignores these horizontal interactions \citep{netoflife}.
+This prompted the idea of a prokaryotic network of life (as opposed to a tree), with edges indicating both vertical and horizontal transfers of genetic material \citep{netoflife}.
+Edges can now connect closely or distantly related \ac{otu}s if \ac{hgt} has occured between them.
+\subsection{Detection}%cite with ihgt,hgterr
+While understanding that \ac{hgt} is important to bacterial evolution and networks provide a useful theoretic framework to study it, constructing such networks is not trivial.
+%Many different strategies have been developed to detect potential \ac{hgt} events given a phylogenetic tree, with some able to detect both recipients and donors \citep{ihgt}.
+%There are two primary sets of methods for detecting \ac{hgt}.
+%\paragraph{Parametric}
+%These methods rely on investigating the sequence composition (GC\%, codon bias, etc.) in genes and when they deviate from the genomic average.
+%Average GC content has been found to vary significantly between some organisms, even by up to $30\%$ in closely related organisms \citep{ihgt}.
+%The same is true for codon bias, where codons variants are observed with different frequency in different bacteria, dependent on the expression levels of the tRNAs in those respective organisms \citep{ihgt,codonbias}.
+%For example, if \ac{ecoli} contains more copies of a tRNA with the anti-codon TTA (Leucine) than CTC, genes will more likely encode the TTA codon to increase transcription efficiency \citep{codonbias}.
+%If more TTA codons than CTC codons are observed in a gene in \ac{sau}, assuming \ac{sau} has no leucin codon bias, one may be able to infer that the codon-biased gene was transferred horizontally \citep{ihgt}.
+%Other metrics to consider are GC\%, k-mer frequency or the presence of other features around the candidate gene, such as transposases or flanking sequences \citep{ihgt}.
+%\paragraph{Phylogenetic}
+Phylogenetic methods are often best at inferring \ac{hgt} events.
+They rely on recognizing discordance between gene trees and species trees.
+If a gene tree is found to have a significantly different topology from a species tree, this difference may be the result of an \ac{hgt} event \citep{hgterr}.
+%One can also compare the substructures of a gene trees and species trees (created by removing a set of edges leaving a set of sub-trees) to see if the tree substructures disagree \citep{ihgt}.
+%Another strategy involves pruning (removing an edge to get 2 distinct trees) an internal branch and reattaching the subtrees at a different location.
+%If the re-grafted tree has a better fit to the reference tree than the original, this may be indicative of an \ac{hgt} event between the original node and the node the subtree was re-grafted to \citep{ihgt}.\par
+%While \ac{hgt}s can lead to these discordances, there are other series of evolutionary events than can produce the same results \citep{hgterr}.
+%Strategies to account for these events, as well as account uncertainty in the tress themselves exist, but there still exist other sources that remain unaccounted for \citep{hgterr}.\par
+%It should also be noted that many of these methods require heuristic solutions, as they are computationally expensive, and sometimes even entirely intractable, which creates further uncertainty in the results obtained \citep{ihgt}.
+%As an example, finding the minimum edit path between 2 trees (as in the re-grafting method) is NP-Hard, but the solution space can be limited by not considering pruning branches between consistent nodes \citep{sprnp,ihgt}.\par\par
+Generally phylogenetic methods are preferred for multiple reasons:
+\begin{itemize}
+    \item Can make use of multiple genomes at once \citep{ihgt}
+    \item Require explicit evolutionary models, which come with their own framework for hypothesis testing and model selection \citep{ihgt}.
+    \item \ac{hgt} events identified by parametric methods are often found by phylogenetic methods as well \citep{ihgt}.
+    \item In recent years, the requirements of computing power and  multiple well sequenced genomes for phylogenetic methods have become easier and easier to meet \citep{ihgt}.
+\end{itemize}
+While detecting \ac{hgt} events with high degrees of certainty is still difficult, much progress has been made in recent years,especially using phylogenetic methods \citep{ihgt}.
+Events that may lead to false diagnosis of \ac{hgt} are: incomplete lineage sorting, gene duplication followed by loss in one of the descendant lineages or homologous recombination \citep{ihgt,hgterr}.

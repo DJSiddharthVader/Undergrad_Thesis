@@ -1,0 +1,63 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}CRISPR-Cas Systems}{3}{section.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}What Are They?}{3}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Horizontal Gene Transfer}{3}{section.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Mechanisms}{3}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Transformation}{3}{section*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Conjugation}{4}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Transduction}{4}{section*.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Rate Influencing Factors}{4}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Pan-genomes}{4}{subsection.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}Phylogenomic Networks}{5}{subsection.2.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5}Detection}{5}{subsection.2.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Do CRISPR Systems Affect Horizontal Gene Transfer?}{6}{section.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Interference Mechanisms}{6}{subsection.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Complexities And Costs Of CRISPR-Cas Systems}{6}{subsection.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Potential Strategies For Reducing CRISPR-\ac {hgt} Trade-off Costs}{6}{subsection.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Hypothesis \& Objectives}{7}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Hypothesis}{7}{subsection.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Objectives}{7}{subsection.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Methods}{7}{section.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Summary}{7}{subsection.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}Data Collection}{9}{subsection.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}Gene Presence/Absence Matrix}{9}{subsection.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4}Makophylo Rate Estimations}{9}{subsection.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5}Network Construction}{10}{subsection.5.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.6}Network Statistics}{10}{subsection.5.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Results}{11}{section.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Discussion}{19}{section.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1}Gene Indel Rates are Different for \ac {crsp} and Non-\ac {crsp} \ac {otu}s}{19}{subsection.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2}Phylogenomic Networks Have Low Assortativity}{20}{subsection.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3}\ac {hgt} Dynamics Vary Across Bacterial Genera}{20}{subsection.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Conclusion}{20}{section.8}

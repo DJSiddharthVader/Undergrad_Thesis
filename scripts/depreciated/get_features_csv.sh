@@ -1,9 +1,10 @@
 #!/bin/bash
 
-#use ./get_eatures_csv.sh dir_of_gbffs/ >| outfile.csv
+#use ./get_features_csv.sh dir_of_gbffs/ >| outfile.csv
 #takes ~50minutes on the 10,614 gbffs I have, probably speed it up by grepping single column for every file at once, paste cols?
 
 declare -a gcounts=("Genes (total)" "CDS (total)" "Genes (coding)" "CDS (coding)" "Genes (RNA)" "tRNAs" "ncRNAs" "Pseudo Genes (total)")
+headers="Filepath~GCF~Accession Number~Organism~Genus~Taxonomy~IsComplete~NCBI_CRISPR_Arrays~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
 singlefileinfo() {  #get info for a single gbfffile, , delimited
     #identifying info
     local GCF=$(grep -m 1 'Assembly' "$1" | cut -d':' -f2 | tr -d ' ') #gca for linking back to crispr annoattions
@@ -32,12 +33,14 @@ singlefileinfo() {  #get info for a single gbfffile, , delimited
     done
     echo "$outvar"
 }
+function main() {
+    gbff_dir="$1"
+    echo "$headers"
+    for file in $gbff_dir/* #dir of gbff files
+    do
+        singlefileinfo $(readlink -e "$file")
+    done
+}
 
-headers="Filepath~GCF~Accession Number~Organism~Genus~Taxonomy~IsComplete~NCBI_CRISPR_Arrays~Genes (total)~CDS (total)~Genes (coding)~CDS (coding)~Genes (RNA)~tRNAs~ncRNAs~Pseudo Genes (total)"
+main "$1"
 
-echo "$headers"
-for file in $1* #dir of gbff files
-do
-    ffile=`readlink -e "$file"`
-    singlefileinfo "$ffile" #print ~ delimited file info to STDOUT
-done

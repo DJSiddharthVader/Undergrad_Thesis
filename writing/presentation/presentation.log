@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.27)  3 APR 2019 22:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.3.27)  9 APR 2019 11:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2371,12 +2371,12 @@ nslations-basic-dictionary')
 Package translations Info: loading dictionary `translations-basic-dictionary' f
 or `english'. on input line 173.
  (./presentation.nav)
-<../nontext/images/mcmaster_logo.png, id=37, 128.91405pt x 74.50227pt>
+<../nontext/images/mcmaster_logo.png, id=37, 631.35875pt x 373.395pt>
 File: ../nontext/images/mcmaster_logo.png Graphic file (type png)
 <use ../nontext/images/mcmaster_logo.png>
 Package pdftex.def Info: ../nontext/images/mcmaster_logo.png  used on input lin
 e 178.
-(pdftex.def)             Requested size: 141.79604pt x 81.94481pt.
+(pdftex.def)             Requested size: 138.55254pt x 81.94481pt.
 LaTeX Font Info:    Try loading font information for U+msa on input line 178.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -2397,25 +2397,39 @@ thkerncmss.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../nontext/images/mcmaster
-_logo.png>] (./presentation.toc) [2
+_logo.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb) [2
 
 ]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb) [3
+ (./presentation.vrb
+<../nontext/images/graphExample_bondy.png, id=54, 580.41844pt x 486.31688pt>
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
+)
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
 
-]
-\openout4 = `presentation.vrb'.
 
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
 
-(./presentation.vrb
-<../nontext/images/CRISPR-immunity_crispgen.jpg, id=68, 228.32204pt x 296.11513
-pt>
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+[3
+
+ <../nontext/images/graphExample_bondy.png>] (./presentation.vrb
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2428,12 +2442,12 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [4
 
- <../nontext/images/CRISPR-immunity_crispgen.jpg>] (./presentation.vrb
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+] (./presentation.vrb
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2447,11 +2461,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [5
 
 ] (./presentation.vrb
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2465,11 +2479,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [6
 
 ] (./presentation.vrb
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2483,11 +2497,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [7
 
 ] (./presentation.vrb
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
+<use ../nontext/images/graphExample_bondy.png>
+Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2500,12 +2514,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [8
 
-] (./presentation.vrb
-File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
-n input line 14.
-(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb) [9
+
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/images/hgt_mechanisims_trendslgt.png, id=102, 420.82219pt x 560.845
+3pt>
+File: ../nontext/images/hgt_mechanisims_trendslgt.png Graphic file (type png)
+<use ../nontext/images/hgt_mechanisims_trendslgt.png>
+Package pdftex.def Info: ../nontext/images/hgt_mechanisims_trendslgt.png  used 
+on input line 5.
+(pdftex.def)             Requested size: 128.19795pt x 170.85646pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2516,19 +2540,9 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 []
  []
 
-[9
+[10
 
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb) [10
-
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/hgt_mechanisims_trendslgt.png, id=120, 420.82219pt x 560.845
-3pt>
+ <../nontext/images/hgt_mechanisims_trendslgt.png>] (./presentation.vrb
 File: ../nontext/images/hgt_mechanisims_trendslgt.png Graphic file (type png)
 <use ../nontext/images/hgt_mechanisims_trendslgt.png>
 Package pdftex.def Info: ../nontext/images/hgt_mechanisims_trendslgt.png  used 
@@ -2546,7 +2560,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [11
 
- <../nontext/images/hgt_mechanisims_trendslgt.png>] (./presentation.vrb
+] (./presentation.vrb
 File: ../nontext/images/hgt_mechanisims_trendslgt.png Graphic file (type png)
 <use ../nontext/images/hgt_mechanisims_trendslgt.png>
 Package pdftex.def Info: ../nontext/images/hgt_mechanisims_trendslgt.png  used 
@@ -2582,30 +2596,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [13
 
-] (./presentation.vrb
-File: ../nontext/images/hgt_mechanisims_trendslgt.png Graphic file (type png)
-<use ../nontext/images/hgt_mechanisims_trendslgt.png>
-Package pdftex.def Info: ../nontext/images/hgt_mechanisims_trendslgt.png  used 
-on input line 5.
-(pdftex.def)             Requested size: 128.19795pt x 170.85646pt.
-)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
+]
+\openout4 = `presentation.vrb'.
 
+ (./presentation.vrb) [14
 
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
+]
+\openout4 = `presentation.vrb'.
 
-[14
-
-] (./presentation.vrb
-File: ../nontext/images/hgt_mechanisims_trendslgt.png Graphic file (type png)
-<use ../nontext/images/hgt_mechanisims_trendslgt.png>
-Package pdftex.def Info: ../nontext/images/hgt_mechanisims_trendslgt.png  used 
-on input line 5.
-(pdftex.def)             Requested size: 128.19795pt x 170.85646pt.
+ (./presentation.vrb
+<../nontext/images/CRISPR-immunity_crispgen.jpg, id=148, 228.32204pt x 296.1151
+3pt>
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -2618,10 +2624,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [15
 
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb)
+ <../nontext/images/CRISPR-immunity_crispgen.jpg>] (./presentation.vrb
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2633,7 +2642,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [16
 
-] (./presentation.vrb)
+] (./presentation.vrb
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2645,7 +2660,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [17
 
-] (./presentation.vrb)
+] (./presentation.vrb
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2657,7 +2678,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [18
 
-] (./presentation.vrb)
+] (./presentation.vrb
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2669,7 +2696,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [19
 
-] (./presentation.vrb)
+] (./presentation.vrb
+File: ../nontext/images/CRISPR-immunity_crispgen.jpg Graphic file (type jpg)
+<use ../nontext/images/CRISPR-immunity_crispgen.jpg>
+Package pdftex.def Info: ../nontext/images/CRISPR-immunity_crispgen.jpg  used o
+n input line 14.
+(pdftex.def)             Requested size: 128.19795pt x 166.26613pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2689,14 +2722,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 ]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb
-<../nontext/images/graphExample_bondy.png, id=207, 580.41844pt x 486.31688pt>
-File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
-<use ../nontext/images/graphExample_bondy.png>
-Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
-t line 5.
-(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
-)
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2708,13 +2734,10 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [22
 
- <../nontext/images/graphExample_bondy.png>] (./presentation.vrb
-File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
-<use ../nontext/images/graphExample_bondy.png>
-Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
-t line 5.
-(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
-)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2726,13 +2749,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [23
 
-] (./presentation.vrb
-File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
-<use ../nontext/images/graphExample_bondy.png>
-Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
-t line 5.
-(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2744,13 +2761,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [24
 
-] (./presentation.vrb
-File: ../nontext/images/graphExample_bondy.png Graphic file (type png)
-<use ../nontext/images/graphExample_bondy.png>
-Package pdftex.def Info: ../nontext/images/graphExample_bondy.png  used on inpu
-t line 5.
-(pdftex.def)             Requested size: 128.19795pt x 107.41301pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2762,15 +2773,19 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [25
 
-]
-\openout4 = `presentation.vrb'.
+] (./presentation.vrb)
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
 
- (./presentation.vrb) [26
 
-]
-\openout4 = `presentation.vrb'.
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
 
- (./presentation.vrb)
+[26
+
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2782,10 +2797,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [27
 
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2809,19 +2821,15 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [29
 
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
+]
+\openout4 = `presentation.vrb'.
 
+ (./presentation.vrb) [30
 
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
+]
+\openout4 = `presentation.vrb'.
 
-[30
-
-] (./presentation.vrb)
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2857,7 +2865,10 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [33
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -2917,10 +2928,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [38
 
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3012,7 +3020,17 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 ]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb)
+ (./presentation.vrb
+<../nontext/figures/network.png, id=330, 1445.4pt x 1084.05pt>
+File: ../nontext/figures/network.png Graphic file (type png)
+<use ../nontext/figures/network.png>
+Package pdftex.def Info: ../nontext/figures/network.png  used on input line 3.
+(pdftex.def)             Requested size: 320.4937pt x 240.3609pt.
+)
+Overfull \vbox (28.04715pt too high) detected at line 347
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3024,7 +3042,17 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [47
 
-] (./presentation.vrb)
+ <../nontext/figures/network.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/c_nc_deg_bar.png, id=337, 1445.4pt x 722.7pt>
+File: ../nontext/figures/c_nc_deg_bar.png Graphic file (type png)
+<use ../nontext/figures/c_nc_deg_bar.png>
+Package pdftex.def Info: ../nontext/figures/c_nc_deg_bar.png  used on input lin
+e 3.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3036,7 +3064,23 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [48
 
-] (./presentation.vrb)
+ <../nontext/figures/c_nc_deg_bar.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/c_nc_indel_bar.png, id=344, 1445.4pt x 722.7pt>
+File: ../nontext/figures/c_nc_indel_bar.png Graphic file (type png)
+<use ../nontext/figures/c_nc_indel_bar.png>
+Package pdftex.def Info: ../nontext/figures/c_nc_indel_bar.png  used on input l
+ine 2.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+<../nontext/figures/partition_example.png, id=345, 166.86278pt x 166.58374pt>
+File: ../nontext/figures/partition_example.png Graphic file (type png)
+<use ../nontext/figures/partition_example.png>
+Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
+t line 3.
+(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3048,7 +3092,119 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [49
 
-]
+ <../nontext/figures/c_nc_indel_bar.png> <../nontext/figures/partition_example.
+png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/c_nc_rate_scatter.png, id=354, 722.7pt x 361.35pt>
+File: ../nontext/figures/c_nc_rate_scatter.png Graphic file (type png)
+<use ../nontext/figures/c_nc_rate_scatter.png>
+Package pdftex.def Info: ../nontext/figures/c_nc_rate_scatter.png  used on inpu
+t line 2.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+File: ../nontext/figures/partition_example.png Graphic file (type png)
+<use ../nontext/figures/partition_example.png>
+Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
+t line 3.
+(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
+)
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[50
+
+ <../nontext/figures/c_nc_rate_scatter.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/crate_cfrac_scatter.png, id=361, 722.7pt x 361.35pt>
+File: ../nontext/figures/crate_cfrac_scatter.png Graphic file (type png)
+<use ../nontext/figures/crate_cfrac_scatter.png>
+Package pdftex.def Info: ../nontext/figures/crate_cfrac_scatter.png  used on in
+put line 2.
+(pdftex.def)             Requested size: 400.61711pt x 200.30902pt.
+File: ../nontext/figures/partition_example.png Graphic file (type png)
+<use ../nontext/figures/partition_example.png>
+Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
+t line 3.
+(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
+)
+Overfull \vbox (5.20898pt too high) detected at line 364
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[51
+
+ <../nontext/figures/crate_cfrac_scatter.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/ncrate_cfrac_scatter.png, id=368, 722.7pt x 361.35pt>
+File: ../nontext/figures/ncrate_cfrac_scatter.png Graphic file (type png)
+<use ../nontext/figures/ncrate_cfrac_scatter.png>
+Package pdftex.def Info: ../nontext/figures/ncrate_cfrac_scatter.png  used on i
+nput line 2.
+(pdftex.def)             Requested size: 400.61711pt x 200.30902pt.
+File: ../nontext/figures/partition_example.png Graphic file (type png)
+<use ../nontext/figures/partition_example.png>
+Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
+t line 3.
+(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
+)
+Overfull \vbox (5.20898pt too high) detected at line 368
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[52
+
+ <../nontext/figures/ncrate_cfrac_scatter.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/c_nc_clust_scatter.png, id=375, 722.7pt x 361.35pt>
+File: ../nontext/figures/c_nc_clust_scatter.png Graphic file (type png)
+<use ../nontext/figures/c_nc_clust_scatter.png>
+Package pdftex.def Info: ../nontext/figures/c_nc_clust_scatter.png  used on inp
+ut line 3.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+)
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[53
+
+ <../nontext/figures/c_nc_clust_scatter.png>]
 \openout4 = `presentation.vrb'.
 
  (./presentation.vrb)
@@ -3061,57 +3217,12 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 []
  []
 
-[50
-
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[51
-
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[52
-
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[53
-
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
 [54
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3171,7 +3282,10 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [59
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3195,25 +3309,19 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [61
 
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb) [62
-
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/network.png, id=531, 1445.4pt x 1084.05pt>
-File: ../nontext/figures/network.png Graphic file (type png)
-<use ../nontext/figures/network.png>
-Package pdftex.def Info: ../nontext/figures/network.png  used on input line 3.
-(pdftex.def)             Requested size: 320.4937pt x 240.3609pt.
-)
-Overfull \vbox (28.04715pt too high) detected at line 381
+] (./presentation.vrb)
+Underfull \hbox (badness 10000) has occurred while \output is active
+[][]
  []
 
 
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[62
+
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3225,17 +3333,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [63
 
- <../nontext/figures/network.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/c_nc_deg_bar.png, id=538, 1445.4pt x 722.7pt>
-File: ../nontext/figures/c_nc_deg_bar.png Graphic file (type png)
-<use ../nontext/figures/c_nc_deg_bar.png>
-Package pdftex.def Info: ../nontext/figures/c_nc_deg_bar.png  used on input lin
-e 3.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3247,23 +3345,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [64
 
- <../nontext/figures/c_nc_deg_bar.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/c_nc_indel_bar.png, id=545, 1445.4pt x 722.7pt>
-File: ../nontext/figures/c_nc_indel_bar.png Graphic file (type png)
-<use ../nontext/figures/c_nc_indel_bar.png>
-Package pdftex.def Info: ../nontext/figures/c_nc_indel_bar.png  used on input l
-ine 2.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
-<../nontext/figures/partition_example.png, id=546, 166.86278pt x 166.58374pt>
-File: ../nontext/figures/partition_example.png Graphic file (type png)
-<use ../nontext/figures/partition_example.png>
-Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
-t line 3.
-(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3275,23 +3357,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [65
 
- <../nontext/figures/c_nc_indel_bar.png> <../nontext/figures/partition_example.
-png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/c_nc_rate_scatter.png, id=554, 722.7pt x 361.35pt>
-File: ../nontext/figures/c_nc_rate_scatter.png Graphic file (type png)
-<use ../nontext/figures/c_nc_rate_scatter.png>
-Package pdftex.def Info: ../nontext/figures/c_nc_rate_scatter.png  used on inpu
-t line 2.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
-File: ../nontext/figures/partition_example.png Graphic file (type png)
-<use ../nontext/figures/partition_example.png>
-Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
-t line 3.
-(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3303,26 +3369,10 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [66
 
- <../nontext/figures/c_nc_rate_scatter.png>]
+]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb
-<../nontext/figures/crate_cfrac_scatter.png, id=561, 722.7pt x 361.35pt>
-File: ../nontext/figures/crate_cfrac_scatter.png Graphic file (type png)
-<use ../nontext/figures/crate_cfrac_scatter.png>
-Package pdftex.def Info: ../nontext/figures/crate_cfrac_scatter.png  used on in
-put line 2.
-(pdftex.def)             Requested size: 400.61711pt x 200.30902pt.
-File: ../nontext/figures/partition_example.png Graphic file (type png)
-<use ../nontext/figures/partition_example.png>
-Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
-t line 3.
-(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
-)
-Overfull \vbox (5.20898pt too high) detected at line 398
- []
-
-
+ (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3334,26 +3384,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [67
 
- <../nontext/figures/crate_cfrac_scatter.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/ncrate_cfrac_scatter.png, id=569, 722.7pt x 361.35pt>
-File: ../nontext/figures/ncrate_cfrac_scatter.png Graphic file (type png)
-<use ../nontext/figures/ncrate_cfrac_scatter.png>
-Package pdftex.def Info: ../nontext/figures/ncrate_cfrac_scatter.png  used on i
-nput line 2.
-(pdftex.def)             Requested size: 400.61711pt x 200.30902pt.
-File: ../nontext/figures/partition_example.png Graphic file (type png)
-<use ../nontext/figures/partition_example.png>
-Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
-t line 3.
-(pdftex.def)             Requested size: 64.09775pt x 63.9913pt.
-)
-Overfull \vbox (5.20898pt too high) detected at line 402
- []
-
-
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3365,17 +3396,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [68
 
- <../nontext/figures/ncrate_cfrac_scatter.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/c_nc_clust_scatter.png, id=576, 722.7pt x 361.35pt>
-File: ../nontext/figures/c_nc_clust_scatter.png Graphic file (type png)
-<use ../nontext/figures/c_nc_clust_scatter.png>
-Package pdftex.def Info: ../nontext/figures/c_nc_clust_scatter.png  used on inp
-ut line 3.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
-)
+] (./presentation.vrb)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3387,17 +3408,25 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [69
 
- <../nontext/figures/c_nc_clust_scatter.png>]
+]
 \openout4 = `presentation.vrb'.
 
  (./presentation.vrb
-<../nontext/figures/mod_violin.png, id=583, 1445.4pt x 722.7pt>
-File: ../nontext/figures/mod_violin.png Graphic file (type png)
-<use ../nontext/figures/mod_violin.png>
-Package pdftex.def Info: ../nontext/figures/mod_violin.png  used on input line 
-3.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+File: ../nontext/images/mcmaster_logo.png Graphic file (type png)
+<use ../nontext/images/mcmaster_logo.png>
+Package pdftex.def Info: ../nontext/images/mcmaster_logo.png  used on input lin
+e 26.
+(pdftex.def)             Requested size: 155.24684pt x 91.81587pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--34
+\OT1/cmtt/m/n/10.95 com / DJSiddharthVader /
+ []
+
 )
+Overfull \vbox (6.5661pt too high) detected at line 444
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3409,16 +3438,16 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [70
 
- <../nontext/figures/mod_violin.png>]
+]
+\c@framenumbervorappendix=\count505
 \openout4 = `presentation.vrb'.
 
  (./presentation.vrb
-<../nontext/figures/asst_violin.png, id=590, 1445.4pt x 722.7pt>
-File: ../nontext/figures/asst_violin.png Graphic file (type png)
-<use ../nontext/figures/asst_violin.png>
-Package pdftex.def Info: ../nontext/figures/asst_violin.png  used on input line
- 3.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+File: ../nontext/figures/partition_example.png Graphic file (type png)
+<use ../nontext/figures/partition_example.png>
+Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
+t line 3.
+(pdftex.def)             Requested size: 160.24684pt x 159.97955pt.
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
@@ -3431,10 +3460,17 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [71
 
- <../nontext/figures/asst_violin.png>]
+]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb)
+ (./presentation.vrb
+<../nontext/figures/netsample.png, id=481, 1947.03882pt x 928.88206pt>
+File: ../nontext/figures/netsample.png Graphic file (type png)
+<use ../nontext/figures/netsample.png>
+Package pdftex.def Info: ../nontext/figures/netsample.png  used on input line 3
+.
+(pdftex.def)             Requested size: 320.4937pt x 152.89041pt.
+)
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3446,10 +3482,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [72
 
-]
+ <../nontext/figures/netsample.png>]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb)
+ (./presentation.vrb
+<../nontext/images/CRISPROneEntry.png, id=488, 629.17412pt x 396.77647pt>
+File: ../nontext/images/CRISPROneEntry.png Graphic file (type png)
+<use ../nontext/images/CRISPROneEntry.png>
+Package pdftex.def Info: ../nontext/images/CRISPROneEntry.png  used on input li
+ne 3.
+(pdftex.def)             Requested size: 256.39594pt x 161.69255pt.
+)
+Overfull \hbox (16.52675pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3461,7 +3509,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [73
 
-] (./presentation.vrb)
+ <../nontext/images/CRISPROneEntry.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/genus_size_dist.png, id=496, 722.7pt x 361.35pt>
+File: ../nontext/figures/genus_size_dist.png Graphic file (type png)
+<use ../nontext/figures/genus_size_dist.png>
+Package pdftex.def Info: ../nontext/figures/genus_size_dist.png  used on input 
+line 2.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+)
+Overfull \hbox (32.6999pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3473,7 +3536,15 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [74
 
-] (./presentation.vrb)
+ <../nontext/figures/genus_size_dist.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
+Overfull \hbox (48.87306pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3485,7 +3556,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [75
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/asst_violin.png, id=518, 1445.4pt x 722.7pt>
+File: ../nontext/figures/asst_violin.png Graphic file (type png)
+<use ../nontext/figures/asst_violin.png>
+Package pdftex.def Info: ../nontext/figures/asst_violin.png  used on input line
+ 3.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+)
+Overfull \hbox (65.0462pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3497,7 +3583,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [76
 
-] (./presentation.vrb)
+ <../nontext/figures/asst_violin.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/figures/mod_violin.png, id=525, 1445.4pt x 722.7pt>
+File: ../nontext/figures/mod_violin.png Graphic file (type png)
+<use ../nontext/figures/mod_violin.png>
+Package pdftex.def Info: ../nontext/figures/mod_violin.png  used on input line 
+3.
+(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
+)
+Overfull \hbox (81.21936pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3509,10 +3610,24 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [77
 
-]
+ <../nontext/figures/mod_violin.png>]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb)
+ (./presentation.vrb
+<../nontext/figures/Sphingomonas_labelled_cladogram.pdf, id=532, 1806.75pt x 10
+84.05pt>
+File: ../nontext/figures/Sphingomonas_labelled_cladogram.pdf Graphic file (type
+ pdf)
+<use ../nontext/figures/Sphingomonas_labelled_cladogram.pdf>
+Package pdftex.def Info: ../nontext/figures/Sphingomonas_labelled_cladogram.pdf
+  used on input line 2.
+(pdftex.def)             Requested size: 320.4937pt x 192.29202pt.
+)
+Overfull \hbox (97.39252pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3524,7 +3639,16 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [78
 
-] (./presentation.vrb)
+ <../nontext/figures/Sphingomonas_labelled_cladogram.pdf>]
+\openout4 = `presentation.vrb'.
+
+
+(./presentation.vrb)
+Overfull \hbox (113.56566pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3536,7 +3660,15 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [79
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb)
+Overfull \hbox (129.73882pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3548,7 +3680,28 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [80
 
-] (./presentation.vrb)
+]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/images/pangenome_pang.jpg, id=568, 37.3395pt x 23.0461pt>
+File: ../nontext/images/pangenome_pang.jpg Graphic file (type jpg)
+<use ../nontext/images/pangenome_pang.jpg>
+Package pdftex.def Info: ../nontext/images/pangenome_pang.jpg  used on input li
+ne 5.
+(pdftex.def)             Requested size: 160.24684pt x 98.93478pt.
+<../nontext/images/pangGrapgs_ecopan.jpg, id=570, 1027.84pt x 1284.8pt>
+File: ../nontext/images/pangGrapgs_ecopan.jpg Graphic file (type jpg)
+<use ../nontext/images/pangGrapgs_ecopan.jpg>
+Package pdftex.def Info: ../nontext/images/pangGrapgs_ecopan.jpg  used on input
+ line 11.
+(pdftex.def)             Requested size: 128.19795pt x 160.24672pt.
+)
+Overfull \hbox (145.91196pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3560,7 +3713,24 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [81
 
-] (./presentation.vrb)
+ <../nontext/images/pangenome_pang.jpg> <../nontext/images/pangGrapgs_ecopan.jp
+g>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/images/spreadDiagram_argspread.png, id=579, 507.39563pt x 475.02469
+pt>
+File: ../nontext/images/spreadDiagram_argspread.png Graphic file (type png)
+<use ../nontext/images/spreadDiagram_argspread.png>
+Package pdftex.def Info: ../nontext/images/spreadDiagram_argspread.png  used on
+ input line 3.
+(pdftex.def)             Requested size: 192.29817pt x 180.02562pt.
+)
+Overfull \hbox (162.08511pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3572,7 +3742,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [82
 
-] (./presentation.vrb)
+ <../nontext/images/spreadDiagram_argspread.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/images/net_netoflife.png, id=589, 603.0028pt x 477.28313pt>
+File: ../nontext/images/net_netoflife.png Graphic file (type png)
+<use ../nontext/images/net_netoflife.png>
+Package pdftex.def Info: ../nontext/images/net_netoflife.png  used on input lin
+e 3.
+(pdftex.def)             Requested size: 224.3446pt x 177.56787pt.
+)
+Overfull \hbox (178.25827pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3584,7 +3769,23 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [83
 
-] (./presentation.vrb)
+ <../nontext/images/net_netoflife.png>]
+\openout4 = `presentation.vrb'.
+
+ (./presentation.vrb
+<../nontext/images/hgtiInferenceMethods_ihgt.png, id=598, 542.025pt x 491.6769p
+t>
+File: ../nontext/images/hgtiInferenceMethods_ihgt.png Graphic file (type png)
+<use ../nontext/images/hgtiInferenceMethods_ihgt.png>
+Package pdftex.def Info: ../nontext/images/hgtiInferenceMethods_ihgt.png  used 
+on input line 3.
+(pdftex.def)             Requested size: 192.29817pt x 174.43773pt.
+)
+Overfull \hbox (194.43141pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3596,10 +3797,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [84
 
-]
+ <../nontext/images/hgtiInferenceMethods_ihgt.png>]
 \openout4 = `presentation.vrb'.
 
- (./presentation.vrb)
+ (./presentation.vrb
+<../nontext/figures/pairplot.png, id=606, 526.1256pt x 533.3526pt>
+File: ../nontext/figures/pairplot.png Graphic file (type png)
+<use ../nontext/figures/pairplot.png>
+Package pdftex.def Info: ../nontext/figures/pairplot.png  used on input line 3.
+
+(pdftex.def)             Requested size: 192.29817pt x 194.9447pt.
+)
+Overfull \hbox (210.60457pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 [][]
  []
@@ -3611,341 +3824,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [85
 
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
+ <../nontext/figures/pairplot.png>]
 
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
+LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10.95> not available
+(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 568.
 
 [86
 
-] (./presentation.vrb)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
+ </usr/share/texlive/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
 [87
 
-]
-\openout4 = `presentation.vrb'.
 
- (./presentation.vrb
-File: ../nontext/images/mcmaster_logo.png Graphic file (type png)
-<use ../nontext/images/mcmaster_logo.png>
-Package pdftex.def Info: ../nontext/images/mcmaster_logo.png  used on input lin
-e 26.
-(pdftex.def)             Requested size: 155.24684pt x 89.72511pt.
+] [88
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--34
-\OT1/cmtt/m/n/10.95 com / DJSiddharthVader /
- []
 
-)
-Overfull \vbox (6.5661pt too high) detected at line 488
- []
+] [89
 
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[88
-
-]
-\c@framenumbervorappendix=\count505
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10.95> not available
-(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 493.
-
-[89
-
- </usr/share/texlive/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
-[90
-
-
-] [91
-
-
-] [92
-
-
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/CRISPR-types_evocas.jpg, id=733, 289.08pt x 268.8444pt>
-File: ../nontext/images/CRISPR-types_evocas.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-types_evocas.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-types_evocas.jpg  used on inp
-ut line 13.
-(pdftex.def)             Requested size: 144.22118pt x 134.1224pt.
-)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[93
-
- <../nontext/images/CRISPR-types_evocas.jpg>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/CRISPR-apps.jpg, id=740, 381.17628pt x 275.00974pt>
-File: ../nontext/images/CRISPR-apps.jpg Graphic file (type jpg)
-<use ../nontext/images/CRISPR-apps.jpg>
-Package pdftex.def Info: ../nontext/images/CRISPR-apps.jpg  used on input line 
-3.
-(pdftex.def)             Requested size: 256.39594pt x 184.9899pt.
-)
-Overfull \vbox (4.62735pt too high) detected at line 518
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[94
-
- <../nontext/images/CRISPR-apps.jpg>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/pangenome_pang.jpg, id=747, 37.3395pt x 23.0461pt>
-File: ../nontext/images/pangenome_pang.jpg Graphic file (type jpg)
-<use ../nontext/images/pangenome_pang.jpg>
-Package pdftex.def Info: ../nontext/images/pangenome_pang.jpg  used on input li
-ne 5.
-(pdftex.def)             Requested size: 160.24684pt x 98.93478pt.
-<../nontext/images/pangGrapgs_ecopan.jpg, id=749, 1027.84pt x 1284.8pt>
-File: ../nontext/images/pangGrapgs_ecopan.jpg Graphic file (type jpg)
-<use ../nontext/images/pangGrapgs_ecopan.jpg>
-Package pdftex.def Info: ../nontext/images/pangGrapgs_ecopan.jpg  used on input
- line 11.
-(pdftex.def)             Requested size: 128.19795pt x 160.24672pt.
-)
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[95
-
- <../nontext/images/pangenome_pang.jpg> <../nontext/images/pangGrapgs_ecopan.jp
-g>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/spreadDiagram_argspread.png, id=756, 507.39563pt x 475.02469
-pt>
-File: ../nontext/images/spreadDiagram_argspread.png Graphic file (type png)
-<use ../nontext/images/spreadDiagram_argspread.png>
-Package pdftex.def Info: ../nontext/images/spreadDiagram_argspread.png  used on
- input line 3.
-(pdftex.def)             Requested size: 192.29817pt x 180.02562pt.
-)
-Overfull \hbox (8.0886pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[96
-
- <../nontext/images/spreadDiagram_argspread.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/net_netoflife.png, id=764, 603.0028pt x 477.28313pt>
-File: ../nontext/images/net_netoflife.png Graphic file (type png)
-<use ../nontext/images/net_netoflife.png>
-Package pdftex.def Info: ../nontext/images/net_netoflife.png  used on input lin
-e 3.
-(pdftex.def)             Requested size: 224.3446pt x 177.56787pt.
-)
-Overfull \hbox (21.44902pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[97
-
- <../nontext/images/net_netoflife.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/images/hgtiInferenceMethods_ihgt.png, id=773, 542.025pt x 491.6769p
-t>
-File: ../nontext/images/hgtiInferenceMethods_ihgt.png Graphic file (type png)
-<use ../nontext/images/hgtiInferenceMethods_ihgt.png>
-Package pdftex.def Info: ../nontext/images/hgtiInferenceMethods_ihgt.png  used 
-on input line 3.
-(pdftex.def)             Requested size: 192.29817pt x 174.43773pt.
-)
-Overfull \hbox (34.80945pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[98
-
- <../nontext/images/hgtiInferenceMethods_ihgt.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/Sphingomonas_labelled_cladogram.pdf, id=780, 1806.75pt x 10
-84.05pt>
-File: ../nontext/figures/Sphingomonas_labelled_cladogram.pdf Graphic file (type
- pdf)
-<use ../nontext/figures/Sphingomonas_labelled_cladogram.pdf>
-Package pdftex.def Info: ../nontext/figures/Sphingomonas_labelled_cladogram.pdf
-  used on input line 2.
-(pdftex.def)             Requested size: 320.4937pt x 192.29202pt.
-)
-Overfull \hbox (48.16988pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[99
-
- <../nontext/figures/Sphingomonas_labelled_cladogram.pdf>]
-\openout4 = `presentation.vrb'.
-
-
-(./presentation.vrb)
-Overfull \hbox (61.5303pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[100
-
-]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-<../nontext/figures/genus_size_dist.png, id=804, 722.7pt x 361.35pt>
-File: ../nontext/figures/genus_size_dist.png Graphic file (type png)
-<use ../nontext/figures/genus_size_dist.png>
-Package pdftex.def Info: ../nontext/figures/genus_size_dist.png  used on input 
-line 2.
-(pdftex.def)             Requested size: 384.59145pt x 192.29753pt.
-)
-Overfull \hbox (74.89073pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[101
-
- <../nontext/figures/genus_size_dist.png>]
-\openout4 = `presentation.vrb'.
-
- (./presentation.vrb
-File: ../nontext/figures/partition_example.png Graphic file (type png)
-<use ../nontext/figures/partition_example.png>
-Package pdftex.def Info: ../nontext/figures/partition_example.png  used on inpu
-t line 3.
-(pdftex.def)             Requested size: 160.24684pt x 159.97955pt.
-)
-Overfull \hbox (88.25116pt too wide) has occurred while \output is active
- [][]  
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[][]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[102
 
 ]
 \tf@nav=\write9
@@ -3957,25 +3851,25 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 \tf@snm=\write11
 \openout11 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 578.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 578.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 570.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 570.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 578.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 578.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 570.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 570.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 6F63F0462FF23801303CE22B5DF50D00;270.
+(rerunfilecheck)             Checksum: 024193030A09B6F8D0EC03E192453258;270.
 Package logreq Info: Writing requests to 'presentation.run.xml'.
 \openout1 = `presentation.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45210 strings out of 494847
- 926371 string characters out of 6179080
- 1372351 words of memory out of 5000000
- 47328 multiletter control sequences out of 15000+600000
+ 45044 strings out of 494847
+ 924143 string characters out of 6179080
+ 1370888 words of memory out of 5000000
+ 47215 multiletter control sequences out of 15000+600000
  542854 words of font info for 67 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 64i,19n,69p,10370b,2535s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,19n,69p,10370b,2410s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
@@ -3989,10 +3883,10 @@ ublic/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10
 .pfb>
-Output written on presentation.pdf (102 pages, 3550062 bytes).
+Output written on presentation.pdf (89 pages, 3714543 bytes).
 PDF statistics:
- 914 PDF objects out of 1000 (max. 8388607)
- 740 compressed objects within 8 object streams
- 230 named destinations out of 1000 (max. 500000)
- 206 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 733 PDF objects out of 1000 (max. 8388607)
+ 570 compressed objects within 6 object streams
+ 202 named destinations out of 1000 (max. 500000)
+ 211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{CRISPR-Cas Systems}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{What Are They?}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Horizontal Gene Transfer}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Mechanisms}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Rate Influencing Factors}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Pan-genomes}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Phylogenomic Networks}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.5}{Detection}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Do CRISPR Systems Affect Horizontal Gene Transfer?}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Interference Mechanisms}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Complexities And Costs Of CRISPR-Cas Systems}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Potential Strategies For Reducing CRISPR-HGT Trade-off Costs}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Hypothesis \046 Objectives}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Hypothesis}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Objectives}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{Methods}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Summary}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Data Collection}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.3}{Gene Presence/Absence Matrix}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.4}{Makophylo Rate Estimations}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.5}{Network Construction}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.6}{Network Statistics}{section.5}% 22
+\BOOKMARK [1][-]{section.6}{Results}{}% 23
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 24
+\BOOKMARK [2][-]{subsection.7.1}{Gene Indel Rates are Different for CRISPR and Non-CRISPR OTUs}{section.7}% 25
+\BOOKMARK [2][-]{subsection.7.2}{Phylogenomic Networks Have Low Assortativity}{section.7}% 26
+\BOOKMARK [2][-]{subsection.7.3}{HGT Dynamics Vary Across Bacterial Genera}{section.7}% 27
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 28

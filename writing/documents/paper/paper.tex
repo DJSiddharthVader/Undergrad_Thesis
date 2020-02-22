@@ -1,0 +1,116 @@
+%Preamble
+\documentclass[12pt,letter]{article}
+\usepackage[utf8]{inputenc}
+%Layout/Spacing
+\usepackage[left=0.7in,right=0.7in,top=1in,bottom=1in]{geometry} %sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{authblk} %allows multiple athors and affiliations
+\usepackage{anyfontsize}
+\usepackage{moresize}
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\graphicspath{{../../nontext/figures/}{../../nontext/images/}}
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+%Tikz
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{calc,shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+\usepackage{tikz-network}
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%Referenes
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{../../refs.bib}
+%Misc
+\usepackage{amsmath} %for math command
+%Abbreviations
+\usepackage{acro}
+%crspc
+\DeclareAcronym{crspc}{
+    short = CRISPR-Cas,
+    long  = CRISPR associated
+}
+%cas
+\DeclareAcronym{cas}{
+    short = Cas,
+    long  = CRISPR-associated
+}
+%crispr
+\DeclareAcronym{crsp}{
+    short = CRISPR,
+    long  = Clustered Regularly Interspaced Short Palindromic Repeat
+}
+%ctmc-fss
+\DeclareAcronym{mc}{
+    short = CTMC-FFS,
+    long  = Continuous-time Markov chain with finite state space
+}
+%s areus
+\DeclareAcronym{sau}{
+    short = \textit{S. aureus},
+    long  = \textit{Staphylococcus aureus}
+}
+%ecoli
+\DeclareAcronym{ecoli}{
+    short = \textit{E. coli},
+    long  = \textit{Escherichia coli}
+}
+%mge
+\DeclareAcronym{mge}{
+    short = MGE,
+    long  = Mobile Genetic Element
+}
+%hgt
+\DeclareAcronym{hgt}{
+    short = HGT,
+    long  = Horiznotal Gene Transfer
+}
+%otu
+\DeclareAcronym{otu}{
+    short = OTU,
+    long  = Operation Taxonomic Unit
+}
+%pa
+\DeclareAcronym{pa}{
+    short = P/A,
+    long  = Presence/Absence,
+}
+\begin{document}
+%Title
+%\title{{\fontsize{40}{50}\selectfont Is Sharing Caring?}\\\vspace{0.4cm} %    Understanding CRISPR and Horizontal Gene Transfer Rates:\\\vspace{0.2cm} % A Network Theoretic Approach\\ \vspace{0.5cm} \Large MolBiol 4C12 Thesis}
+\title{{\fontsize{30}{50}\selectfont Is Sharing Caring?}\\
+    \vspace{0.3cm}
+    Elucidating the Effects of the Presence of CRISPR-Cas Systems on Rates of Horizontal Gene Transfer\newline Using Network Analysis\\
+    \vspace{0.3cm}}
+%Authors
+\author[1]{Siddharth Reed\thanks{To whom correspondence should be addressed; reeds4@mcmaster.ca}}
+\author[1]{G. Brian Golding\vspace{-0.45cm}}
+\affil[1]{Department of Biology, McMaster University, Hamilton, Canada}
+%\affil[1]{Department of Biology, McMaster University\authorcr
+%                Hamilton, Canada}
+\date{\today}
+\maketitle
+\input{./sections/abstract}
+\newpage
+\tableofcontents
+\newpage
+\linespread{1.25}%default is 1.2, 1.2*1.25 = 1.5 spacing
+\input{./sections/crispr_systems}
+\input{./sections/hgt}
+%\input{./sections/network_theory}
+\input{./sections/phylogenetic_networks}
+\input{./sections/crispr_vs_hgt}
+\input{./sections/hypothesis}
+\input{./sections/methods}
+\input{./sections/results}
+\input{./sections/discussion}
+\input{./sections/significance}
+\printbibliography
+\end{document}

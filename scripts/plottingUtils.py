@@ -181,9 +181,10 @@ def genusSizeDist(df,dpi=50,size=(10,5),file=False):
     plt.show()
 
 def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
-                labels=['CRISPR','Non-CRISPR'],file=False):
-    sdf = df.sort_values(by=cols)
+                labels=['CRISPR','Non-CRISPR'],file=False,lsize=20):
+    sdf = df.sort_values(by=['c_otus'])
     fig, ax = plt.subplots(figsize=(20,10))
+    plt.rc('axes',labelsize=20)
     pos = np.arange(0,len(sdf[cols[0]])*(len(cols)+1),len(cols)+1)
     pal = sns.color_palette('coolwarm')
     colors = [pal[0],pal[-1]]
@@ -196,13 +197,14 @@ def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
     ax.set_xticklabels(sdf.index,rotation=65,ha='right')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
-    plt.legend()
+    plt.legend(loc='best',prop={'size':lsize})
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
 
 def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
+    plt.rc('axes',labelsize=15)
     x,y = 'nc_indel', 'c_indel'
     #main fig
     sns.scatterplot(x=x,y=y,data=nohdf,ax=ax)
@@ -235,6 +237,7 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
 
 def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
+    plt.rc('axes',labelsize=14)
     cols = sns.color_palette('coolwarm')
     blue,red = cols[0],cols[-1]
     #lin reg
@@ -251,7 +254,7 @@ def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     ax.set_ylabel('CRISPR Mean Clustering Coefficient')
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
-    ax.legend()
+    ax.legend(prop={'size':12})
     #inlet fig
     axins = ins.zoomed_inset_axes(ax,1.55,loc=4)
     axins.scatter(xdata,ydata,color=blue)
@@ -308,6 +311,7 @@ def cratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     y1 = nohdf['c_indel']
     #base plotting
     fig,ax = plt.subplots(figsize=size)
+    plt.rc('axes',labelsize=13)
     cols = sns.color_palette('coolwarm')
     ax.scatter(x=x,y=y1,color=cols[0],marker='+',label='CRISPR')
     #lingresss
@@ -315,7 +319,7 @@ def cratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     y = lambda x:m*x+b
     ax.plot(x,y(x),color=cols[0],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
     #plot formatting
-    plt.legend()
+    plt.legend(loc='best',prop={'size':12})
     ax.set_xlabel('Fraction of OTUs With A CRISPR System')
     ax.set_ylabel('Gene Indel Rate of CRISPR OTUs')
     ax.spines['right'].set_visible(False)
@@ -330,6 +334,7 @@ def ncratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     y2 = nohdf['nc_indel']
     #base plotting
     fig,ax = plt.subplots(figsize=size)
+    plt.rc('axes',labelsize=13)
     cols = sns.color_palette('coolwarm')
     ax.scatter(x=x,y=y2,color=cols[-1],marker='x',label='Non-CRISPR')
     #lingress
@@ -337,7 +342,7 @@ def ncratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     y = lambda x:m*x+b
     ax.plot(x,y(x),color=cols[-1],label='$R^2$: {} P-value: {}'.format(np.round(r**2,dec),np.round(p,dec)))
     #plot formatting
-    plt.legend()
+    plt.legend(loc=1,prop={'size':12})
     ax.set_xlabel('Fraction of OTUs With A CRISPR System')
     ax.set_ylabel('Gene Indel Rate of Non-CRISPR OTUs')
     ax.spines['right'].set_visible(False)
@@ -358,6 +363,7 @@ def violinPlot(stats,col='modularity',thresh=np.inf,
     df.columns = ['genera',col]
     df[col] = df[col].astype(float)
     fig,ax = plt.subplots(figsize=size)
+    plt.rc('axes',labelsize=23)
     sns.violinplot(y=col,x='genera',data=df,ax=ax,
                     inner='quart',scale='count')
     ax.set_xticklabels(s1,rotation=45,ha='right')
@@ -369,7 +375,6 @@ def violinPlot(stats,col='modularity',thresh=np.inf,
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
     return ax
-
 
 
 if __name__ == '__main__':

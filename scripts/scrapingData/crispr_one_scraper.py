@@ -1,56 +1,45 @@
 import os
 import re
 import sys
-import math
 import json
-import time
 import requests
-from timeit import timeit
+from tqdm import tqdm
 from bs4 import BeautifulSoup
-from multiprocessing import Pool
 from multiprocessing.dummy import Pool as ThreadPool
 
-#reffile os allCRISPRonelinks.html
-base = 'http://omics.informatics.indiana.edu/CRISPRone/' #base for getting reports
+baseURL = 'http://omics.informatics.indiana.edu/CRISPRone/' #base for getting reports
+#takes about ~15 minutes working on 11102 taxa using 4 cores (processes)
 
-def getGCA_Tax_link(lientry):
-    reportlink = lientry.a.get('href')
-    text = lientry.get_text().split(' | ')
-    name = text[0]
-    gca = text[2]
-    return {'GCA':gca,'Name':name,'Report_URL':reportlink}
-
-def geturllist(reffile):
-    allsoup = BeautifulSoup(''.join(open(reffile).readlines()),'html.parser')
-    lientries = allsoup.find_all('li')[6:] #skip first 5 entries, headers
-    return lientries #list of all report links for each genome
+def getGCATaxLink(entry):
+    reportlink = entry.a.get('href')
+    info = entry.get_text().split(' | ')
+    return {'GCA':info[2],'Name':info[0],'Report_URL':reportlink}
 
 def getCRISPRInfo(reporturl):
-    data = requests.get(reporturl)
-    dsoup = BeautifulSoup(data.text,'html.parser')
-    nothascrispr = list(set(re.findall(r'',dsoup.find_all('h3')[0].text))) #empty if has crispr
-    if nothascrispr == ['']: #if has crispr
-        #crisprreportlink = [x.get('href') for x in dsoup.find_all('a') if 'what=summary' in x.get('href')][0]
-        crisprreportlinks = [x.get('href') for x in dsoup.find_all('a')]
-        crl = 'nolinkfound'
-        for x in crisprreportlinks:
-            if 'what=summary' in x:
-                crl = x
-        if crl == 'nolinkfound':
+    #for a link to a crispr_one page (1 per strain) scrape info about the crispr genes in the strain
+    dsoup = BeautifulSoup(requests.get(reporturl).text,'html.parser')
+    has_crispr = True if list(set(re.findall(r'',dsoup.find_all('h3')[0].text)))  == [''] else False #check if report says taxa has a crispr system  or not
+    if has_crispr:
+        reportlinks = [x.get('href') for x in dsoup.find_all('a')]
+        has_info = [x if 'what=summary' in x else False for x in reportlinks]
+        reportlink = list(filter(lambda a:a, has_info))[-1] if any(x for x in has_info) else 'nolinkfound' #get link to info about crisprs found in taxa
+        if reportlink == 'nolinkfound':
+            # no crispr information found
             crispr_arrs = -1
             casprots = ['No System']
             numcasprots = -1
             types = 'No System'
         else:
-            cdata = requests.get(base + crl)
+            #get crispr information found
+            cdata = requests.get(baseURL + reportlink)
             crispr_arrs = int(re.search(r'array=(\d+?);',cdata.text).groups(1)[0])
             casprots = re.findall(r'what=cas;des=.*?:(.*?);',cdata.text)
             numcasprots = len(casprots)
-            #types = re.search(r'type=(.*?)$',cdata.text).groups(1)
-            #the above does not work for some reason, so use grep below
             with open('tmp','w') as gp:
                 gp.write(cdata.text)
-            types = os.popen("grep -oP 'type=.*$' tmp | tail -1 | cut -d'=' -f2").read().strip('\n')
+            types = os.popen("grep -oP 'type=.*$' tmp | tail -1 | cut -d'=' -f2").read().strip('\n') # grep for the types of crispr systems detected
+            #types = re.search(r'type=(.*?)$',cdata.text).groups(1)
+            #the above does not work for some reason, so use grep
     else: #no crispr detected
         crispr_arrs = 0
         casprots = ['None']
@@ -62,33 +51,32 @@ def getCRISPRInfo(reporturl):
             'System Types (CRISPRone)':types
            }
 
-def addCRISPRToGCA(gcataxlinkdict):
-    crisprannotation = getCRISPRInfo(gcataxlinkdict['Report_URL'])
-    gcataxlinkdict.update(crisprannotation)
-    return gcataxlinkdict
+def addCRISPRToGCA(gcaDict):
+    crisprannotation = getCRISPRInfo(gcaDict['Report_URL'])
+    gcaDict.update(crisprannotation)
+    return gcaDict
 
-def main(reffile,outfile):
-    linkinfo = [getGCA_Tax_link(x) for x in geturllist(reffile)]
-    allinfo = [addCRISPRToGCA(x) for x in linkinfo]
-    json.dump(allinfo,open(outfile,'w'))
+def getURLList(reffile):
+    soup = BeautifulSoup(open(reffile),'html.parser')
+    entries = soup.find_all('li')[6:] #skip first 5 entries, headers
+    return entries #list of all report links for each genome
 
-def main_mp(reffile,outfile,processes):
-    pool = ThreadPool(processes)
-    #linkinfo = pool.map(getGCA_Tax_link,geturllist(reffile))
-    #allinfo = pool.map(addCRISPRToGCA,linkinfo)
-    urllist = geturllist(reffile)
-    linkinfo = list(tqdm(pool.imap(getGCA_Tax_link,urllist),total=len(urllist),desc='scrape'))
-    allinfo = list(tqdm(pool.imap(addCRISPRToGCA,linkinfo),total=len(linkinfo),desc='extracting'))
+def main(reffile,outfile,processes=1):
+    if processes > 1:
+        pool = ThreadPool(processes)
+        urllist = getURLList(reffile)
+        linkinfo = list(tqdm(pool.imap(getGCATaxLink,urllist),total=len(urllist),desc='scrape'))
+        allinfo = list(tqdm(pool.imap(addCRISPRToGCA,linkinfo),total=len(linkinfo),desc='extracting'))
+    else:
+        linkinfo = [getGCATaxLink(x) for x in getURLList(reffile)]
+        allinfo = [addCRISPRToGCA(x) for x in linkinfo]
     json.dump(allinfo,open(outfile,'w'))
 
 
 if __name__ == '__main__':
-    reffile = '/home/sid/thesis_SidReed/data/CRISPRone_files/allCRISPRonelinks.html'
-    outfile = str(sys.argv[1])
-    if len(sys.argv) == 3:
-        processes = int(sys.argv[2])
-    else:
-        processes = 8
-    main_mp(reffile,'mp_' + outfile,processes)
+    reffile = sys.argv[1]#/home/sid/thesis_SidReed/data/CRISPROne.html
+    outfile = sys.argv[2]#/home/sid/thesis_SidReed/data/CRISPROne.html.json
+    processes = int(sys.argv[3])
+    main(reffile,outfile,processes)
 
 

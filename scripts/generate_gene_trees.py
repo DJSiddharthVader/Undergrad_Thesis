@@ -13,12 +13,13 @@ from Bio import SeqIO,AlignIO,Alphabet
 from multiprocessing.dummy import Pool as ThreadPool
 
 def getNumTaxa():
-    return len(glob.glob('./protein_fastas/*.faa'))
+    return len(glob.glob('./protein/*.faa'))
 
 def pickGeneFamiliesForTrees(genefamilies,minsize):
     #list of families that have exactly maxtax members and contain genes from every taxa being considered
     maxtax = getNumTaxa()
-    if type(minsize) == float and (minsize > 0 and minsize < 1):
+    print('Number of strains: {}'.format(maxtax))
+    if type(minsize) == float and (minsize > 0 and minsize <= 1):
         minsize = int(math.floor(minsize*maxtax))
     print('minimum organisms gene family must be present in: {}'.format(minsize))
     return [fam for fam,members in tqdm(genefamilies.items(),total=len(genefamilies),desc='picking') if (len(set([x.split(':')[0] for x in members])) >= minsize)]
@@ -31,6 +32,13 @@ def extractSeqsForTree(headersNameTuple,nucFasta):
     fastafilename = 'gene_tree_files/fastas/{}.fna'.format(genefam)
     return fastafilename, seqRecordlist
 
+def extractSeqsParallel(headerTuples,nucFasta):
+    pool = ThreadPool(processes)
+    extractfnc = partial(extractSeqsForTree,nucFasta=nucFasta)
+    fastas = list(tqdm(pool.imap(extractfnc,headerTuples),total=len(headerTuples),desc='getseqs'))
+    return fastas
+
+
 def fixNames(seqlist):
     fixedseqs = []
     for sequence in seqlist:
@@ -42,17 +50,12 @@ def fixNames(seqlist):
                                    description=''))
     return fixedseqs
 
-def extractSeqsParallel(headerTuples,nucFasta):
-    pool = ThreadPool(processes)
-    extractfnc = partial(extractSeqsForTree,nucFasta=nucFasta)
-    fastas = list(tqdm(pool.imap(extractfnc,headerTuples),total=len(headerTuples),desc='getseqs'))
-    return fastas
-
 def writeFastas(nameseqiter):
     for name,seqs in nameseqiter.items():
         with open(name,'w') as outfile:
             SeqIO.write(seqs,outfile,'fasta')#write all seqs to a fasta file
     return None
+
 
 def alignGeneFamilies(fastafile):
     mafftbase = 'mafft --quiet --localpair --maxiterate 1000'
@@ -71,6 +74,7 @@ def parallelAlignFastas(processes):
     alnfnc = partial(alignGeneFamilies)
     alnfiles = list(tqdm(pool.imap(alnfnc,fastas),total=len(fastas),desc='aligning'))
     return None
+
 
 def buildTree(nexfile):
     nexbase = nexfile.split('.')[0]
@@ -99,13 +103,12 @@ quit""".format(nexfile,nexbase)
 def parallelBuildTrees(processes):
     pool = ThreadPool(processes)
     alnfiles = os.listdir('gene_tree_files/nexus')
-    treefnc = partial(buildTree)
-    treefiles = list(tqdm(pool.imap(treefnc,alnfiles),total=len(alnfiles),desc='trees'))
+    treefiles = list(tqdm(pool.imap(buildTree,alnfiles),total=len(alnfiles),desc='trees'))
     return None
 
 def main(familys,nucFasta,minsize,processes,maxtrees):
     #set up out directories
-    outdir = 'gene_tree_files'
+    outdir = './gene_tree_files'
     os.system('mkdir -p {}'.format(outdir))
     os.system('mkdir -p {}/fastas'.format(outdir))
     os.system('mkdir -p {}/nexus'.format(outdir))
@@ -134,21 +137,27 @@ def main(familys,nucFasta,minsize,processes,maxtrees):
 if __name__ == '__main__':
     famidx = json.load(open(sys.argv[1]))
     nucFasta = sys.argv[2]
-    minsize = 0.4
-    processes = 16
     if len(sys.argv) > 3:
-        maxtrees = sys.argv[3]
+        maxtrees = int(sys.argv[3])
     else:
         maxtrees = 1500
+    if len(sys.argv) > 4:
+        minsize = float(sys.argv[4])
+    else:
+        minsize = 0.4
+    if len(sys.argv) > 5:
+        processes = int(sys.argv[5])
+    else:
+        processes = 16
     main(famidx,nucFasta,minsize,processes,maxtrees)
 
 #DEPRECIATED
-def pickGeneFamiliesForTrees(pamat,columnindex,minsize):
-    gene_family_list = []
-    if type(minsize) == float and (minsize > 0 and minsize < 1):
-        minsize = int(math.floor(minsize*pamat.shape[0]))
-    print('minimum organisms gene family must be present in: {}'.format(minsize))
-    binmat = matrix_to_binary(pamat)
-    sizes = np.apply_along_axis(sum,0,binmat)
-    family_idxs = [str(i) for i,size in enumerate(sizes) if size >= minsize]
-    return family_idxs
+#def pickGeneFamiliesForTrees(pamat,columnindex,minsize):
+#    gene_family_list = []
+#    if type(minsize) == float and (minsize > 0 and minsize < 1):
+#        minsize = int(math.floor(minsize*pamat.shape[0]))
+#    print('minimum organisms gene family must be present in: {}'.format(minsize))
+#    binmat = matrix_to_binary(pamat)
+#    sizes = np.apply_along_axis(sum,0,binmat)
+#    family_idxs = [str(i) for i,size in enumerate(sizes) if size >= minsize]
+#    return family_idxs

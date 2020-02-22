@@ -1,42 +1,46 @@
 #!/bin/bash
 
-#file to download gbffs from ncbi summary txt file
-
-function downloadSuffix(){
-    acc_source="$1"
-    suffix="$2"
-    urlfile="$3"
-    mkdir -p "$(basename $urlfile | cut -d'.' -f1)"
-#echo "$suffix $acc_source $urlfile $(basename $urlfile | cut -d'.' -f1)"
-    cd "$(basename $urlfile | cut -d'.' -f1)"
-    tail -n +3 "$acc_source" | perl -pe "s/^.*(ftp:\/\/[^ \t]*)\t.*$/\1/g" | perl -pe "s/(^.*)(\/[^\/\t\n]*)/\1\2\2/g" | sed "s/$/$suffix/g" >| "$urlfile"
-    numurls="$(wc -l $urlfile | cut -d' ' -f1)"
-    parallel --eta --bar --eta -a "$urlfile" wget -q
+#file to download gene sequences from urllust
+function downloadList(){
+    urllist="$1"
+    output="$2"
+    mode="$(basename $urllist | cut -d'_' -f1)"
+    case $mode in
+        'nucleotide')
+            outdir="$output/nucleotide"
+            ;;
+        'protein')
+            outdir="$output/protein"
+            ;;
+        'genome')
+            outdir="$output/genome"
+            ;;
+        *)
+            echo "Invalid mode, pick from {nuc|prot}"
+            exit 1
+            ;;
+    esac
+    mkdir -p $outdir && cd $outdir #directory
+    parallel --eta --bar -a "$urllist" wget -q -a '../download_errors.txt'
     cd -
 }
-summary="/home/sid/thesis_SidReed/data/bacterialGBFFs/assembly_summary.txt"
-#filesuffix="_genomic.gbff.gz" #file suffix for every organism
-nuc_filesuffix="_cds_from_genomic.fna.gz" #file suffix for genomic dna fasta
-prot_filesuffix="_translated_cds.faa.gz" #file suffix for protien fasta, all headers match genomic fasta
-outfile="$1"
-downloadSuffix "$summary" "$nuc_filesuffix"  "nuc_$outfile"
-downloadSuffix "$summary" "$prot_filesuffix"  "prot_$outfile"
+function main() {
+    filelist_dir="$1"
+    outdir="$2"
+    for file in $filelist_dir/*FTPURLs.txt;
+    do
+        downloadList "$(readlink -e $file)" $outdir
+    done
+}
+filelist_dir="$(readlink -e $1)"
+output="$2"
+main $filelist_dir $output
 
 #DEPRECIATED
 #GETTING ASSEMBLYSUMMARY
 #ftpurl="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt" #tsv-ish of bacteria, accs, names and ftp urls for everything in refseq
 #filesuffix="_genomic.gbff.gz" #file suffix for every organism
 #outfile="all_refseq_bacteria_ftp_paths_110918.txt" #outputfile with all ftp links
-
-#WORKED EARILIER
-#filesuffix="_genomic.gbk.gz" #file suffix for every organism
-#cat "$summary" | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$prot_filesuffix/g" >| "prot_$outfile"
-#cat "$summary" | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$nuc_filesuffix/g" >| "nuc_$outfile"
-#echo "Got all paths in nuc_$outfile , prot_$outfile"
-#for url in $(cat "$outfile");
-#do
-#    wget $url
-#done
 
 #COMMENTS ON SUBSTITUTIONS
 #wget -qO- $ftpurl | tee "$rawsummary" | sed 's/\t\{1,\}/,/g' | awk -F "," '{print $0 ~ "latest" && $0 ~ "Complete Genome"?$(NF-1):""}' | sed '/^$/d' | perl -pe 's/(\/[^\/]+?)$/\1\1/g' | sed "s/$/$filesuffix/g" >| "$outfile"
@@ -48,3 +52,38 @@ downloadSuffix "$summary" "$prot_filesuffix"  "prot_$outfile"
 #perl -pe 's/(\/[^\/]+?)$/\1\1/g' #fix links so they point to specific file name without suffix
 #sed "s/$/$filesuffix/g" #add suffix to the end of each ftp link (line)
 ## >| "$outfile" # write to output file specified above
+#function downloadSuffix(){
+#    assembly_summary="$1"
+#    output="$2"
+#    mode="$3"
+#    mkdir -p $output && cd $output #directory
+#    case $mode in
+#        'nuc')
+#            urllist="./nucleotide_data_urls.txt"
+#            downloaddir="./nucleotide"
+#            suffix="_cds_from_genomic.fna.gz" #file suffix for genomic dna fasta
+#            ;;
+#        'prot')
+#            urllist="./protein_data_urls.txt"
+#            downloaddir="./protein"
+#            suffix="_translated_cds.faa.gz" #file suffix for protien fasta, all headers match genomic fasta
+#            ;;
+#        *)
+#            echo "Invalid mode, pick from {nuc|prot}"
+#            exit 1
+#            ;;
+#    esac
+#    #create file of fasta ftp urls for download, nucleotide or protein
+#    tail -n +3 "$assembly_summary" |\
+#               grep 'Complete Genome' |\
+#               perl -pe "s/^.*(ftp:\/\/[^ \t]*)\t.*$/\1/g" |\
+#               perl -pe "s/(^.*)(\/[^\/\t\n]*)/\1\2\2/g" |\
+#               sed "s/$/$suffix/g" >| "$urllist"
+#    mkdir -p $downloaddir && cd $downloaddir
+#    parallel --eta --bar -a "../$urllist" wget -q
+#}
+#assembly_summary="$(readlink -e $1)"
+#output="$2"
+#downloadSuffix $assembly_summary $output 'nuc'
+#downloadSuffix $assembly_summary $output 'prot'
+

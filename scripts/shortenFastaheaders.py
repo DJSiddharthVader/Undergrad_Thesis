@@ -3,10 +3,21 @@ import re
 import sys
 import json
 import glob
-import string
 from tqdm import tqdm
 from Bio.Alphabet import IUPAC
 from Bio import SeqIO,Seq,SeqRecord
+
+#terms taht indicate a genes is annotated as a Mobile Genetic Element (MGE)
+#any genes matching these terms (headers) are removed from the fastas
+mobileElements = ['phage',
+                  'mobile.element',
+                  'insertion.sequence*',
+                  'viral.element',
+                  'transposase',
+                  '[^sA-Z]IS\d',
+                  '^IS\d',
+                  'viral.([^A-Z]|enhancin)',
+                  'holin']
 
 def getHeaderAsDict(seqrecord,meregex):
     raw = seqrecord.id.strip('lcl|')
@@ -62,10 +73,9 @@ def fixFasta(fasta,meregex,outname=-1):
     return allinfodirs
 
 def main(fasta_dir):
-    mobileElements = ['phage','mobile.element','insertion.sequence*','viral.element','transposase','[^sA-Z]IS\d','^IS\d','viral.([^A-Z]|enhancin)','holin']
-    meregex= [re.compile(x) for x in mobileElements]
     allinfodirs = []
-    globstr = '{}/*.f*a'.format(fasta_dir)
+    meregex= [re.compile(x) for x in mobileElements]
+    globstr = '{}/*.f*'.format(fasta_dir)
     for fasta in tqdm(glob.glob(globstr),desc='fixingfastas'):
         fastapath = os.path.join(os.getcwd(),fasta)
         infodir = fixFasta(fastapath,meregex)
@@ -74,6 +84,7 @@ def main(fasta_dir):
         json.dump(allinfodirs,outf)
     return None
 
+
 if __name__ == '__main__':
-    fasta_dir  = sys.argv[1]
+    fasta_dir  = sys.argv[1] #dir with fasta files /data/genus_data/$GENUS/nucleotide
     main(fasta_dir)

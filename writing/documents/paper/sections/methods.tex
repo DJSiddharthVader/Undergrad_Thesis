@@ -33,11 +33,12 @@ The workflow is as follows for a single genus:
     \item Cluster all genes into families using Diamond (\% identity $> 80\%$)
     \item Construct a presence/absence matrix of gene families for organisms
     \item Estimate gene family indel rates separately for the CRISPR and non-CRISPR containing genomes using the R package markophylo
-    \item Construct a species tree using all 16S rRNA genes that have 1 copy for each member of the genus
+    \item Construct a species tree using sections from a whole genome alignment of all genomes of the genus
     \begin{enumerate}
-        \item Align each 16S gene with mafft using defaul settings
-        \item Concatenate all alignments together as a nexus file
-        \item Build the tree using Mr Bayes (10000 generations, 25\% burn in)
+        \item Create whole genome alignment with parsnp
+        \item Filter all aligned regions that are uninformative (identical sequence for every genome)
+        \item Concatenate all aligned regions into 1 alignment as a nexus file
+        \item Build the tree using Mr Bayes (10000 generations, 25\% burn in rate)
     \end{enumerate}
     \item Construct the gene trees ($\leq 1500$)
     \begin{enumerate}
@@ -60,7 +61,7 @@ The workflow is as follows for a single genus:
         \node [block,below=0.5cm of node1]  (node2)  {Filter MGEs};
         \node [block,below=0.5cm of node2]  (node3)  {Cluster Families};
         \node [block,right=0.8cm of node3]  (node4)  {P/A Matrix};
-        \node [block,above=0.5cm of node4]  (node5)  {Get 16S Genes};
+        \node [block,above=0.5cm of node4]  (node5)  {Genome Alignment};
         \node [block,above=0.5cm of node5]  (node6)  {Gene Trees};
         \node [block,right=0.5cm of node5]  (node7)  {Species Tree};
         \node [block,below=0.5cm of node7]  (node8)  {Gene InDel Rates};
@@ -87,10 +88,10 @@ The workflow is as follows for a single genus:
     \caption{Diagram of the worfkflow for a single genus}
 \end{figure}
 \FloatBarrier
+
 \subsection{Data Collection}
-Protein and nucleotide fastas of all CDS sequences were downloaded from NCBI RefSeq.
+Protein and nucleotide fastas of all CDS sequences and whole genome fastas for all bacterial strains included in this analysis were downloaded from NCBI RefSeq.
 \ac{crsp} annotations of \ac{cas} and Cfp proteins from the \ac{crsp}one tool from Zhang and Ye will be used to assess the presence of \ac{crsp} systems \citep{ineqcas}.
-%and the \ac{crsp}db (along with a python script) is used to annotate genera as being mixed (containing strains with and without \ac{crspc} systems) or Non-\ac{crsp} (containing no strains with a \ac{crspc} system) \citep{crispdb}.
 \subsection{Gene Presence/Absence Matrix}
 In order to use the program markophylo to estimate indel rates, a \ac{pa} matrix of gene families and organisms and a species tree are required.
 First any genes classified as \ac{mge}s (from NCBI annotations) are removed.
@@ -122,7 +123,7 @@ This total score calculation is repeated for each horizontal edge $H_i$ in S, re
 This is further explained in the original work, \citep{hide}.
 \subsection{Network Statistics}
 All networks will be comprised of nodes representing \ac{otu}s and weighted edges represent the estimated amount of \ac{hgt} events between the two incident nodes.
-As multiple sets of networks can be computed for a single set of genera (using different sets of gene trees), bootstrap support for edges and confidence intervals on edge weights can also be calculated.
+Bootstrap replicates of a network for each genus can be computed by creating a set of networks from a set of ramdom samples of gene trees and the same species tree.
 Given a network, with a set of nodes $V = \{V_0$ \dots $V_i\}$ of cardinality $N$ and a set of weighted edges (an unordered 2-tuple and weight) $T = \{((V_1,V_2),W_{1,2})$ \dots $((V_i,V_j),W_{i,j})\}$ with cardinality $E$ descriptive statistics can be computed as follows \citep{netstat}:
     \begin{itemize}
         \item \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$

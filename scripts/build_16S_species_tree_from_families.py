@@ -19,14 +19,13 @@ from multiprocessing.dummy import Pool as ThreadPool
 base_dir = 'species_tree_16S'
 
 def getNumTaxa():
-    return len(glob.glob('./protein_fastas/*.faa'))
+    return len(glob.glob('./protein/*.faa'))
 
 def get16SHeaders(fastaInfoJson):
     return [nucDir for nucDir in tqdm(fastaInfoJson,desc='picking') if '16S rRNA' in nucDir['protein']]
 
-def pick16Sprots(headers16s):
+def pick16Sprots(headers16s,numtaxa):
     headerlists = []
-    numtaxa = getNumTaxa()
     for p in set([x['protein'] for x in headers16s]):
         ponly = [x for x in headers16s if x['protein'] == p]
         if len(set([x['organism_accession'] for x in ponly])) == numtaxa:
@@ -133,8 +132,9 @@ def main(allNucFasta,fastaInfoJson,processes,maxfams):
     os.system('mkdir -p {}/fastas/'.format(base_dir))
     os.system('mkdir -p {}/nexus'.format(base_dir))
     #Get 16S Gene Fastas
+    numtaxa = getNumTaxa()
     headers16s = get16SHeaders(fastaInfoJson)
-    fams16 = pick16Sprots(headers16s)
+    fams16 = pick16Sprots(headers16s,numtaxa)
     famsdict16 = getFamDict16s(fams16[:maxfams])
     namesAndRecords = extractSeqsForTree(famsdict16,allNucFasta)
     writeFastas(namesAndRecords)
@@ -155,12 +155,21 @@ def main(allNucFasta,fastaInfoJson,processes,maxfams):
 
 
 if __name__ == '__main__':
-    nucFasta = sys.argv[1]
-    fastaInfoJson = json.load(open(sys.argv[2]))
-    maxfams = 50
-    processes = 16
-    main(nucFasta,
-         fastaInfoJson,
-         processes,
-         maxfams)
+    if len(sys.argv) > 1:
+        nucFasta = sys.argv[1]
+    else:
+        nucFasta = './all_nucleotides.fna'
+    if len(sys.argv) > 2:
+        fastaInfoJson = json.load(open(sys.argv[2]))
+    else:
+        fastaInfoJson = json.load(open('./fasta_headers_info.json'))
+    if len(sys.argv) > 3:
+        maxfams = int(sys.argv[3])
+    else:
+        maxfams = 50
+    if len(sys.argv) > 4:
+        processes = int(sys.argv[4])
+    else:
+        processes = 8
+    main(nucFasta, fastaInfoJson, processes, maxfams)
 

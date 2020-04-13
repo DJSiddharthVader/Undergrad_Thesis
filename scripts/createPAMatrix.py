@@ -33,9 +33,9 @@ def buildmatrix(organismGenes,genefamilies):
     pajson = []
     organisms = list(organismGenes.keys())
     genefams = list(genefamilies.keys())
-    for org in tqdm(organisms):
+    for org in tqdm(organisms,leave=True):
         orgcol = {'organism':org}
-        for fam in tqdm(genefams):
+        for fam in tqdm(genefams,leave=False):
             orggenes = set(organismGenes[org])
             famgenes = set(genefamilies[fam])
             orgcol[fam] = len(orggenes.intersection(famgenes))
@@ -52,11 +52,14 @@ def jsonToCsv(jsondata,outfile):
     return None
 
 def main(genefamilies,fastadir,outfile):
+    if os.path.exists(outfile):
+        print('already calcualted')
+        return None
     genefamilies = json.load(open(genefamilies))
     organismGenes = allOrganismsGeneLists(fastadir)
     pajson = buildmatrix(organismGenes,genefamilies)
     jsonToCsv(pajson,outfile)
-    return
+    return None
 
 if __name__ == '__main__':
     genefamilies = sys.argv[1]

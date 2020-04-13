@@ -80,9 +80,8 @@ def dfToNetwork(df,attrdict=None):
 
 def loadNetwork(networkfile,andf,filterInternal):
     netdf = loaddf(networkfile,andf,filterInternal)
-    if isinstance(netdf,pd.core.frame.DataFrame):
-        network = dfToNetwork(netdf)
-        return network
+    network = dfToNetwork(netdf)
+    return network
 
 def loadAllNetworks(cdir,processes,genus):
     #load all the HiDe edgelists and convert them to networkx objects and return the list of networks
@@ -97,6 +96,7 @@ def loadAllNetworks(cdir,processes,genus):
         sys.exit()
     pool = ThreadPool(processes)
     nets = list(tqdm(pool.imap(ln,files),total=len(files),desc='loading networks...'))
+    nets = [net for net in nets if isinstance(net,pd.core.frame.DataFrame)]
     return nets
 
 #Stats

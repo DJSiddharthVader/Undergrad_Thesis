@@ -20,7 +20,7 @@ def copyfiles(datatype,genus_df,genomic_dir,suffix):
         #cp data/genomic_data/nucleotide/GCF_000005825.2_ASM582v2_genomic.fna.gz
         #   ./nucleotide/GCF_000005825.2_ASM582v2_genomic.fna.gz
         os.system(cpcmd)
-    os.system("gzip -d ./{}/*.gz".format(datatype)) #unzip all files
+    os.system("gzip -f -d ./{}/*.gz".format(datatype)) #unzip all files
     return None
 
 def copyAllFiles(genus,df,genomic_dir):

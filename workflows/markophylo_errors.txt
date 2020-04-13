@@ -1,0 +1,38 @@
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) :
+  system is computationally singular: reciprocal condition number = 2.00661e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Acholeplasma
+Occurs 47 times
+
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Acidithiobacillus
+Occurs 8 times
+
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.
+Acidovorax
+Occurs 85 times
+
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Glaesserella
+Occurs 7 times
+
+26 No species tree (fixed, need to rerun)
+
+5 Normal looking results
+
+178 total

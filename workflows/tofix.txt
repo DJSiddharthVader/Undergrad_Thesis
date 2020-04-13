@@ -1,0 +1,219 @@
+- cmd to remove row numbers from hide csvs in network_files dir
+for f in *.csv; do sed -i 's/^\"[0-9]*\"~//g' $f; done
+- cmd to run pipeline on genera not already started in parallel
+grep -vf <(ls | grep -v .log)  ~/thesis_SidReed/data/url_lists/test_genera.txt | parallel --progress --jobs 16 "~/thesis_SidReed/workflows/genus.sh {} > {}.log 2>&1"
+
+#TODO
+- run pipeline for large genera
+
+# Error in markophylo
+- Paenibacillus
+    ```
+    error if using alphabet c(0,1)
+        Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  :
+      subscript out of bounds
+      Calls: main -> markophyloEstimate -> <Anonymous>
+      Execution halted
+    error if using alphabet c('b','d')
+      Something is not right with the standard errors.Check Hessian matrix estimate.
+      Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+      Warning message:
+      In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+        NA/NaN function evaluation
+    ```
+Enterococcus
+#no hide, run network builder again
+#ran
+
+- Flavobacterium
+    ```
+    Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  :
+      subscript out of bounds
+      Calls: main -> markophyloEstimate -> <Anonymous>
+      Execution halted
+    ```
+- Bartonella
+    ```
+    Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+    Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+    Warning message:
+    In sqrt(diag(solve(res$hessian))) : NaNs produced
+    ```
+- Proteus
+  - error in markophylo, might be because only 1 crispr otu (2 nodes)
+    ```
+    Error in solve.default(res$hessian) :
+    system is computationally singular: reciprocal condition number = 4.61654e-32
+    Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+    Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+    ```
+- Bifidobacterium
+    - error when running markophylo, not sure how to fix
+    ```
+    Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+    Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+    Execution halted
+    ```
+- Dietzia
+  - didntproduce species tree WGS
+  ```
+  |--Parsnp v1.2--|
+  For detailed documentation please see --> http://harvest.readthedocs.org/en/latest
+  -->Reading Genome (asm, fasta) files from ./genome..
+    |->[OK]
+    -->Reading Genbank file(s) for reference (.gbk) ..
+      |->[WARNING]: no genbank file provided for reference annotations, skipping..
+      ERROR: ref genome sequence ./genome/GCF_003096095.1_ASM309609v1_genomic.fna seems to aligned! remove and restart
+
+  ```
+  - error fixed if I delete the plasmid sequence from the file causing an error
+
+# Not enough gene trees
+- Eubacterium
+- Acholeplasma
+- Aerococcus
+- Frankia
+
+# Errors in network analysis
+- Acholeplasma
+``` not network files created
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 189, in makeReport
+    ses = computeEdgeSEs(netlist) #get the mean and SE for all edge weights
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 91, in computeEdgeSEs
+    edgeset = list(reduce(union,[nx.edges(net) for net in netlist]))
+    TypeError: reduce() of empty sequence with no initial value
+```
+- Acidithiobacillus
+```
+/home/sid/thesis_SidReed/scripts/network_analysis.py:37: DeprecationWarning: The truth value of an empty array is a
+mbiguous. Returning False, but in future this will result in an error. Use `array.size > 0` to check that an array is not empty.
+```
+- Actinobacillus
+``` duriing closeness vitality
+/home/sid/anaconda3/envs/thesis/lib/python3.7/site-packages/numpy/core/_methods.py:117: RuntimeWarning: invalid value encountered in subtract
+  x = asanyarray(arr - arrmean)
+```
+- Actinoplanes
+``` likely bc only 1 non-crispr node, so some stats can be calculated?
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 195, in makeReport
+    report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 178, in diffStats_total
+    cstats, ncstats = separateStats(statpairs)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in separateStats
+    ncstats = [y[1] for x in statpairs for y in x]
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in <listcomp>
+    ncstats = [y[1] for x in statpairs for y in x]
+    IndexError: list index out of range
+```
+- Aerococcus
+```bc no network files, bc not enough gene trees to have networks of size 50
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 189, in makeReport
+    ses = computeEdgeSEs(netlist) #get the mean and SE for all edge weights
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 91, in computeEdgeSEs
+    edgeset = list(reduce(union,[nx.edges(net) for net in netlist]))
+    TypeError: reduce() of empty sequence with no initial value
+```
+- Amycolatopsis
+``` duriing closeness vitality
+/home/sid/anaconda3/envs/thesis/lib/python3.7/site-packages/numpy/core/_methods.py:117: RuntimeWarning: invalid value encountered in subtract
+  x = asanyarray(arr - arrmean)
+```
+- Anaplasma
+``` likely bc crispr node, so some stats can be calculated?
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 195, in makeReport
+    report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 178, in diffStats_total
+    cstats, ncstats = separateStats(statpairs)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in separateStats
+    ncstats = [y[1] for x in statpairs for y in x]
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in <listcomp>
+    ncstats = [y[1] for x in statpairs for y in x]
+    IndexError: list index out of range
+```
+- Azoarcus
+```
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 195, in makeReport
+    report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 178, in diffStats_total
+    cstats, ncstats = separateStats(statpairs)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in separateStats
+    ncstats = [y[1] for x in statpairs for y in x]
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in <listcomp>
+    ncstats = [y[1] for x in statpairs for y in x]
+    IndexError: list index out of range
+```
+- Bartonella
+```
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 195, in makeReport
+    report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 178, in diffStats_total
+    cstats, ncstats = separateStats(statpairs)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in separateStats
+    ncstats = [y[1] for x in statpairs for y in x]
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in <listcomp>
+    ncstats = [y[1] for x in statpairs for y in x]
+    IndexError: list index out of range
+```
+- Bdellovibrio
+```
+Traceback (most recent call last):
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 238, in <module>
+    main(genusdir,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 222, in main
+    plotnet, report = makeReport(netlist,genus,processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 195, in makeReport
+    report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 178, in diffStats_total
+    cstats, ncstats = separateStats(statpairs)
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in separateStats
+    ncstats = [y[1] for x in statpairs for y in x]
+    File "/home/sid/thesis_SidReed/scripts/network_analysis.py", line 159, in <listcomp>
+    ncstats = [y[1] for x in statpairs for y in x]
+    IndexError: list index out of range
+```
+- Desulfitobacterium
+  - no networks produced, probably because only 4 taxa in the trees?
+- Borreliella
+  - deleted plasmid headers from  genome/GCF_000222835.1_ASM22283v1_genomic.fna so parsnp would build the species tree
+  - no non-crispr nodes so markophylo/network data missing
+- Photobacterium
+  - deleted plasmid headers from ./genome/GCF_002356235.1_ASM235623v1_genomic.fna so parsnp would build the species tree
+
+# Supplementary Table
+For each genus list
+- total number of OTUs
+- number of crispr/non-crispr OTUs (from stat report)
+- LCBs used in species tree (ls species_tree_WGS/nexus)
+- gene trees created (len network_files/all_newick_trees)
+- if markophylo data was generated
+- 16S tree created?

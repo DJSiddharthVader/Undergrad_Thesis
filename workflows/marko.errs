@@ -1,0 +1,1061 @@
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Acetobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.00661e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Acholeplasma
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Achromobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.05627e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Acidipropionibacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Acidithiobacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Acidovorax
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Actinobacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Actinobacteria
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Actinomyces
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Actinoplanes
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.52009e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Aerococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 3.5371e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Aeromonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Aggregatibacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Agrobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Alcanivorax
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 6.7416e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Altererythrobacter
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Alteromonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Amycolatopsis
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Anaplasma
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Anoxybacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Arcobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.7313e-35
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Arthrobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Azoarcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Azospirillum
+[1] "plotting tree"
+[1] "running markophylo"
+Azotobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Bacteroides
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Bartonella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Bdellovibrio
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Bifidobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Blattabacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Borrelia
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Borreliella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Brachybacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Brachyspira
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Bradyrhizobium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Brevibacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Brevundimonas
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 5.8442e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Buchnera
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Caldicellulosiruptor
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Calothrix
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+candidate
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Capnocytophaga
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.02479e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Caulobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Cellulophaga
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Chlorobium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.76132e-34
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Chromobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  : 
+  subscript out of bounds
+Calls: main -> markophyloEstimate -> <Anonymous>
+Execution halted
+Chryseobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.92673e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Citrobacter
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Clavibacter
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Clostridioides
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Collimonas
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.60224e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Colwellia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Coxiella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Cronobacter
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Cupriavidus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.52968e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Cutibacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Cyanothece
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.62486e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Dehalococcoides
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 3.16318e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Deinococcus
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Desulfitobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Desulfovibrio
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Dickeya
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Dietzia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.00002e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Edwardsiella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Ehrlichia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.01893e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Elizabethkingia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.77884e-30
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Enterobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.68705e-32
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Enterococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Erwinia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Erysipelothrix
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Erythrobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Eubacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Exiguobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  : 
+  subscript out of bounds
+Calls: main -> markophyloEstimate -> <Anonymous>
+Execution halted
+Flavobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.02892e-31
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Francisella
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Frankia
+[1] "plotting tree"
+[1] "running markophylo"
+Fusobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Gardnerella
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Geobacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Geobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Glaesserella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 5.12042e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Gluconobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Gordonia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Granulibacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Haemophilus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Hafnia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.57953e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Halomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Herbaspirillum
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Histophilus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Hydrogenobaculum
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Hymenobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Idiomarina
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Janthinobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Ketogulonicigenium
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Kocuria
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.53924e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Komagataeibacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 3.69452e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Kosakonia
+[1] "plotting tree"
+[1] "running markophylo"
+Lactococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Legionella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Lelliottia
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Leptolyngbya
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Leptospira
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Leuconostoc
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Lysinibacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.19834e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Lysobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.05165e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Magnetospirillum
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.42472e-35
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Mannheimia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.05495e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Marinobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Massilia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Mesoplasma
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.76181e-35
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Mesorhizobium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Methylobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Methylorubrum
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.16269e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Microbacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Microcystis
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Moorella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Moraxella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Morganella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.62522e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Mycobacteroides
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Mycolicibacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Myxococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Neisseria
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 5.10634e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Nitrosomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 6.33949e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Nocardia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Nocardiopsis
+[1] "plotting tree"
+[1] "running markophylo"
+Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  : 
+  subscript out of bounds
+Calls: main -> markophyloEstimate -> <Anonymous>
+Execution halted
+Nostoc
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Novosphingobium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Oblitimonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Ochrobactrum
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Orientia
+[1] "plotting tree"
+[1] "running markophylo"
+Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  : 
+  subscript out of bounds
+Calls: main -> markophyloEstimate -> <Anonymous>
+Execution halted
+Paenibacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.62708e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Pandoraea
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Pantoea
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Paraburkholderia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Paracoccus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 8.53234e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Pasteurella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Pectobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Pediococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Pedobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.00959e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Phaeobacter
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Photobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Piscirickettsia
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Planococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Polaribacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Polynucleobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Porphyromonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Prevotella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Prochlorococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Propionibacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.61654e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Proteus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.48356e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Providencia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Pseudoalteromonas
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Pseudonocardia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Pseudothermotoga
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.38591e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Psychrobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Ralstonia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Raoultella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.48127e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Rhizobium
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.33374e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Rhodobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Rhodococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in Q[modelmat == gf] <- rates[gf, j] : replacement has length zero
+Calls: main ... objective -> lapply -> FUN -> lapply -> FUN -> TPM_taxa
+Execution halted
+Rhodopseudomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Rhodovulum
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.58092e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Rickettsia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Riemerella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Rothia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Ruminiclostridium
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Selenomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Serratia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Shewanella
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Shigella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.19041e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Sinorhizobium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Sphingobacterium
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Sphingobium
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Sphingomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 7.55953e-37
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Sphingopyxis
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Spiroplasma
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Spirosoma
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Sporosarcina
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.98785e-31
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Stenotrophomonas
+[1] "plotting tree"
+[1] "running markophylo"
+Streptomyces
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Sulfurospirillum
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Synechococcus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Synechocystis
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Taylorella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Tessaracoccus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Thauera
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Thermoanaerobacterium
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Thermoanaerobacter
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Thermosipho
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Thermotoga
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Thermus
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Thioalkalivibrio
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In sqrt(diag(solve(res$hessian))) : NaNs produced
+Treponema
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 4.19635e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Trueperella
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Ureaplasma
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Variovorax
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Veillonella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 2.68177e-32
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Virgibacillus
+[1] "plotting tree"
+[1] "running markophylo"
+Error in `[<-`(`*tmp*`, which(databp_red[[i]][j, ] == alphabet[u]), u,  : 
+  subscript out of bounds
+Calls: main -> markophyloEstimate -> <Anonymous>
+Execution halted
+Weissella
+[1] "plotting tree"
+[1] "running markophylo"
+Error in solve.default(res$hessian) : 
+  system is computationally singular: reciprocal condition number = 1.39345e-33
+Estimated parameters on interval bounds.Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Wolbachia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Xenorhabdus
+Error in file(file, "r") : cannot open the connection
+Calls: main ... readSpeciesTree -> <Anonymous> -> <Anonymous> -> scan -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file './species_tree_WGS/WGS_species_tree.con.tre': No such file or directory
+Execution halted
+Xylella
+[1] "plotting tree"
+[1] "running markophylo"
+Something is not right with the standard errors.Check Hessian matrix estimate.
+Consider calculating bootstrap errors (make sure to use numhessian=FALSE).
+Warning message:
+In nlminb(start = modelop[[i]]$start, objective = totalll, model = i,  :
+  NA/NaN function evaluation
+Yersinia
+[1] "plotting tree"
+[1] "running markophylo"
+Estimated parameters on interval bounds.Zymomonas

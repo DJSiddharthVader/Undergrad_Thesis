@@ -1,11 +1,23 @@
 #!/usr/bin/env Rscript
-library("ape")
-library('progress')
+
+suppressMessages(library("ape"))
+suppressMessages(library('pryr')) #for partial
+suppressMessages(library('doSNOW'))
 suppressMessages(library('igraph')) #masking
 suppressMessages(library("phangorn")) #map warnings
+suppressMessages(library('progress'))
 
 set.seed(9)
 #Docs
+#GETTING HIDE TO RUN
+## Must use the /usr/bin/lua executable lua to run it
+## run the script ~/thesis_SidReed/hide2/score.lua on a dir of gene trees and a species tree (1 dir, 1 argument)
+## The dir with the hide files (~/thesis_SidReed/hide2/) must be in the LD_ LIBRARY_PATH variable or it wont work
+### Give the error "cant find shared object file liblua5.1.so
+##Command is
+### exprt LD_LIBRARY_PATH=~/thesis_SidReed/hide2/:$LD_LIBRARY_PATH
+### /usr/bin/lua ~/thesis_SidReed/hide2/score.lua /dir/with/trees
+
 #STEPS
 #1. convert species nexus_tree to newick tree
 #2. convert gene nexus_trees to newick trees
@@ -39,175 +51,275 @@ set.seed(9)
 #          subset_3.ncol
 #          subset_4.ncol
 #          ...
+gtdir <- 'gene_tree_files/trees'             #famXXX/famXXX.con.tre
 
-makepb <- function(total){
-    pb <- progress_bar$new(format = "[:bar] :percent eta: :eta",total = total, clear = FALSE, width= 75)
+#Utilities
+makepb <- function(total,msg=NA){
+    pb <- progress_bar$new(format = "[:bar] :current/:total (:percent) :tick_rate/s :elapsedfull",
+                           total=total,
+                           show_after=0,
+                           clear=FALSE)
+    if (!(is.na(msg))){pb$message(msg)}
+    pb$tick(0)
     return(pb)
 }
-setUpDirs <- function(rootDir){
-    netbase = paste(rootDir,'network_files',sep='/')
-    dir.create(netbase)
-    dir.create(paste(netbase,'all_newick_trees',sep='/'))
-    dir.create(paste(netbase,'subsets',sep='/'))
-    dir.create(paste(netbase,'raw_hide',sep='/'))
-    dir.create(paste(netbase,'csvs',sep='/'))
+removeFinishedEntries <- function(sourcedir,targetdir,sp,tp){
+    # used to prevent redoing every step/file by only looking at the input files without an extant corresponding output
+    #source is a list of files used as input
+    #target is the list of files that would be the output
+    #remove all members in target from source to avoid recomputing files that already were computed i.e exist
+    targets <- list.files(targetdir,pattern=tp,full.names=TRUE)
+    targets <- lapply(targets,function(tf){strsplit(basename(tf),'.',fixed=T)[[1]][1]})
+    sources <- list.files(sourcedir,pattern=sp,full.names=TRUE)
+    remaining <- lapply(sources,function(sf){
+                            bsf <- strsplit(basename(sf),'.',fixed=T)[[1]][1]
+                            if (!(bsf %in% targets)){
+                                return(sf) #returns NULL if conditon not met for some reason
+                            }})
+    return(remaining[lengths(remaining) != 0]) #remove NULL elements
+}
+runParallel <- function(fnc,iterable,processes,msg,exports=c(),ret=FALSE,...){
+    #NOTE: fnc must take an argument for a progress bar to call pb$tick  for progress reporting
+    print(msg)
+    if (length(iterable) == 0) {
+        print('skipped, already computed')
+        return(NA)
+    }
+    pb <- txtProgressBar(max=length(iterable),style=3)
+    prog <- function(n) setTxtProgressBar(pb,n)
+    #pb <- makepb(length(iterable))
+    #prog <- function(n) pb$update(match(n,iterable)/length(iterable))
+    registerDoSNOW(makeCluster(processes))
+    result <- foreach(i=iterable,
+                      .options.snow=list(progress=prog),
+                      .export=exports) %dopar% { return(fnc(i,...)) }
+    cat('\n')
+    if (ret){
+        return(result)
+    } else {
+        return(NULL)
+    }
+}
+setUpDirs <- function(rootDir,speciesTreePath){
+    if (length(grep('16S',speciesTreePath)) > 0){ #if WGS in stp
+        netbase = paste(rootDir,'network_files_16S',sep='/')
+    } else {
+        netbase = paste(rootDir,'network_files_WGS',sep='/')
+    }
+    dir.create(netbase,showWarnings=FALSE)
+    dir.create(paste(netbase,'all_newick_trees',sep='/'),showWarnings=FALSE)
+    dir.create(paste(netbase,'subsets',sep='/'),showWarnings=FALSE)
+    dir.create(paste(netbase,'raw_hide',sep='/'),showWarnings=FALSE)
+    dir.create(paste(netbase,'csvs',sep='/'),showWarnings=FALSE)
+    return(netbase)
 }
 
-convertToNwk <- function(pathToNexus,isSpecies=FALSE){
-    tree <- ape::read.nexus(file=pathToNexus)
+
+#Convert MrBayes output to newick
+convertToNwk <- function(treedir,netdir,isSpecies=FALSE){
+    treefile <- list.files(treedir,pattern='*.con.tre',full.names=TRUE)[1]
+    if (is.na(treefile)){
+        return(NULL)
+    }
+    tree <- ape::read.nexus(file=treefile)
     if (length(grep('copy',tree$tip.label)) != 0){
         return(FALSE)
     }
-    if (!is.rooted(tree)){
-        tree <- phangorn::midpoint(tree)
-    }
+    if (!(ape::is.rooted(tree))){ tree <- phangorn::midpoint(tree) }
     tree$edge.length <- NULL
-    if (!is.binary.tree(tree)){
-        tree <- multi2di(tree)
-    }
+    if (!(ape::is.binary.tree(tree))){ tree <- ape::multi2di(tree) }
     if (isSpecies){
-        nwkpath <- 'network_files/all_newick_trees/species.newick'
+        nwkpath <- file.path(netdir,'all_newick_trees','species.newick')
     } else{
-        filename <- strsplit(basename(pathToNexus),'.',fixed=TRUE)[[1]][1]
-        nwkpath <- paste('network_files/all_newick_trees/',filename,'.newick',sep='')
+        filename <- strsplit(basename(treefile),'.',fixed=TRUE)[[1]][1]
+        nwkpath <- file.path(netdir,'all_newick_trees',paste(filename,'.newick',sep=''))
     }
     ape::write.tree(tree,nwkpath)
-    return(nwkpath)
+    return(NULL)
+}
+convertAllTrees <- function(rootDir,speciesTreePath,processes,netdir){
+    #convert species tree to newick
+    convertToNwk(file.path(rootDir,speciesTreePath),netdir,isSpecies=TRUE)
+    if (!(file.exists(file.path(netdir,'all_newick_trees','species.newick')))){
+        print('no species tree, stopping...')
+        quit()
+    }
+    #convert gene tree to newick
+    dirlist <- removeFinishedEntries(file.path(rootDir,gtdir),
+                                     file.path(rootDir,netdir,'all_newick_trees'),
+                                     'fam*','fam*')
+    runParallel(convertToNwk, dirlist, processes, 'converting trees...',netdir=netdir)
 }
 
-generateSample <- function(diridx,allGeneTrees,size){
-    sdir <- paste('network_files/subsets/subset_',diridx,sep='')
+#Create samples of gene trees
+generateSample <- function(diridx,allGeneTrees,size,netdir){
+    sdir <- paste(netdir,'/subsets/subset_',diridx,sep='')
     dir.create(sdir)
-    file.copy('network_files/all_newick_trees/species.newick',paste(sdir,'species.newick',sep='/'))
+    file.copy(paste(netdir,'/all_newick_trees/species.newick',sep=''),
+              paste(sdir,'species.newick',sep='/'))
     sample <- sample(allGeneTrees,size=size,replace=FALSE)
     for (file in sample){
         file.copy(file,paste(sdir,basename(file),sep='/'))
     }
 }
-sampleSet <- function(){
-    allsubsets <- c()
-    subsets <- list.files('network_files/subsets',full.names=TRUE)
-    for (set in subsets){
-        allsubsets <- c(allsubsets,list.files(set,pattern='*.newick'))
+
+whichTreesSampled <- function(netdir,bool=TRUE){
+    #check if all gene trees that were computed are represented in everysubset used for a hide network
+    subsets <- list.files(paste(netdir,'/subsets',sep=''),full.names=TRUE)
+    allsubsets <- unique(sapply(subsets,function(set) list.files(set,pattern='*.newick')))
+    alltrees <- list.files(paste(netdir,'/all_newick_trees',sep=''),pattern='*.newick') #all trees generated
+    if (bool){
+        return(setequal(alltrees,allsubsets)) #boolean value, tree if all trees used
+    } else {
+        return(setdiff(alltrees,allsubsets)) #return list of unused trees
     }
-    allsubsets <- unique(allsubsets)
-    print(length(allsubsets))
-    alltrees <- list.files('network_files/all_newick_trees',pattern='*.newick')
-    print(length(alltrees))
-    return(setequal(alltrees,allsubsets))
 }
-sampleUntillAllUsed <- function(size){
-    stopsampling <- sampleSet()
-    print(stopsampling)
-    if (stopsampling){
-        return(NULL)
+
+sampleUntillAllUsed <- function(size,netdir){
+    stopsampling <- whichTreesSampled(netdir)
+    if (stopsampling){#if all trees exists in at least 1 sample
+        return(NA) #stop sampling
     }
-    subsetidx <- length(list.files('network_files/subsets'))+1
-    allGeneTrees <- list.files('network_files/all_newick_trees',full.names=TRUE)
+    subsetidx <- length(list.files(paste(netdir,'/subsets',sep='')))
+    allGeneTrees <- whichTreesSampled(bool=F)
+    while (!stopsampling){#if not
+        subsetidx <- subsetidx + 1
+        generateSample(subsetidx,allGeneTrees,size) #make anew sample with unused trees
+        stopsampling <- whichTreesSampled() #check if all samples are used, if so stop
+    }
+}
+
+sampleGeneTreesForNetworks <- function(num,size,processes,netdir){
+    allGeneTrees <- list.files(paste(netdir,'/all_newick_trees',sep=''),full.names=TRUE)
     allGeneTrees <- allGeneTrees[!grepl('species.newick',allGeneTrees)]
-    while (!stopsampling){
-        generateSample(subsetidx,allGeneTrees,size)
-        stopsampling <- sampleSet()
-        subsetidx <- subsetidxs + 1
+    subsets <- length(list.files(paste(netdir,'/subsets',sep='')))
+    if (subsets >= num){
+        print('generating samples...')
+        print('skipped, already computed')
+        return(NA)
     }
+    runParallel(generateSample,
+                (subsets:(subsets+num)),
+                processes,
+                'generating samples...',
+                exports=c('generateSample'),
+                allGeneTrees=allGeneTrees,size=size,netdir=netdir)
+    sampleUntillAllUsed(size,netdir)
+    #non-parallel code
+#    iters <- subsets:(subsets+num)
+#    pb <- makepb(length(iters),msg='generating samples...')
+#    lapply(iters,function(i){
+#                    generateSample(i,allGeneTrees,size,netdir)
+#                    pb$tick()
+#                 })
+    #scope issues with parallel sampling, not really an issue bc its pretty fast anyways
+    #gsfnc <- pryr::partial(generateSample,allGeneTrees=allGeneTrees,size=size,netdir=netdir)
 }
-runHide <- function(treedir){
+
+#Run HiDe on each samples
+runHide <- function(treedir,netdir){
     lua <- '/usr/bin/lua'
     hideexe <- '/home/sid/thesis_SidReed/hide_program/score.lua'
     edgelist <- system(paste(lua,hideexe,treedir),intern=TRUE,ignore.stderr=TRUE)
-    outf <- file(paste('network_files/raw_hide/',basename(treedir),'.hide',sep=''))
+    outf <- file(paste(netdir,'/raw_hide/',basename(treedir),'.hide',sep=''))
     writeLines(edgelist,outf)
     close(outf)
 }
-normalizeEdge <- function(weight,fname){
-    subset <- strsplit(basename(fname),'.',fixed=TRUE)[[1]][1][1]
-    subdir <- paste('network_files/subsets/',subset,sep='')
-    norm <- length(list.files(subdir))-1
-    return(weight/norm)
+runAllHide <- function(processes,netdir){
+    #subsets <- list.files(network_files/subsets,full.names=TRUE)
+    subsets <- removeFinishedEntries(paste(netdir,'/subsets',sep=''),
+                                     paste(netdir,'/raw_hide',sep=''),
+                                     'subset*','subset*')
+    runParallel(runHide,subsets,processes,'running HiDe...',netdir=netdir)
 }
-parseEdge <- function(line,hidefile){
-    split <- strsplit(line,'\t')
+
+#Convert HiDe to edge list csvs
+parseEdge <- function(hedge,enorm){
+    split <- strsplit(hedge,'\t')
     weight <- as.numeric(split[[1]][1])
     if (weight == 0){
-       return(c(-1,-1,-1))
+       return(NA)
     }
     esplit <- strsplit(split[[1]][2],' ')
     source <- strsplit(esplit[[1]][1],'-')[[1]][2]
     sink <- strsplit(esplit[[1]][3],'-')[[1]][2]
-    nweight <- normalizeEdge(weight,hidefile)
     direction <- split[[1]][3]
-    edge <- list(source=source,sink=sink,raw_weight=weight,weight=nweight,direction=direction)
+    nweight <- weight/enorm
+    edge <- list(source=source,
+                 sink=sink,
+                 raw_weight=weight,
+                 weight=nweight,
+                 direction=direction)
     return(edge)
 }
-hideToEdgeList <- function(hidefile){
-    lines <- readLines(hidefile)
-    parsed_edge_list <- parseEdge(lines[1],hidefile)
-    for (line in lines[2:length(lines)]){
-        edge <- parseEdge(line,hidefile)
-        if (edge[3][1] == -1){
-            next
-        }
-        parsed_edge_list <- rbind(parsed_edge_list,edge)
-    }
-    return(parsed_edge_list)
+convertHideToCSV <- function(hidefile,netdir){
+    #find a description of the format .hide output here http://acgt.cs.tau.ac.il/hide/
+    #converts a .hide file in to a .csv, where each row is a edge i.e.
+    #the direction is a probability of the tranfer occuring from (u to v)/(v to u)
+    #node u, node v, edge weight, normalized weight, estimated direction
+    #NCXX.1, NCYY.1, 38.4432    , 0.872473         , (80%/20%)
+    subset <- strsplit(basename(hidefile),'.',fixed=TRUE)[[1]][1][1]
+    edge_norm <- length(list.files(paste(netdir,'/subsets/',subset,sep='')))-1
+    hedges <- readLines(hidefile)
+    parsed_edge_list <- lapply(hedges,
+                                function(hedge){
+                                edge <- parseEdge(hedge,edge_norm)
+                                if (!(is.na(edge))){
+                                    return(edge)
+                                }})
+    parsed_edge_list <- do.call('rbind',parsed_edge_list)
+    base <- strsplit(basename(hidefile),'.',fixed=TRUE)[[1]][1]
+    outf <- file.path(netdir,'/csvs',paste(base,'.csv',sep=''))
+    write.table(parsed_edge_list,file=outf,sep='~',row.names=F)
 }
-main <- function(rootDir,num,size){
-    setUpDirs(rootDir)
-    print('converting trees to newick')
-    #convert species tree to newick
-    speciesTreePath <- paste(rootDir,'species_tree_files/species_tree/species_tree.con.tre',sep='')
-    speciesTreePath <- convertToNwk(speciesTreePath,isSpecies=TRUE)
-    #convert gene tree to newick
-    dirlist <- list.files(paste(rootDir,'gene_tree_files/trees',sep=''),pattern='fam*',full.names=TRUE)
-    geneTreePaths <- c()
-    pb <- makepb(length(dirlist))
-    for (dir in dirlist){
-        tree <- list.files(dir,patter='*.con.tre',full.names=TRUE)
-        gpath <- convertToNwk(tree[1])
-        if (typeof(gpath) == 'character'){
-            geneTreePaths <- c(geneTreePaths,gpath)
-        }
-        pb$tick()
-    }
-    print('generating samples')
-    #generate samples of gene trees
-    allGeneTrees <- list.files('network_files/all_newick_trees',full.names=TRUE)
-    allGeneTrees <- allGeneTrees[!grepl('species.newick',allGeneTrees)]
-    pb <- makepb(num)
-    for (s in 1:num){
-        generateSample(s,allGeneTrees,size)
-        pb$tick()
-    }
-    #sampleUntillAllUsed(size)
-    print('running HiDe')
-    #build networks
-    subsets <- list.files('network_files/subsets',full.names=TRUE)
-    pb <- makepb(length(subsets))
-    for (sample in subsets){
-        runHide(sample)
-        pb$tick()
-    }
-    print('parsing and writing networks')
-    #parse and write networks
-    hidefiles <- list.files('network_files/raw_hide',full.names=TRUE)
-    pb <- makepb(length(hidefiles))
-    for (hide in hidefiles){
-        edgelist <- hideToEdgeList(hide)
-        base <- strsplit(basename(hide),'.',fixed=TRUE)[[1]][1]
-        outf <- paste('network_files/csvs/',base,'.csv',sep='')
-        write.table(edgelist,file=outf,sep='~',row.names=1:dim(edgelist)[1])
-        pb$tick()
-    }
+parseAllEdgeLists <- function(processes,netdir){
+    hidefiles  <- removeFinishedEntries(paste(netdir,'/raw_hide',sep=''),
+                                        paste(netdir,'/csvs',sep=''),
+                                        'subset*','subset*')
+    runParallel(convertHideToCSV,
+                hidefiles,
+                processes,
+                'formatting networks...',
+                exports=c('parseEdge'),
+                netdir=netdir)
 }
 
+main <- function(rootDir,speciesTreePath,num,size,processes){
+    netdir <- setUpDirs(rootDir,speciesTreePath)
+    convertAllTrees(rootDir,speciesTreePath,processes,netdir)
+    sampleGeneTreesForNetworks(num,size,processes,netdir)
+    runAllHide(processes,netdir)
+    parseAllEdgeLists(processes,netdir)
+}
 
 #if name == main
 if (sys.nframe() == 0){
     #CLI Args
     args <-  commandArgs(trailingOnly=TRUE)
-    if (length(args) != 1){
-        stop("arg is genus dir .n",call.=FALSE)
-    }
-    main(args[1],1000,50)
+    species_tree <- ifelse(length(args) > 0,args[1],'species_tree_WGS') #use species_tree_16S/species_tree for the 16S built species tree
+    genus_dir = ifelse(length(args) > 1,args[2],getwd())
+    subset_number <- ifelse(length(args) > 2,as.numeric(args[3]),1000)
+    subset_size <- ifelse(length(args) > 3,as.numeric(args[4]),50)
+    processes <- ifelse(length(args) > 4,as.numeric(args[5]),8)
+    main(genus_dir,species_tree,subset_number,subset_size,processes)
 }
 
+#DEPRECIATED
+#convertAllTrees <- function(rootdir,speciesTreePath){
+#    #convert species tree to newick
+#    speciesTreePath <- file.path(rootDir,speciesTree)
+#    speciesTreePath <- convertToNwk(speciesTreePath,isSpecies=TRUE)
+#    #convert gene tree to newick
+#    dirlist <- list.files(file.path(rootDir,gtdir),pattern='fam*',full.names=TRUE)
+#    pb <- makepb(length(dirlist))
+#    geneTreePaths <- c()
+#    for (dir in dirlist){
+#        tree <- list.files(dir,pattern='*.con.tre',full.names=TRUE)
+#        gpath <- convertToNwk(tree[1])
+#        if (typeof(gpath) == 'character'){
+#            geneTreePaths <- c(geneTreePaths,gpath)
+#        }
+#        pb$tick()
+#    }
+#    return(list(sp=speciesTreePath,gt=geneTreePaths))
+#}

@@ -9,23 +9,16 @@ library("markophylo")
 suppressMessages(library("data.table"))
 suppressMessages(library("phangorn")) #map warnings
 
-newfp <- function(fp){
-    dir <- dirname(fp)
-    newfp <- paste(dir,paste('rooted_',basename(fp),sep=''),sep='/')
-    newfpnwk <- paste(dir,paste('rooted_',basename(fp),'.newick',sep=''),sep='/')
-    return(c(newfp,newfpnwk))
-}
 readSpeciesTree <- function(filepath){
     #read the species tree from MrBayes, root it and return the rooted tree
     #rooted tree is required by markophylo but the root is arbitrary
     rootedtree <- phangorn::midpoint(ape::read.nexus(file=filepath))
     if (!is.binary.tree(rootedtree)){
-        rootedtree <- multi2di(rootedtree,random=FALSE)
+        rootedtree <- ape::multi2di(rootedtree,random=FALSE)
     }
-    rootedtreefile<- newfp(filepath)
-    ape::write.nexus(rootedtree,file=rootedtreefile[1])
- #   ape::write.tree(rootedtree,file=rootfp[2])
-    rootedtree <- ape::read.nexus(file=rootedtreefile[1])
+    rootedtreefile <- file.path(dirname(filepath),paste('rooted_',basename(filepath),sep=''))
+    ape::write.nexus(rootedtree,file=rootedtreefile)
+    rootedtree <- ape::read.nexus(file=rootedtreefile)
     return(rootedtree)
 }
 loadAnnotationInfo <- function(filepath){
@@ -63,28 +56,16 @@ plotTree <- function(speciesTree,partitions){
         edgelabels(speciesTree$edge.length,frame='none',adj = c(0.5,-1.25))
         taxlist <- speciesTree$tip.label
         tipnums <-  1:length(taxlist)
-        adj <- 0
-        #label crispr tips
         if (length(crispr) != 0){
             tc = crispr[which(crispr %in% tipnums)]
-            acclist = taxlist[tc]
-            #acctext = paste('CRISPR',acclist,sep='   ')
-            acctext = acclist
-            tiplabels(acctext,tc,frame='rect',adj=adj,bg='cadetblue')
+            tiplabels(taxlist[tc],tc,frame='rect',adj=0,bg='cadetblue')
         }
-        #label non-crispr tips
         if (length(non_crispr) != 0){
             tnc = non_crispr[which(non_crispr %in% tipnums)]
-            acclist = taxlist[tnc]
-            #acctext = paste('Non-CRISPR',acclist,sep='   ')
-            acctext = acclist
-            tiplabels(acctext,tnc,frame='rect',adj=adj,bg='firebrick1')
+            tiplabels(taxlist[tnc],tnc,frame='rect',adj=0,bg='firebrick1')
         }
-        #label internal nodes
         internal <- (length(taxlist)+1):(speciesTree$Nnode+length(taxlist))
-        #nodetext <- paste('Internal',internal,sep=' ')
-        nodetext <- internal
-        nodelabels(nodetext,internal,frame='circle',bg='green')
+        nodelabels(internal,internal,frame='circle',bg='green')
         dev.off()
     })
 }
@@ -92,10 +73,10 @@ markophyloEstimate <- function(speciesTree,paMatrix,partitions){
     cleaned <- partitions[lapply(partitions,length)>0]
     estrates <- markophylo::estimaterates(usertree=speciesTree,
                                           userphyl=paMatrix,
-                                          alphabet=c('D','B'),
-                                          bgtype="listofnodes",
                                           bg=cleaned,
+                                          bgtype="listofnodes",
                                           rootprob="maxlik",
+                                          alphabet=c(0,1),
                                           modelmat="BDSYM",
                                           #numhessian=FALSE,
                                           matchtiptodata=TRUE)
@@ -118,12 +99,9 @@ main <- function(speciesTreePath,paMatrixPath,crisprAnnotationPath){
 if (sys.nframe() == 0){
     #CLI Args
     args <-  commandArgs(trailingOnly=TRUE)
-    if (length(args) != 3){
-        stop("args are species tree, PA matrix, crispr annotation data .n",call.=FALSE)
-    }
-    speciesTreePath = args[1] #'./species_tree_files/species_tree/species_tree.con.tre'
-    paMatrixPath = args[2] #'binary_pa_matrix.csv'
-    crisprAnnotationPath = args[3] #'/home/sid/thesis_SidReed/data/fasta_crispr_annotation_df.json'
+    speciesTreePath = ifelse(length(args) > 0,args[1],'./species_tree_WGS/WGS_species_tree.con.tre')
+    paMatrixPath = ifelse(length(args) > 1,args[2],'binary_pa_matrix.csv')
+    crisprAnnotationPath = ifelse(length(args) > 2,args[3],'/home/sid/thesis_SidReed/data/all_data.tsv')
     main(speciesTreePath,paMatrixPath,crisprAnnotationPath)
 }
 

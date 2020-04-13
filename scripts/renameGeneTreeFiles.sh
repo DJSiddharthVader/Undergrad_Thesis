@@ -13,4 +13,4 @@ mv "$fam"_* \
    "$fam".trprobs \
    "$fam".tstat \
    "$fam".vstat \
-   "$fdir" #2> /dev/null
+   "$fdir" 2> /dev/null

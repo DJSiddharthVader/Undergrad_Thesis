@@ -11,6 +11,9 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import mpl_toolkits.axes_grid1.inset_locator as ins
 
+mkdir = '/home/sidreed/thesis_SidReed/marko_reports/'
+jrdir = '/home/sidreed/thesis_SidReed/json_reports/'
+
 #Utils
 def getNodeStatus(df):
     sos = {s:list(set(df[df['source'] == s]['isCRISPR_source']))[0] for s in set(df['source'])}
@@ -23,27 +26,23 @@ def getNodeStatus(df):
     consensus = lambda row: row['source'] if (row['sink'] == 0) else row['sink']
     cdf['status'] =  cdf.apply(consensus,axis=1)
     return {i:row['status'] for i,row in cdf.iterrows()}
-
 def cnodescount(genus,andf):
     gdf = andf[andf['Genus'] == genus].fillna(0)
     gdf = gdf[gdf['nucPath'] != 0]
     t = gdf.shape[0]
     c = gdf[gdf['isCRISPR'] == True].shape[0]
     return c/t,t
-
 def numCrisprNodes(genus):
     path = '/home/sidreed/thesis_SidReed/plotnets/{}_plot_network.json'.format(genus)
     df = pd.DataFrame(json.load(open(path)))
     df = df[df['source'] != df['sink']].drop('target',axis=1)
     status = getNodeStatus(df)
     return sum([1 for k,v in status.items() if v == 'crispr']),len(list(status.keys()))
-
 def genlist(stats,col,thresh):
     #ratios = [k for k,v in stats.items() if np.mean(v[col])/sst.sem(v[col]) < 100]
     ratios = [(k,abs(np.mean(v[col])/sst.sem(v[col])))  for k,v in stats.items()]
     ratios = [r[0] for r in ratios if r[1] < thresh]
     return ratios
-
 
 #Data IO
 def loadnetwork(path,dfonly=False,returnname=False):
@@ -63,7 +62,6 @@ def loadnetwork(path,dfonly=False,returnname=False):
             return df,name
         else:
             return df
-
 def loadMarkoOnly(andf):
     #mkdir = '/home/sidreed/thesis_SidReed/marko_reports'
     mkdir = '/home/sidreed/thesis_SidReed/all_markos/'
@@ -78,18 +76,14 @@ def loadMarkoOnly(andf):
     mdf = mdf[(mdf['c_indel'] != 100) & (mdf['nc_indel'] != 100)]
     mdf = mdf[~((np.isnan(mdf['c_indel'])) | (np.isnan(mdf['nc_indel'])))]
     return mdf
-
 def loadReports():
-    mkdir = '/home/sidreed/thesis_SidReed/marko_reports/'
     markos = [json.load(open(os.path.join(mkdir,path))) for path in os.listdir(mkdir)]
     mdf = pd.DataFrame(markos).set_index('genus')
-    jrdir = '/home/sidreed/thesis_SidReed/json_reports/'
     stats = [json.load(open(os.path.join(jrdir,path))) for path in os.listdir(jrdir)]
     stats = {s['genus']:s for s in stats}
     commongens = set(mdf.index).intersection(set(list(stats.keys())))
     mdf = mdf.loc[list(commongens),:]
     return mdf,stats
-
 def finaldf(mdf,stats):
     mdf['a'] = abs(mdf['crispr_indel_rate']-mdf['non-crispr_indel_rate'])
     mdf['b'] = [np.mean(stats[i]['modularity']) for i in mdf.index]
@@ -165,7 +159,6 @@ def plotNetwork(net,df,width_scaling=4000,alpha=0.8,legend_entries=6,legend_deci
     if type(save) != bool:
         fig.savefig(save,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def genusSizeDist(df,dpi=50,size=(10,5),file=False):
     fig,ax = plt.subplots(figsize=size)
     counts = df['t_otus']
@@ -179,7 +172,6 @@ def genusSizeDist(df,dpi=50,size=(10,5),file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
                 labels=['CRISPR','Non-CRISPR'],file=False,lsize=20):
     sdf = df.sort_values(by=['c_otus'])
@@ -201,7 +193,6 @@ def multiBarPlot(df,cols,ylabel,xlabel='Genera',width=1,dpi=50,
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
     plt.rc('axes',labelsize=15)
@@ -234,7 +225,6 @@ def cVsncRate(nohdf,size=(10,5),dpi=50,file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     fig, ax = plt.subplots(figsize=size)
     plt.rc('axes',labelsize=14)
@@ -276,7 +266,6 @@ def cVsncClust(nohdf,size=(10,5),dpi=50,file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def rateVsCFrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     #Data
     x = nohdf['c_otus']
@@ -304,7 +293,6 @@ def rateVsCFrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def cratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     #Data
     x = nohdf['c_otus']
@@ -327,7 +315,6 @@ def cratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def ncratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     #Data
     x = nohdf['c_otus']
@@ -350,7 +337,6 @@ def ncratevscfrac(nohdf,size=(10,5),dec=5,dpi=50,file=False):
     if type(file) != bool:
         fig.savefig(file,dpi=dpi,format='png',frameon=False)
     plt.show()
-
 def violinPlot(stats,col='modularity',thresh=np.inf,
                 size=(20,10),dpi=50,limit=-1,file=False):
     reps = len(list(stats.values())[0]['modularity'])

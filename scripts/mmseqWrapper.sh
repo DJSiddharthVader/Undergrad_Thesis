@@ -7,6 +7,10 @@ mmseq_dir="$3"
 db="mmseq_db_$genus"
 out="clusters_$genus"
 #run mmseq clustering
+if [[ -f "$out".tsv ]]; then
+    echo "already computed"
+    exit 0
+fi
 mkdir -p "$mmseq_dir" && cd "$mmseq_dir"
 mmseqs createdb "$fasta" "$db" -v 3 >| mmseq.log 2>| mmseq.errors
 mmseqs cluster -e 0.05 -c 0.8 --min-seq-id 0.85 --alignment-mode 3 --cluster-mode 1 "$db" "$out" mmseq_tmp >> mmseq.log 2>> mmseq.errors

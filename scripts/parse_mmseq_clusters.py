@@ -1,3 +1,4 @@
+import os
 import sys
 import json
 import numpy as np
@@ -51,6 +52,9 @@ def writeSingletons(genelist,allfasta,processes):
     return None
 
 def main(clusters,allfasta,processes=32):
+    if os.path.exists('gene_families.json'):
+        print('already computed')
+        return None
     clusters,singletons = parseParallel(clusters,processes)
     json.dump(clusters,open('gene_families.json','w'))
     writeSingletons(singletons,allfasta,processes)

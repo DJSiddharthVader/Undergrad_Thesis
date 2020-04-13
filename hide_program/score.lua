@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 package.cpath = package.cpath .. ";/home/sid/thesis_SidReed/hide_program/?.so"
+package.cpath = package.cpath .. ";/home/sid/thesis_SidReed/hide_program/?.0"
 require 'io'
 require 'os'
 require 'math'

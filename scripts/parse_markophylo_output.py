@@ -6,7 +6,6 @@ from functools import reduce
 def hascat(lines,cat):
     boollist = [True if cat in l else False for l in lines ]
     return reduce(lambda x,y:x or y,boollist)
-
 def parse2(filepath,genus):
     lines = [x.strip() for x in open(filepath).readlines()]
     #parse rates
@@ -56,11 +55,11 @@ def parse2(filepath,genus):
                 'internal_indel_sem':-1}
 
 if __name__ == '__main__':
-    basedir = sys.argv[1]
+    #basedir = sys.argv[1]
+    basedir =  os.getcwd()
     genus = os.path.basename(basedir)
-    inpath = os.path.join(os.getcwd(),basedir,'markophylo_results.txt')
+    inpath = os.path.join(basedir,'markophylo_results.txt')
     outd = parse2(inpath,genus)
-    print(outd)
     outpath = os.path.join(basedir,'{}_markophylo_results.json'.format(genus))
     json.dump(outd,open(outpath,'w'))
 

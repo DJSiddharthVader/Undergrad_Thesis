@@ -15,14 +15,19 @@ from multiprocessing.dummy import Pool as ThreadPool
 def getNumTaxa():
     return len(glob.glob('./protein/*.faa'))
 
-def pickGeneFamiliesForTrees(genefamilies,minsize):
+def pickGeneFamiliesForTrees(genefamilies,minsize,maxtrees):
     #list of families that have exactly maxtax members and contain genes from every taxa being considered
     maxtax = getNumTaxa()
     print('Number of strains: {}'.format(maxtax))
     if type(minsize) == float and (minsize > 0 and minsize <= 1):
-        minsize = int(math.floor(minsize*maxtax))
+        minsize = max(int(math.floor(minsize*maxtax)),4) #4 bc MrBayes requires min 4 taxa to build a tree
     print('minimum organisms gene family must be present in: {}'.format(minsize))
-    return [fam for fam,members in tqdm(genefamilies.items(),total=len(genefamilies),desc='picking') if (len(set([x.split(':')[0] for x in members])) >= minsize)]
+    toget = tqdm(genefamilies.items(),total=len(genefamilies),desc='picking')
+    families = [fam for fam,members in toget \
+                if (len(set([x.split(':')[0] for x in members])) >= minsize)]
+    if maxtrees != -1:
+        families = families[:maxtrees]
+    return families
 
 def extractSeqsForTree(headersNameTuple,nucFasta):
     genefam,headerlist = headersNameTuple
@@ -38,7 +43,6 @@ def extractSeqsParallel(headerTuples,nucFasta):
     fastas = list(tqdm(pool.imap(extractfnc,headerTuples),total=len(headerTuples),desc='getseqs'))
     return fastas
 
-
 def fixNames(seqlist):
     fixedseqs = []
     for sequence in seqlist:
@@ -50,8 +54,12 @@ def fixNames(seqlist):
                                    description=''))
     return fixedseqs
 
-def writeFastas(nameseqiter):
-    for name,seqs in nameseqiter.items():
+def writeAllFastas(family_idxs,familys,nucFasta):
+    already_done = [x.split('.')[0] for x in list(os.listdir('gene_tree_files/fastas'))]
+    familys_to_write = [(famidx,familys[famidx]) for famidx in family_idxs if famidx not in already_done]
+    seqs_to_write = extractSeqsParallel(familys_to_write,nucFasta)
+    seqs_to_write = {name:fixNames(seqs) for (name,seqs) in seqs_to_write}
+    for name,seqs in seqs_to_write.items():
         with open(name,'w') as outfile:
             SeqIO.write(seqs,outfile,'fasta')#write all seqs to a fasta file
     return None
@@ -70,7 +78,8 @@ def alignGeneFamilies(fastafile):
 
 def parallelAlignFastas(processes):
     pool = ThreadPool(processes)
-    fastas = os.listdir('gene_tree_files/fastas')
+    already_aligned = [x.split('.')[0] for x in os.listdir('gene_tree_files/nexus')]
+    fastas = [x for x in os.listdir('gene_tree_files/fastas') if x.split('.')[0] not in already_aligned]
     alnfnc = partial(alignGeneFamilies)
     alnfiles = list(tqdm(pool.imap(alnfnc,fastas),total=len(fastas),desc='aligning'))
     return None
@@ -102,7 +111,10 @@ quit""".format(nexfile,nexbase)
 
 def parallelBuildTrees(processes):
     pool = ThreadPool(processes)
-    alnfiles = os.listdir('gene_tree_files/nexus')
+    unfinished = [x.split('.')[0] for x in os.listdir('gene_tree_files/nexus') if \
+                not os.path.exists('gene_tree_files/trees/{0}/{0}.con.tre'.format(x.split('.')[0]))]
+    alnfiles = [x for x in os.listdir('gene_tree_files/nexus') if \
+                (x.split('.')[0] in unfinished) and (x.split('.')[-1]  == 'nex')]
     treefiles = list(tqdm(pool.imap(buildTree,alnfiles),total=len(alnfiles),desc='trees'))
     return None
 
@@ -113,20 +125,15 @@ def main(familys,nucFasta,minsize,processes,maxtrees):
     os.system('mkdir -p {}/fastas'.format(outdir))
     os.system('mkdir -p {}/nexus'.format(outdir))
     os.system('mkdir -p {}/trees'.format(outdir))
-    #pick families
+    #Make gene family fastas
+    family_idxs = pickGeneFamiliesForTrees(familys,minsize,maxtrees)
+    writeAllFastas(family_idxs,familys,nucFasta)
     if maxtrees != -1:
-        family_idxs = pickGeneFamiliesForTrees(familys,minsize)
-        print('Using {} of {} usable families of {} total families'.format(maxtrees,len(family_idxs),len(familys)))
-        family_idxs = family_idxs[:maxtrees]
+        print('Using {} of {} usable families of {} total families'.format(min(maxtrees,len(family_idxs)),
+                                                                           len(family_idxs),
+                                                                           len(familys)))
     else:
-        family_idxs = pickGeneFamiliesForTrees(familys,minsize)
         print('Using {} usable families of {} total families'.format(len(family_idxs),len(familys)))
-    headerlists = {famidx:familys[famidx] for famidx in family_idxs}
-    headerTuples = [(famidx,familys[famidx]) for famidx in family_idxs]
-    #write families to fasta files
-    seqs_to_write = extractSeqsParallel(headerTuples,nucFasta)
-    seqs_to_write = {name:fixNames(seqs) for (name,seqs) in seqs_to_write}
-    writeFastas(seqs_to_write)
     #align gene family fastas and convert to nexus
     parallelAlignFastas(processes)
     #build gene trees with mrbayes from alingments
@@ -135,20 +142,27 @@ def main(familys,nucFasta,minsize,processes,maxtrees):
 
 
 if __name__ == '__main__':
-    famidx = json.load(open(sys.argv[1]))
-    nucFasta = sys.argv[2]
-    if len(sys.argv) > 3:
-        maxtrees = int(sys.argv[3])
+    if len(sys.argv) > 1:
+        famidx = sys.argv[1]
     else:
-        maxtrees = 1500
+        famidx = './gene_families.json'
+    famidx = json.load(open(famidx))
+    if len(sys.argv) > 2:
+        nucFasta = sys.argv[2]
+    else:
+        nucFasta = './all_nucleotides.fna'
+    if len(sys.argv) > 3:
+        processes = int(sys.argv[3])
+    else:
+        processes = 1
     if len(sys.argv) > 4:
-        minsize = float(sys.argv[4])
+        maxtrees = int(sys.argv[4])
+    else:
+        maxtrees = 3000
+    if len(sys.argv) > 5:
+        minsize = float(sys.argv[5])
     else:
         minsize = 0.4
-    if len(sys.argv) > 5:
-        processes = int(sys.argv[5])
-    else:
-        processes = 16
     main(famidx,nucFasta,minsize,processes,maxtrees)
 
 #DEPRECIATED

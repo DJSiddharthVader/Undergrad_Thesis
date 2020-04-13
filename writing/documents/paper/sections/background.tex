@@ -1,0 +1,85 @@
+\section{Background}
+\subsection{What is CRISPR-Cas?}
+\ac{crspc} systems are sets of nucleotide motifs (spacers) interspaced with nucleotide repeats (\ac{crsp}s) and \ac{cas} proteins (with sequences usually adjacent to the \ac{crsp} motifs) that have an adaptive immune function in many bacteria and archaea \citep{crispgen}.
+Each nucleotide motif is the result of a DNA molecule that was previously taken up by the host, serving as a marker for the \ac{cas} proteins to degrade any DNA matching the motif \citep{crispgen}.
+If a bacterium possessing a \ac{crspc} system is infected with a phage and survives, a motif representative of that phage can be integrated as a spacer.
+If the bacterium is reinfected with the same phage strain the spacers will guide \ac{cas} proteins to the invading phage DNA and degrade it, hence adaptive immunity.
+Although \ac{crspc} appears to have evolved to degrade viral DNA system, the majority of \ac{crsp} spacers have been found to match bacterial \ac{mge}s with no known viral match \citep{nonvspacer}.\par
+As of 2017, over $45\%$ of bacterial genomes analyzed ($n=6782$) appear to contain \ac{crsp} motifs \citep{crispdb}.
+Moreover, \ac{crsp} motifs show significant diversity between individual bacteriums as they represent a chronological history of spacer acquisition (usually via viral infection or \ac{mge} ``infection'') for that specific bacterium\citep{crispgen}.
+There still exist many bacterial strains, and even entire genera with no \textit{known} \ac{crspc} systems, although they may have simply not been discovered yet \citep{ineqcas,casguild}.
+Furthermore, the diversification of CRISPR-Cas systems is driven further by \ac{hgt} acting on \ac{crsp} and \ac{cas} components independently, adding another level of complexity to the propagation of CRISPR-Cas systems \citep{crispgen}.
+
+\subsection{Horizontal Gene Transfer}
+\subsubsection{Mechanisms}
+\ac{hgt} can be defined as the exchange of genetic information across lineages \citep{lgt}, as opposed to vertical gene transfer between parents and offspring \citep{ihgt}.
+It is a source of genetic variation, allowing organisms to adapt quickly by copying a gene with a specific function, rather than evolving it themselves \citep{ihgt,adaevo}.
+There are 3 main mechanisms of \ac{hgt}\\
+\textbf{Transformation}
+Free floating DNA is taken up by a bacterium and incorporated into the genome \citep{lgt}. DNA is not always incorporated successfully even if it taken up.\\
+\textbf{Conjugation}
+The sharing of genetic material through cell-to-cell bridges, the genes for which are usually carried on a plasmid \citep{conjug}.\\
+\textbf{Transduction}
+Genes or DNA fragments can be transferred through either lytic or lysogenic bacteriophages \citep{transd}.
+Bacterial DNA can be accidentally packaged into the lysogenic phage head during cell lysis and integrate into the next infected host.  \citep{transd}.
+Lysogenic phages can take up bacterial DNA flanking the viral sequence and bring it with them to the next host\citep{transd}.\par
+It should be noted that \textit{successful} \ac{hgt} requires that a gene be maintained, either by genomic integration or plasmid replication.
+Frequently, putatively transferred genes are either lost quickly or diverge quickly due to minimal selective pressure maintaining them \citep{fastlane}.
+\subsubsection{Rate Influencing Factors}
+The rate of \ac{hgt} in bacteria is constantly in flux\citep{trendbs}.
+The more exogenous DNA, higher population density or higher phage density means more DNA is available for transfer \citep{lgt}.
+Just like mutation rates, \ac{hgt} rates are also thought to evolve in response to environmental factors or selective pressure \citep{mtrate,hgtrate}.
+The metaboliccost or the possibility of receiving toxic or incompatible genes can dis incentivize a cell to produce the machinery required for \ac{hgt} \citep{hgtcost}.
+But for bacteria in hospitals, the potential benefit of receiving antibiotic resistance genes can outweigh any potential danger or metabolic cost, inducing increased bacterial competence \citep{hospital}
+It has been suggested that genes acquired via \ac{hgt} are often quickly lost since they often confer no advantage to a cell's current selective pressures \citep{fastlane}.
+Ultimately \ac{hgt} rates are influenced by a variety of factors related balancing the potential fitness costs and benefits.
+\subsection{Phylogenomic Networks}
+\ac{hgt} is an important factor in understanding evolution in prokaryotes.
+In graph theory a tree is defined as a graph where there is only one path between every pair of nodes.
+In phylogenetics this implies there is only one path for genetic material to transfer between organisms, that path being vertical inheritance.
+The existence of \ac{hgt} demonstrates that the tree model is clearly an incomplete representation of genetic relationships between bacterial \ac{otu}s.
+Genetic material can be transferred outside of reproduction, creating multiple paths through which a gene can exist in two different \ac{otu}s  \citep{lgt}.
+The frequency of \ac{hgt} among prokaryotes has lead many to re-evaluate the concept of a ``prokaryotic tree of life'', which ignores these horizontal interactions \citep{netoflife}.
+This prompted the idea of a prokaryotic network of life (as opposed to a tree), with edges indicating both vertical and horizontal transfers of genetic material \citep{netoflife}.
+Edges can now connect closely or distantly related \ac{otu}s if \ac{hgt} has occurred between them.
+\subsection{Detection}
+While understanding that \ac{hgt} is important to bacterial evolution and networks provide a useful theoretic framework to study it, constructing such networks is not trivial.
+Previously researches have used methods based on gene composition (GC content, codon usage, di/tri-nucleotide frequency) to detect transferred genes.
+These methods are often inadequate as there are several reasons why gene composition may differ in one region vs the rest of the genome that are not related to transfer.
+Further they often cannot discriminate \ac{MGE}s which may be fasely annotated as transfers.
+Phylogenetic methods, which rely on recognizing discordance between gene trees and species trees, are currently considered the best for inferring \ac{hgt} events.
+If a gene tree is found to have a significantly different topology from a species tree, this difference may be the result of an \ac{hgt} event \citep{hgterr}.
+Generally phylogenetic methods are preferred for multiple reasons:
+\begin{itemize}
+    \item Can make use of multiple genomes at once \citep{ihgt}
+    \item Require explicit evolutionary models, which come with their own framework for hypothesis testing and model selection \citep{ihgt}.
+    \item \ac{hgt} events identified by parametric methods are often found by phylogenetic methods as well \citep{ihgt}.
+    \item In recent years, the requirements of computing power and  multiple well sequenced genomes for phylogenetic methods have become easier and easier to meet \citep{ihgt}.
+\end{itemize}
+While detecting \ac{hgt} events with high degrees of certainty is still difficult, much progress has been made in recent years,especially using phylogenetic methods \citep{ihgt}.
+Events that may lead to false diagnosis of \ac{hgt} are: incomplete lineage sorting, gene duplication followed by loss in one of the descendant lineages or homologous recombination \citep{ihgt,hgterr}.
+
+\subsection{How Does CRISPR Affect HGT?}
+\subsubsection{Interference Mechanisms}
+\ac{crspc} systems have also been found to interfere with transformation-mediated \ac{hgt}, by degrading foreign DNA taken up by a cell \citep{climtrans}.
+They have been shown to interfere with conjugation by targeting genes on conjugative plasmid \citep{staphlim}.
+They have also been shown to interfere with transduction by creating immunity to phage infection \citep{staphlim}.
+Thus it been hypothesized that lower rates of \ac{hgt} will be observed in bacterial strains with \ac{crspc} systems than without \citep{staphlim}.
+\subsubsection{Complexities And Costs Of CRISPR-Cas Systems}
+Since antibiotic resistance genes are often transferred on plasmids maintaining a \ac{crspc} systems can present a large opportunity cost, especially in environments like hospitals or trees \citep{hospital}.
+\ac{crspc} systems incur a metabolic cost, as \ac{cas} proteins, guide RNAs and  spacer acquisition proteins must all be expressed consistently\citep{crispgen}.
+Much like the human immune system, \ac{crspc} systems can have off-target effects, sometimes affecting \ac{hgt} \citep{acqorres}.
+While resisting lytic phage infection clearly provides some fitness benefit, \ac{crspc} has also been shown to help resist prophages which can provide super-infection immunity or reduce competitor populations \citep{acqorres,transhgt}.
+It has also been shown that spacers targeting a bacterium's own DNA can be acquired, leading to an auto-immune response \citep{selfcrisp}.
+As \ac{crspc} systems prevent phage infection, mechanisms, denoted as anti-\ac{crsp}s, have evolved in certain phages making them immune to \ac{crsp} \citep{acqorres}.
+This has a two-fold effect, as it can increase the susceptibility of the host to infection reducing the fitness benefit of \ac{crsp}, but it can also increase transduction-mediated \ac{hgt} \citep{acqorres}.
+\subsubsection{Balancing the Cost of \ac{crsp} and \ac{hgt}}
+Due to the myriad of fitness costs associated with consistently expressing \ac{crspc} systems, bacteria have appeared to develop strategies to mitigate these costs.
+It has been posited that \ac{crspc} systems need only be present in some proportion of a population as they can be horizontally transferred themselves between members\citep{crisprlgt}.
+This allows populations to maintain phage immunity while isolating the metabolic cost to only a few organisms \citep{acqorres}.
+It should also be noted that \ac{crspc} genes are not necessarily constitutively transcribed, potentially allowing bacteria to tune their \ac{crspc} to suit their selective pressures \citep{acqorres}.
+The presence of \ac{crspc} systems have also been shown to actually enhance \ac{hgt} at a population level via transduction by reducing total phage abundance \citep{transhgt}.\par
+A bioinformatic analysis has shown increased levels of gene insertion and deletion as in Firmicutes with \ac{crspc} systems compared to closely related outgroups without \citep{athena}.
+The effects of \ac{crspc} systems on \ac{hgt} rates are highly complex, owning in no small part to the broad range of these effects, how \ac{crsp} activity can be modulated and the transfer of \ac{crsp} systems within a population \citep{acqorres}.
+Taking a systematic approach may help elucidate the dynamics between \ac{crsp} system presence and \ac{hgt} rate.
+

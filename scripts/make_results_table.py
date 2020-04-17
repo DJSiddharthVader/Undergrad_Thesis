@@ -12,6 +12,57 @@ marko_filename = 'markophylo_results.txt'
 marko_file_errors = ['[1] "plotting tree"','"Error']
 report_filename = 'markophylo_results.txt'
 
+#Output Description
+"""
+For each statistic there are 6 values returned
+- the mean of the statistic of all CRISPR taxa in the genus across all bootstraps
+- the std. error of the statistic of all CRISPR taxa in the genus across all bootstraps
+- the mean of the statistic of all Non-CRISPR taxa in the genus across all bootstraps
+- the std. error of the statistic of all Non-CRISPR taxa in the genus across all bootstraps
+- the U statistic from the Mann-Whiteney U test between the CRISPR and Non-CRISPR values
+-  the p-value from the Mann-Whiteney U test between the CRISPR and Non-CRISPR values
+*Note: For statistics on the entire network (modularity, assortativity) only the mean
+       and std. error are computed as there is no comparison to be made
+A list of the statistics and descriptions (nx = networkx function, partitions are CRISPR/Non-CRISPR)
+## Indel Rate
+- gene insertion/deletion rates for a partition of nodes in a species tree
+- partitons are CRISPR, Non-CRISPR and internal (non-leaf nodes in the tree, unused, avoids confounding results)
+- calculated using markophylo R package using a 16S tree as the species tree and a gene P/A matrix
+## Degree
+- degree is the sum of all connected edge weights of a single node
+- mean of degree of all nodes in a partition across all bootstraps
+- degree includes connections between CRISPR and Non-CRISPR nodes
+- calculated using the nx.degree function applied to the entire network
+## Mean Edge Weight
+ - compute the mean edge weight for a partition of nodes across all boostraps
+ - calculated using the nx.degree fuction applied to CRISPR/Non-CRISPR subgraphs
+## Weighted Clustering Coefficient
+ - clustering coefficient of a node is weighted fraction of all triangles that node could exist in
+ - take the mean of the WCC of all nodes in a partition across all bootstraps
+ - intended to measure how tightly connected nodes (how much/how exclusive) are to each other
+ - calculated using the nx.clustering fuction applied to each node
+ - [link](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.cluster.clustering.html#networkx.algorithms.cluster.clustering)
+## Closeness Vitality
+ - the sum of the change in distance between all nodes if a given node is excluded
+ - how much does a taxa contribute to transfer across the network (kinda loose)
+ - calculated using nx.closeness_vitality for each node
+ - [link](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.vitality.closeness_vitality.html)
+## Eigenvector Centrality
+ - a weighted version of degree centraility where the weight of each node is it's degree centrality
+ - are there "hub" taxa? or sets of highly connected taxa? or is it relatively  even
+ - calculated using nx.eigenvector_centrality_numpy for each node
+ - [link](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.eigenvector_centrality_numpy.html#networkx.algorithms.centrality.eigenvector_centrality_numpy)
+## Modularity
+ - given 2 edge partitions, the relative density of edges within a partition to those outside of it
+ - are CRISPR and Non-CRISPR taxa distinct "communities" based on their edges? or does trasnfer occur between all taxa (mixing)?
+ - calculated using my implementation of modularity, based on [this definition](https://en.wikipedia.org/wiki/Louvain_modularity)
+## Assortativity
+ - "Assortativity measures the similarity of connections in the graph with respect to the given attribute."
+ - are the connections made by 2 CRISPR/Non-CRISPR nodes different?
+ - calculated using nx.attribute_assortativity_coefficient for each node
+ - [link](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.assortativity.attribute_assortativity_coefficient.html#networkx.algorithms.assortativity.attribute_assortativity_coefficient)
+"""
+
 def hasRate(lines,cat):
     boollist = [True if cat in l else False for l in lines ]
     return reduce(lambda x,y: x or y, boollist)
@@ -87,6 +138,7 @@ def main(basedir,marko_outpath,report_outpath,smode):
     combined_df = marko_df.merge(report_df,how='outer',on='genus')
     combined_df.to_csv('all_{}_results.csv'.format(smode),index=False)
     return None
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

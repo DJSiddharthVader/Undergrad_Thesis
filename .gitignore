@@ -1,10 +1,12 @@
-Cas-Finder_macsyfinder/
 athena/genomedata/
 apps/
 data/
-genus_filepaths/
-testing/
-.ipynb_checkpoints/*
+depreciated/
+inference_programs/
+scripts/.ipynb_checkpoints/
+notebooks/.Rhistory
+.ipynb_checkpoints/
+.Rhistory
 *.pyc
 #tex files
 *.run.xml
@@ -20,13 +22,3 @@ testing/
 *.gbff
 *.faa
 *.fna
-cpHiDe/
-hide_program/
-hide_source/
-Pseudoalteromonas/
-json_reports/
-marko_reports/
-plotnets/
-dehalococcoides_test_network.html
-ehrlichia_test_network.html
- inference_programs/

@@ -55,6 +55,7 @@ def getNodeStatus(df,node):
         status = df[df['sink'] == node]['isCRISPR_sink'].iloc[0]
     return status
 
+
 #Data IO
 def loaddf(path,andf,filterInternal=True):
     #load the edgelists produced by HiDe and filter out the edges connecting at least 1 internal (non-leaf) node
@@ -99,6 +100,7 @@ def loadAllNetworks(cdir,processes,genus):
     nets = [net for net in nets if isinstance(net,pd.core.frame.DataFrame)]
     return nets
 
+
 #Stats
 def computeEdgeSEs(netlist):
     #for a list of networks compute the average weight and sd. err. for each edge (pair of nodes)
@@ -140,6 +142,8 @@ def computeDensity(net):
     n = nx.number_of_nodes(net)*(nx.number_of_nodes(net)-1) #number of possible edges (i.e max possible total edge weight)
     return m/n
 
+
+#Make Report
 def computeStat(network,statfnc,fmt):
     cnodes = list(set([x for x,y in network.nodes(data=True) if y['isCRISPR']=='crispr']))
     ncnodes = list(set([x for x,y in network.nodes(data=True) if y['isCRISPR']=='non-crispr']))
@@ -218,17 +222,18 @@ def makeReport(netlist,genus,processes):
     #Create a dictionary of statistics for the set of networks
     report = {'genus':genus}
     report['degree'] = diffStats_total(netlist,nx.degree,'edict',processes)
-    report['clustering'] = diffStats_total(netlist,nx.clustering,'list',processes)
     report['mean_edge_weight'] = diffStats_total(netlist,nx.degree,'subgraph',processes)
-    if genus in toolonggenera:
-        report['closeness_vitaltiy'] = {'crispr_mean':'takes_too_long', 'crispr_sem':'takes_too_long', 'non-crispr_mean':'takes_too_long', 'non-crispr_sem':'takes_too_long', 'mw_stat':'takes_too_long', 'mw_pval':'takes_too_long'}
-    else:
-        report['closeness_vitaltiy'] = diffStats_total(netlist,nx.closeness_vitality,'ndict',processes)
+    report['clustering'] = diffStats_total(netlist,nx.clustering,'list',processes)
     report['centrality'] = diffStats_total(netlist,nx.eigenvector_centrality_numpy,'ndict',processes)
     report['assortativity'] = [nx.attribute_assortativity_coefficient(net,'isCRISPR') \
                                for net in tqdm(netlist,desc='assortativity')]
     report['modularity'] = [modularity(net) for net in tqdm(netlist,desc='modularity')]
+    if genus in toolonggenera:
+        report['closeness_vitaltiy'] = {'crispr_mean':'takes_too_long', 'crispr_sem':'takes_too_long', 'non-crispr_mean':'takes_too_long', 'non-crispr_sem':'takes_too_long', 'mw_stat':'takes_too_long', 'mw_pval':'takes_too_long'}
+    else:
+        report['closeness_vitaltiy'] = diffStats_total(netlist,nx.closeness_vitality,'ndict',processes)
     return basenet,report
+
 
 def main(genusdir,sttype,processes):
     genus = os.path.basename(genusdir)
@@ -265,167 +270,4 @@ if __name__ == '__main__':
         sys.exit()
     main(genusdir,sttype,processes)
 
-
-#DEPRECIARED
-#def avgEdgeWeight(netlist):
-#    alledges = pd.concat(netlist)
-#    cweights = alledges[(alledges['isCRISPR_source'] == 'crispr') | (alledges['isCRISPR_sink'] == 'crispr')]['weight']
-#    ncweights = alledges[~((alledges['isCRISPR_source'] == 'crispr') | (alledges['isCRISPR_sink'] == 'crispr' ))]['weight']
-#    cmean = np.mean(cweights)
-#    cse = sst.sem(cweights)
-#    ncmean = np.mean(ncweights)
-#    ncse = sst.sem(ncweights)
-#    ustat = sst.mannwhitneyu(cweights,ncweights,alternative='two-sided')
-#    return {'crispr_mean_edge_weight':cmean,
-#            'non_crispr_mean_edge_weight':ncmean,
-#            'crispr_std_err':cse,
-#            'non_crispr_std_err':ncse,
-#            'mann_whitney_u_stat':ustat.statistic,
-#            'mann_whitney_u_pvalue':ustat.pvalue}
-#def modularity(df):
-#    m = sum(df['weight']) #total edge weight
-#    delta = lambda u,v: 1 if u == v else 0
-#    tipnodes = getTipNodeList(df)
-#    q = 0
-#    for (u,v) in combinations(tipnodes,2):
-#        ave = getEdgeWeight(df,u,v) - getNodeDeg(df,u)*getNodeDeg(df,v)/(2*m)
-#        d = delta(getNodeStatus(df,u),getNodeStatus(df,u))
-#        q += ave*d
-#    return q/(2*m)
-#def getTipNodeList(df):
-#    sourcetips = df[df['isCRISPR_source'] != 'internal']['source']
-#    sinktips = df[df['isCRISPR_sink'] != 'internal']['sink']
-#    tipnodes = list(set(sourcetips).union(set(sinktips)))
-#    return tipnodes
-#def edgesByStatus(df,status):
-#    return df[(df['isCRISPR_source'] == status) | (df['isCRISPR_sink'] == status)]
-#def computeEdgeSEs(netlist):
-#    semlist = {}
-#    union = lambda x,y: set(x).union(set(y))
-#    edgeset = list(reduce(union,[nx.edges(net) for net in netlist]))
-#    allnodes = list(reduce(union,[nx.nodes(net) for net in netlist]))
-#    for edge in list(edgeset):
-#        u,v = edge
-#        weightlist = []
-#        for n in netlist:
-#            try:
-#                weightlist.append(n[u][v]['weight'])
-#            except KeyError:
-#                pass
-#        semlist.update({tuple([u,v]):{'mean_weight':np.mean(weightlist),'sem_weight':sst.sem(weightlist)}})
-#    return semlist
-#def getNodeDf(df,nodename):
-#    return df[(df['source'] == nodename) | (df['sink'] == nodename)]
-#def getNodeDeg(df,nodename):
-#    return sum(getNodeDf(df,nodename)['weight'])
-#def getEdgeDf(dfconcat,u,v):
-#    forward = df[(df['source'] == u) & (df['sink'] == v)]
-#    reverse = df[(df['source'] == v) & (df['sink'] == u)]
-#    return pd.concat([forward,reverse])
-#def getEdgeWeight(df,u,v):
-#    edge = df[(df['source'] == u) & (df['sink'] == v)]
-#    if not edge.empty:
-#        return edge['weight'].values[0]
-#    else:
-#        return 0
-#def avgEdgeWeight(df):
-#    return sum(df['weight'])/df.size[0]
-#def modularity(net):
-#    m = sum(dict(nx.number_of_edges(net,weight='weight')))
-#    delta = lambda u,v: 1 if u == v else 0
-#    q = 0
-#    for u,v,data in net.edges(data=True):
-#        ave = data['weight'] - nx.degree(net,u,weight='weight')*nx.degree(net,u,weight='weight')
-#        d = delta(data['isCRISPR_source'],data['isCRISPR_sink'])
-#        q += ave*d
-#    return q/(m)
-#def loadAllNetworks(cdir,processes,cdfpath=crisprdfpath):
-#    #load all the HiDe edgelists and convert them to network x objects and return the list of networks
-#    #andf = pd.DataFrame(json.load(open(cdfpath)))
-#    andf = pd.read_csv(cdfpath,sep='\t')
-#    pool = ThreadPool(processes)
-#    ldf = partial(loaddf,andf=andf,filterInternal=True)
-#    files = [os.path.join(cdir,csv) for csv in os.listdir(cdir)]
-#    dfs = list(tqdm(pool.imap(ldf,files),total=len(files),desc='loading HiDes...'))
-#    nets = [dfToNetwork(df) for df in dfs]
-#    return nets
-#def modularity(net):
-#    q = 0
-#    m = sum(dict(nx.degree(net,weight='weight')).values())
-#    delta = lambda u,v: 1 if u == v else 0
-#    for u,v,data in net.edges(data=True):
-#        ave = data['weight'] - nx.degree(net,u,weight='weight')*nx.degree(net,v,weight='weight')/m
-#        d = delta(data['isCRISPR_source'],data['isCRISPR_sink'])
-#        q += ave*d
-#    return q/m
-#def diffStats_perBS(netlist,netstat,fmt=False):
-#    statlist = defaultdict(list)
-#    for net in tqdm(netlist):
-#        cnodes = [x for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']
-#        ncnodes = [x for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']
-#        if fmt == 'dict':
-#            cstats = list(dict(netstat(net,cnodes,weight='weight')).values())
-#            ncstats = list(dict(netstat(net,ncnodes,weight='weight')).values())
-#        elif fmt == 'list':
-#            alls = netstat(net,weight='weight')
-#            cstats = [alls[x] for x in cnodes]
-#            ncstats = [alls[x] for x in ncnodes]
-#        elif fmt == 'subgraph':
-#            cnet = nx.edges(net,nbunch=cnodes)
-#            cstats.append(cnet.size(weight='weight')/cnet.number_of_edges())
-#            ncnet = nx.edges(net,nbunch=ncnodes)
-#            cstats.append(ncnet.size(weight='weight')/ncnet.number_of_edges())
-#        else:
-#            raise ValueError('invalid calculation')
-#    mwu = sst.mannwhitneyu(cstats,ncstats)
-#    return {'crispr_mean':np.mean(cstats)
-#            'crispr_sem':sst.sem(cstats)
-#            'non-crispr_mean':np.mean(ncstats)
-#            'non-crispr_sem':sst.sem(ncstats)
-#            'mw_stat':mwu.statistic
-#            'mw_pval':mwu.pvalue
-#           }
-#def diffStats_total(netlist,netstat,fmt='edict'):
-#    #here netstat is a function (mostly from the networkx package) that will return a statistic (single value, list, dict) given a single network
-#    #Then seperate the calculated statistics into only the crispr and non-crispr nodes
-#    #finally reutrn the list of statistics
-#    #   - the crispr mean and SE
-#    #   - the noncrispr mean,SE and
-#    #   - the Mann-Whitney U stat,pval testing if the the crispr and non-crisprs lists are different
-#    cstats,ncstats = [],[]
-#    for net in tqdm(netlist):
-#        cnodes = list(set([x for x,y in net.nodes(data=True) if y['isCRISPR']=='crispr']))
-#        ncnodes = list(set([x for x,y in net.nodes(data=True) if y['isCRISPR']=='non-crispr']))
-#        if fmt == 'edict':
-#            cstats.extend(list(dict(netstat(net,cnodes,weight='weight')).values()))
-#            ncstats.extend(list(dict(netstat(net,ncnodes,weight='weight')).values()))
-#        elif fmt == 'ndict':
-#            stats =  dict(netstat(net,weight='weight'))
-#            cstats.extend(list({k:v for k,v in stats.items() if k in cnodes}.values()))
-#            ncstats.extend(list({k:v for k,v in stats.items() if k in ncnodes}.values()))
-#        elif fmt == 'list':
-#            alls = netstat(net,weight='weight') #a statistic for each node in the network
-#            cstats.extend([alls[x] for x in cnodes])
-#            ncstats.extend([alls[x] for x in ncnodes])
-#        elif fmt == 'subgraph':
-#            cnet = nx.subgraph(net,nbunch=cnodes)   #take the subgraph of only crispr nodes
-#            ncnet = nx.subgraph(net,nbunch=ncnodes) #take the subgraph of only non-crispr nodes
-#            try:
-#                cstats.append(cnet.size(weight='weight')/cnet.number_of_edges())
-#            except ZeroDivisionError:
-#                cstats.append(0) #only reached if no crispr nodes in the network
-#            try:
-#                ncstats.append(ncnet.size(weight='weight')/ncnet.number_of_edges())
-#            except ZeroDivisionError:
-#                ncstats.append(0) #only reached if no non-crispr nodes in the network
-#        else:
-#            raise ValueError('invalid calculation')
-#    mwu = sst.mannwhitneyu(cstats,ncstats)
-#    return {'crispr_mean':np.mean(cstats),
-#            'crispr_sem':sst.sem(cstats),
-#            'non-crispr_mean':np.mean(ncstats),
-#            'non-crispr_sem':sst.sem(ncstats),
-#            'mw_stat':mwu.statistic,
-#            'mw_pval':mwu.pvalue
-#           }
 

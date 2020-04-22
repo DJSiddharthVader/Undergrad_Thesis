@@ -1,6 +1,7 @@
 \section{Results}
 \textbf{Note}: The term indel refers to gene insertion/deletion events.
 It is impossible to tell between two \ac{otu}s if a gene was deleted from one or inserted in the other, leading to an ambiguity.
+Also a \ac{crsp} \ac{otu} is an \ac{otu} that I annotated as having a \ac{crsp} system as described in the methods section.
 %Example Network
 %Fig
 \FloatBarrier
@@ -22,103 +23,67 @@ Further both \ac{crsp} and non-\ac{crsp} nodes both show distributions of strong
 Also the standard error of each edge appears proportional to it's weight.
 This is likely due to the sampling, as if more genes were transferred along an edge, the more likely some of those genes were left out of any individual bootstrap sample, as the size of each bootstrap sample was $\frac{50}{376}$ of the total number of gene trees.
 
-%Mean Node Degree Bar Graph
+%Genus Degree and Edge Weight Distributions
 %Fig
 \FloatBarrier
 \begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{c_nc_deg_bar.png}}
-    \caption{Mean node degree for either all \ac{crsp} or Non-\ac{crsp} nodes across all 1000 bootstrap replicates for each genus. There were 30 genera used.}
-    \label{db}
-\end{figure}
-\FloatBarrier
-
-%Indel Rate Bar Graph
-%Fig
-\FloatBarrier
-\begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{c_nc_indel_bar.png}}
-    \caption{Markopholo estimate of gene indel rates for the partitions of \ac{crsp} and Non-\ac{crsp} \ac{otu}s for each genus. Rate is indel events per base pair substitution. There were 140 genera used.}
-    \label{ib}
+    \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{status_vs_degree_weight.png}}
+    \caption{\textbf{A)} Distribution of the degree of all nodes with/without a \ac{crsp} system. This includes the mean across all nodes in all 1000 replicates for each genus.
+             \textbf{B)}  Distribution of the edge weight of all edges connected to a node with/without a \ac{crsp} system. This includes the mean across all edges in all 1000 replicates for each genus.}
+    \label{degplot}
 \end{figure}
 \FloatBarrier
 %Desc
-The mean node degree is much more similar between the \ac{crsp} and non-\ac{crsp} than the indel rate estimates (figures \ref{db},\ref{ib}).
-Both show significant variability for the non-\ac{crsp} nodes across genera, but the indel rates estimates for the \ac{crsp} nodes are much less variable and generally smaller by comparison.
-Despite this there are clear exceptions where the indel rate is estimated to be much larger for \ac{crsp} \ac{otu}s than non-\ac{crsp} \ac{otu}s, specifically of Rhizobium, Acetobacter, Pediococcus and Moraxella.
+What is immediately clear from Figure \ref{degplot} is that the node degrees are much more similar than the mean edge weights for the \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+This is also supported by preforming a Wilcoxon Rank Sign test comparing the \ac{crsp} and non-\ac{crsp} means.
+For the mean node degree the Wilcoxon p value is 0.07412 (n=197 genera).
+For the mean edge weight the Wilcoxon p value is 0.001981 (n=197 genera).
+So there appears to be a significant difference between the mean edge weight for all edges but not for the degree.
+
 
 %CRISPR Indel vs. Non-CRISPR Indel Scatter Plot
 %Fig
 \FloatBarrier
 \begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{c_nc_rate_scatter.png}}
-    \caption{Markopholo estimate of gene indel rates for the partitions of \ac{crsp} and Non-\ac{crsp} \ac{otu}s for each genus. Rate is indel events per base pair substitution. Each point represents a genus. There were 140 genera used.}
+    \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{cindel_vs_ncindel.png}}
+    \caption{Markopholo estimate of gene insertion/deletion rates for the partitions of \ac{crsp} and Non-\ac{crsp} \ac{otu}s for each genus. The Rate is the number of indel events per base pair substitution. Each point represents a genus. There are 128 genera shown.}
     \label{is}
 \end{figure}
 \FloatBarrier
 %Desc
-Figure \ref{is} further demonstrates these points, that \ac{crsp} indel rates are smaller and less varied that the and non-\ac{crsp}.
-This difference is quantified by the Wilcoxon signed rank test statistic of $191,0$ and a corresponding p-value $0.02596$.
+Figure \ref{is} shows the estimated gene indel rates for the \ac{crsp} and non-\ac{crsp} branch partitions for 128 genera.
+The Wilcoxon signed rank test gives a p-value of $0.594$, pointing to a lack of a significant difference in indel rates for \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+This is despite the fact that the slope of this fitted trend line is only 0.39464, but this may be because the trend line is influenced by specific outliers.
 
-
-%CRISPR Fraction vs. Indel Rate Scatter Plot
-%Fig
+%CRISPR Fraction vs. Indel Rate Scatter Plot %Fig
 \FloatBarrier
 \begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{cfrac_cncRateDiff_scattter.png}}
-    \caption{Markopholo estimate of gene indel rates for the partitions of \ac{crsp} and Non-\ac{crsp} \ac{otu}s for each genus against the fraction of all \ac{otu}s in that genus that are annotated as having a \ac{crsp} system. $R^2$ values are for linear regression lines fit to the \ac{crsp} and non-\ac{crsp} estimates. Rate is indel events per base pair substitution. Each point represents a genus. There were 140 genera used.}
+    \makebox[\textwidth][c]{\includegraphics[width=1\linewidth]{fraction_vs_indel.png}}
+    \caption{Markopholo estimate of gene indel rates for the partitions of \ac{crsp} and non-\ac{crsp} \ac{otu}s for each genus against the fraction of all \ac{otu}s in that genus that are annotated as having a \ac{crsp} system. (n=311)}
     \label{cfrd}
 \end{figure}
 \FloatBarrier
 %Desc
-Figure \ref{cfrd} show that as the fraction of all \ac{otu}s in a genus with a \ac{crsp} system increases, the gene indel rates appear to decrease for non-\ac{crsp} \ac{otu}s remains mostly stagnant for \ac{crsp} \ac{otu}s.
-The $R^2$ values in Figure \ref{cfrd} are fairly small, implying a poor fit of a linear relationship to the data, but the p-values are significant, implying that some relationship does exist.
+Figure \ref{cfrd} show that the fraction of all \ac{otu}s in a genus with a \ac{crsp} system appears to be independent of the gene indel rate.
+Neither the \ac{crsp} or non-\ac{crsp} show a relationship with \ac{crsp} fraction, having regression line slope and p values of 6.099065e-06, 0.9956342 and -0.0003156696, 0.7553688 respectively.
 
-%Mean Clustering Coefficient CRISPR vs. Non-CRISPR Scatter Plot
+
+%Modularity and Assortativity Distributions
 %Fig
 \FloatBarrier
 \begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{c_nc_clust_scatter.png}}
-    \caption{Mean over 1000 bootstraps of the clutering coefficients of the \ac{crsp} \ac{otu}s for each genus against the non-\ac{crsp} means over the 1000 bootstraps. $R^2$ value is for the linear regression fit to the \ac{crsp} and non-\ac{crsp} estimates. There were 140 genera used.}
-    \label{ccnc}
+    \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{assort_and_mod.png}}
+    \caption{\textbf{A)} Mean network modularity over 1000 bootstrap replicates for each genus against the fraction of all \ac{otu}s in that genera with a \ac{crsp} system  (n=197).
+    \textbf{B)}  Distribution of network assortativity by \ac{crsp} status (either \ac{crsp} or non-\ac{crsp}) over 1000 bootstrap replicates for each genus against the fraction of all \ac{otu}s in that genera with a \ac{crsp} system  (n=157).}
+    \label{asso_mod}
 \end{figure}
 \FloatBarrier
 %Desc
-Figure \ref{ccnc} show the mean clustering coefficient over 1000 bootstraps for each genus for all \ac{crsp} and non-\ac{crsp} \ac{otu}s.
-There appears to be a clear linear relationship between the mean clustering coefficients of \ac{crsp} and non-\ac{crsp} \ac{otu}s.
-Clustering is also generally small in magnitude, with most of the data in the range of $0.0$ to $0.2$ (the maximum value is $1.0$).
-
-%Genus Modularity Violin Plot
-%Fig
-\FloatBarrier
-\begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{mod_violin.png}}
-    \caption{Distribution of network modularity over 1000 bootstrap repliactes for each genus. Plot is of the kernel density estimated from the observed values, with witdh proportional to the number of data points. Lines inside each distribution represent quartiles.}
-    \label{mod}
-\end{figure}
-\FloatBarrier
-%Desc
-Figure \ref{mod} shows that the distribution of network modularity is centered near $0$ for most networks, implying a lack of modularity between \ac{crsp} and non-\ac{crsp} \ac{otu}s.
-However the variability in the shape of each distribution, ranging from very narrow to very wide, with some being bimodal, should be noted.
-
-%Genus Assortativity Violin Plot
-%Fig
-\FloatBarrier
-\begin{figure}[htb!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{asst_violin.png}}
-    \caption{Distribution of network assortativity by \ac{crsp} status (either \ac{crsp} or non-\ac{crsp}) over 1000 bootstrap repliactes for each genus. Plot is of the kernel density estimated from the observed values, with witdh proportional to the number of data points. Lines inside each distribution represent quartiles.}
-    \label{asst}
-\end{figure}
-\FloatBarrier
-%Desc
-Figure \ref{asst} shows that the distribution of network assortativity is centered near $-0.05$ for most networks, implying a lack of assortativity between \ac{crsp} and non-\ac{crsp} \ac{otu}s.
-The variability in the shape of each distribution is much more pronounced than with modularity, with many distributions having several undulations or very sharp contrasts between different peaks or completely smooth and centered around the mean.
-This variability may be due to the variation in the fraction of \ac{otu}s with a \ac{crsp} system.
-Some genera may only have one or two \ac{otu}s with a \ac{crsp} system, thus limiting the range of values that assortativity can take on, due to how it is defined.
+Figure \ref{asso_mod} \textbf{A)} shows that the network modularity is centered near $0$ for most networks, implying that \ac{crsp} and non-\ac{crsp} \ac{otu}s do not form distinct communities.
+There does appear to be some relationship between \ac{crsp} fraction and modularity, where the closer the \ac{crsp} fraction is to 0.5 the lower the modularity is.
+This mkes intuitive sense, as if more members of the network share an attribute, the more terms are included in the sum in the definition of modularity.
+Figure \ref{asso_mod} \textbf{B)} shows distribution of network assortativity is centered near $0.10$ for most networks, implying non-assortative mixing between \ac{crsp} and non-\ac{crsp} \ac{otu}s.
+Assortativity is usually defined in terms of a node's degree but here node similarity is defined as whether 2 nodes are both \ac{crsp} or both non-\ac{crsp}.
+This wold suggest that there is no clear separation in how \ac{crsp} and non-\ac{crsp} \ac{otu}s edges are organized in a network, with some specific exceptions.
 
 
-%%pairplot
-%\FloatBarrier
-%\begin{figure}[htb!]
-%    \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{pairplot.png}}
-%\end{figure}
-%\FloatBarrier

@@ -200,16 +200,16 @@ def diffStats_total(netlist,statfnc,fmt,processes):
         mwu = sst.mannwhitneyu(cstats,ncstats)
         return {'crispr_mean':np.mean(cstats),
                 'crispr_sem':sst.sem(cstats),
-                'non-crispr_mean':np.mean(ncstats),
-                'non-crispr_sem':sst.sem(ncstats),
+                'non.crispr_mean':np.mean(ncstats),
+                'non.crispr_sem':sst.sem(ncstats),
                 'mw_stat':mwu.statistic,
                 'mw_pval':mwu.pvalue
                }
     except ValueError: #All numbers are identical in mannwhitneyu
         return {'crispr_mean':np.mean(cstats),
                 'crispr_sem':sst.sem(cstats),
-                'non-crispr_mean':np.mean(ncstats),
-                'non-crispr_sem':sst.sem(ncstats),
+                'non.crispr_mean':np.mean(ncstats),
+                'non.crispr_sem':sst.sem(ncstats),
                 'mw_stat':-1,
                 'mw_pval':-1
                }
@@ -229,7 +229,7 @@ def makeReport(netlist,genus,processes):
                                for net in tqdm(netlist,desc='assortativity')]
     report['modularity'] = [modularity(net) for net in tqdm(netlist,desc='modularity')]
     if genus in toolonggenera:
-        report['closeness_vitaltiy'] = {'crispr_mean':'takes_too_long', 'crispr_sem':'takes_too_long', 'non-crispr_mean':'takes_too_long', 'non-crispr_sem':'takes_too_long', 'mw_stat':'takes_too_long', 'mw_pval':'takes_too_long'}
+        report['closeness_vitaltiy'] = {'crispr_mean':-1, 'crispr_sem':-1, 'non-crispr_mean':-1, 'non-crispr_sem':-1, 'mw_stat':-1, 'mw_pval':-1}
     else:
         report['closeness_vitaltiy'] = diffStats_total(netlist,nx.closeness_vitality,'ndict',processes)
     return basenet,report

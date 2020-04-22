@@ -63,6 +63,7 @@ A list of the statistics and descriptions (nx = networkx function, partitions ar
  - [link](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.assortativity.attribute_assortativity_coefficient.html#networkx.algorithms.assortativity.attribute_assortativity_coefficient)
 """
 
+
 def hasRate(lines,cat):
     boollist = [True if cat in l else False for l in lines ]
     return reduce(lambda x,y: x or y, boollist)
@@ -98,12 +99,12 @@ def parseMarko(basedir,genus):
     crate,ncrate,intrate = getRates(lines,'$rates',has_c,has_nc)
     csem,ncsem,intsem = getRates(lines,'$se$rates',has_c,has_nc)
     return {'genus':genus,
-            'crispr_indel_rate':crate,
-            'non-crispr_indel_rate':ncrate,
-            'internal_indel_rate':intrate,
-            'crispr_indel_sem':csem,
-            'non-crispr_indel_sem':ncsem,
-            'internal_indel_sem':intsem}
+            'indel_rate.crispr_rate':crate,
+            'indel_rate.non.crispr_rate':ncrate,
+            'indel_rate.internal_rate':intrate,
+            'indel_rate.crispr_sem':csem,
+            'indel_rate.non.crispr_sem':ncsem,
+            'indel_rate.internal_sem':intsem}
 
 def makeMarkoDF(basedir,inputs):
     marko_data=[parseMarko(basedir,genus) for genus in tqdm(inputs)]
@@ -159,41 +160,4 @@ if __name__ == '__main__':
         report_outpath = 'all_{}_report_results.csv'.format(smode)
     print(basedir,marko_outpath,smode,report_outpath)
     main(basedir,marko_outpath,report_outpath,smode)
-
-#DEPRECIATED
-##rates
-#ratelist = lines[lines.index('$rates')+4].split(' ')[1:]
-#ratelist = [x for x in ratelist if x != '']
-#rates = [float(x) for x in ratelist]
-#if len(rates) != 3:
-#    none = [0]
-#    none.extend(rates)
-#    rates = none
-#crate,ncrate,intrate = rates
-#try:
-#    #std errs
-#    semlist = lines[lines.index('$se$rates')+4].split(' ')[1:]
-#    semlist = [x for x in semlist if x != '']
-#    if len(semlist) != 3:
-#        none = [0]
-#        none.extend(semlist)
-#        semlist = none
-#    csem,ncsem,intsem = semlist
-#    return {'genus':genus,
-#            'crispr_indel_rate':crate,
-#            'non-crispr_indel_rate':ncrate,
-#            'internal_indel_rate':intrate,
-#            'crispr_indel_sem':csem,
-#            'non-crispr_indel_sem':ncsem,
-#            'internal_indel_sem':ncsem}
-#except ValueError:
-#    return {'genus':genus,
-#            'crispr_indel_rate':crate,
-#            'non-crispr_indel_rate':ncrate,
-#            'internal_indel_rate':intrate}
-#def mainSingle(basedir,outpath):
-#    genus = os.path.basename(basedir)
-#    inpath = os.path.join(basedir,'markophylo_results.txt')
-#    outdata = parse2(inpath,genus)
-#    json.dump(outdata,open(outpath,'w'))
 

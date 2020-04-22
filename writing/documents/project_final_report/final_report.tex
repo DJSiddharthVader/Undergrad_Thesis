@@ -1,0 +1,136 @@
+%Preamble
+\documentclass[12pt,letter]{article}
+\usepackage[utf8]{inputenc}
+%Layout/Spacing
+\usepackage[left=0.7in,right=0.7in,top=1in,bottom=1in]{geometry} %sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{authblk} %allows multiple athors and affiliations
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\graphicspath{{../../nontext/figures/}{../../nontext/images/}}
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,shapes.misc}%flow chart
+\usepackage{tikz-network}
+\usepackage{hyperref}
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%Referenes
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{../../refs.bib}
+%Misc
+\usepackage{amsmath} %for math command
+\usepackage{listings} %for code styling
+\lstdefinestyle{rs}{
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    frame=L,
+    xleftmargin=\parindent,
+    language=R,
+    showstringspaces=false,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{purple!40!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{orange},
+}
+
+%Abbreviations
+\usepackage{acro}
+%CRISPR-Cas
+\DeclareAcronym{crspc}{
+    short = CRISPR-Cas,
+    long  = CRISPR associated
+}
+%cas
+\DeclareAcronym{cas}{
+    short = Cas,
+    long  = CRISPR-associated
+}
+%crispr
+\DeclareAcronym{crsp}{
+    short = CRISPR,
+    long  = Clustered Regularly Interspaced Short Palindromic Repeat
+}
+%ctmc-fss
+\DeclareAcronym{mc}{
+    short = CTMC-FFS,
+    long  = Continuous-time Markov chain with finite state space
+}
+%s areus
+\DeclareAcronym{sau}{
+    short = \textit{S. aureus},
+    long  = \textit{Staphylococcus aureus}
+}
+%ecoli
+\DeclareAcronym{ecoli}{
+    short = \textit{E. coli},
+    long  = \textit{Escherichia coli}
+}
+%mge
+\DeclareAcronym{mge}{
+    short = MGE,
+    long  = Mobile Genetic Element
+}
+%hgt
+\DeclareAcronym{hgt}{
+    short = HGT,
+    long  = Horiznotal Gene Transfer
+}
+%otu
+\DeclareAcronym{otu}{
+    short = OTU,
+    long  = Operation Taxonomic Unit
+}
+%pa
+\DeclareAcronym{pa}{
+    short = P/A,
+    long  = Presence/Absence,
+}
+\usepackage{listings}
+\begin{document}
+
+\title{\vspace{-1in}MolBiol 3I03 Midterm Progress Report}
+\author{Siddharth Reed}
+\date{\vspace{-0.2in}\today}
+\maketitle
+\vspace{-0.5in}
+\section{Code}
+The repository is at \url{https://github.com/DJSiddharthVader/thesis_SidReed}\\
+For several steps in the pipeline add checks to see if results are already calculated and continue from there, i.e. if the script outputs files\{1..10\} but files\{1..5\} were already produced skip regenerating those and only produce files\{6..20\}.
+Also changed the network building steps to be run in parallel using the doSNOW package from R.
+I re-wrote parts of the \verb|network_analysis.py| code to re-use certain functions more effectively and to calculate the closeness vitality and centrality.
+I also wrote a script \verb|make_results_table.py| to parse the output of \verb|network_analysis.py| and the output of markophylo into a csv file where rows are genera and column sare the network statistics.
+Finally after producing all of the data I re-created the figures using this new data in the jupyter notebook \verb|PlottingResults.ipynb| using ggplot.
+I also updated the manuscript with the new figures, but not the discussion section yet.
+
+\section{Data Produced}
+For the 210 genera that I ran the pipeline on the following sets of files were produced
+\begin{itemize}
+    \item species tree from whole genome data
+    \item species tree from 16S rRNA genes (for some larger genera there were no 16S genes common to all members so no 16S species tree was produced)
+    \item gene trees for all eligible genes up to a maximum of 3000  tree (eligible meaning the gene must be present in $\geq 40\%$ of the members of the genus)
+    \item 1000 HGT networks produced from a WGS species tree and 50 randomly sampled gene trees
+    \item 1000 HGT networks produced from a 16S species tree and 50 randomly sampled gene trees (if a 16S species tree was produced
+    \item Network statistics calculated for each genus as detailed in the \verb|network_analysis.py| file
+    \item markophylo estimates of the gene indel rates (only 128 genera produced data points without error and not on the boundary)
+\end{itemize}
+All this data is on infoserv under \verb|/home/sid/thesis_SidReed/data/genus_data| where each genus has it's own directory with all of the data produced.
+Another note is that for all statistics the mean and standard error of that statistic is calculated across all 1000 replicate networks.
+In all cases where the error was calculated it would produced negligible error bars compared to the mean values (i.e the top and bottom bars would overlap eachother) and thus are not shown.
+One final note is that markphylo was not able to generate any results using the WGS species trees but produced data for 128 genera using the 16S species trees.
+So currently the markophylo data is created using the 16S species trees but all of the network statistics were calculated using the WGS trees.
+\section{Future Work}
+\begin{itemize}
+    \item Update the discussion section to reflect the new results
+    \item Check how different the 16S and WGS species trees, likely using distance metrics (\hyperlink{https://cran.r-project.org/web/packages/Quartet/vignettes/Tree-distance-metrics.pdf}{R package})
+    \item Continue looking into the network data
+\end{itemize}
+\end{document}

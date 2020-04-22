@@ -91,7 +91,12 @@ The workflow is as follows for a single genus:
 
 \subsection{Data Collection}
 Protein and nucleotide fastas of all CDS sequences and whole genome fastas for all bacterial strains included in this analysis were downloaded from NCBI RefSeq.
-\ac{crsp} annotations of \ac{cas} and Cfp proteins from the \ac{crsp}one tool from Zhang and Ye will be used to assess the presence of \ac{crsp} systems \citep{ineqcas}.
+Only bacterial data from genomes annotated as complete by RefSeq were used.
+Data was downloaded using custom scripts available in the github repo \verb|./scripts/scrapingData/{NCBINameScraper.py,get_gbffs.sh}|.
+\ac{crsp} annotations of \ac{cas} and Cfp proteins from the \ac{crsp}one tool from Zhang and Ye were used to determine the presence of \ac{crsp} systems \citep{ineqcas}.
+Data from their online results were parsed and downloaded using a custom python script available in the github  repo \verb|./scripts/scrapingData/crispr_one_scraper.py|
+An \ac{otu} was annotated as having a \ac{crsp} system if it was annotated as having a \ac{crsp} system and at least 1 \ac{crsp} array sequence according to the CRISPROne database \cite{ineqcas}.
+
 \subsection{Gene Presence/Absence Matrix}
 In order to use the program markophylo to estimate indel rates, a \ac{pa} matrix of gene families and organisms and a species tree are required.
 First any genes classified as \ac{mge}s (from NCBI annotations) are removed.
@@ -114,7 +119,7 @@ To calculate the weight of an edge for the network, given a species tree $S$ and
     \item Pick a gene tree $G_i$ in $G$
     \item Decompose $G_i$ into it's set of quartets $\phi_i$
     \item Remove all quartets from $\phi_i$ either consistent with $S$ or discordant with $S$ but accounted for previously by a quartet set from another tree $G_j \in G$
-    \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the existenc of edge $(u,v)$
+    \item Set $RS((u,v),\phi_i)$ to be the number of quartets in $\phi_i$ that support the existence of edge $(u,v)$
     \item Set $NS((u,v),\phi_i) = \frac{RS((u,v),\phi_i)}{\lambda}$, where $\lambda$ is the total number of quartets in $S$ that are consistent with the existence of edge $(u,v)$.
     \item The score for the edge $H$ for tree $G_i$ is $max\{NS((u,v),\phi_i),NS((v,u),\phi_i)\} \in [0,1]$
     \item The total score for the edge $H$ is the sum of scores for each tree $G_i \in G$
@@ -123,7 +128,11 @@ This total score calculation is repeated for each horizontal edge $H_i$ in S, re
 This is further explained in the original work, \citep{hide}.
 \subsection{Network Statistics}
 All networks will be comprised of nodes representing \ac{otu}s and weighted edges represent the estimated amount of \ac{hgt} events between the two incident nodes.
-Bootstrap replicates of a network for each genus can be computed by creating a set of networks from a set of ramdom samples of gene trees and the same species tree.
+Bootstrap replicates of a network for each genus can be computed by creating a set of networks from a set of random samples of gene trees and the same species tree.
+For each genus 1000 bootstrap replicate networks were produced, each with 50 gene trees sampled randomly from all gene trees produced for that genus.
+The population of gene trees for a genus is all gene families that contained genes such that at least $40\%$ of all \ac{otu}s in the genus had 1 gene member of the family.
+If the genus Proteus contains 20 \ac{otu}s (genomes) then all gene trees (up to a max of 3000) of Proteus genes with at least $0.4*20=8$ different \ac{otu}s are sampled from.
+In addition extra samples are computed beyond the 1000 replicates if there are gene trees that were not sampled at least once in any sample i.e sampling is continued until the union of all samples is equal to the set of all gene trees produced, althought there were no cases of additional sampling required.
 Given a network, with a set of nodes $V = \{V_0$ \dots $V_i\}$ of cardinality $N$ and a set of weighted edges (an unordered 2-tuple and weight) $T = \{((V_1,V_2),W_{1,2})$ \dots $((V_i,V_j),W_{i,j})\}$ with cardinality $E$ descriptive statistics can be computed as follows \citep{netstat}:
     \begin{itemize}
         \item \textbf{Average Node Degree}: $\frac{1}{|N_u|}\sum_{uv}^{N_u} w_{uv}$ where $N_u$ is the set of nodes incidenent to $u$
@@ -136,7 +145,7 @@ Given a network, with a set of nodes $V = \{V_0$ \dots $V_i\}$ of cardinality $N
 %        \item<4-> \textbf{Network Diameter}: Shortest path between the 2 furthest nodes.
 %        \item<3-> \textbf{Network Density}: $\frac{2E}{N(N-1)}$
     \end{itemize}
-Each statistic was computed, either separately for the \ac{crsp} and Non-\ac{crsp} nodes or for the entire network for each of the 1000 bootstraps replicates.
-Each replicate was produced with 50 gene trees sampled randomly from all gene trees produced for that genus.
-%For the statistics estimated separately for \ac{crsp} and Non-\ac{crsp} nodes, the average and standard error was calculated across all replicates.
+For the statistics estimated separately for \ac{crsp} and Non-\ac{crsp} nodes, the average and standard error was calculated across all replicates.
+All network statistics were calculated using the networkx python package, except for modularity which was calculated using my own implementation as no modularity function was available.
+All subsequent statistical analysis was done using base R and all figures were produced using ggplot2.
 

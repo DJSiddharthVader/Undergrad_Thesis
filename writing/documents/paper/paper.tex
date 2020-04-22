@@ -1,6 +1,7 @@
 %Preamble
 \documentclass[12pt,letter]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath} %for math command
 %Layout/Spacing
 \usepackage[left=0.7in,right=0.7in,top=1in,bottom=1in]{geometry} %sets margins
 \usepackage{setspace} %singles spacing
@@ -28,8 +29,6 @@
             backend=biber,
             useprefix=true]{biblatex}
 \addbibresource{../../refs.bib}
-%Misc
-\usepackage{amsmath} %for math command
 %Abbreviations
 \usepackage{acro}
 %crspc
@@ -82,6 +81,8 @@
     short = P/A,
     long  = Presence/Absence,
 }
+
+
 \begin{document}
 %Title
 %\title{{\fontsize{40}{50}\selectfont Is Sharing Caring?}\\\vspace{0.4cm} %    Understanding CRISPR and Horizontal Gene Transfer Rates:\\\vspace{0.2cm} % A Network Theoretic Approach\\ \vspace{0.5cm} \Large MolBiol 4C12 Thesis}
@@ -97,6 +98,7 @@
 %                Hamilton, Canada}
 \date{\today}
 \maketitle
+
 \input{./sections/abstract}
 \newpage
 \tableofcontents
